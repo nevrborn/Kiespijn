@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "640646160691",
+    "firebase_url": "https://kiespijn-ad7c2.firebaseio.com",
+    "project_id": "kiespijn-ad7c2",
+    "storage_bucket": "kiespijn-ad7c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640646160691:android:ba63f7e6fd5eb322",
+        "android_client_info": {
+          "package_name": "com.bnnvara.kiespijn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640646160691-dqkk012b9p44jah2dg88mkko6vbjkriq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

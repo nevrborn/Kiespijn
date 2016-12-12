@@ -5,10 +5,6 @@ import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by paulvancappelle on 02-11-16.
- */
-
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     @LayoutRes
@@ -34,7 +30,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
 
     protected abstract Fragment createFragment();
 

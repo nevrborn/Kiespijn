@@ -88,7 +88,7 @@
             />
 
         <TextView
-            android:id="@+id/text_view_question"
+            android:id="@+id/text_view_dilemma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

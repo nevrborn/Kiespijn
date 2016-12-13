@@ -13,8 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.R;
+import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
@@ -28,6 +30,9 @@ public class LoginFragment extends Fragment {
     // Firebase Parameters
     private FirebaseAuth mFirebaseAuth;
 
+    // Facebook Parametres
+    CallbackManager callbackManager;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -40,7 +45,7 @@ public class LoginFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getContext());
-        AppEventsLogger.activateApp(getContext());
+        AppEventsLogger.activateApp(getActivity().getApplication());
     }
 
     @Nullable
@@ -52,6 +57,7 @@ public class LoginFragment extends Fragment {
         TextView title = (TextView) view.findViewById(R.id.textview_login_title);
         TextView text = (TextView) view.findViewById(R.id.textview_login_text);
         Button facebookButton = (Button) view.findViewById(R.id.button_login_facebook);
+        LoginButton loginButton = (LoginButton) view.findViewById(R.id.login_button);
         Button googleButton = (Button) view.findViewById(R.id.button_login_google);
         EditText emailField = (EditText) view.findViewById(R.id.edittext_login_email);
         EditText passwordField = (EditText) view.findViewById(R.id.edittext_login_password);
@@ -60,11 +66,14 @@ public class LoginFragment extends Fragment {
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
         Typeface source_sans_extra_light_italic = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLightItalic.ttf");
         Typeface source_sans_regular = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Regular.ttf");
-
         title.setTypeface(source_sans_extra_light);
         text.setTypeface(source_sans_extra_light);
         emailField.setTypeface(source_sans_extra_light_italic);
         passwordField.setTypeface(source_sans_extra_light_italic);
+
+        // Facebook Login Button Setup
+        loginButton.setReadPermissions("email");
+        loginButton.setFragment(this);
 
 
         return view;

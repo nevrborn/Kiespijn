@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
 import com.bnnvara.kiespijn.Dilemma.Option;
 import com.bnnvara.kiespijn.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class TargetGroupFragment extends Fragment {
@@ -21,6 +23,7 @@ public class TargetGroupFragment extends Fragment {
     private static final String TAG = "TargetGroupFragment";
 
     private static DilemmaProvider mDilemmaProvider;
+    private String mDilemmaKey;
 
     public static TargetGroupFragment newInstance() {
         return new TargetGroupFragment();
@@ -69,14 +72,15 @@ public class TargetGroupFragment extends Fragment {
         everyoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Answer answer = new Answer(FirebaseAuth.getInstance().getCurrentUser().toString(), 1);
+                mDilemmaProvider.writeAnswerToFirebase(answer, "KYt0qGMD2PTrwwAiGZx");
             }
         });
 
         callSomeoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mDilemmaProvider.getDataFromFirebase();
             }
         });
 

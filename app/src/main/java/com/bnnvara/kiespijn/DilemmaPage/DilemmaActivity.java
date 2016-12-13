@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 
-public class DecisionPageActivity extends SingleFragmentActivity {
+public class DilemmaActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return DecisionPageFragment.newInstance();
+        return DilemmaFragment.newInstance();
     }
 }

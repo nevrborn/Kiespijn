@@ -13,11 +13,11 @@ import com.bnnvara.kiespijn.R;
 /**
  *
  */
-public class DecisionPageFragment extends Fragment {
+public class DilemmaFragment extends Fragment {
 
 
     public static Fragment newInstance() {
-        return new DecisionPageFragment();
+        return new DilemmaFragment();
     }
 
 

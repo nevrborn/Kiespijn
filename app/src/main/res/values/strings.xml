@@ -13,5 +13,11 @@
     <string name="dilemma_username">ANONIEM</string>
     <string name="dilemma_user_description">Vrouw | 31 jaar</string>
 
+    // TARGET GROUP SCREEN
+    <string name="targetgroup_title">VRAAG HET AAN</string>
+    <string name="targetgroup_friends">VRIENDEN</string>
+    <string name="targetgroup_everyone">IDEREEN</string>
+    <string name="targetgroup_call_someone">JE MOEDER BELLEN</string>
+    <string name="targetgroup_profile">Profile</string>
 
 </resources>

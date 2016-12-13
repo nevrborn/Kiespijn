@@ -3,9 +3,9 @@ package com.bnnvara.kiespijn.Login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.bnnvara.kiespijn.SingleFragmentActivity;
+import com.bnnvara.kiespijn.TargetGroup.TargetGroupFragment;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -28,7 +28,7 @@ public class LoginActivity extends SingleFragmentActivity {
     }
 
     @Override
-    protected Fragment createFragment() {
+    protected TargetGroupFragment createFragment() {
         return LoginFragment.newInstance();
     }
 

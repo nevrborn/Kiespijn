@@ -1,13 +1,12 @@
 package com.bnnvara.kiespijn.DecisionPage;
 
-import android.support.v4.app.Fragment;
-
 import com.bnnvara.kiespijn.SingleFragmentActivity;
+import com.bnnvara.kiespijn.TargetGroup.TargetGroupFragment;
 
 public class DecisionPageActivity extends SingleFragmentActivity {
 
     @Override
-    protected Fragment createFragment() {
+    protected TargetGroupFragment createFragment() {
         return DecisionPageFragment.newInstance();
     }
 }

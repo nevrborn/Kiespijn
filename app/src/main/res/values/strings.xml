@@ -9,5 +9,11 @@
     <string name="facebook_app_id">1276846372390346</string>
     <string name="fb_login_protocol_scheme">fb1276846372390346</string>
 
+    // TARGET GROUP SCREEN
+    <string name="targetgroup_title">VRAAG HET AAN</string>
+    <string name="targetgroup_friends">VRIENDEN</string>
+    <string name="targetgroup_everyone">IDEREEN</string>
+    <string name="targetgroup_call_someone">JE MOEDER BELLEN</string>
+    <string name="targetgroup_profile">Profile</string>
 
 </resources>

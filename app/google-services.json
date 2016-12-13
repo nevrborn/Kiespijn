@@ -15,13 +15,21 @@
       },
       "oauth_client": [
         {
+          "client_id": "640646160691-19dr6o9i1efchbm7ual31mivkm1rggea.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bnnvara.kiespijn",
+            "certificate_hash": "BEEDC99DD4FC8B3E09679B778E5D9B2656F7AF80"
+          }
+        },
+        {
           "client_id": "640646160691-dqkk012b9p44jah2dg88mkko6vbjkriq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCF0wzD7uJWXP-pXJ1Y_7fZgkfjkLOU4pc"
+          "current_key": "AIzaSyDiGFNX6woLPfEKl_2SftVuil1KniG3PWE"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640646160691-dqkk012b9p44jah2dg88mkko6vbjkriq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

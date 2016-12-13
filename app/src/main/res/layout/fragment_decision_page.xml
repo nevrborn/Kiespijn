@@ -30,6 +30,7 @@
                 android:layout_width="58dp"
                 android:layout_height="58dp"
                 android:background="@color/colorRed"
+                android:src="@drawable/ic_action_user_photo"
                 />
         </RelativeLayout>
 
@@ -48,7 +49,7 @@
                 android:id="@+id/text_view_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ANONIEM"
+                android:text="@string/dilemma_username"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"/>
 
@@ -56,7 +57,7 @@
                 android:id="@+id/text_view_user_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vrouw | 31 jaar"
+                android:text="@string/dilemma_user_description"
                 android:textColor="@android:color/white"
                 android:textSize="11sp"
                 />
@@ -82,7 +83,7 @@
             android:gravity="center"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="DE KIES"
+            android:text="@string/de_kies"
             android:textColor="@color/colorGreen"
             />
 
@@ -93,7 +94,7 @@
             android:layout_marginLeft="8dp"
             android:background="@color/colorYellow"
             android:padding="8dp"
-            android:text="Mijn familie wil mijn vader cremeren maar ik wil dat hij begraven wordt, wat moet ik kiezen?"
+            android:text="@string/dilemma_main_text"
             android:textColor="@color/colorGreen"
             android:textStyle="normal|bold"/>
 

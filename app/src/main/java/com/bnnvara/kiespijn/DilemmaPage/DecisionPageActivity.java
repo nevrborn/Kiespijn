@@ -1,4 +1,4 @@
-package com.bnnvara.kiespijn.DecisionPage;
+package com.bnnvara.kiespijn.DilemmaPage;
 
 import android.support.v4.app.Fragment;
 

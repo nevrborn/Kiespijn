@@ -1,4 +1,4 @@
-package com.bnnvara.kiespijn.DecisionPage;
+package com.bnnvara.kiespijn.DilemmaPage;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

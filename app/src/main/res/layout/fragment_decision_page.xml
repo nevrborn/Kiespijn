@@ -2,10 +2,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:background="@android:color/background_light"
-    android:padding="32dp"
+    android:orientation="vertical"
+    android:paddingTop="24dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="8dp"
     >
 
     <LinearLayout
@@ -15,37 +18,48 @@
         android:orientation="horizontal"
         >
 
-        <ImageView
-            android:id="@+id/image_view_user_photo"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@color/colorRed"
-            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGreen"
+            android:padding="3dp"
+            >
+
+            <ImageView
+                android:id="@+id/image_view_user_photo"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:background="@color/colorRed"
+                android:src="@drawable/ic_action_user_photo"
+                />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/linear_layout_user_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:background="@color/colorGreen"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
             >
 
             <TextView
                 android:id="@+id/text_view_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ANONIEM"
+                android:text="@string/dilemma_username"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/text_view_user_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vrouw | 31 jaar"
+                android:text="@string/dilemma_user_description"
                 android:textColor="@android:color/white"
+                android:textSize="11sp"
                 />
 
         </LinearLayout>
@@ -58,27 +72,100 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
         >
 
         <TextView
             android:id="@+id/text_view_dilemma_indicator"
             android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorYellow"
-            android:textAlignment="center"
-            android:text="DE KIES"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/de_kies"
             android:textColor="@color/colorGreen"
             />
 
         <TextView
-            android:id="@+id/text_view_question"
+            android:id="@+id/text_view_dilemma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorYellow"
+            android:padding="8dp"
+            android:text="@string/dilemma_main_text"
+            android:textColor="@color/colorGreen"
+            android:textStyle="normal|bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="275dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="24dp"
+        >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorYellow"
-            android:layout_marginLeft="16dp"
-            android:padding="16dp"
-            android:text="Mijn familie wil mijn vader cremeren maar ik wil dat hij begraven wordt, wat moet ik kiezen?"
-            android:textColor="@color/colorGreen"
+            android:layout_weight="0.5"
+            android:background="@color/colorGreen"
+            android:padding="6dp"
+            android:layout_marginRight="4dp"
+            >
+
+            <ImageView
+                android:id="@+id/image_view_first_option_decicision_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/cremation_urn"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/colorGreen"
+            android:padding="6dp"
+            android:layout_marginLeft="4dp"
+            >
+
+            <ImageView
+                android:id="@+id/image_view_second_option_decicision_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/uitvaart_begrafenis"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_dicicion_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/image_view_choose_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_choose"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:id="@+id/image_view_choose_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_choose"
+            android:layout_weight="1"
             />
 
     </LinearLayout>

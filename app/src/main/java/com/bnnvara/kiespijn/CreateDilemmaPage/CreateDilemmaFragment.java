@@ -1,4 +1,4 @@
-package com.bnnvara.kiespijn.DecisionPage;
+package com.bnnvara.kiespijn.CreateDilemmaPage;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,11 +13,11 @@ import com.bnnvara.kiespijn.R;
 /**
  *
  */
-public class DecisionPageFragment extends Fragment {
+public class CreateDilemmaFragment extends Fragment {
 
 
     public static Fragment newInstance() {
-        return new DecisionPageFragment();
+        return new CreateDilemmaFragment();
     }
 
 

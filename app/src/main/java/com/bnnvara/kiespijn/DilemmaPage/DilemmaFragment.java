@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 
 
 /**
@@ -45,7 +48,23 @@ public class DilemmaFragment extends Fragment {
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_choose_right);
 
         // set up the listeners
+        // JUST FOR TESTING THE LOGIN PAGE
+        mUserPhotoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = LoginActivity.newIntent(getActivity());
+                startActivity(i);
+            }
+        });
 
+        // JUST FOR TESTING THE TARGETGROUP PAGE
+        mUserDescriptionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = TargetGroupActivity.newIntent(getActivity());
+                startActivity(i);
+            }
+        });
 
         return view;
     }

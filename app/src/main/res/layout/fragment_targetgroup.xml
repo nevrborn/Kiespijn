@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/targetgroup_title"
         android:textAlignment="center"
+        android:textSize="18dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginTop="10dp"

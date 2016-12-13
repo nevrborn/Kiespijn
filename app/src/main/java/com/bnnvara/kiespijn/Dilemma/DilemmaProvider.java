@@ -54,7 +54,7 @@ public class DilemmaProvider {
     public static Dilemma getDilemma(String dilemmaKey) {
 
         int i = 0;
-        Dilemma dilemma = null;
+        Dilemma dilemma;
 
         while (i < mDilemmaProvider.size()) {
 
@@ -66,7 +66,7 @@ public class DilemmaProvider {
             i += 1;
         }
 
-        return dilemma;
+        return null;
     }
 
     public Dilemma getDilemmaFromIndex(int index) {

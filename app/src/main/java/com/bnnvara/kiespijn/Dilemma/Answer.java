@@ -3,10 +3,6 @@ package com.bnnvara.kiespijn.Dilemma;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/**
- * Created by nevrborn on 13.12.2016.
- */
-
 public class Answer {
 
     private String mUserKey;

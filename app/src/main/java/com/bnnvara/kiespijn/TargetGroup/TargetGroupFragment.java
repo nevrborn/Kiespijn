@@ -40,7 +40,7 @@ public class TargetGroupFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = (View) inflater.inflate(R.layout.fragment_targetgroup, container, false);
+        View view = inflater.inflate(R.layout.fragment_targetgroup, container, false);
 
         // Setting up the XML objects
         TextView title = (TextView) view.findViewById(R.id.textview_targetgroup_title);

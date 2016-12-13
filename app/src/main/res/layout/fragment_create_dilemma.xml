@@ -70,6 +70,7 @@
         android:layout_height="275dp"
         android:layout_marginBottom="24dp"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         >
 
         <LinearLayout
@@ -101,6 +102,7 @@
                 android:src="@drawable/ic_action_camera"
                 android:layout_gravity="center"
                 android:layout_weight="1.0"
+                android:contentDescription="@string/image_content"
                 />
 
         </LinearLayout>
@@ -132,6 +134,7 @@
                 android:src="@drawable/ic_action_camera"
                 android:layout_gravity="center"
                 android:layout_weight="1.0"
+                android:contentDescription="@string/image_content"
                 />
 
         </LinearLayout>

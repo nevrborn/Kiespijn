@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.bnnvara.kiespijn.SingleFragmentActivity;
-import com.bnnvara.kiespijn.TargetGroup.TargetGroupFragment;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -13,7 +12,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 public class LoginActivity extends SingleFragmentActivity {
 
@@ -55,7 +54,7 @@ public class LoginActivity extends SingleFragmentActivity {
             }
         });
 
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+        LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
     }
 
     @Override

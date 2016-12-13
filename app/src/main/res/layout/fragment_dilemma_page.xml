@@ -31,6 +31,7 @@
                 android:layout_height="58dp"
                 android:background="@color/colorRed"
                 android:src="@drawable/ic_action_user_photo"
+                android:contentDescription="@string/image_content"
                 />
         </RelativeLayout>
 
@@ -43,6 +44,7 @@
             android:orientation="vertical"
             android:gravity="center_vertical"
             android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             >
 
             <TextView
@@ -59,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dilemma_user_description"
                 android:textColor="@android:color/white"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 />
 
         </LinearLayout>
@@ -105,6 +107,7 @@
         android:layout_height="275dp"
         android:orientation="horizontal"
         android:layout_marginBottom="24dp"
+        android:baselineAligned="false"
         >
 
         <LinearLayout
@@ -121,6 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/cremation_urn"
+                android:contentDescription="@string/image_content"
                 />
 
         </LinearLayout>
@@ -139,6 +143,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/uitvaart_begrafenis"
+                android:contentDescription="@string/image_content"
+
                 />
 
         </LinearLayout>
@@ -158,6 +164,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_choose"
             android:layout_weight="1"
+            android:contentDescription="@string/image_content"
             />
 
         <ImageView
@@ -166,6 +173,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_choose"
             android:layout_weight="1"
+            android:contentDescription="@string/image_content"
             />
 
     </LinearLayout>

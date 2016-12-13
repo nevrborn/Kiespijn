@@ -10,11 +10,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
+import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
+import com.bnnvara.kiespijn.Dilemma.Option;
 import com.bnnvara.kiespijn.R;
+
 
 public class TargetGroupFragment extends Fragment {
 
     private static final String TAG = "TargetGroupFragment";
+
+    private static DilemmaProvider mDilemmaProvider;
 
     public static TargetGroupFragment newInstance() {
         return new TargetGroupFragment();
@@ -23,6 +29,8 @@ public class TargetGroupFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mDilemmaProvider = DilemmaProvider.get(getContext());
 
     }
 
@@ -41,7 +49,8 @@ public class TargetGroupFragment extends Fragment {
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
         Typeface source_sans_extra_light_italic = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLightItalic.ttf");
         Typeface source_sans_regular = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Regular.ttf");
-        title.setTypeface(source_sans_extra_light);
+        Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        title.setTypeface(source_sans_bold);
         friendsButton.setTypeface(source_sans_extra_light);
         everyoneButton.setTypeface(source_sans_extra_light);
         callSomeoneButton.setTypeface(source_sans_extra_light);
@@ -50,7 +59,10 @@ public class TargetGroupFragment extends Fragment {
         friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Option option1 = new Option("Option1 Test", "Sinterklaas");
+                Option option2 = new Option("Option1 Test", "Xmas");
+                Dilemma dilemma = new Dilemma("Hello", "Which holiday do you like best?", "userKeyTest", option1, option2);
+                mDilemmaProvider.writeDilemmaToFirebase(dilemma);
             }
         });
 

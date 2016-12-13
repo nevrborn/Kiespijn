@@ -28,7 +28,7 @@ public class LoginActivity extends SingleFragmentActivity {
     }
 
     @Override
-    protected TargetGroupFragment createFragment() {
+    protected LoginFragment createFragment() {
         return LoginFragment.newInstance();
     }
 

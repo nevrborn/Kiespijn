@@ -37,7 +37,7 @@ public class DilemmaFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_decision_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo);

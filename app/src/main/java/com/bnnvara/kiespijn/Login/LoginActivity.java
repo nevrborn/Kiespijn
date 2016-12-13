@@ -12,7 +12,6 @@ public class LoginActivity extends SingleFragmentActivity {
         return new Intent(context, LoginActivity.class);
     }
 
-
     @Override
     protected Fragment createFragment() {
         return LoginFragment.newInstance();

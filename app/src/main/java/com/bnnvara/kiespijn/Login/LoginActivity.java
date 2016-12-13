@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
-import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -14,7 +12,6 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
 import java.util.Arrays;
 
@@ -24,6 +21,7 @@ public class LoginActivity extends SingleFragmentActivity {
 
     // Facebook Parameters
     CallbackManager mCallbackManager;
+
 
     public static Intent newIntent(Context context) {
         return new Intent(context, LoginActivity.class);
@@ -65,4 +63,5 @@ public class LoginActivity extends SingleFragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 }

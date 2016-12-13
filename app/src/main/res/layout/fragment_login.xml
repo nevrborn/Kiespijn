@@ -37,59 +37,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button_login_facebook"
-            android:background="@drawable/icon_facebook"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
+        <!--<Button-->
+        <!--android:id="@+id/button_login_facebook"-->
+        <!--android:background="@drawable/icon_facebook"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"/>-->
 
-        <Button
-            android:id="@+id/button_login_google"
-            android:background="@drawable/icon_google"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            />
+        <!--<Button-->
+        <!--android:id="@+id/button_login_google"-->
+        <!--android:background="@drawable/icon_google"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--/>-->
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"/>
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edittext_login_email"
-        android:layout_weight="0.1"
-        android:layout_height="0dp"
-        android:hint="@string/login_email_text"
-        android:layout_width="200dp"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/colorGreen"
-        android:textColorHint="@color/colorGreen"
-        android:textStyle="italic"
-        android:padding="8dp"
-        android:background="@color/colorYellow"/>
+        android:layout_marginBottom="30dp"/>
 
-    <EditText
-        android:id="@+id/edittext_login_password"
-        android:layout_weight="0.1"
-        android:layout_width="200dp"
-        android:layout_gravity="center"
-        android:inputType="textPassword"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorGreen"
-        android:textStyle="italic"
-        android:textColorHint="@color/colorGreen"
-        android:background="@color/colorYellow"
-        android:hint="@string/login_password_text"
-        android:padding="8dp"
-        android:layout_height="0dp"/>
+    <!--<EditText-->
+    <!--android:id="@+id/edittext_login_email"-->
+    <!--android:layout_weight="0.1"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:hint="@string/login_email_text"-->
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:inputType="textEmailAddress"-->
+    <!--android:textColor="@color/colorGreen"-->
+    <!--android:textColorHint="@color/colorGreen"-->
+    <!--android:textStyle="italic"-->
+    <!--android:padding="8dp"-->
+    <!--android:background="@color/colorYellow"/>-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/edittext_login_password"-->
+    <!--android:layout_weight="0.1"-->
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:inputType="textPassword"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:textColor="@color/colorGreen"-->
+    <!--android:textStyle="italic"-->
+    <!--android:textColorHint="@color/colorGreen"-->
+    <!--android:background="@color/colorYellow"-->
+    <!--android:hint="@string/login_password_text"-->
+    <!--android:padding="8dp"-->
+    <!--android:layout_height="0dp"/>-->
 
 </LinearLayout>

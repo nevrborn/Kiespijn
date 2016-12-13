@@ -7,6 +7,7 @@
     <string name="login_email_text">email</string>
     <string name="login_password_text">wachtwoord</string>
     <string name="facebook_app_id">1276846372390346</string>
+    <string name="fb_login_protocol_scheme">fb1276846372390346</string>
 
 
 </resources>

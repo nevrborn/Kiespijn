@@ -8,6 +8,10 @@ public class Option {
     private String mText;
     private Image mImage;
 
+    public Option() {
+        // empty constructur
+    }
+
     public Option(String title, String text) {
         mTitle = title;
         mText = text;

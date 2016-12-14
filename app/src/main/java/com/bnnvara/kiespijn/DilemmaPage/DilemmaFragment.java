@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
@@ -33,6 +37,12 @@ public class DilemmaFragment extends Fragment {
         return new DilemmaFragment();
     }
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -67,5 +77,27 @@ public class DilemmaFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_general, menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_item_user:
+                // start user's personal page
+                return true;
+            case R.id.menu_item_create_dilemma:
+                Intent i = CreateDilemmaActivity.newIntent(getActivity());
+                startActivity(i);
+                return true;
+            default: return true;
+        }
     }
 }

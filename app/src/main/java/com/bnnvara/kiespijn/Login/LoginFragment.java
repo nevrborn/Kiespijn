@@ -21,9 +21,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
-import com.facebook.GraphRequestBatch;
 import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -40,7 +38,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -213,7 +210,7 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
-                getFacebookItems(object);
+                getFacebookParameters(object);
             }
         });
 
@@ -227,7 +224,7 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void getFacebookItems(JSONObject object) {
+    public void getFacebookParameters(JSONObject object) {
 
         try {
             mFacebookID = object.getString("id");
@@ -254,7 +251,6 @@ public class LoginFragment extends Fragment {
                     i += 1;
                 }
 
-                Log.i(TAG, "Facebook Friends are: " + mFacebookFriendsMap);
             }
 
 

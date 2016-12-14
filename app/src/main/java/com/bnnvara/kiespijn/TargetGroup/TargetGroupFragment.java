@@ -18,6 +18,7 @@ import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
 import com.bnnvara.kiespijn.Dilemma.Option;
+import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -94,7 +95,8 @@ public class TargetGroupFragment extends Fragment {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
+                startActivity(i);
             }
         });
 

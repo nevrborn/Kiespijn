@@ -7,7 +7,7 @@
               android:background="@color/colorGrey">
 
     <ImageView
-        android:id="@+id/imageview_fromwho_user"
+        android:id="@+id/imageview_deadline_user"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
@@ -17,10 +17,10 @@
         android:contentDescription="@string/image_content"/>
 
     <TextView
-        android:id="@+id/textview_fromwho_title"
+        android:id="@+id/textview_deadline_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dilemma_from_who_title"
+        android:text="@string/deadline_title"
         android:textAlignment="center"
         android:textSize="18sp"
         android:layout_marginLeft="80dp"
@@ -30,37 +30,47 @@
         android:textColor="@color/colorGreen"
         android:background="@color/colorYellow"/>
 
+    <TextView
+        android:id="@+id/textview_deadline_hours"
+        android:text="@string/deadline_hours"
+        android:gravity="center"
+        android:textColor="@color/colorGreen"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        />
+
+    <SeekBar
+        android:id="@+id/seekBar_deadline"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="8dp"
+        android:tickMarkTint="@color/colorRed"
+        android:progressTint="@color/colorGreen"
+        android:backgroundTint="@color/colorYellow"
+        android:progress="12"
+        android:max="24"
+        />
 
     <Button
-        android:id="@+id/button_fromwho_anonymous"
+        android:id="@+id/button_deadline_pick_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dilemma_from_who_anonymous"
         android:textAlignment="center"
+        android:text="@string/deadline_set"
         android:textSize="20sp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="25dp"
         android:padding="15dp"
         android:textColor="@color/colorYellow"
         android:background="@color/colorGreen"/>
 
     <Button
-        android:id="@+id/button_fromwho_myself"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dilemma_from_who_myself"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:textColor="@color/colorYellow"
-        android:background="@color/colorGreen"/>
-
-    <Button
-        android:id="@+id/button_next_from_who"
+        android:id="@+id/button_next_deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -68,5 +78,6 @@
         android:background="@drawable/ic_action_next_arrow"
         android:layout_marginBottom="8dp"
         />
+
 
 </LinearLayout>

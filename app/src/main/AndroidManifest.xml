@@ -27,6 +27,12 @@
             android:name="com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity">
         </activity>
         <activity
+            android:name="com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity">
+        </activity>
+        <activity
+            android:name="com.bnnvara.kiespijn.Deadline.DeadlineActivity">
+        </activity>
+        <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

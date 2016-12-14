@@ -1,151 +1,158 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/background_light"
-    android:orientation="vertical"
-    android:paddingBottom="8dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="24dp"
+    android:layout_height="match_parent"
     >
 
-
-    <EditText
-        android:id="@+id/text_view_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:background="@color/colorYellow"
-        android:hint="Moet ik..."
-        android:padding="16dp"
-        android:textColor="@color/colorGreen"
-        android:textColorHint="@color/colorGreen"
-        android:textSize="14sp"
-        />
-
-
     <LinearLayout
-        android:id="@+id/linear_layout_dilemma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
+        android:background="@android:color/background_light"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp"
         >
 
         <EditText
-            android:id="@+id/text_view_option_1"
+            android:id="@+id/text_view_dilemma_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_weight="0.5"
-            android:background="@color/colorGreen"
-            android:gravity="center"
-            android:hint="......................."
-            android:padding="8dp"
-            android:textColorHint="@color/colorYellow"
-            android:textStyle="normal|bold"/>
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:background="@color/colorYellow"
+            android:hint="Moet ik..."
+            android:padding="16dp"
+            android:textColor="@color/colorGreen"
+            android:textColorHint="@color/colorGreen"
+            android:textSize="14sp"
+            />
 
-        <EditText
-            android:id="@+id/text_view_option_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_weight="0.5"
-            android:background="@color/colorGreen"
-            android:gravity="center"
-            android:hint="......................."
-            android:padding="8dp"
-            android:textColorHint="@color/colorYellow"
-            android:textStyle="normal|bold"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="275dp"
-        android:layout_marginBottom="24dp"
-        android:orientation="horizontal"
-        android:baselineAligned="false"
-        >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="4dp"
-            android:layout_weight="0.5"
-            android:background="@color/colorGreen"
-            android:orientation="vertical"
-            android:padding="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
             >
 
-            <SearchView
-                android:id="@+id/search_view_option_1_search_image"
-                style="style/MyActionBarWidgetTheme"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edit_text_option_1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/yellow_border_background"
-                android:iconifiedByDefault="false"
-                android:queryHint="............"
+                android:layout_marginRight="4dp"
+                android:layout_weight="0.5"
+                android:background="@color/colorGreen"
+                android:gravity="center"
+                android:hint="......................."
+                android:padding="8dp"
+                android:textColorHint="@color/colorYellow"
+                android:textStyle="normal|bold"/>
 
-                />
-
-            <ImageView
-                android:id="@+id/image_view_option__take_picture"
-                android:layout_width="60dp"
+            <EditText
+                android:id="@+id/edit_text_option_2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1.0"
-                android:contentDescription="@string/image_content"
-                android:src="@drawable/ic_action_camera"
-                />
+                android:layout_marginLeft="4dp"
+                android:layout_weight="0.5"
+                android:background="@color/colorGreen"
+                android:gravity="center"
+                android:hint="......................."
+                android:padding="8dp"
+                android:textColorHint="@color/colorYellow"
+                android:textStyle="normal|bold"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_weight="0.5"
-            android:background="@color/colorGreen"
-            android:orientation="vertical"
-            android:padding="16dp"
+            android:layout_height="275dp"
+            android:layout_marginBottom="24dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
             >
 
-            <SearchView
-                android:id="@+id/search_view_option_2_search_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/yellow_border_background"
-                android:iconifiedByDefault="false"
-                android:queryHint="............"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="4dp"
+                android:layout_weight="0.5"
+                android:background="@color/colorGreen"
+                android:orientation="vertical"
+                android:padding="16dp"
+                >
 
-            <ImageView
-                android:id="@+id/image_view_option_2_take_picture"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1.0"
-                android:contentDescription="@string/image_content"
-                android:src="@drawable/ic_action_camera"
-                />
+                <SearchView
+                    android:id="@+id/search_view_option_1_search_image"
+                    style="style/MyActionBarWidgetTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/yellow_border_background"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="............"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/image_view_option_1_take_picture"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:contentDescription="@string/image_content"
+                    android:src="@drawable/ic_action_camera"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="0.5"
+                android:background="@color/colorGreen"
+                android:orientation="vertical"
+                android:padding="16dp"
+                >
+
+                <SearchView
+                    android:id="@+id/search_view_option_2_search_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/yellow_border_background"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="............"
+                    />
+
+                <ImageView
+                    android:id="@+id/image_view_option_2_take_picture"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:contentDescription="@string/image_content"
+                    android:src="@drawable/ic_action_camera"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/button_next_create_dilemma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/button_next"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_action_next_arrow"
         />
 
-</LinearLayout>
+</RelativeLayout>

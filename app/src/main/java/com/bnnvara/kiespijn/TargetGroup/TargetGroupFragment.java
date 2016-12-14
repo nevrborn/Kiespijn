@@ -56,6 +56,8 @@ public class TargetGroupFragment extends Fragment {
         Button friendsButton = (Button) view.findViewById(R.id.button_targetgroup_friends);
         Button everyoneButton = (Button) view.findViewById(R.id.button_targetgroup_everyone);
         Button callSomeoneButton = (Button) view.findViewById(R.id.button_targetgroup_call_someone);
+        mNextButton = (Button) view.findViewById(R.id.button_next_target_group);
+        mPreviousButton = (Button) view.findViewById(R.id.button_previous_target_group);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");

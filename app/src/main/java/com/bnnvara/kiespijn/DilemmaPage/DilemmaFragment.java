@@ -58,23 +58,7 @@ public class DilemmaFragment extends Fragment {
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_choose_right);
 
         // set up the listeners
-        // JUST FOR TESTING THE LOGIN PAGE
-        mUserPhotoImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = LoginActivity.newIntent(getActivity());
-                startActivity(i);
-            }
-        });
 
-        // JUST FOR TESTING THE TARGETGROUP PAGE
-        mUserDescriptionTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = TargetGroupActivity.newIntent(getActivity());
-                startActivity(i);
-            }
-        });
 
         return view;
     }
@@ -91,11 +75,12 @@ public class DilemmaFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_item_user:
-                // start user's personal page
+                Intent i = LoginActivity.newIntent(getActivity());
+                startActivity(i);
                 return true;
             case R.id.menu_item_create_dilemma:
-                Intent i = CreateDilemmaActivity.newIntent(getActivity());
-                startActivity(i);
+                Intent intent = CreateDilemmaActivity.newIntent(getActivity());
+                startActivity(intent);
                 return true;
             default: return true;
         }

@@ -23,4 +23,9 @@
     <string name="button_next">VOLGENDE STAP!</string>
     <string name="create_dilemma">Nieuw dilemma</string>
 
+    // Dilemma FROM WHO SCREEN
+    <string name="dilemma_from_who_title">HOE VRAGEN?</string>
+    <string name="dilemma_from_who_anonymous">ANONIEMPJE_69</string>
+    <string name="dilemma_from_who_myself">ALS MEZELF</string>
+
 </resources>

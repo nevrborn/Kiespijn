@@ -73,40 +73,4 @@ public class DilemmaProvider {
         return mDilemmaProvider.get(index);
     }
 
-    public void writeDilemmaToFirebase(Dilemma dilemma) {
-        DatabaseReference mDilemmasRef = FirebaseDatabase.getInstance().getReference("dilemmas");
-        //String key = mDilemmasRef.push().getKey();
-        String key = "KYt0qGMD2PTrwwAiGZx";
-        mDilemmasRef.child(key).setValue(dilemma);
-    }
-
-    public void writeAnswerToFirebase(Answer answer, String dilemmaKey) {
-        DatabaseReference mDilemmasRef = FirebaseDatabase.getInstance().getReference("dilemmas");
-        mDilemmasRef.child(dilemmaKey).child("option1AnswerList").push().setValue(answer);
-    }
-
-    public void getDataFromFirebase() {
-
-        DatabaseReference mUserRef = FirebaseDatabase.getInstance().getReference("dilemmas");
-        mUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Dilemma dilemma = child.getValue(Dilemma.class);
-                    mDilemmaProvider.add(dilemma);
-                }
-
-                mDilemmaProvider.size();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
-
-
 }

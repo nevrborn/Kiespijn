@@ -12,6 +12,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 
 public class LoginActivity extends SingleFragmentActivity {
@@ -54,7 +56,9 @@ public class LoginActivity extends SingleFragmentActivity {
             }
         });
 
-        LoginManager.getInstance().logInWithReadPermissions(this, Collections.singletonList("public_profile"));
+        Collection<String> facebookPersmissions = Arrays.asList("email", "public_profile", "user_friends");
+
+        LoginManager.getInstance().logInWithReadPermissions(this, facebookPersmissions);
     }
 
     @Override

@@ -23,9 +23,14 @@
     <string name="button_next">VOLGENDE STAP!</string>
     <string name="create_dilemma">Nieuw dilemma</string>
 
-    // Dilemma FROM WHO SCREEN
+    // DILEMMA FROM WHO SCREEN
     <string name="dilemma_from_who_title">HOE VRAGEN?</string>
     <string name="dilemma_from_who_anonymous">ANONIEMPJE_69</string>
     <string name="dilemma_from_who_myself">ALS MEZELF</string>
+
+    // DEADLINE WHO SCREEN
+    <string name="deadline_title">NOG %1$i UUR TOT DE UITSLAG</string>
+    <string name="deadline_set">STEL EEN DEADLINE</string>
+    <string name="deadline_hours">%1$i uur</string>
 
 </resources>

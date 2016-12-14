@@ -86,11 +86,12 @@
                 android:padding="16dp"
                 >
 
-                <SearchView
+                <android.support.v7.widget.SearchView
                     android:id="@+id/search_view_option_1_search_image"
                     style="style/MyActionBarWidgetTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/yellow_border_background"
                     android:iconifiedByDefault="false"
@@ -120,10 +121,11 @@
                 android:padding="16dp"
                 >
 
-                <SearchView
+                <android.support.v7.widget.SearchView
                     android:id="@+id/search_view_option_2_search_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/yellow_border_background"
                     android:iconifiedByDefault="false"

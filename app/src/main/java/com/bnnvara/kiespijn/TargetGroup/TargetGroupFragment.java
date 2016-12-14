@@ -1,15 +1,19 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
@@ -29,9 +33,14 @@ public class TargetGroupFragment extends Fragment {
         return new TargetGroupFragment();
     }
 
+    // views
+    private Button mPreviousButton;
+    private Button mNextButton;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         mDilemmaProvider = DilemmaProvider.get(getContext());
 
@@ -58,7 +67,7 @@ public class TargetGroupFragment extends Fragment {
         everyoneButton.setTypeface(source_sans_extra_light);
         callSomeoneButton.setTypeface(source_sans_extra_light);
 
-
+        // set the listeners
         friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +89,27 @@ public class TargetGroupFragment extends Fragment {
             }
         });
 
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        mPreviousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = CreateDilemmaActivity.newIntent(getActivity());
+                startActivity(i);
+            }
+        });
+
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_no_create_button, menu);
+    }
 }

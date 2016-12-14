@@ -1,77 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center"
-              android:background="@color/colorGrey">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="16dp"
+    >
 
-    <ImageView
-        android:id="@+id/imageview_targetgroup_user"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@mipmap/ic_profile"
-        android:backgroundTint="@color/colorYellow"
-        android:layout_marginTop="18dp"
-        android:contentDescription="@string/image_content"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_gravity="center"
+                  android:background="@color/colorGrey"
+                  android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textview_targetgroup_title"
-        android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageview_targetgroup_user"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@mipmap/ic_profile"
+            android:backgroundTint="@color/colorYellow"
+            android:contentDescription="@string/image_content"/>
+
+        <TextView
+            android:id="@+id/textview_targetgroup_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorYellow"
+            android:padding="8dp"
+            android:text="@string/targetgroup_title"
+            android:textAlignment="center"
+            android:textColor="@color/colorGreen"
+            android:textSize="18sp"/>
+
+
+        <Button
+            android:id="@+id/button_targetgroup_friends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/colorGreen"
+            android:padding="15dp"
+            android:text="@string/targetgroup_friends"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/button_targetgroup_everyone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorGreen"
+            android:padding="15dp"
+            android:text="@string/targetgroup_everyone"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/button_targetgroup_call_someone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorGreen"
+            android:padding="15dp"
+            android:text="@string/targetgroup_call_someone"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textSize="20sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/targetgroup_title"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="10dp"
-        android:padding="8dp"
-        android:textColor="@color/colorGreen"
-        android:background="@color/colorYellow"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        >
 
+        <Button
+            android:id="@+id/button_previous_target_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_action_previous_arrow"
+            />
 
-    <Button
-        android:id="@+id/button_targetgroup_friends"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/targetgroup_friends"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="60dp"
-        android:padding="15dp"
-        android:textColor="@color/colorYellow"
-        android:background="@color/colorGreen"/>
+        <Button
+            android:id="@+id/button_next_create_dilemma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_action_next_arrow"
+            />
 
-    <Button
-        android:id="@+id/button_targetgroup_everyone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/targetgroup_everyone"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:textColor="@color/colorYellow"
-        android:background="@color/colorGreen"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button_targetgroup_call_someone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/targetgroup_call_someone"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:textColor="@color/colorYellow"
-        android:background="@color/colorGreen"/>
-
-
-</LinearLayout>
+</RelativeLayout>

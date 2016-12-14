@@ -2,10 +2,6 @@ package com.bnnvara.kiespijn.Dilemma;
 
 import android.media.Image;
 
-/**
- * Created by nevrborn on 13.12.2016.
- */
-
 public class Option {
 
     private String mTitle;

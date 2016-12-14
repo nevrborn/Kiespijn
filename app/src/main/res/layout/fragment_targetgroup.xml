@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_gravity="center"
-              android:backgroundTint="@color/colorGrey">
+              android:background="@color/colorGrey">
 
     <ImageView
         android:id="@+id/imageview_targetgroup_user"
@@ -13,7 +13,8 @@
         android:layout_gravity="center"
         android:background="@mipmap/ic_profile"
         android:backgroundTint="@color/colorYellow"
-        android:layout_marginTop="18dp"/>
+        android:layout_marginTop="18dp"
+        android:contentDescription="@string/image_content"/>
 
     <TextView
         android:id="@+id/textview_targetgroup_title"
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/targetgroup_title"
         android:textAlignment="center"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginTop="10dp"

@@ -2,8 +2,11 @@ package com.bnnvara.kiespijn.Dilemma;
 
 import android.content.Context;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +31,7 @@ public class DilemmaProvider {
         mDilemmaProvider = new ArrayList<>();
     }
 
-    public void addDilemma(Dilemma dilemma, String userKey) {
-        dilemma.setUserKey(userKey);
+    public void addDilemma(Dilemma dilemma) {
         mDilemmaProvider.add(dilemma);
     }
 
@@ -52,7 +54,7 @@ public class DilemmaProvider {
     public static Dilemma getDilemma(String dilemmaKey) {
 
         int i = 0;
-        Dilemma dilemma = null;
+        Dilemma dilemma;
 
         while (i < mDilemmaProvider.size()) {
 
@@ -64,7 +66,7 @@ public class DilemmaProvider {
             i += 1;
         }
 
-        return dilemma;
+        return null;
     }
 
     public Dilemma getDilemmaFromIndex(int index) {
@@ -73,8 +75,37 @@ public class DilemmaProvider {
 
     public void writeDilemmaToFirebase(Dilemma dilemma) {
         DatabaseReference mDilemmasRef = FirebaseDatabase.getInstance().getReference("dilemmas");
-        String key = mDilemmasRef.push().getKey();
+        //String key = mDilemmasRef.push().getKey();
+        String key = "KYt0qGMD2PTrwwAiGZx";
         mDilemmasRef.child(key).setValue(dilemma);
+    }
+
+    public void writeAnswerToFirebase(Answer answer, String dilemmaKey) {
+        DatabaseReference mDilemmasRef = FirebaseDatabase.getInstance().getReference("dilemmas");
+        mDilemmasRef.child(dilemmaKey).child("option1AnswerList").push().setValue(answer);
+    }
+
+    public void getDataFromFirebase() {
+
+        DatabaseReference mUserRef = FirebaseDatabase.getInstance().getReference("dilemmas");
+        mUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Dilemma dilemma = child.getValue(Dilemma.class);
+                    mDilemmaProvider.add(dilemma);
+                }
+
+                mDilemmaProvider.size();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
 

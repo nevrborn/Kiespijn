@@ -70,6 +70,7 @@
         android:layout_height="275dp"
         android:layout_marginBottom="24dp"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         >
 
         <LinearLayout
@@ -100,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1.0"
+                android:contentDescription="@string/image_content"
                 android:src="@drawable/ic_action_camera"
                 />
 
@@ -131,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1.0"
+                android:contentDescription="@string/image_content"
                 android:src="@drawable/ic_action_camera"
                 />
 

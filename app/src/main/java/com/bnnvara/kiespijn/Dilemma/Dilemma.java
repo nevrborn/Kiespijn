@@ -1,6 +1,5 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,6 +21,10 @@ public class Dilemma {
 
     private ArrayList<Answer> mOption1AnswerList;
     private ArrayList<Answer> mOption2AnswerList;
+
+    public Dilemma() {
+
+    }
 
     public Dilemma(String title, String text, String userKey, Option option1, Option option2) {
         mTitle = title;

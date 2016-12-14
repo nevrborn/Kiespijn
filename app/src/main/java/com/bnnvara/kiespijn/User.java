@@ -2,15 +2,12 @@ package com.bnnvara.kiespijn;
 
 import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
 
-/**
- * Created by nevrborn on 13.12.2016.
- */
-
 public class User {
 
     private String mUserKey;
     private String mName;
     private String mEmail;
+    private String mGender;
     private DilemmaProvider mUserCreatedDilemmas;
     private DilemmaProvider mUserAnsweredDilemmas;
 
@@ -37,6 +34,14 @@ public class User {
 
     public void setEmail(String email) {
         mEmail = email;
+    }
+
+    public String getGender() {
+        return mGender;
+    }
+
+    public void setGender(String gender) {
+        mGender = gender;
     }
 
     public DilemmaProvider getUserCreatedDilemmas() {

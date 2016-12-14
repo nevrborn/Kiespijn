@@ -228,31 +228,34 @@ public class LoginFragment extends Fragment {
     }
 
     public void getFacebookItems(JSONObject object) {
+
         try {
             mFacebookID = object.getString("id");
             Log.i(TAG, "Facebook ID is: " + mFacebookID);
             mFacebookName = object.getString("name");
             Log.i(TAG, "Facebook NAME is: " + mFacebookName);
             mFacebookFriends = object.getJSONObject("friends");
-            Log.i(TAG, "Facebook Friends is: " + mFacebookFriends);
 
-            JSONObject summary = (JSONObject) mFacebookFriends.get("summary");
-            int friendsCount = (int) summary.get("total_count");
-            Log.i(TAG, "Facebook Friends Count is: " + friendsCount);
+            JSONArray friendsObject = mFacebookFriends.getJSONArray("data");
+            Log.i(TAG, "Facebook Friends Object is: " + friendsObject);
 
-//            JSONArray friendsObject = mFacebookFriends.getJSONArray("data").getJSONArray(0);
-//            Log.i(TAG, "Facebook Friends Object is: " + friendsObject);
+            int friendsCount = friendsObject.length();
 
             int i = 0;
 
-//            if (friendsCount != 0) {
-//                while (i <= friendsCount) {
-//
-//                    friendsObject.get(i);
-//
-//                    i += 1;
-//                }
-//            }
+            if (friendsCount != 0) {
+                while (i < friendsCount) {
+
+                    JSONObject friend = friendsObject.getJSONObject(i);
+                    String name = friend.getString("name");
+                    String id = friend.getString("id");
+                    mFacebookFriendsMap.put(name, id);
+
+                    i += 1;
+                }
+
+                Log.i(TAG, "Facebook Friends are: " + mFacebookFriendsMap);
+            }
 
 
         } catch (JSONException e) {

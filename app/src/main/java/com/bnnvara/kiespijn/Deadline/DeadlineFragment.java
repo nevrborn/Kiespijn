@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.Deadline;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -45,6 +46,7 @@ public class DeadlineFragment extends Fragment {
         Button timeButton = (Button) view.findViewById(R.id.button_deadline_pick_time);
         SeekBar timeBar = (SeekBar) view.findViewById(R.id.seekBar_deadline);
         final TextView timeText = (TextView) view.findViewById(R.id.textview_deadline_hours);
+        Button nextButton = (Button) view.findViewById(R.id.button_next_target_group);
 
         timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +73,14 @@ public class DeadlineFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = DeadlineActivity.newIntent(getActivity());
+                startActivity(i);
             }
         });
 

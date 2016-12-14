@@ -59,4 +59,14 @@
         android:textColor="@color/colorYellow"
         android:background="@color/colorGreen"/>
 
+    <Button
+        android:id="@+id/button_next_from_who"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_action_next_arrow"
+        android:layout_marginBottom="8dp"
+        />
+
 </LinearLayout>

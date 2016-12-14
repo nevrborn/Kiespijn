@@ -62,25 +62,21 @@ public class TargetGroupFragment extends Fragment {
         friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Option option1 = new Option("Option1 Test", "Sinterklaas");
-                Option option2 = new Option("Option1 Test", "Xmas");
-                Dilemma dilemma = new Dilemma("Hello", "Which holiday do you like best?", "userKeyTest", option1, option2);
-                mDilemmaProvider.writeDilemmaToFirebase(dilemma);
+
             }
         });
 
         everyoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Answer answer = new Answer(FirebaseAuth.getInstance().getCurrentUser().toString(), 1);
-                mDilemmaProvider.writeAnswerToFirebase(answer, "KYt0qGMD2PTrwwAiGZx");
+
             }
         });
 
         callSomeoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDilemmaProvider.getDataFromFirebase();
+
             }
         });
 

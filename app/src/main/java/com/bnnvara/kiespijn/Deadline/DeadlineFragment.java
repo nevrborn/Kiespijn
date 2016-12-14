@@ -79,8 +79,7 @@ public class DeadlineFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = DeadlineActivity.newIntent(getActivity());
-                startActivity(i);
+
             }
         });
 

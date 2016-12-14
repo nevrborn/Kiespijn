@@ -20,5 +20,6 @@
     <string name="targetgroup_call_someone">JE MOEDER BELLEN</string>
     <string name="targetgroup_profile">Profile</string>
     <string name="button_next">VOLGENDE STAP!</string>
+    <string name="create_dilemma">Nieuw dilemma</string>
 
 </resources>

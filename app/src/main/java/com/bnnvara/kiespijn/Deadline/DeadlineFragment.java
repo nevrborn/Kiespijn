@@ -46,7 +46,7 @@ public class DeadlineFragment extends Fragment {
         Button timeButton = (Button) view.findViewById(R.id.button_deadline_pick_time);
         SeekBar timeBar = (SeekBar) view.findViewById(R.id.seekBar_deadline);
         final TextView timeText = (TextView) view.findViewById(R.id.textview_deadline_hours);
-        Button nextButton = (Button) view.findViewById(R.id.button_next_target_group);
+        Button nextButton = (Button) view.findViewById(R.id.button_next_deadline);
 
         timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +79,7 @@ public class DeadlineFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = DeadlineActivity.newIntent(getActivity());
-                startActivity(i);
+
             }
         });
 

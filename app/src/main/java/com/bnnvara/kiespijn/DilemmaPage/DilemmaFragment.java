@@ -102,7 +102,7 @@ public class DilemmaFragment extends Fragment {
         Dilemma dilemma_1 = new Dilemma();
         dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kiest?");
         dilemma_1.setUuid();
-        dilemma_1.setCreator_fb_id("abc_faceb_123");
+        dilemma_1.setCreator_fb_id("10156521655410158");
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
         dilemma_1.setDeadline(12);

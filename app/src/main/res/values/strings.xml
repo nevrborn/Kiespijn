@@ -29,9 +29,9 @@
     <string name="dilemma_from_who_myself">ALS MEZELF</string>
 
     // DEADLINE WHO SCREEN
-    <string name="deadline_title">NOG %1$i UUR TOT DE UITSLAG</string>
-    <string name="deadline_set">STEL EEN DEADLINE</string>
-    <string name="deadline_hours">%1$i uur</string>
+    <string name="deadline_title"> NOG ... UUR TOT DE UITSLAG</string>
+    <string name="deadline_set">POST JE DILEMMA</string>
+    <string name="deadline_hours">%1$d uur</string>
 
     // CREATE DILEMMA SCREEN
     <string name="title_hint">Moet ik…</string>

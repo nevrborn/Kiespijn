@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.User;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -38,8 +39,8 @@ public class LoginFragment extends Fragment {
 
     private static final String TAG = "LoginFragment";
 
-    // Facebook Parametres
-    CallbackManager mCallbackManager;
+    // Facebook Parameters
+    private CallbackManager mCallbackManager;
     private String mFacebookID;
     private String mFacebookName;
     private Image mFacebookPicture;
@@ -197,6 +198,10 @@ public class LoginFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        User user = User.getInstance();
+        user.setUserKey(mFacebookID);
+        user.setName(mFacebookName);
     }
 
     public void postToFacebook() {

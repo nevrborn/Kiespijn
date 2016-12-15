@@ -6,12 +6,34 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 
 public class User {
 
+    // Singleton
+    private static User sCurrentUser;
+
     private String mUserKey;
     private String mName;
     private String mEmail;
+    private String mSex;
+    private String mAge;
     private Image mProfilePicture;
     private DilemmaApiResponse mUserCreatedDilemmas;
     private DilemmaApiResponse mUserAnsweredDilemmas;
+
+
+    private User() {
+
+    }
+
+    public static User getInstance() {
+        if (sCurrentUser == null) {
+            User user = new User();
+            User.setInstance(user);
+        }
+        return sCurrentUser;
+    }
+
+    private static void setInstance(User user) {
+        sCurrentUser = user;
+    }
 
     public String getUserKey() {
         return mUserKey;

@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.R;
 
 public class DeadlineFragment extends Fragment {

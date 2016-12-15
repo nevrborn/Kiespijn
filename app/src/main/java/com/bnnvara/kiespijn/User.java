@@ -2,7 +2,7 @@ package com.bnnvara.kiespijn;
 
 import android.media.Image;
 
-import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
+import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 
 public class User {
 
@@ -10,8 +10,8 @@ public class User {
     private String mName;
     private String mEmail;
     private Image mProfilePicture;
-    private DilemmaProvider mUserCreatedDilemmas;
-    private DilemmaProvider mUserAnsweredDilemmas;
+    private DilemmaApiResponse mUserCreatedDilemmas;
+    private DilemmaApiResponse mUserAnsweredDilemmas;
 
     public String getUserKey() {
         return mUserKey;
@@ -37,19 +37,19 @@ public class User {
         mEmail = email;
     }
 
-    public DilemmaProvider getUserCreatedDilemmas() {
+    public DilemmaApiResponse getUserCreatedDilemmas() {
         return mUserCreatedDilemmas;
     }
 
-    public void setUserCreatedDilemmas(DilemmaProvider userCreatedDilemmas) {
+    public void setUserCreatedDilemmas(DilemmaApiResponse userCreatedDilemmas) {
         mUserCreatedDilemmas = userCreatedDilemmas;
     }
 
-    public DilemmaProvider getUserAnsweredDilemmas() {
+    public DilemmaApiResponse getUserAnsweredDilemmas() {
         return mUserAnsweredDilemmas;
     }
 
-    public void setUserAnsweredDilemmas(DilemmaProvider userAnsweredDilemmas) {
+    public void setUserAnsweredDilemmas(DilemmaApiResponse userAnsweredDilemmas) {
         mUserAnsweredDilemmas = userAnsweredDilemmas;
     }
 }

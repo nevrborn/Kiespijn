@@ -14,20 +14,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
-import com.bnnvara.kiespijn.Dilemma.Answer;
-import com.bnnvara.kiespijn.Dilemma.Dilemma;
-import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
-import com.bnnvara.kiespijn.Dilemma.Option;
+import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class TargetGroupFragment extends Fragment {
 
     private static final String TAG = "TargetGroupFragment";
 
-    private static DilemmaProvider mDilemmaProvider;
+    private static DilemmaApiResponse mDilemmaProvider;
     private String mDilemmaKey;
 
     public static TargetGroupFragment newInstance() {
@@ -43,7 +39,7 @@ public class TargetGroupFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        mDilemmaProvider = DilemmaProvider.get(getContext());
+        mDilemmaProvider = DilemmaApiResponse.get(getContext());
 
     }
 

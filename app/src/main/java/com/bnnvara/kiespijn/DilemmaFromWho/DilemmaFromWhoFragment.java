@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.bnnvara.kiespijn.Deadline.DeadlineActivity;
-import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
+import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.R;
 
 
@@ -20,7 +20,7 @@ public class DilemmaFromWhoFragment extends Fragment {
 
     private static final String TAG = "DilemmaFromWhoFragment";
 
-    private static DilemmaProvider mDilemmaProvider;
+    private static DilemmaApiResponse mDilemmaProvider;
     private String mDilemmaKey;
     private Boolean isAnonymous;
 
@@ -33,7 +33,7 @@ public class DilemmaFromWhoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        mDilemmaProvider = DilemmaProvider.get(getContext());
+        mDilemmaProvider = DilemmaApiResponse.get(getContext());
 
     }
 

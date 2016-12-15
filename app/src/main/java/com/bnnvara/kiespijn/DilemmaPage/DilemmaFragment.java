@@ -3,7 +3,9 @@ package com.bnnvara.kiespijn.DilemmaPage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +22,14 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Replies;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.internal.FacebookDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +39,9 @@ import java.util.List;
  *
  */
 public class DilemmaFragment extends Fragment {
+
+    // constants
+    private static final String TAG = DialogFragment.class.getSimpleName();
 
     // Views
     private ImageView mUserPhotoImageView;
@@ -65,15 +77,18 @@ public class DilemmaFragment extends Fragment {
         mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username);
         mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_user_info);
         mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma);
-        mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_choose_left);
-        mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_choose_right);
+        mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
+        mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
 
         // set up the listeners
-
-
-        // get data and update UI
-        createDummyDate();
-        updateUi();
+        mUserPhotoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // get data and update UI
+                createDummyDate();
+                updateUi();
+            }
+        });
 
         return view;
     }
@@ -89,18 +104,28 @@ public class DilemmaFragment extends Fragment {
             mUserDescriptionTextView.setText("Get this from the FB User");
         }
 
+        mDilemmaFirstImageView.setBackground(null);
+        mDilemmaSecondImageView.setBackground(null);
+
         mDilemmaTextView.setText(mDilemma.getTitle());
         Glide.with(getActivity())
                 .load(mDilemma.getPhotoA())
                 .placeholder(R.mipmap.ic_launcher)
                 .into(mDilemmaFirstImageView);
 
+        mDilemmaTextView.setText(mDilemma.getTitle());
+        Glide.with(getActivity())
+                .load(mDilemma.getPhotoB())
+                .placeholder(R.mipmap.ic_launcher)
+                .into(mDilemmaSecondImageView);
+
     }
+
 
     private void createDummyDate() {
         // SET UP TEST DATA!
         Dilemma dilemma_1 = new Dilemma();
-        dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kiest?");
+        dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kist?");
         dilemma_1.setUuid("abc-dil-12345");
         dilemma_1.setCreator_fb_id("abc_faceb_123");
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");

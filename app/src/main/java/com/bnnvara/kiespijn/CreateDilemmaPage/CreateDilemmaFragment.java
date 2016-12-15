@@ -37,6 +37,8 @@ public class CreateDilemmaFragment extends Fragment {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final String DILEMMA_OBJECT = "dilemma_object";
+    static final String DILEMMA_PHOTO_A = "dilemma_photo_a";
+    static final String DILEMMA_PHOTO_B = "dilemma_photo_b";
 
     // views
     private EditText mDilemmaTitle;
@@ -92,6 +94,8 @@ public class CreateDilemmaFragment extends Fragment {
 
                 Intent i = TargetGroupActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
+                i.putExtra(DILEMMA_PHOTO_A, mDilemma.getPhotoAParceble());
+                i.putExtra(DILEMMA_PHOTO_B, mDilemma.getPhotoBParceble());
                 startActivity(i);
             }
         });
@@ -201,27 +205,15 @@ public class CreateDilemmaFragment extends Fragment {
             if (isImageA) {
                 mImageA = imageBitmap;
                 mImageViewA.setImageBitmap(mImageA);
-                mDilemma.setPhotoA("https://farm1.staticflickr.com/379/30812017803_a62730715e_m.jpg"); // DUMMY VALUE
+                mDilemma.setPhotoAParceble(mImageA);
+                //mDilemma.setPhotoA("https://farm1.staticflickr.com/379/30812017803_a62730715e_m.jpg"); // DUMMY VALUE
             } else {
                 mImageB = imageBitmap;
                 mImageViewB.setImageBitmap(mImageB);
-                mDilemma.setPhotoB("https://goo.gl/lsKFBk"); // DUMMY VALUE
+                mDilemma.setPhotoBParceble(mImageB);
+                //mDilemma.setPhotoB("https://goo.gl/lsKFBk"); // DUMMY VALUE
             }
         }
-    }
 
-    private void serializeImages(ObjectOutputStream out) throws IOException {
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        mImageA.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        mImageB.compress(Bitmap.CompressFormat.PNG, 100, stream);
-
-        byte[] byteArray = stream.toByteArray();
-
-        out.writeInt(byteArray.length);
-        out.write(byteArray);
-
-        mImageA = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        mImageB = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 }

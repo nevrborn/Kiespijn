@@ -110,12 +110,14 @@ public class DilemmaFragment extends Fragment {
         mDilemmaTextView.setText(mDilemma.getTitle());
         Glide.with(getActivity())
                 .load(mDilemma.getPhotoA())
+                .centerCrop()
                 .placeholder(R.mipmap.ic_launcher)
                 .into(mDilemmaFirstImageView);
 
         mDilemmaTextView.setText(mDilemma.getTitle());
         Glide.with(getActivity())
                 .load(mDilemma.getPhotoB())
+                .centerCrop()
                 .placeholder(R.mipmap.ic_launcher)
                 .into(mDilemmaSecondImageView);
 

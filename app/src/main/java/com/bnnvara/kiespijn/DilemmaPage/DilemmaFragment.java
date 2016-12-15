@@ -125,13 +125,13 @@ public class DilemmaFragment extends Fragment {
     private void createDummyDate() {
         // SET UP TEST DATA!
         Dilemma dilemma_1 = new Dilemma();
-        dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kist?");
-        dilemma_1.setUuid("abc-dil-12345");
-        dilemma_1.setCreator_fb_id("abc_faceb_123");
+        dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kiest?");
+        dilemma_1.setUuid();
+        dilemma_1.setCreator_fb_id("10156521655410158");
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
-        dilemma_1.setDeadline("Tue, 13 Dec 2016 12:08:56 -0100");
-        dilemma_1.setCreatedAt("Tue, 13 Dec 2016 02:08:56 -0100");
+        dilemma_1.setDeadline(12);
+        dilemma_1.setCreatedAt();
         dilemma_1.setAnonymous("0");
         Replies replies = new Replies();
         List<Answer> option1AnswerList = new ArrayList<>() ;

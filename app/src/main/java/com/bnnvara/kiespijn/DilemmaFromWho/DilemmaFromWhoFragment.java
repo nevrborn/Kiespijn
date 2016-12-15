@@ -1,21 +1,24 @@
 package com.bnnvara.kiespijn.DilemmaFromWho;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.text.TextDirectionHeuristicCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.bnnvara.kiespijn.Deadline.DeadlineActivity;
-import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
-import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 
 
 public class DilemmaFromWhoFragment extends Fragment {
@@ -42,21 +45,40 @@ public class DilemmaFromWhoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_from_who, container, false);
 
-        Button anonymousButton = (Button) view.findViewById(R.id.button_fromwho_anonymous);
-        Button myselfButton = (Button) view.findViewById(R.id.button_fromwho_myself);
-        Button nextButton = (Button) view.findViewById(R.id.button_next_from_who);
+        TextView title = (TextView) view.findViewById(R.id.textview_fromwho_title);
+        final Button anonymousButton = (Button) view.findViewById(R.id.button_fromwho_anonymous);
+        final Button myselfButton = (Button) view.findViewById(R.id.button_fromwho_myself);
+        Button nextButton = (Button) view.findViewById(R.id.button_next_fromwho);
+        Button previousButton = (Button) view.findViewById(R.id.button_previous_fromwho);
+
+        // FONT setup
+        Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
+        Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        title.setTypeface(source_sans_bold);
+        anonymousButton.setTypeface(source_sans_extra_light);
+        myselfButton.setTypeface(source_sans_extra_light);
 
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDilemma.setAnonymous("1");
+                mDilemma.setAnonymous("0");
+
+                anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
+                myselfButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                myselfButton.setTextColor(getResources().getColor(R.color.colorYellow));
             }
         });
 
         myselfButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDilemma.setAnonymous(false);
+                mDilemma.setAnonymous("1");
+
+                anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                anonymousButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                myselfButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                myselfButton.setTextColor(getResources().getColor(R.color.colorGreen));
             }
         });
 
@@ -64,6 +86,15 @@ public class DilemmaFromWhoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = DeadlineActivity.newIntent(getActivity());
+                i.putExtra(DILEMMA_OBJECT, mDilemma);
+                startActivity(i);
+            }
+        });
+
+        previousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = TargetGroupActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);
             }
@@ -78,4 +109,5 @@ public class DilemmaFromWhoFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_no_create_button, menu);
     }
+
 }

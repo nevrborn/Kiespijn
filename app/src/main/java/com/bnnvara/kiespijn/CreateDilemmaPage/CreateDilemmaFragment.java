@@ -3,6 +3,7 @@ package com.bnnvara.kiespijn.CreateDilemmaPage;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,6 +23,10 @@ import android.widget.Toast;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -84,7 +89,6 @@ public class CreateDilemmaFragment extends Fragment {
             public void onClick(View view) {
 
                 Log.i(TAG, mDilemma.getTitle());
-
 
                 Intent i = TargetGroupActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
@@ -204,5 +208,20 @@ public class CreateDilemmaFragment extends Fragment {
                 mDilemma.setPhotoB("");
             }
         }
+    }
+
+    private void serializeImages(ObjectOutputStream out) throws IOException {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        mImageA.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        mImageB.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+        byte[] byteArray = stream.toByteArray();
+
+        out.writeInt(byteArray.length);
+        out.write(byteArray);
+
+        mImageA = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        mImageB = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 }

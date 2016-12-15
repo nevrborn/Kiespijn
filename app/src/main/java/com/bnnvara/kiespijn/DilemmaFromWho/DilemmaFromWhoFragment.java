@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.bnnvara.kiespijn.Deadline.DeadlineActivity;
+import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
 import com.bnnvara.kiespijn.R;
@@ -48,7 +49,7 @@ public class DilemmaFromWhoFragment extends Fragment {
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDilemma.setAnonymous(true);
+                mDilemma.setAnonymous("1");
             }
         });
 

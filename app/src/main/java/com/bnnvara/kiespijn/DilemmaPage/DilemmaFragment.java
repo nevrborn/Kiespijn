@@ -14,9 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
+import com.bnnvara.kiespijn.Dilemma.Answer;
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
+import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
+import com.bnnvara.kiespijn.Dilemma.Replies;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
-import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,6 +38,9 @@ public class DilemmaFragment extends Fragment {
     private TextView mDilemmaTextView;
     private ImageView mDilemmaFirstImageView;
     private ImageView mDilemmaSecondImageView;
+
+    // regular variables
+    private Dilemma mDilemma;
 
 
     public static Fragment newInstance() {
@@ -53,14 +63,65 @@ public class DilemmaFragment extends Fragment {
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo);
         mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username);
         mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_user_info);
-        mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_dilemma);
+        mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma);
         mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_choose_left);
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_choose_right);
 
         // set up the listeners
 
 
+        // get data and update UI
+        createDummyDate();
+        updateUi();
+
         return view;
+    }
+
+    private void updateUi() {
+
+        if (mDilemma.getAnonymous() == "0"){
+            mUserNameTextView.setText("Get this from the FB User");
+            mUserDescriptionTextView.setText("Get this from the FB User");
+        } else {
+            mUserNameTextView.setText(getString(R.string.dilemma_username));
+            mUserDescriptionTextView.setText("Get this from the FB User");
+        }
+
+        mDilemmaTextView.setText(mDilemma.getTitle());
+        Glide.with(getActivity())
+                .load(mDilemma.getPhotoA())
+                .placeholder(R.mipmap.ic_launcher)
+                .into(mDilemmaFirstImageView);
+
+    }
+
+    private void createDummyDate() {
+        // SET UP TEST DATA!
+        Dilemma dilemma_1 = new Dilemma();
+        dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kiest?");
+        dilemma_1.setUuid("abc-dil-12345");
+        dilemma_1.setCreator_fb_id("abc_faceb_123");
+        dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
+        dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
+        dilemma_1.setDeadline("Tue, 13 Dec 2016 12:08:56 -0100");
+        dilemma_1.setCreatedAt("Tue, 13 Dec 2016 02:08:56 -0100");
+        dilemma_1.setAnonymous("0");
+        Replies replies = new Replies();
+        List<Answer> option1AnswerList = new ArrayList<>() ;
+        List<Answer> option2AnswerList = new ArrayList<>() ;
+        option1AnswerList.add(new Answer("awef-2398"));
+        option1AnswerList.add(new Answer("erg-rth98"));
+        option2AnswerList.add(new Answer("qweasd-999"));
+        option2AnswerList.add(new Answer("lkmlk-8930"));
+        replies.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
+        replies.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
+        dilemma_1.setReplies(replies);
+
+        List<Dilemma> dilemmaList = new ArrayList<>();
+        dilemmaList.add(dilemma_1);
+        DilemmaApiResponse dilemmaApiResponse = new DilemmaApiResponse();
+        dilemmaApiResponse.setDilemmaList(dilemmaList);
+        dilemmaList = dilemmaApiResponse.getDilemmaList();
     }
 
 

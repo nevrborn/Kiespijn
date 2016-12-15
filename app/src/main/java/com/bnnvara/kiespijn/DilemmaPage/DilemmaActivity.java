@@ -19,4 +19,5 @@ public class DilemmaActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         return DilemmaFragment.newInstance();
     }
+
 }

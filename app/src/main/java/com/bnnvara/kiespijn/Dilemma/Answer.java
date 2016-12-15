@@ -5,43 +5,22 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Answer {
 
-    private String mUserKey;
-    private int mChosenAnswer;
-    private long mDateAnswered;
+    //    @SerializedName("user_fb_id");
+    private String mUserFbId;
 
-    public Answer(String userKey, int chosenAnswer) {
-        mUserKey = userKey;
-        mChosenAnswer = chosenAnswer;
-        mDateAnswered = System.currentTimeMillis() / 1000L;
 
-        // Set user if logged in
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            mUserKey = user.getUid();
-        }
+    public Answer(){
     }
 
-    public String getUserKey() {
-        return mUserKey;
+    public Answer(String userFbId) {
+        mUserFbId = userFbId;
     }
 
-    public void setUserKey(String userKey) {
-        mUserKey = userKey;
+    public String getUserFbId() {
+        return mUserFbId;
     }
 
-    public int getChosenAnswer() {
-        return mChosenAnswer;
-    }
-
-    public void setChosenAnswer(int chosenAnswer) {
-        mChosenAnswer = chosenAnswer;
-    }
-
-    public long getDateAnswered() {
-        return mDateAnswered;
-    }
-
-    public void setDateAnswered() {
-        mDateAnswered = System.currentTimeMillis() / 1000L;
+    public void setUserFbId(String userFbId) {
+        mUserFbId = userFbId;
     }
 }

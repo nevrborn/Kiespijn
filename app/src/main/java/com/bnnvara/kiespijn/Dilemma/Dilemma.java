@@ -1,5 +1,7 @@
 package com.bnnvara.kiespijn.Dilemma;
 
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -42,6 +44,9 @@ public class Dilemma implements Serializable {
 
     //    @SerializedName("replies");
     private Replies mReplies;
+
+    private Parcelable mPhotoAParceble;
+    private Parcelable mPhotoBParceble;
 
 
 
@@ -151,5 +156,21 @@ public class Dilemma implements Serializable {
 
     public void setReplies(Replies replies) {
         mReplies = replies;
+    }
+
+    public Parcelable getPhotoAParceble() {
+        return mPhotoAParceble;
+    }
+
+    public void setPhotoAParceble(Parcelable photoAParceble) {
+        mPhotoAParceble = photoAParceble;
+    }
+
+    public Parcelable getPhotoBParceble() {
+        return mPhotoBParceble;
+    }
+
+    public void setPhotoBParceble(Parcelable photoBParceble) {
+        mPhotoBParceble = photoBParceble;
     }
 }

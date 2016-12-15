@@ -13,18 +13,18 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.R;
 
 public class DeadlineFragment extends Fragment {
 
     private static final String TAG = "DeadlineFragment";
 
-    private static DilemmaProvider mDilemmaProvider;
-    private String mDilemmaKey;
+    private static Dilemma mDilemma;
     private int mDeadline;
 
-    public static DeadlineFragment newInstance() {
+    public static DeadlineFragment newInstance(Dilemma dilemma) {
+        mDilemma = dilemma;
         return new DeadlineFragment();
     }
 
@@ -32,8 +32,6 @@ public class DeadlineFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        mDilemmaProvider = DilemmaProvider.get(getContext());
 
     }
 

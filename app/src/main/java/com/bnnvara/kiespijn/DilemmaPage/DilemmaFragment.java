@@ -97,11 +97,11 @@ public class DilemmaFragment extends Fragment {
         mDilemma = mDilemmaList.get(0);
 
         if (mDilemma.getAnonymous() == "0"){
-            mUserNameTextView.setText("Get this from the FB User");
-            mUserDescriptionTextView.setText("Get this from the FB User");
+            mUserNameTextView.setText(mDilemma.getCreator_name());
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
-            mUserDescriptionTextView.setText("Get this from the FB User");
+            mUserDescriptionTextView.setText("");
         }
 
         mDilemmaFirstImageView.setBackground(null);
@@ -127,9 +127,12 @@ public class DilemmaFragment extends Fragment {
     private void createDummyDate() {
         // SET UP TEST DATA!
         Dilemma dilemma_1 = new Dilemma();
-        dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kiest?");
+        dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kist?");
         dilemma_1.setUuid();
         dilemma_1.setCreator_fb_id("10156521655410158");
+        dilemma_1.setCreator_name("Jarle Matland");
+        dilemma_1.setCreator_age("32");
+        dilemma_1.setCreator_sex("Man");
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
         dilemma_1.setDeadline(12);

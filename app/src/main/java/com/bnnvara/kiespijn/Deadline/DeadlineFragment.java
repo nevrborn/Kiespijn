@@ -53,11 +53,11 @@ public class DeadlineFragment extends Fragment {
             }
         });
 
-        final int stepSize = 1;
+        final int stepSize = 5;
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                progress = ((int) Math.round(progress / stepSize)) * stepSize;
+                progress = (Math.round(progress / stepSize)) * stepSize;
                 timeText.setText(getString(R.string.deadline_hours, progress));
                 title.setText(getString(R.string.deadline_title, progress));
                 mDeadline = progress;

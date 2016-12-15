@@ -41,6 +41,7 @@ public class DilemmaFragment extends Fragment {
 
     // regular variables
     private Dilemma mDilemma;
+    private ArrayList<Dilemma> mDilemmaList;
 
 
     public static Fragment newInstance() {
@@ -78,6 +79,7 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateUi() {
+        mDilemma = mDilemmaList.get(0);
 
         if (mDilemma.getAnonymous() == "0"){
             mUserNameTextView.setText("Get this from the FB User");
@@ -121,7 +123,7 @@ public class DilemmaFragment extends Fragment {
         dilemmaList.add(dilemma_1);
         DilemmaApiResponse dilemmaApiResponse = new DilemmaApiResponse();
         dilemmaApiResponse.setDilemmaList(dilemmaList);
-        dilemmaList = dilemmaApiResponse.getDilemmaList();
+        mDilemmaList = (ArrayList<Dilemma>) dilemmaApiResponse.getDilemmaList();
     }
 
 

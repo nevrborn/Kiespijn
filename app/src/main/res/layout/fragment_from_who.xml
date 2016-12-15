@@ -1,72 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center"
-              android:background="@color/colorGrey">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    >
 
-    <ImageView
-        android:id="@+id/imageview_fromwho_user"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@mipmap/ic_profile"
-        android:backgroundTint="@color/colorYellow"
-        android:layout_marginTop="18dp"
-        android:contentDescription="@string/image_content"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_gravity="center"
+                  android:background="@color/colorGrey">
 
-    <TextView
-        android:id="@+id/textview_fromwho_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dilemma_from_who_title"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="10dp"
-        android:padding="8dp"
-        android:textColor="@color/colorGreen"
-        android:background="@color/colorYellow"/>
+        <ImageView
+            android:id="@+id/imageview_fromwho_user"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/ic_profile"
+            android:backgroundTint="@color/colorYellow"
+            android:layout_marginTop="18dp"
+            android:contentDescription="@string/image_content"/>
+
+        <TextView
+            android:id="@+id/textview_fromwho_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dilemma_from_who_title"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:textColor="@color/colorGreen"
+            android:background="@color/colorYellow"/>
 
 
-    <Button
-        android:id="@+id/button_fromwho_anonymous"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dilemma_from_who_anonymous"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="60dp"
-        android:padding="15dp"
-        android:textColor="@color/colorYellow"
-        android:background="@color/colorGreen"/>
+        <Button
+            android:id="@+id/button_fromwho_anonymous"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dilemma_from_who_anonymous"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="60dp"
+            android:padding="15dp"
+            android:textColor="@color/colorYellow"
+            android:background="@color/colorGreen"/>
 
-    <Button
-        android:id="@+id/button_fromwho_myself"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dilemma_from_who_myself"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:textColor="@color/colorYellow"
-        android:background="@color/colorGreen"/>
+        <Button
+            android:id="@+id/button_fromwho_myself"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dilemma_from_who_myself"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:padding="15dp"
+            android:textColor="@color/colorYellow"
+            android:background="@color/colorGreen"/>
 
-    <Button
-        android:id="@+id/button_next_from_who"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:background="@drawable/ic_action_next_arrow"
-        android:layout_marginBottom="8dp"
-        />
+    </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        >
+
+        <Button
+            android:id="@+id/button_previous_fromwho"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_action_previous_arrow"
+            />
+
+        <Button
+            android:id="@+id/button_next_fromwho"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_action_next_arrow"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

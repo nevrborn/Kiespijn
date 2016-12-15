@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.R;
@@ -49,9 +50,9 @@ public class TargetGroupFragment extends Fragment {
 
         // Setting up the XML objects
         TextView title = (TextView) view.findViewById(R.id.textview_targetgroup_title);
-        Button friendsButton = (Button) view.findViewById(R.id.button_targetgroup_friends);
-        Button everyoneButton = (Button) view.findViewById(R.id.button_targetgroup_everyone);
-        Button callSomeoneButton = (Button) view.findViewById(R.id.button_targetgroup_call_someone);
+        final Button friendsButton = (Button) view.findViewById(R.id.button_targetgroup_friends);
+        final Button everyoneButton = (Button) view.findViewById(R.id.button_targetgroup_everyone);
+        final Button callSomeoneButton = (Button) view.findViewById(R.id.button_targetgroup_call_someone);
         mNextButton = (Button) view.findViewById(R.id.button_next_target_group);
         mPreviousButton = (Button) view.findViewById(R.id.button_previous_target_group);
 
@@ -69,7 +70,12 @@ public class TargetGroupFragment extends Fragment {
         friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                friendsButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                friendsButton.setTextColor(getResources().getColor(R.color.colorGreen));
+                everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
             }
         });
 
@@ -77,6 +83,12 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                friendsButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                friendsButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                everyoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
+                callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
             }
         });
 
@@ -84,15 +96,19 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                friendsButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                friendsButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                callSomeoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
             }
         });
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
-                i.putExtra(DILEMMA_OBJECT, mDilemma);
-                startActivity(i);
+                startIntent();
             }
         });
 
@@ -112,5 +128,11 @@ public class TargetGroupFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_no_create_button, menu);
+    }
+
+    private void startIntent() {
+        Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
+        i.putExtra(DILEMMA_OBJECT, mDilemma);
+        startActivity(i);
     }
 }

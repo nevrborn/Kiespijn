@@ -201,11 +201,11 @@ public class CreateDilemmaFragment extends Fragment {
             if (isImageA) {
                 mImageA = imageBitmap;
                 mImageViewA.setImageBitmap(mImageA);
-                mDilemma.setPhotoA("");
+                mDilemma.setPhotoA("https://farm1.staticflickr.com/379/30812017803_a62730715e_m.jpg"); // DUMMY VALUE
             } else {
                 mImageB = imageBitmap;
                 mImageViewB.setImageBitmap(mImageB);
-                mDilemma.setPhotoB("");
+                mDilemma.setPhotoB("https://goo.gl/lsKFBk"); // DUMMY VALUE
             }
         }
     }

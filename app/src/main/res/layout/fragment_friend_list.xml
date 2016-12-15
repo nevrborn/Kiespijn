@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    >
+
+    <LinearLayout
+        android:id="@+id/linear_button_friend_list"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        >
+
+        <Button
+            android:id="@+id/button_previous_fromwho"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_action_previous_arrow"
+            />
+
+        <Button
+            android:id="@+id/button_next_fromwho"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_action_next_arrow"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/colorGrey"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/imageview_fromwho_user"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/ic_profile"
+            android:backgroundTint="@color/colorYellow"
+            android:layout_marginTop="18dp"
+            android:contentDescription="@string/image_content"/>
+
+        <TextView
+            android:id="@+id/textview_fromwho_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dilemma_from_who_title"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:textColor="@color/colorGreen"
+            android:background="@color/colorYellow"/>
+
+        <ListView
+            android:id="@+id/listview_friend_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.ListView"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

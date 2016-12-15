@@ -1,11 +1,7 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -41,6 +37,9 @@ public class Dilemma implements Serializable {
     //    @SerializedName("anonymous");
     private String mAnonymous;
 
+    //    @SerializedName("sendtoall");
+    private String mIsToAll;
+
     //    @SerializedName("replies");
     private Replies mReplies;
 
@@ -55,8 +54,7 @@ public class Dilemma implements Serializable {
     }
 
     public void setUuid() {
-        String tempUUID = UUID.randomUUID().toString();
-        mUuid = tempUUID;
+        mUuid = UUID.randomUUID().toString();
     }
 
     public String getCreator_fb_id() {
@@ -139,6 +137,14 @@ public class Dilemma implements Serializable {
         mAnonymous = anonymous;
     }
 
+    public String getIsToAll() {
+        return mIsToAll;
+    }
+
+    public void setIsToAll(String isToAll) {
+        mIsToAll = isToAll;
+    }
+
     public Replies getReplies() {
         return mReplies;
     }
@@ -147,18 +153,3 @@ public class Dilemma implements Serializable {
         mReplies = replies;
     }
 }
-
-//    public Dilemma(String title, String text, String userKey, Option option1, Option option2) {
-//        mTitle = title;
-//        mText = text;
-//        mDateCreated = System.currentTimeMillis() / 1000L;
-//        mUserKey = userKey;
-//        mOption1 = option1;
-//        mOption2 = option2;
-//
-//        // Set user if logged in
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user != null) {
-//            mUserKey = user.getUid();
-//        }
-//    }

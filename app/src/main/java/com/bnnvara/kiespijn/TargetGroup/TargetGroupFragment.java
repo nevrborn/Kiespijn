@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
-import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.R;
 
@@ -31,10 +30,6 @@ public class TargetGroupFragment extends Fragment {
         mDilemma = dilemma;
         return new TargetGroupFragment();
     }
-
-    // views
-    private Button mPreviousButton;
-    private Button mNextButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +48,8 @@ public class TargetGroupFragment extends Fragment {
         final Button friendsButton = (Button) view.findViewById(R.id.button_targetgroup_friends);
         final Button everyoneButton = (Button) view.findViewById(R.id.button_targetgroup_everyone);
         final Button callSomeoneButton = (Button) view.findViewById(R.id.button_targetgroup_call_someone);
-        mNextButton = (Button) view.findViewById(R.id.button_next_target_group);
-        mPreviousButton = (Button) view.findViewById(R.id.button_previous_target_group);
+        Button nextButton = (Button) view.findViewById(R.id.button_next_target_group);
+        Button previousButton = (Button) view.findViewById(R.id.button_previous_target_group);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -76,6 +71,10 @@ public class TargetGroupFragment extends Fragment {
                 everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+
+                mDilemma.setIsToAll("0");
+
+
             }
         });
 
@@ -89,6 +88,8 @@ public class TargetGroupFragment extends Fragment {
                 everyoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+
+                mDilemma.setIsToAll("1");
             }
         });
 
@@ -105,14 +106,16 @@ public class TargetGroupFragment extends Fragment {
             }
         });
 
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startIntent();
+                Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
+                i.putExtra(DILEMMA_OBJECT, mDilemma);
+                startActivity(i);
             }
         });
 
-        mPreviousButton.setOnClickListener(new View.OnClickListener() {
+        previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = CreateDilemmaActivity.newIntent(getActivity());
@@ -130,9 +133,4 @@ public class TargetGroupFragment extends Fragment {
         inflater.inflate(R.menu.menu_no_create_button, menu);
     }
 
-    private void startIntent() {
-        Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
-        i.putExtra(DILEMMA_OBJECT, mDilemma);
-        startActivity(i);
-    }
 }

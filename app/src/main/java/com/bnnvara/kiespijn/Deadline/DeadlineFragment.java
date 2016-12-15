@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
+import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
 import com.bnnvara.kiespijn.R;
 
 public class DeadlineFragment extends Fragment {
@@ -76,6 +77,9 @@ public class DeadlineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 postDilemma();
+
+                Intent i = DilemmaActivity.newIntent(getActivity());
+                startActivity(i);
             }
         });
 

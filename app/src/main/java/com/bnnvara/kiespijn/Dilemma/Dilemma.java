@@ -9,44 +9,59 @@ import java.util.Locale;
 
 public class Dilemma {
 
-    private String mDilemmaKey;
-    private String mTitle;
-    private String mText;
-    private long mDateCreated;
-    private long mDateExpiration;
-    private String mUserKey;
-    private Option mOption1;
-    private Option mOption2;
-    private Boolean isAnonymous;
+    //    @SerializedName("uuid");
+    private String mUuid;
 
-    private ArrayList<Answer> mOption1AnswerList;
-    private ArrayList<Answer> mOption2AnswerList;
+    //    @SerializedName("creator_fb_id");
+    private String mCreator_fb_id;
+
+    //    @SerializedName("title");
+    private String mTitle;
+
+    //    @SerializedName("photoA");
+    private String mPhotoA;
+
+    //    @SerializedName("photoB");
+    private String mPhotoB;
+
+    //    @SerializedName("titlePhotoA");
+    private String mTitlePhotoA;
+
+    //    @SerializedName("uuid");
+    private String mTitlePhotoB;
+
+    //    @SerializedName("createdAt");
+    private String mCreatedAt;
+
+    //    @SerializedName("deadline");
+    private String mDeadline;
+
+    //    @SerializedName("anonymous");
+    private String mAnonymous;
+
+    //    @SerializedName("replies");
+    private Replies mReplies;
+
+
 
     public Dilemma() {
 
     }
 
-    public Dilemma(String title, String text, String userKey, Option option1, Option option2) {
-        mTitle = title;
-        mText = text;
-        mDateCreated = System.currentTimeMillis() / 1000L;
-        mUserKey = userKey;
-        mOption1 = option1;
-        mOption2 = option2;
-
-        // Set user if logged in
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            mUserKey = user.getUid();
-        }
+    public String getUuid() {
+        return mUuid;
     }
 
-    public String getDilemmaKey() {
-        return mDilemmaKey;
+    public void setUuid(String uuid) {
+        mUuid = uuid;
     }
 
-    public void setDilemmaKey(String dilemmaKey) {
-        mDilemmaKey = dilemmaKey;
+    public String getCreator_fb_id() {
+        return mCreator_fb_id;
+    }
+
+    public void setCreator_fb_id(String creator_fb_id) {
+        mCreator_fb_id = creator_fb_id;
     }
 
     public String getTitle() {
@@ -57,87 +72,104 @@ public class Dilemma {
         mTitle = title;
     }
 
-    public String getText() {
-        return mText;
+    public String getPhotoA() {
+        return mPhotoA;
     }
 
-    public void setText(String text) {
-        mText = text;
+    public void setPhotoA(String photoA) {
+        mPhotoA = photoA;
     }
 
-    public String getDateCreated() {
-        long tempDate = mDateCreated * 1000L;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
-        return dateFormat.format(tempDate);
+    public String getPhotoB() {
+        return mPhotoB;
     }
 
-    public void setDateCreated() {
-        mDateCreated = System.currentTimeMillis() / 1000L;
+    public void setPhotoB(String photoB) {
+        mPhotoB = photoB;
     }
 
-    public String getDateExpiration() {
-        long tempDate = mDateExpiration * 1000L;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
-        return dateFormat.format(tempDate);
+    public String getTitlePhotoA() {
+        return mTitlePhotoA;
     }
 
-    public void setDateExpiration(long dateExpiration) {
-        mDateExpiration = dateExpiration / 1000L;
+    public void setTitlePhotoA(String titlePhotoA) {
+        mTitlePhotoA = titlePhotoA;
     }
 
-    public String getUserKey() {
-        return mUserKey;
+    public String getTitlePhotoB() {
+        return mTitlePhotoB;
     }
 
-    public void setUserKey(String userKey) {
-        mUserKey = userKey;
+    public void setTitlePhotoB(String titlePhotoB) {
+        mTitlePhotoB = titlePhotoB;
     }
 
-    public Option getOption1() {
-        return mOption1;
+    public String getCreatedAt() {
+        return mCreatedAt;
     }
 
-    public void setOption1(Option option1) {
-        mOption1 = option1;
+    public void setCreatedAt(String createdAt) {
+        mCreatedAt = createdAt;
     }
 
-    public Option getOption2() {
-        return mOption2;
+    public String getDeadline() {
+        return mDeadline;
     }
 
-    public void setOption2(Option option2) {
-        mOption2 = option2;
+    public void setDeadline(String deadline) {
+        mDeadline = deadline;
     }
 
-    public Boolean getAnonymous() {
-        return isAnonymous;
+    public String getAnonymous() {
+        return mAnonymous;
     }
 
-    public void setAnonymous(Boolean anonymous) {
-        isAnonymous = anonymous;
+    public void setAnonymous(String anonymous) {
+        mAnonymous = anonymous;
     }
 
-    public ArrayList<Answer> getOption1AnswerList() {
-        return mOption1AnswerList;
+    public Replies getReplies() {
+        return mReplies;
     }
 
-    public void setOption1AnswerList(ArrayList<Answer> option1AnswerList) {
-        mOption1AnswerList = option1AnswerList;
-    }
-
-    public ArrayList<Answer> getOption2AnswerList() {
-        return mOption2AnswerList;
-    }
-
-    public void setOption2AnswerList(ArrayList<Answer> option2AnswerList) {
-        mOption2AnswerList = option2AnswerList;
-    }
-
-    public void addAnswerToOption1AnswerList(Answer answer) {
-        mOption1AnswerList.add(answer);
-    }
-
-    public void addAnswerToOption2AnswerList(Answer answer) {
-        mOption2AnswerList.add(answer);
+    public void setReplies(Replies replies) {
+        mReplies = replies;
     }
 }
+
+//    public Dilemma(String title, String text, String userKey, Option option1, Option option2) {
+//        mTitle = title;
+//        mText = text;
+//        mDateCreated = System.currentTimeMillis() / 1000L;
+//        mUserKey = userKey;
+//        mOption1 = option1;
+//        mOption2 = option2;
+//
+//        // Set user if logged in
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            mUserKey = user.getUid();
+//        }
+//    }
+
+
+//
+//    public String getDateCreated() {
+//        long tempDate = mDateCreated * 1000L;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
+//        return dateFormat.format(tempDate);
+//    }
+//
+//    public void setDateCreated() {
+//        mDateCreated = System.currentTimeMillis() / 1000L;
+//    }
+//
+//    public String getDateExpiration() {
+//        long tempDate = mDateExpiration * 1000L;
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
+//        return dateFormat.format(tempDate);
+//    }
+//
+//    public void setDateExpiration(long dateExpiration) {
+//        mDateExpiration = dateExpiration / 1000L;
+//    }

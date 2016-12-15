@@ -26,11 +26,12 @@ import com.google.firebase.auth.FirebaseAuth;
 public class TargetGroupFragment extends Fragment {
 
     private static final String TAG = "TargetGroupFragment";
+    static final String DILEMMA_OBJECT = "dilemma_object";
 
-    private static DilemmaProvider mDilemmaProvider;
-    private String mDilemmaKey;
+    private static Dilemma mDilemma;
 
-    public static TargetGroupFragment newInstance() {
+    public static TargetGroupFragment newInstance(Dilemma dilemma) {
+        mDilemma = dilemma;
         return new TargetGroupFragment();
     }
 
@@ -42,8 +43,6 @@ public class TargetGroupFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        mDilemmaProvider = DilemmaProvider.get(getContext());
 
     }
 
@@ -96,6 +95,7 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
+                i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);
             }
         });
@@ -104,6 +104,7 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = CreateDilemmaActivity.newIntent(getActivity());
+                i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);
             }
         });

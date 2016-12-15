@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.UUID;
 
 public class Dilemma implements Serializable {
 
@@ -32,10 +33,10 @@ public class Dilemma implements Serializable {
     private String mTitlePhotoB;
 
     //    @SerializedName("createdAt");
-    private String mCreatedAt;
+    private long mCreatedAt;
 
     //    @SerializedName("deadline");
-    private String mDeadline;
+    private long mDeadline;
 
     //    @SerializedName("anonymous");
     private String mAnonymous;
@@ -53,8 +54,9 @@ public class Dilemma implements Serializable {
         return mUuid;
     }
 
-    public void setUuid(String uuid) {
-        mUuid = uuid;
+    public void setUuid() {
+        String tempUUID = UUID.randomUUID().toString();
+        mUuid = tempUUID;
     }
 
     public String getCreator_fb_id() {
@@ -105,20 +107,28 @@ public class Dilemma implements Serializable {
         mTitlePhotoB = titlePhotoB;
     }
 
-    public String getCreatedAt() {
+    public long getCreatedAt() {
         return mCreatedAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        mCreatedAt = createdAt;
+    public void setCreatedAt() {
+        mCreatedAt = System.currentTimeMillis() / 1000L;
     }
 
-    public String getDeadline() {
+    public long getDeadline() {
         return mDeadline;
     }
 
-    public void setDeadline(String deadline) {
-        mDeadline = deadline;
+    public long setDeadline(int deadline) {
+        long timeToAdd = deadline * 3600000;
+        mDeadline = (System.currentTimeMillis() + timeToAdd) / 1000L;
+        return mDeadline;
+    }
+
+    public String getDateAndTime(long date) {
+        long tempDate = date * 1000L;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
+        return dateFormat.format(tempDate);
     }
 
     public String getAnonymous() {
@@ -151,26 +161,4 @@ public class Dilemma implements Serializable {
 //        if (user != null) {
 //            mUserKey = user.getUid();
 //        }
-//    }
-
-
-//
-//    public String getDateCreated() {
-//        long tempDate = mDateCreated * 1000L;
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
-//        return dateFormat.format(tempDate);
-//    }
-//
-//    public void setDateCreated() {
-//        mDateCreated = System.currentTimeMillis() / 1000L;
-//    }
-//
-//    public String getDateExpiration() {
-//        long tempDate = mDateExpiration * 1000L;
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
-//        return dateFormat.format(tempDate);
-//    }
-//
-//    public void setDateExpiration(long dateExpiration) {
-//        mDateExpiration = dateExpiration / 1000L;
 //    }

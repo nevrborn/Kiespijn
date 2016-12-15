@@ -63,7 +63,7 @@ public class Dilemma implements Serializable {
 
     }
 
-    
+
 
     public String getCreator_name() {
         return mCreator_name;

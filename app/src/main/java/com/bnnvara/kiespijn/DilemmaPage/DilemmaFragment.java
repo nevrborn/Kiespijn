@@ -105,8 +105,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setCreator_fb_id("abc_faceb_123");
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
-        dilemma_1.setDeadline("Tue, 13 Dec 2016 12:08:56 -0100");
-        dilemma_1.setCreatedAt("Tue, 13 Dec 2016 02:08:56 -0100");
+        dilemma_1.setDeadline(12);
+        dilemma_1.setCreatedAt();
         dilemma_1.setAnonymous("0");
         Replies replies = new Replies();
         List<Answer> option1AnswerList = new ArrayList<>() ;

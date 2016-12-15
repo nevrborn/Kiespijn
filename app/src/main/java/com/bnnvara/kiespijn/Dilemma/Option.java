@@ -1,13 +1,12 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import android.graphics.Bitmap;
 import android.media.Image;
 
 public class Option {
 
     private String mTitle;
     private String mText;
-    private Bitmap mImage;
+    private Image mImage;
 
     public Option() {
         // empty constructur
@@ -34,11 +33,11 @@ public class Option {
         mText = text;
     }
 
-    public Bitmap getImage() {
+    public Image getImage() {
         return mImage;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(Image image) {
         mImage = image;
     }
 }

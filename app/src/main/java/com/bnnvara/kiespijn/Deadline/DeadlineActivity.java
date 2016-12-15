@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 
 public class DeadlineActivity extends SingleFragmentActivity {
 
     private static final String TAG = "DeadlineActivity";
+    static final String DILEMMA_OBJECT = "dilemma_object";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, DeadlineActivity.class);
@@ -16,6 +18,8 @@ public class DeadlineActivity extends SingleFragmentActivity {
 
     @Override
     protected DeadlineFragment createFragment() {
-        return DeadlineFragment.newInstance();
+        Intent i = getIntent();
+        Dilemma dilemma = (Dilemma) i.getSerializableExtra(DILEMMA_OBJECT);
+        return DeadlineFragment.newInstance(dilemma);
     }
 }

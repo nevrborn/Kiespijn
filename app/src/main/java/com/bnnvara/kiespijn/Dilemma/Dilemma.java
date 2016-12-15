@@ -3,11 +3,12 @@ package com.bnnvara.kiespijn.Dilemma;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Dilemma {
+public class Dilemma implements Serializable {
 
     //    @SerializedName("uuid");
     private String mUuid;

@@ -13,18 +13,20 @@ import android.widget.Button;
 
 import com.bnnvara.kiespijn.Deadline.DeadlineActivity;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
+import com.bnnvara.kiespijn.Dilemma.DilemmaProvider;
 import com.bnnvara.kiespijn.R;
 
 
 public class DilemmaFromWhoFragment extends Fragment {
 
     private static final String TAG = "DilemmaFromWhoFragment";
+    static final String DILEMMA_OBJECT = "dilemma_object";
 
-    private static DilemmaApiResponse mDilemmaProvider;
-    private String mDilemmaKey;
-    private Boolean isAnonymous;
+    private static Dilemma mDilemma;
 
-    public static DilemmaFromWhoFragment newInstance() {
+    public static DilemmaFromWhoFragment newInstance(Dilemma dilemma) {
+        mDilemma = dilemma;
         return new DilemmaFromWhoFragment();
     }
 
@@ -32,8 +34,6 @@ public class DilemmaFromWhoFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        mDilemmaProvider = DilemmaApiResponse.get(getContext());
 
     }
 
@@ -49,14 +49,14 @@ public class DilemmaFromWhoFragment extends Fragment {
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isAnonymous = false;
+                mDilemma.setAnonymous("1");
             }
         });
 
         myselfButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                isAnonymous = true;
+                mDilemma.setAnonymous(false);
             }
         });
 
@@ -64,6 +64,7 @@ public class DilemmaFromWhoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = DeadlineActivity.newIntent(getActivity());
+                i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);
             }
         });

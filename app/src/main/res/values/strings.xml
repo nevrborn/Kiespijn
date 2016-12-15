@@ -33,4 +33,9 @@
     <string name="deadline_set">STEL EEN DEADLINE</string>
     <string name="deadline_hours">%1$i uur</string>
 
+    // CREATE DILEMMA SCREEN
+    <string name="title_hint">Moet ik…</string>
+    <string name="title_hint_1">Dilemma 1</string>
+    <string name="title_hint_2">Dilemma 2</string>
+
 </resources>

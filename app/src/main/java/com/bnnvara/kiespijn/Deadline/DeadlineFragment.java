@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.Deadline;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,11 +20,11 @@ public class DeadlineFragment extends Fragment {
 
     private static final String TAG = "DeadlineFragment";
 
-    private static DilemmaApiResponse mDilemmaProvider;
-    private String mDilemmaKey;
+    private static Dilemma mDilemma;
     private int mDeadline;
 
-    public static DeadlineFragment newInstance() {
+    public static DeadlineFragment newInstance(Dilemma dilemma) {
+        mDilemma = dilemma;
         return new DeadlineFragment();
     }
 
@@ -31,8 +32,6 @@ public class DeadlineFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        mDilemmaProvider = DilemmaApiResponse.get(getContext());
 
     }
 

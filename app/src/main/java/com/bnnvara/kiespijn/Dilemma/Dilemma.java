@@ -3,6 +3,8 @@ package com.bnnvara.kiespijn.Dilemma;
 import android.graphics.Bitmap;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -10,49 +12,49 @@ import java.util.UUID;
 
 public class Dilemma implements Serializable {
 
-    //    @SerializedName("uuid");
+    @SerializedName("uuid")
     private String mUuid;
 
-    //    @SerializedName("creator_fb_id");
+    @SerializedName("creator_fb_id")
     private String mCreator_fb_id;
 
-    //    @SerializedName("creator_fb_name");
+    @SerializedName("creator_fb_name")
     private String mCreator_name;
 
-    //    @SerializedName("creator_fb_sex");
+    @SerializedName("creator_fb_sex")
     private String mCreator_sex;
 
-    //    @SerializedName("creator_fb_age");
+    @SerializedName("creator_fb_age")
     private String mCreator_age;
 
-    //    @SerializedName("title");
+    @SerializedName("title")
     private String mTitle;
 
-    //    @SerializedName("photoA");
+    @SerializedName("photoA")
     private String mPhotoA;
 
-    //    @SerializedName("photoB");
+    @SerializedName("photoB")
     private String mPhotoB;
 
-    //    @SerializedName("titlePhotoA");
+    @SerializedName("titlePhotoA")
     private String mTitlePhotoA;
 
-    //    @SerializedName("uuid");
+    @SerializedName("uuid")
     private String mTitlePhotoB;
 
-    //    @SerializedName("createdAt");
+    @SerializedName("createdAt")
     private long mCreatedAt;
 
-    //    @SerializedName("deadline");
+    @SerializedName("deadline")
     private long mDeadline;
 
-    //    @SerializedName("anonymous");
+    @SerializedName("anonymous")
     private String mAnonymous;
 
-    //    @SerializedName("sendtoall");
+    @SerializedName("sendtoall")
     private String mIsToAll;
 
-    //    @SerializedName("replies");
+    @SerializedName("replies")
     private Replies mReplies;
 
 

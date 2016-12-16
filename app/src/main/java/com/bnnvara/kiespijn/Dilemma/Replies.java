@@ -1,5 +1,7 @@
 package com.bnnvara.kiespijn.Dilemma;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
@@ -7,10 +9,10 @@ import java.util.ArrayList;
  */
 public class Replies {
 
-    //    @SerializedName("optionA");
+    @SerializedName("optionA")
     private ArrayList<Answer> mOption1AnswerList;
 
-    //    @SerializedName("optionB");
+    @SerializedName("optionB")
     private ArrayList<Answer> mOption2AnswerList;
 
 

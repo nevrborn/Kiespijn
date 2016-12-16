@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.ApiDataFetcher;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -73,7 +74,8 @@ public class DilemmaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
-        createDummyDate();
+        //createDummyDate();
+        getData();
 
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo);
@@ -99,9 +101,16 @@ public class DilemmaFragment extends Fragment {
             }
         });
 
-        updateUi();
+
 
         return view;
+    }
+
+    private void getData() {
+        ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
+        apiDataFetcher.getData();
+        mDilemmaList = apiDataFetcher.getDilemmaList();
+        updateUi();
     }
 
     private void updateCurrentIndex() {
@@ -113,33 +122,34 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateUi() {
-        mDilemma = mDilemmaList.get(mCurrentIndex);
+        if (mDilemmaList != null){
+            mDilemma = mDilemmaList.get(mCurrentIndex);
 
-        if (mDilemma.getAnonymous() == "0"){
-            mUserNameTextView.setText(mDilemma.getCreator_name());
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
-        } else {
-            mUserNameTextView.setText(getString(R.string.dilemma_username));
-            mUserDescriptionTextView.setText("");
+            if (mDilemma.getAnonymous() == "0") {
+                mUserNameTextView.setText(mDilemma.getCreator_name());
+                mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+            } else {
+                mUserNameTextView.setText(getString(R.string.dilemma_username));
+                mUserDescriptionTextView.setText("");
+            }
+
+            mDilemmaFirstImageView.setBackground(null);
+            mDilemmaSecondImageView.setBackground(null);
+
+            mDilemmaTextView.setText(mDilemma.getTitle());
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoA())
+                    .centerCrop()
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(mDilemmaFirstImageView);
+
+            mDilemmaTextView.setText(mDilemma.getTitle());
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoB())
+                    .centerCrop()
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(mDilemmaSecondImageView);
         }
-
-        mDilemmaFirstImageView.setBackground(null);
-        mDilemmaSecondImageView.setBackground(null);
-
-        mDilemmaTextView.setText(mDilemma.getTitle());
-        Glide.with(getActivity())
-                .load(mDilemma.getPhotoA())
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
-                .into(mDilemmaFirstImageView);
-
-        mDilemmaTextView.setText(mDilemma.getTitle());
-        Glide.with(getActivity())
-                .load(mDilemma.getPhotoB())
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
-                .into(mDilemmaSecondImageView);
-
     }
 
 
@@ -219,7 +229,7 @@ public class DilemmaFragment extends Fragment {
         dilemmaList.add(dilemma_2);
         dilemmaList.add(dilemma_3);
         DilemmaApiResponse dilemmaApiResponse = new DilemmaApiResponse();
-        dilemmaApiResponse.setDilemmaList(dilemmaList);
+        dilemmaApiResponse.setDilemmaList((ArrayList) dilemmaList);
         mDilemmaList = (ArrayList<Dilemma>) dilemmaApiResponse.getDilemmaList();
     }
 

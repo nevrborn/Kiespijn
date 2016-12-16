@@ -5,7 +5,7 @@ import android.util.Log;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;;
@@ -22,8 +22,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiDataFetcher {
 
     private static final String BASE_URL = "http://www.mocky.io/";
-    private List<Dilemma> mDilemmaList;
+    private ArrayList<Dilemma> mDilemmaList;
 
+
+    public ApiDataFetcher() {
+        //this.getData();
+    }
 
     public void getData(){
 
@@ -60,7 +64,10 @@ public class ApiDataFetcher {
             Log.e("Retrofit body null", String.valueOf(response.code()));
         }
         mDilemmaList = mDilemmaApiResponse.getDilemmaList();
-        Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
+        //Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
     }
 
+    public ArrayList<Dilemma> getDilemmaList() {
+        return mDilemmaList;
+    }
 }

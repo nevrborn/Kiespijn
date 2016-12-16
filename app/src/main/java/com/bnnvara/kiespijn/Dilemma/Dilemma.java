@@ -39,7 +39,7 @@ public class Dilemma implements Serializable {
     @SerializedName("titlePhotoA")
     private String mTitlePhotoA;
 
-    @SerializedName("uuid")
+    @SerializedName("titlePhotoB")
     private String mTitlePhotoB;
 
     @SerializedName("createdAt")

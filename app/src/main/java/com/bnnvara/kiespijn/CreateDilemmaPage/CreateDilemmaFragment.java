@@ -1,10 +1,11 @@
 package com.bnnvara.kiespijn.CreateDilemmaPage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -26,7 +27,6 @@ import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -54,9 +54,16 @@ public class CreateDilemmaFragment extends Fragment {
     private Boolean isImageA = true;
 
     // dilemma variables
-    private Dilemma mDilemma;
+    private static Dilemma mDilemma;
 
-    public static Fragment newInstance() {
+    public static Fragment newInstance(Dilemma dilemma) {
+
+        if (mDilemma != null) {
+            mDilemma = dilemma;
+        } else {
+            mDilemma = new Dilemma();
+        }
+
         return new CreateDilemmaFragment();
     }
 
@@ -65,8 +72,6 @@ public class CreateDilemmaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_dilemma, container, false);
-
-        mDilemma = new Dilemma();
 
         // set up the references
         mDilemmaTitle = (EditText) view.findViewById(R.id.text_view_dilemma_title);
@@ -85,12 +90,25 @@ public class CreateDilemmaFragment extends Fragment {
         mOptionAText.setTypeface(source_sans_extra_light);
         mOptionBText.setTypeface(source_sans_extra_light);
 
+        if (mDilemma.getPhotoA() != null && mDilemma.getPhotoB() != null) {
+            try {
+                mDilemmaTitle.setText(mDilemma.getTitle());
+                mOptionAText.setText(mDilemma.getTitlePhotoA());
+                mOptionBText.setText(mDilemma.getTitlePhotoB());
+                mImageViewA.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoA())));
+                mImageViewB.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoB())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         // set up the listeners
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Log.i(TAG, mDilemma.getTitle());
+
 
                 Intent i = TargetGroupActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
@@ -203,13 +221,24 @@ public class CreateDilemmaFragment extends Fragment {
             if (isImageA) {
                 mImageA = imageBitmap;
                 mImageViewA.setImageBitmap(mImageA);
-                mDilemma.setPhotoA("https://farm1.staticflickr.com/379/30812017803_a62730715e_m.jpg"); // DUMMY VALUE
+                String imageAUri = getImageUri(getContext(), mImageA).toString();
+                mDilemma.setPhotoA(imageAUri);
+                Log.i(TAG, imageAUri);
             } else {
                 mImageB = imageBitmap;
                 mImageViewB.setImageBitmap(mImageB);
-                mDilemma.setPhotoB("https://goo.gl/lsKFBk"); // DUMMY VALUE
+                String imageBUri = getImageUri(getContext(), mImageB).toString();
+                mDilemma.setPhotoB(imageBUri);
+                Log.i(TAG, imageBUri);
             }
         }
 
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 }

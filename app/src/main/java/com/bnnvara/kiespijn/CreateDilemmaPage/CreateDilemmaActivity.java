@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
+import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 
 public class CreateDilemmaActivity extends SingleFragmentActivity {
+
+    static final String DILEMMA_OBJECT = "dilemma_object";
 
     /*
     * create Intent to start this activity
@@ -19,7 +22,9 @@ public class CreateDilemmaActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return CreateDilemmaFragment.newInstance();
+        Intent i = getIntent();
+        Dilemma dilemma = (Dilemma) i.getSerializableExtra(DILEMMA_OBJECT);
+        return CreateDilemmaFragment.newInstance(dilemma);
     }
 
 

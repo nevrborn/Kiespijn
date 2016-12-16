@@ -50,14 +50,21 @@ public class DeadlineFragment extends Fragment {
         final TextView timeText = (TextView) view.findViewById(R.id.textview_deadline_hours);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_deadline);
 
-        if (mDilemma != null) {
+        if (mDilemma.getDeadline() != 0) {
 
+            Log.i(TAG, "CreatedAt: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
+            Log.i(TAG, "Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
+
+            long deadline = (mDilemma.getDeadline() - mDilemma.getCreatedAt()) * 1000L;
+            long timeToAdd = deadline / 3600000;
+            timeText.setText(getString(R.string.deadline_hours, timeToAdd));
+            timeBar.setProgress((int) timeToAdd);
+        } else {
             timeText.setText(getString(R.string.deadline_hours, 12));
-
         }
 
 
-        timeText.setText(getString(R.string.deadline_hours, 12));
+
 
         final int stepSize = 1;
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -84,7 +91,6 @@ public class DeadlineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 postDilemma();
-
                 Intent i = DilemmaActivity.newIntent(getActivity());
                 startActivity(i);
             }
@@ -93,6 +99,7 @@ public class DeadlineFragment extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setDateCreatedAndDeadLine(mDeadline);
                 Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);

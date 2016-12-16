@@ -58,6 +58,21 @@ public class DilemmaFromWhoFragment extends Fragment {
         anonymousButton.setTypeface(source_sans_extra_light);
         myselfButton.setTypeface(source_sans_extra_light);
 
+        if (mDilemma != null && mDilemma.getAnonymous() != null) {
+
+            if (mDilemma.getAnonymous().equals("0")) {
+                anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
+                myselfButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                myselfButton.setTextColor(getResources().getColor(R.color.colorYellow));
+            } else if (mDilemma.getAnonymous().equals("1")) {
+                anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                anonymousButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                myselfButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                myselfButton.setTextColor(getResources().getColor(R.color.colorGreen));
+            }
+        }
+
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,6 +1,7 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ public class TargetGroupFragment extends Fragment {
     static final String DILEMMA_OBJECT = "dilemma_object";
 
     private static Dilemma mDilemma;
+
 
     public static TargetGroupFragment newInstance(Dilemma dilemma) {
         mDilemma = dilemma;
@@ -60,6 +62,26 @@ public class TargetGroupFragment extends Fragment {
         friendsButton.setTypeface(source_sans_extra_light);
         everyoneButton.setTypeface(source_sans_extra_light);
         callSomeoneButton.setTypeface(source_sans_extra_light);
+
+        if (mDilemma != null && mDilemma.getIsToAll() != null) {
+
+            if (mDilemma.getIsToAll().equals("0")) {
+                friendsButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                friendsButton.setTextColor(getResources().getColor(R.color.colorGreen));
+                everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+            } else if (mDilemma.getIsToAll().equals("1")) {
+                friendsButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                friendsButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                everyoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
+                callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+            }
+
+        }
 
         // set the listeners
         friendsButton.setOnClickListener(new View.OnClickListener() {
@@ -132,5 +154,6 @@ public class TargetGroupFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_no_create_button, menu);
     }
+
 
 }

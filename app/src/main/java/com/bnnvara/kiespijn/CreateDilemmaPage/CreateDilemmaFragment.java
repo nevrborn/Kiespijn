@@ -94,8 +94,6 @@ public class CreateDilemmaFragment extends Fragment {
 
                 Intent i = TargetGroupActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
-                i.putExtra(DILEMMA_PHOTO_A, mDilemma.getPhotoAParceble());
-                i.putExtra(DILEMMA_PHOTO_B, mDilemma.getPhotoBParceble());
                 startActivity(i);
             }
         });
@@ -205,13 +203,11 @@ public class CreateDilemmaFragment extends Fragment {
             if (isImageA) {
                 mImageA = imageBitmap;
                 mImageViewA.setImageBitmap(mImageA);
-                mDilemma.setPhotoAParceble(mImageA);
-                //mDilemma.setPhotoA("https://farm1.staticflickr.com/379/30812017803_a62730715e_m.jpg"); // DUMMY VALUE
+                mDilemma.setPhotoA("https://farm1.staticflickr.com/379/30812017803_a62730715e_m.jpg"); // DUMMY VALUE
             } else {
                 mImageB = imageBitmap;
                 mImageViewB.setImageBitmap(mImageB);
-                mDilemma.setPhotoBParceble(mImageB);
-                //mDilemma.setPhotoB("https://goo.gl/lsKFBk"); // DUMMY VALUE
+                mDilemma.setPhotoB("https://goo.gl/lsKFBk"); // DUMMY VALUE
             }
         }
 

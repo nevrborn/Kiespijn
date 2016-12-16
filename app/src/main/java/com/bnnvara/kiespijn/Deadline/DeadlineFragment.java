@@ -50,6 +50,13 @@ public class DeadlineFragment extends Fragment {
         final TextView timeText = (TextView) view.findViewById(R.id.textview_deadline_hours);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_deadline);
 
+        if (mDilemma != null) {
+
+            timeText.setText(getString(R.string.deadline_hours, 12));
+
+        }
+
+
         timeText.setText(getString(R.string.deadline_hours, 12));
 
         final int stepSize = 1;

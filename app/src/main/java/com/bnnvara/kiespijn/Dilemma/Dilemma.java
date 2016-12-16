@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.Dilemma;
 
+import android.graphics.Bitmap;
 import android.os.Parcelable;
 
 import java.io.Serializable;
@@ -53,10 +54,6 @@ public class Dilemma implements Serializable {
 
     //    @SerializedName("replies");
     private Replies mReplies;
-
-    private Parcelable mPhotoAParceble;
-    private Parcelable mPhotoBParceble;
-
 
 
     public Dilemma() {
@@ -201,19 +198,4 @@ public class Dilemma implements Serializable {
         mReplies = replies;
     }
 
-    public Parcelable getPhotoAParceble() {
-        return mPhotoAParceble;
-    }
-
-    public void setPhotoAParceble(Parcelable photoAParceble) {
-        mPhotoAParceble = photoAParceble;
-    }
-
-    public Parcelable getPhotoBParceble() {
-        return mPhotoBParceble;
-    }
-
-    public void setPhotoBParceble(Parcelable photoBParceble) {
-        mPhotoBParceble = photoBParceble;
-    }
 }

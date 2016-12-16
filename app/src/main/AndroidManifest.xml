@@ -24,19 +24,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login.LoginActivity">
+            android:name=".Login.LoginActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity">
+            android:name="com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity">
+            android:name="com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity">
+            android:name="com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.Deadline.DeadlineActivity">
+            android:name="com.bnnvara.kiespijn.Deadline.DeadlineActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"

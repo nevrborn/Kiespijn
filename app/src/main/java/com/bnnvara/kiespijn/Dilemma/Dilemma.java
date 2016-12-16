@@ -16,6 +16,15 @@ public class Dilemma implements Serializable {
     //    @SerializedName("creator_fb_id");
     private String mCreator_fb_id;
 
+    //    @SerializedName("");
+    private String mCreator_name;
+
+    //    @SerializedName("");
+    private String mCreator_sex;
+
+    //    @SerializedName("");
+    private String mCreator_age;
+
     //    @SerializedName("title");
     private String mTitle;
 
@@ -49,6 +58,40 @@ public class Dilemma implements Serializable {
 
     public Dilemma() {
 
+    }
+
+
+
+    public String getCreator_name() {
+        return mCreator_name;
+    }
+
+    public void setCreator_name(String creator_name) {
+        mCreator_name = creator_name;
+    }
+
+    public String getCreator_sex() {
+        return mCreator_sex;
+    }
+
+    public void setCreator_sex(String creator_sex) {
+        mCreator_sex = creator_sex;
+    }
+
+    public String getCreator_age() {
+        return mCreator_age;
+    }
+
+    public void setCreator_age(String creator_age) {
+        mCreator_age = creator_age;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        mCreatedAt = createdAt;
+    }
+
+    public void setDeadline(long deadline) {
+        mDeadline = deadline;
     }
 
     public String getUuid() {

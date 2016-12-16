@@ -123,7 +123,6 @@
                 android:id="@+id/image_view_first_option_decicision_page"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/cremation_urn"
                 android:contentDescription="@string/image_content"
                 />
 
@@ -142,7 +141,6 @@
                 android:id="@+id/image_view_second_option_decicision_page"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/uitvaart_begrafenis"
                 android:contentDescription="@string/image_content"
 
                 />

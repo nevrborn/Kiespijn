@@ -99,6 +99,8 @@ public class DilemmaFragment extends Fragment {
             }
         });
 
+        updateUi();
+
         return view;
     }
 

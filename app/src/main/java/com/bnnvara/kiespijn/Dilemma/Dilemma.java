@@ -16,13 +16,13 @@ public class Dilemma implements Serializable {
     //    @SerializedName("creator_fb_id");
     private String mCreator_fb_id;
 
-    //    @SerializedName("");
+    //    @SerializedName("creator_fb_name");
     private String mCreator_name;
 
-    //    @SerializedName("");
+    //    @SerializedName("creator_fb_sex");
     private String mCreator_sex;
 
-    //    @SerializedName("");
+    //    @SerializedName("creator_fb_age");
     private String mCreator_age;
 
     //    @SerializedName("title");

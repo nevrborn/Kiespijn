@@ -167,6 +167,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setDeadline(12);
         dilemma_1.setCreatedAt();
         dilemma_1.setAnonymous("0");
+        dilemma_1.setIsToAll("1");
         Replies replies1 = new Replies();
         List<Answer> option1AnswerList = new ArrayList<>() ;
         List<Answer> option2AnswerList = new ArrayList<>() ;
@@ -190,6 +191,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setDeadline(12);
         dilemma_2.setCreatedAt();
         dilemma_2.setAnonymous("0");
+        dilemma_1.setIsToAll("1");
         Replies replies2 = new Replies();
         option1AnswerList = new ArrayList<>() ;
         option2AnswerList = new ArrayList<>() ;
@@ -213,6 +215,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setDeadline(12);
         dilemma_3.setCreatedAt();
         dilemma_3.setAnonymous("0");
+        dilemma_1.setIsToAll("1");
         Replies replies3 = new Replies();
         option1AnswerList = new ArrayList<>() ;
         option2AnswerList = new ArrayList<>() ;
@@ -229,8 +232,8 @@ public class DilemmaFragment extends Fragment {
         dilemmaList.add(dilemma_2);
         dilemmaList.add(dilemma_3);
         DilemmaApiResponse dilemmaApiResponse = new DilemmaApiResponse();
-        dilemmaApiResponse.setDilemmaList((ArrayList) dilemmaList);
-        mDilemmaList = (ArrayList<Dilemma>) dilemmaApiResponse.getDilemmaList();
+        dilemmaApiResponse.setDilemmaList((ArrayList<Dilemma>) dilemmaList);
+        mDilemmaList = dilemmaApiResponse.getDilemmaList();
     }
 
 

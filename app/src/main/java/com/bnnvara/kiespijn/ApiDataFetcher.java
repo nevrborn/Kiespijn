@@ -22,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiDataFetcher {
 
     private static final String BASE_URL = "http://www.mocky.io/";
+    private static final String TAG = "kiespijn.ApiDataFetcher";
     private ArrayList<Dilemma> mDilemmaList;
 
 
@@ -47,12 +48,13 @@ public class ApiDataFetcher {
         apiResponse.getDilemmaList().enqueue(new Callback<DilemmaApiResponse>() {
             @Override
             public void onResponse(Call<DilemmaApiResponse> call, Response<DilemmaApiResponse> response) {
+                Log.e(TAG, "Retrofit response");
                 setResponse(response);
             }
 
             @Override
             public void onFailure(Call<DilemmaApiResponse> call, Throwable t) {
-                Log.e("Retrofit error", t.getMessage());
+                Log.e(TAG, "Retrofit error: " + t.getMessage());
             }
         });
 
@@ -61,7 +63,7 @@ public class ApiDataFetcher {
     private void setResponse(Response<DilemmaApiResponse> response) {
         DilemmaApiResponse mDilemmaApiResponse = response.body();
         if (response.body() == null) {
-            Log.e("Retrofit body null", String.valueOf(response.code()));
+            Log.e(TAG, "Retrofit body null: " + String.valueOf(response.code()));
         }
         mDilemmaList = mDilemmaApiResponse.getDilemmaList();
         //Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));

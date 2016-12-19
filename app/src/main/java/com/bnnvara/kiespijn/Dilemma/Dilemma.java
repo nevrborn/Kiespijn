@@ -51,7 +51,7 @@ public class Dilemma implements Serializable {
     @SerializedName("anonymous")
     private String mAnonymous;
 
-    @SerializedName("sendtoall")
+    @SerializedName("isToAll")
     private String mIsToAll;
 
     @SerializedName("replies")
@@ -96,12 +96,25 @@ public class Dilemma implements Serializable {
         mDeadline = deadline;
     }
 
+    public void setDeadline(int deadline) {
+        long timeToAdd = deadline * 3600000;
+        mDeadline = (System.currentTimeMillis() + timeToAdd) / 1000L;
+    }
+
+    public void setDeadline(String deadline) {
+        mDeadline = Long.getLong(deadline);
+    }
+
     public String getUuid() {
         return mUuid;
     }
 
     public void setUuid() {
         mUuid = UUID.randomUUID().toString();
+    }
+
+    public void setUuid(String uuid) {
+        mUuid = uuid;
     }
 
     public String getCreator_fb_id() {
@@ -160,13 +173,11 @@ public class Dilemma implements Serializable {
         mCreatedAt = System.currentTimeMillis() / 1000L;
     }
 
-    public long getDeadline() {
-        return mDeadline;
+    public void setCreatedAt(String createdAt) {
+        mCreatedAt = Long.getLong(createdAt);
     }
 
-    public long setDeadline(int deadline) {
-        long timeToAdd = deadline * 3600000;
-        mDeadline = (System.currentTimeMillis() + timeToAdd) / 1000L;
+    public long getDeadline() {
         return mDeadline;
     }
 

@@ -3,6 +3,7 @@ package com.bnnvara.kiespijn.Dilemma;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by paulvancappelle on 15-12-16.
@@ -10,26 +11,27 @@ import java.util.ArrayList;
 public class Replies {
 
     @SerializedName("optionA")
-    private ArrayList<Answer> mOption1AnswerList;
+    private List<Answer> mOption1AnswerList;
+
 
     @SerializedName("optionB")
-    private ArrayList<Answer> mOption2AnswerList;
+    private List<Answer> mOption2AnswerList;
 
 
 
-    public ArrayList<Answer> getOption1AnswerList() {
+    public List<Answer> getOption1AnswerList() {
         return mOption1AnswerList;
     }
 
-    public void setOption1AnswerList(ArrayList<Answer> option1AnswerList) {
+    public void setOption1AnswerList(List<Answer> option1AnswerList) {
         mOption1AnswerList = option1AnswerList;
     }
 
-    public ArrayList<Answer> getOption2AnswerList() {
+    public List<Answer> getOption2AnswerList() {
         return mOption2AnswerList;
     }
 
-    public void setOption2AnswerList(ArrayList<Answer> option2AnswerList) {
+    public void setOption2AnswerList(List<Answer> option2AnswerList) {
         mOption2AnswerList = option2AnswerList;
     }
 }

@@ -20,6 +20,7 @@ import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
+import com.bnnvara.kiespijn.Dilemma.Dilemmas;
 import com.bnnvara.kiespijn.Dilemma.Replies;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
@@ -54,7 +55,7 @@ public class DilemmaFragment extends Fragment {
 
     // regular variables
     private Dilemma mDilemma;
-    private ArrayList<Dilemma> mDilemmaList;
+    private List<Dilemma> mDilemmaList;
     private int mCurrentIndex;
 
 
@@ -231,9 +232,9 @@ public class DilemmaFragment extends Fragment {
         dilemmaList.add(dilemma_1);
         dilemmaList.add(dilemma_2);
         dilemmaList.add(dilemma_3);
-        DilemmaApiResponse dilemmaApiResponse = new DilemmaApiResponse();
-        dilemmaApiResponse.setDilemmaList((ArrayList<Dilemma>) dilemmaList);
-        mDilemmaList = dilemmaApiResponse.getDilemmaList();
+        Dilemmas dilemmas = new Dilemmas();
+        dilemmas.setDilemmaList(dilemmaList);
+        mDilemmaList = dilemmas.getDilemmaList();
     }
 
 

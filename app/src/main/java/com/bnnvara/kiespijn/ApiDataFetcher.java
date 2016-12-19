@@ -7,7 +7,7 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;;
@@ -25,7 +25,7 @@ public class ApiDataFetcher {
 
     private static final String BASE_URL = "http://www.mocky.io/";
     private static final String TAG = "kiespijn.ApiDataFetcher";
-    private ArrayList<Dilemma> mDilemmaList;
+    private List<Dilemma> mDilemmaList;
 
 
     public ApiDataFetcher() {
@@ -72,7 +72,7 @@ public class ApiDataFetcher {
         //Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
     }
 
-    public ArrayList<Dilemma> getDilemmaList() {
+    public List<Dilemma> getDilemmaList() {
         return mDilemmaList;
     }
 }

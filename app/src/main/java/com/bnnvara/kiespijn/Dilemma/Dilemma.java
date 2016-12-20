@@ -51,8 +51,8 @@ public class Dilemma implements Serializable {
     @SerializedName("isToAll")
     private boolean mIsToAll;
 
-//    @SerializedName("replies")
-//    private Replies mReplies;
+    @SerializedName("replies")
+    private Replies mReplies;
 
 
     public Dilemma() {
@@ -200,12 +200,12 @@ public class Dilemma implements Serializable {
         mIsToAll = isToAll.equals("true");
     }
 
-//    public Replies getReplies() {
-//        return mReplies;
-//    }
+    public Replies getReplies() {
+        return mReplies;
+    }
 
-    //public void setReplies(Replies replies) {
-//        mReplies = replies;
-//    }
+    public void setReplies(Replies replies) {
+        mReplies = replies;
+    }
 
 }

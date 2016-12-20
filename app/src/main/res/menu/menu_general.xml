@@ -17,5 +17,12 @@
         app:showAsAction="always|withText"
         />
 
+    <item
+        android:id="@+id/menu_item_login"
+        android:title="Login"
+        android:icon="@drawable/com_facebook_favicon_blue"
+        app:showAsAction="ifRoom"
+        />
+
 
 </menu>

@@ -24,6 +24,7 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Dilemmas;
 import com.bnnvara.kiespijn.Dilemma.Replies;
 import com.bnnvara.kiespijn.Login.LoginActivity;
+import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
@@ -270,12 +271,16 @@ public class DilemmaFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_item_user:
-                Intent i = LoginActivity.newIntent(getActivity());
-                startActivity(i);
+                Intent intent1 = PersonalPageActivity.newIntent(getActivity());
+                startActivity(intent1);
+                return true;
+            case R.id.menu_item_login:
+                Intent intent2 = LoginActivity.newIntent(getActivity());
+                startActivity(intent2);
                 return true;
             case R.id.menu_item_create_dilemma:
-                Intent intent = CreateDilemmaActivity.newIntent(getActivity());
-                startActivity(intent);
+                Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
+                startActivity(intent3);
                 return true;
             default: return true;
         }

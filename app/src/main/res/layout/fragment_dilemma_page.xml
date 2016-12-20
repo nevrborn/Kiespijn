@@ -51,7 +51,8 @@
                 android:id="@+id/text_view_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dilemma_username"
+                android:hint="@string/dilemma_username"
+                android:textColorHint="@android:color/white"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"/>
 
@@ -59,6 +60,7 @@
                 android:id="@+id/text_view_user_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
                 android:hint="@string/dilemma_user_description"
                 android:textColorHint="@android:color/white"
                 android:textSize="12sp"

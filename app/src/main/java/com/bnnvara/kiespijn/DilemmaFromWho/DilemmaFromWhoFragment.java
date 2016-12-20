@@ -58,14 +58,14 @@ public class DilemmaFromWhoFragment extends Fragment {
         anonymousButton.setTypeface(source_sans_extra_light);
         myselfButton.setTypeface(source_sans_extra_light);
 
-        if (mDilemma != null && mDilemma.getAnonymous() != null) {
+        if (mDilemma != null && mDilemma.getIsAnonymous()) {
 
-            if (mDilemma.getAnonymous().equals("0")) {
+            if (mDilemma.getIsAnonymous()) {
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
                 myselfButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 myselfButton.setTextColor(getResources().getColor(R.color.colorYellow));
-            } else if (mDilemma.getAnonymous().equals("1")) {
+            } else if (mDilemma.getIsAnonymous()) {
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorYellow));
                 myselfButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
@@ -76,7 +76,7 @@ public class DilemmaFromWhoFragment extends Fragment {
         anonymousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDilemma.setAnonymous("0");
+                mDilemma.setIsAnonymous("true");
 
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
@@ -88,7 +88,7 @@ public class DilemmaFromWhoFragment extends Fragment {
         myselfButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDilemma.setAnonymous("1");
+                mDilemma.setIsAnonymous("false");
 
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorYellow));

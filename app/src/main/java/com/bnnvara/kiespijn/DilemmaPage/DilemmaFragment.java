@@ -60,6 +60,8 @@ public class DilemmaFragment extends Fragment {
     private TextView mUserNameTextView;
     private TextView mUserDescriptionTextView;
     private TextView mDilemmaTextView;
+    private TextView mFirstImageTitleTextView;
+    private TextView mSecondImageTitleTextView;
     private ImageView mDilemmaFirstImageView;
     private ImageView mDilemmaSecondImageView;
 
@@ -92,6 +94,8 @@ public class DilemmaFragment extends Fragment {
         mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username);
         mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_user_info);
         mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma);
+        mFirstImageTitleTextView = (TextView) view.findViewById(R.id.text_view_first_image_title);
+        mSecondImageTitleTextView = (TextView) view.findViewById(R.id.text_view_second_image_title);
         mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
 
@@ -132,6 +136,23 @@ public class DilemmaFragment extends Fragment {
         if (mDilemmaList != null){
             mDilemma = mDilemmaList.get(mCurrentIndex);
 
+            // load image 1
+            mDilemmaTextView.setText(mDilemma.getTitle());
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoA())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mDilemmaFirstImageView);
+
+            // load image 2
+            mDilemmaTextView.setText(mDilemma.getTitle());
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoB())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mDilemmaSecondImageView);
+
+            // set creator and dilemma text
             if (!mDilemma.getIsAnonymous()) {
                 mUserNameTextView.setText(mDilemma.getCreator_name());
                 mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
@@ -140,22 +161,10 @@ public class DilemmaFragment extends Fragment {
                 mUserDescriptionTextView.setText("");
             }
 
-            mDilemmaFirstImageView.setBackground(null);
-            mDilemmaSecondImageView.setBackground(null);
+            // set image titles
+            mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
+            mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
 
-            mDilemmaTextView.setText(mDilemma.getTitle());
-            Glide.with(getActivity())
-                    .load(mDilemma.getPhotoA())
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_action_sand_timer)
-                    .into(mDilemmaFirstImageView);
-
-            mDilemmaTextView.setText(mDilemma.getTitle());
-            Glide.with(getActivity())
-                    .load(mDilemma.getPhotoB())
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_action_sand_timer)
-                    .into(mDilemmaSecondImageView);
         }
     }
 

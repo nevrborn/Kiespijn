@@ -59,8 +59,8 @@
                 android:id="@+id/text_view_user_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dilemma_user_description"
-                android:textColor="@android:color/white"
+                android:hint="@string/dilemma_user_description"
+                android:textColorHint="@android:color/white"
                 android:textSize="12sp"
                 />
 
@@ -96,7 +96,8 @@
             android:layout_marginLeft="8dp"
             android:background="@color/colorYellow"
             android:padding="8dp"
-            android:text="@string/dilemma_main_text"
+            android:hint="@string/dilemma_main_text"
+            android:textColorHint="@color/colorGreen"
             android:textColor="@color/colorGreen"
             android:textStyle="normal|bold"/>
 
@@ -110,7 +111,7 @@
         android:baselineAligned="false"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -123,12 +124,24 @@
                 android:id="@+id/image_view_first_option_decicision_page"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:src="@drawable/ic_action_sand_timer"
                 android:contentDescription="@string/image_content"
                 />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:textAlignment="center"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/white"
+                android:alpha="0.5"
+                android:text="image title"
+                />
 
-        <LinearLayout
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -141,11 +154,22 @@
                 android:id="@+id/image_view_second_option_decicision_page"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:src="@drawable/ic_action_sand_timer"
                 android:contentDescription="@string/image_content"
-
                 />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:textAlignment="center"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/white"
+                android:alpha="0.5"
+                android:text="image title"
+                />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

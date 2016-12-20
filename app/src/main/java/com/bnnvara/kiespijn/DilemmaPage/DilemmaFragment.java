@@ -180,6 +180,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setCreator_sex("Man");
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
+        dilemma_1.setTitlePhotoA("Vase");
+        dilemma_1.setTitlePhotoB("Box");
         dilemma_1.setDeadline(12);
         dilemma_1.setCreatedAt();
         dilemma_1.setIsAnonymous("false");
@@ -204,6 +206,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setCreator_sex("Man");
         dilemma_2.setPhotoA("http://cvandaag.nl/wp-content/uploads/2015/12/Geen-Kerst-2.jpg");
         dilemma_2.setPhotoB("https://www.schoolplaten.com/img/crafts-att/16310-att%20kerstboom%201.jpg");
+        dilemma_2.setTitlePhotoA("Geen boom");
+        dilemma_2.setTitlePhotoB("Wel een boom");
         dilemma_2.setDeadline(12);
         dilemma_2.setCreatedAt();
         dilemma_2.setIsAnonymous("false");
@@ -228,6 +232,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setCreator_sex("Vrouw");
         dilemma_3.setPhotoA("https://nyoobserver.files.wordpress.com/2013/12/vermeer-670-girl-with-a-pearl-earring_2000.jpg");
         dilemma_3.setPhotoB("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg/266px-Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg");
+        dilemma_3.setTitlePhotoA("Meisje met een oorbel");
+        dilemma_3.setTitlePhotoB("Meisje met een lach");
         dilemma_3.setDeadline(12);
         dilemma_3.setCreatedAt();
         dilemma_3.setIsAnonymous("false");

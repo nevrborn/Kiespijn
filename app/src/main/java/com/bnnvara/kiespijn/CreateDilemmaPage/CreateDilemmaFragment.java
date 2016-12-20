@@ -3,7 +3,9 @@ package com.bnnvara.kiespijn.CreateDilemmaPage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ public class CreateDilemmaFragment extends Fragment {
     private static final String TAG = "CreateDilemmaFragment";
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_IMAGE_GALLERY = 2;
     static final String DILEMMA_OBJECT = "dilemma_object";
     static final String DILEMMA_PHOTO_A = "dilemma_photo_a";
     static final String DILEMMA_PHOTO_B = "dilemma_photo_b";
@@ -233,6 +236,28 @@ public class CreateDilemmaFragment extends Fragment {
             }
         }
 
+        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK
+                && null != data) {
+
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContext().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+
+            if (isImageA) {
+                mImageViewA.setImageBitmap(bitmap);
+            }
+
+        }
+
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -240,5 +265,11 @@ public class CreateDilemmaFragment extends Fragment {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+    }
+
+    public void FromCard() {
+        Intent i = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, 2);
     }
 }

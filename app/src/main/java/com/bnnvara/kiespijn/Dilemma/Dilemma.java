@@ -184,11 +184,11 @@ public class Dilemma implements Serializable {
         return dateFormat.format(tempDate);
     }
 
-    public boolean getAnonymous() {
+    public boolean getIsAnonymous() {
         return mIsAnonymous;
     }
 
-    public void setAnonymous(String anonymous) {
+    public void setIsAnonymous(String anonymous) {
         mIsAnonymous = anonymous.equals("true");
     }
 

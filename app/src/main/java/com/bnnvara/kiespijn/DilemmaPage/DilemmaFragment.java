@@ -135,7 +135,7 @@ public class DilemmaFragment extends Fragment {
         if (mDilemmaList != null){
             mDilemma = mDilemmaList.get(mCurrentIndex);
 
-            if (!mDilemma.getAnonymous()) {
+            if (!mDilemma.getIsAnonymous()) {
                 mUserNameTextView.setText(mDilemma.getCreator_name());
                 mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
             } else {

@@ -64,8 +64,6 @@ public class DeadlineFragment extends Fragment {
         }
 
 
-
-
         final int stepSize = 1;
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

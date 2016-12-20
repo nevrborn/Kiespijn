@@ -49,10 +49,10 @@ public class Dilemma implements Serializable {
     private long mDeadline;
 
     @SerializedName("anonymous")
-    private String mAnonymous;
+    private boolean mAnonymous;
 
     @SerializedName("isToAll")
-    private String mIsToAll;
+    private boolean mIsToAll;
 
 //    @SerializedName("replies")
 //    private Replies mReplies;
@@ -187,20 +187,20 @@ public class Dilemma implements Serializable {
         return dateFormat.format(tempDate);
     }
 
-    public String getAnonymous() {
+    public boolean getAnonymous() {
         return mAnonymous;
     }
 
     public void setAnonymous(String anonymous) {
-        mAnonymous = anonymous;
+        mAnonymous = anonymous.equals("true");
     }
 
-    public String getIsToAll() {
+    public boolean getIsToAll() {
         return mIsToAll;
     }
 
     public void setIsToAll(String isToAll) {
-        mIsToAll = isToAll;
+        mIsToAll = isToAll.equals("true");
     }
 
 //    public Replies getReplies() {

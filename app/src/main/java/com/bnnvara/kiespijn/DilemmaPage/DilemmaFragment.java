@@ -135,7 +135,7 @@ public class DilemmaFragment extends Fragment {
         if (mDilemmaList != null){
             mDilemma = mDilemmaList.get(mCurrentIndex);
 
-            if (mDilemma.getAnonymous() == "0") {
+            if (!mDilemma.getAnonymous()) {
                 mUserNameTextView.setText(mDilemma.getCreator_name());
                 mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
             } else {
@@ -176,8 +176,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
         dilemma_1.setDeadline(12);
         dilemma_1.setCreatedAt();
-        dilemma_1.setAnonymous("0");
-        dilemma_1.setIsToAll("1");
+        dilemma_1.setAnonymous("false");
+        dilemma_1.setIsToAll("true");
 //        Replies replies1 = new Replies();
 //        List<Answer> option1AnswerList = new ArrayList<>() ;
 //        List<Answer> option2AnswerList = new ArrayList<>() ;
@@ -200,8 +200,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setPhotoB("https://www.schoolplaten.com/img/crafts-att/16310-att%20kerstboom%201.jpg");
         dilemma_2.setDeadline(12);
         dilemma_2.setCreatedAt();
-        dilemma_2.setAnonymous("0");
-        dilemma_1.setIsToAll("1");
+        dilemma_2.setAnonymous("false");
+        dilemma_1.setIsToAll("true");
         Replies replies2 = new Replies();
 //        option1AnswerList = new ArrayList<>() ;
 //        option2AnswerList = new ArrayList<>() ;
@@ -224,8 +224,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setPhotoB("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg/266px-Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg");
         dilemma_3.setDeadline(12);
         dilemma_3.setCreatedAt();
-        dilemma_3.setAnonymous("0");
-        dilemma_1.setIsToAll("1");
+        dilemma_3.setAnonymous("false");
+        dilemma_1.setIsToAll("true");
         Replies replies3 = new Replies();
 //        option1AnswerList = new ArrayList<>() ;
 //        option2AnswerList = new ArrayList<>() ;

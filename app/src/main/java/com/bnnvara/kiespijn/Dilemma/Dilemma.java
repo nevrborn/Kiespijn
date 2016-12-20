@@ -1,8 +1,5 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import android.graphics.Bitmap;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -49,7 +46,7 @@ public class Dilemma implements Serializable {
     private long mDeadline;
 
     @SerializedName("anonymous")
-    private boolean mAnonymous;
+    private boolean mIsAnonymous;
 
     @SerializedName("isToAll")
     private boolean mIsToAll;
@@ -188,11 +185,11 @@ public class Dilemma implements Serializable {
     }
 
     public boolean getAnonymous() {
-        return mAnonymous;
+        return mIsAnonymous;
     }
 
     public void setAnonymous(String anonymous) {
-        mAnonymous = anonymous.equals("true");
+        mIsAnonymous = anonymous.equals("true");
     }
 
     public boolean getIsToAll() {

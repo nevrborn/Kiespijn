@@ -7,13 +7,13 @@ import java.util.List;
 public class DilemmaApiResponse {
 
     @SerializedName("dilemmas")
-    private Dilemmas mDillemmas;
+    private Dilemmas mDilemmas;
 
     public DilemmaApiResponse() {
 
     }
 
     public List<Dilemma> getDilemmaList() {
-        return mDillemmas.getDilemmaList();
+        return mDilemmas.getDilemmaList();
     }
 }

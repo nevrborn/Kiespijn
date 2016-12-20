@@ -8,20 +8,22 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false"/>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:fullBackupContent="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".DilemmaPage.DilemmaActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -30,25 +32,24 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity"
+            android:name=".CreateDilemmaPage.CreateDilemmaActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity"
+            android:name=".TargetGroup.TargetGroupActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity"
+            android:name=".DilemmaFromWho.DilemmaFromWhoActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.bnnvara.kiespijn.Deadline.DeadlineActivity"
+            android:name=".Deadline.DeadlineActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"/>
         <activity
             android:name="com.facebook.CustomTabActivity"
@@ -66,6 +67,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
+
+        <activity android:name=".PersonalPage.PersonalPageActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface ApiEndpointInterface {
 
-    @GET("v2/5857e5d5120000d90cc8ae8d")
+    @GET("v2/5858ff492400003b057c5a40")
     Call<DilemmaApiResponse> getDilemmaList();
 
 //    @GET("services/rest?method=flickr.photos.getRecent&extras=url_s&format=json&nojsoncallback=1")

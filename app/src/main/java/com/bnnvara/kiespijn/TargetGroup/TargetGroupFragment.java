@@ -63,16 +63,16 @@ public class TargetGroupFragment extends Fragment {
         everyoneButton.setTypeface(source_sans_extra_light);
         callSomeoneButton.setTypeface(source_sans_extra_light);
 
-        if (mDilemma != null && mDilemma.getIsToAll() != null) {
+        if (mDilemma != null && (mDilemma.getIsToAll() || !mDilemma.getIsToAll())) {
 
-            if (mDilemma.getIsToAll().equals("0")) {
+            if (!mDilemma.getIsToAll()) {
                 friendsButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 friendsButton.setTextColor(getResources().getColor(R.color.colorGreen));
                 everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
-            } else if (mDilemma.getIsToAll().equals("1")) {
+            } else if (mDilemma.getIsToAll()) {
                 friendsButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 friendsButton.setTextColor(getResources().getColor(R.color.colorYellow));
                 everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
@@ -94,7 +94,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
 
-                mDilemma.setIsToAll("0");
+                mDilemma.setIsToAll("false");
 
 
             }
@@ -111,7 +111,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
 
-                mDilemma.setIsToAll("1");
+                mDilemma.setIsToAll("true");
             }
         });
 

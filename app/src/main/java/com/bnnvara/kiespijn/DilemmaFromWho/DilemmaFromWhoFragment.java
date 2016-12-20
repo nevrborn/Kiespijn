@@ -58,9 +58,9 @@ public class DilemmaFromWhoFragment extends Fragment {
         anonymousButton.setTypeface(source_sans_extra_light);
         myselfButton.setTypeface(source_sans_extra_light);
 
-        if (mDilemma != null && mDilemma.getIsAnonymous()) {
+        if (mDilemma != null && (mDilemma.getIsAnonymous() || !mDilemma.getIsAnonymous())) {
 
-            if (mDilemma.getIsAnonymous()) {
+            if (!mDilemma.getIsAnonymous()) {
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
                 myselfButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));

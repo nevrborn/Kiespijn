@@ -131,14 +131,15 @@
                 />
 
             <TextView
+                android:id="@+id/text_view_first_image_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:textAlignment="center"
                 android:layout_marginBottom="16dp"
-                android:background="@android:color/white"
-                android:alpha="0.5"
-                android:text="image title"
+                android:background="@color/colorTransparentWhite"
+                android:hint="@string/image_title"
+                android:textColorHint="@android:color/black"
                 />
 
         </RelativeLayout>
@@ -161,14 +162,15 @@
                 />
 
             <TextView
+                android:id="@+id/text_view_second_image_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:textAlignment="center"
                 android:layout_marginBottom="16dp"
-                android:background="@android:color/white"
-                android:alpha="0.5"
-                android:text="image title"
+                android:background="@color/colorTransparentWhite"
+                android:hint="@string/image_title"
+                android:textColorHint="@android:color/black"
                 />
 
         </RelativeLayout>

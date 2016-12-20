@@ -113,14 +113,12 @@ public class DilemmaFragment extends Fragment {
         });
 
 
-
         return view;
     }
 
     private void getData() {
         ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
         apiDataFetcher.getData();
-        updateUi();
     }
 
     private void updateCurrentIndex() {
@@ -324,6 +322,7 @@ public class DilemmaFragment extends Fragment {
             }
             mDilemmaList = mDilemmaApiResponse.getDilemmaList();
             Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
+            updateUi();
         }
 
     }

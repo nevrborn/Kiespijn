@@ -70,6 +70,7 @@ public class DilemmaFragment extends Fragment {
     private Dilemma mDilemma;
     private List<Dilemma> mDilemmaList;
     private int mCurrentIndex;
+    private String mUserFbId = "101283870370822";
 
 
     public static Fragment newInstance() {
@@ -105,14 +106,12 @@ public class DilemmaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 updateCurrentIndex();
-                updateUi();
             }
         });
         mDilemmaSecondImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateCurrentIndex();
-                updateUi();
             }
         });
 
@@ -131,11 +130,17 @@ public class DilemmaFragment extends Fragment {
         } else {
             mCurrentIndex++;
         }
+        updateUi();
     }
 
     private void updateUi() {
-        if (mDilemmaList != null){
             mDilemma = mDilemmaList.get(mCurrentIndex);
+
+            // do not show the current user's dilemma's
+            if (mDilemma.getCreator_fb_id().equals(mUserFbId)){
+                updateCurrentIndex();
+                return;
+            }
 
             // load image 1
             mDilemmaTextView.setText(mDilemma.getTitle());
@@ -165,8 +170,6 @@ public class DilemmaFragment extends Fragment {
             // set image titles
             mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
             mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
-
-        }
     }
 
 

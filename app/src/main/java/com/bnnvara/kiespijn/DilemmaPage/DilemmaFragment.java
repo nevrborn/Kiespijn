@@ -85,7 +85,6 @@ public class DilemmaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
-        //createDummyDate();
         getData();
 
         // set up the references
@@ -148,14 +147,14 @@ public class DilemmaFragment extends Fragment {
             Glide.with(getActivity())
                     .load(mDilemma.getPhotoA())
                     .centerCrop()
-                    .placeholder(R.mipmap.ic_launcher)
+                    .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mDilemmaFirstImageView);
 
             mDilemmaTextView.setText(mDilemma.getTitle());
             Glide.with(getActivity())
                     .load(mDilemma.getPhotoB())
                     .centerCrop()
-                    .placeholder(R.mipmap.ic_launcher)
+                    .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mDilemmaSecondImageView);
         }
     }
@@ -176,16 +175,16 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setCreatedAt();
         dilemma_1.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
-//        Replies replies1 = new Replies();
-//        List<Answer> option1AnswerList = new ArrayList<>() ;
-//        List<Answer> option2AnswerList = new ArrayList<>() ;
-//        option1AnswerList.add(new Answer("awef-2398"));
-//        option1AnswerList.add(new Answer("erg-rth98"));
-//        option2AnswerList.add(new Answer("qweasd-999"));
-//        option2AnswerList.add(new Answer("lkmlk-8930"));
-//        replies1.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
-//        replies1.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
-//        dilemma_1.setReplies(replies1);
+        Replies replies1 = new Replies();
+        List<Answer> option1AnswerList = new ArrayList<>() ;
+        List<Answer> option2AnswerList = new ArrayList<>() ;
+        option1AnswerList.add(new Answer("awef-2398"));
+        option1AnswerList.add(new Answer("erg-rth98"));
+        option2AnswerList.add(new Answer("qweasd-999"));
+        option2AnswerList.add(new Answer("lkmlk-8930"));
+        replies1.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
+        replies1.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
+        dilemma_1.setReplies(replies1);
 
         Dilemma dilemma_2 = new Dilemma();
         dilemma_2.setTitle("Moet ik als man alleen toch ook een kerstboom optuigen?");
@@ -201,15 +200,15 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies2 = new Replies();
-//        option1AnswerList = new ArrayList<>() ;
-//        option2AnswerList = new ArrayList<>() ;
-//        option1AnswerList.add(new Answer("awef-2398"));
-//        option1AnswerList.add(new Answer("erg-rth98"));
-//        option2AnswerList.add(new Answer("qweasd-999"));
-//        option2AnswerList.add(new Answer("lkmlk-8930"));
-//        replies2.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
-//        replies2.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
-//        dilemma_2.setReplies(replies2);
+        option1AnswerList = new ArrayList<>() ;
+        option2AnswerList = new ArrayList<>() ;
+        option1AnswerList.add(new Answer("awef-2398"));
+        option1AnswerList.add(new Answer("erg-rth98"));
+        option2AnswerList.add(new Answer("qweasd-999"));
+        option2AnswerList.add(new Answer("lkmlk-8930"));
+        replies2.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
+        replies2.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
+        dilemma_2.setReplies(replies2);
 
         Dilemma dilemma_3 = new Dilemma();
         dilemma_3.setTitle("Ik heb 100 euro. Welk schilderij zal ik kopen?");
@@ -225,23 +224,19 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies3 = new Replies();
-//        option1AnswerList = new ArrayList<>() ;
-//        option2AnswerList = new ArrayList<>() ;
-//        option1AnswerList.add(new Answer("awef-2398"));
-//        option1AnswerList.add(new Answer("erg-rth98"));
-//        option2AnswerList.add(new Answer("qweasd-999"));
-//        option2AnswerList.add(new Answer("lkmlk-8930"));
-//        replies3.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
-//        replies3.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
-//        dilemma_3.setReplies(replies3);
+        option1AnswerList = new ArrayList<>() ;
+        option2AnswerList = new ArrayList<>() ;
+        option1AnswerList.add(new Answer("awef-2398"));
+        option1AnswerList.add(new Answer("erg-rth98"));
+        option2AnswerList.add(new Answer("qweasd-999"));
+        option2AnswerList.add(new Answer("lkmlk-8930"));
+        replies3.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
+        replies3.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
+        dilemma_3.setReplies(replies3);
 
-        List<Dilemma> dilemmaList = new ArrayList<>();
-        dilemmaList.add(dilemma_1);
-        dilemmaList.add(dilemma_2);
-        dilemmaList.add(dilemma_3);
-        Dilemmas dilemmas = new Dilemmas();
-        dilemmas.setDilemmaList(dilemmaList);
-        mDilemmaList = dilemmas.getDilemmaList();
+        mDilemmaList.add(dilemma_1);
+        mDilemmaList.add(dilemma_2);
+        mDilemmaList.add(dilemma_3);
     }
 
 
@@ -322,6 +317,7 @@ public class DilemmaFragment extends Fragment {
             }
             mDilemmaList = mDilemmaApiResponse.getDilemmaList();
             Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
+            createDummyDate();
             updateUi();
         }
 

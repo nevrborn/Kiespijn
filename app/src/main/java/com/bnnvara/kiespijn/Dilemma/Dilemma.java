@@ -54,6 +54,9 @@ public class Dilemma implements Serializable {
     @SerializedName("replies")
     private Replies mReplies;
 
+    private Boolean isFirstTimeToTargetGroup = true;
+    private Boolean isFirstTimeToFromWho = true;
+
 
     public Dilemma() {
 
@@ -207,5 +210,22 @@ public class Dilemma implements Serializable {
     public void setReplies(Replies replies) {
         mReplies = replies;
     }
+
+    public Boolean getFirstTimeToTargetGroup() {
+        return isFirstTimeToTargetGroup;
+    }
+
+    public void setFirstTimeToTargetGroup(Boolean firstTimeToTargetGroup) {
+        isFirstTimeToTargetGroup = firstTimeToTargetGroup;
+    }
+
+    public Boolean getFirstTimeToFromWho() {
+        return isFirstTimeToFromWho;
+    }
+
+    public void setFirstTimeToFromWho(Boolean firstTimeToFromWho) {
+        isFirstTimeToFromWho = firstTimeToFromWho;
+    }
+
 
 }

@@ -58,14 +58,14 @@ public class DilemmaFromWhoFragment extends Fragment {
         anonymousButton.setTypeface(source_sans_extra_light);
         myselfButton.setTypeface(source_sans_extra_light);
 
-        if (mDilemma != null && (mDilemma.getIsAnonymous() || !mDilemma.getIsAnonymous())) {
+        if (mDilemma != null && !mDilemma.getFirstTimeToFromWho()) {
 
-            if (!mDilemma.getIsAnonymous()) {
+            if (mDilemma.getIsAnonymous()) {
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
                 myselfButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 myselfButton.setTextColor(getResources().getColor(R.color.colorYellow));
-            } else if (mDilemma.getIsAnonymous()) {
+            } else if (!mDilemma.getIsAnonymous()) {
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorYellow));
                 myselfButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
@@ -77,6 +77,7 @@ public class DilemmaFromWhoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mDilemma.setIsAnonymous("true");
+                mDilemma.setFirstTimeToFromWho(false);
 
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
@@ -89,6 +90,7 @@ public class DilemmaFromWhoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mDilemma.setIsAnonymous("false");
+                mDilemma.setFirstTimeToFromWho(false);
 
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorYellow));
@@ -112,6 +114,7 @@ public class DilemmaFromWhoFragment extends Fragment {
                 Intent i = TargetGroupActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);
+                getActivity().finish();
             }
         });
 

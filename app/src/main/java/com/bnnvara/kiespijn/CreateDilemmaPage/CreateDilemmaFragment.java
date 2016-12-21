@@ -1,6 +1,7 @@
 package com.bnnvara.kiespijn.CreateDilemmaPage;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,7 +23,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.R;
@@ -39,6 +40,7 @@ public class CreateDilemmaFragment extends Fragment {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_GALLERY = 2;
+    private static final String DIALOG_PHOTO = "dialog_photo";
     static final String DILEMMA_OBJECT = "dilemma_object";
     static final String DILEMMA_PHOTO_A = "dilemma_photo_a";
     static final String DILEMMA_PHOTO_B = "dilemma_photo_b";
@@ -55,6 +57,7 @@ public class CreateDilemmaFragment extends Fragment {
     private Bitmap mImageB;
     private Button mNextButton;
     private Boolean isImageA = true;
+    public static Boolean isFromCamera = false;
 
     // dilemma variables
     private static Dilemma mDilemma;
@@ -93,25 +96,25 @@ public class CreateDilemmaFragment extends Fragment {
         mOptionAText.setTypeface(source_sans_extra_light);
         mOptionBText.setTypeface(source_sans_extra_light);
 
-        if (mDilemma.getPhotoA() != null && mDilemma.getPhotoB() != null) {
-            try {
-                mDilemmaTitle.setText(mDilemma.getTitle());
-                mOptionAText.setText(mDilemma.getTitlePhotoA());
-                mOptionBText.setText(mDilemma.getTitlePhotoB());
-                mImageViewA.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoA())));
-                mImageViewB.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoB())));
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (mDilemma != null) {
+            if (mDilemma.getPhotoA() != null && mDilemma.getPhotoB() != null) {
+                try {
+                    mDilemmaTitle.setText(mDilemma.getTitle());
+                    mOptionAText.setText(mDilemma.getTitlePhotoA());
+                    mOptionBText.setText(mDilemma.getTitlePhotoB());
+                    mImageViewA.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoA())));
+                    mImageViewB.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoB())));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
 
         // set up the listeners
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Log.i(TAG, mDilemma.getTitle());
-
 
                 Intent i = TargetGroupActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
@@ -174,12 +177,9 @@ public class CreateDilemmaFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (hasCameraSupport()) {
-                    takePictureIntent();
-                    isImageA = true;
-                } else {
-                    Toast.makeText(getContext(), "Device has no camera or app is not allowed to use it", Toast.LENGTH_SHORT).show();
-                }
+                isImageA = true;
+                selectImage();
+
             }
         });
 
@@ -187,17 +187,33 @@ public class CreateDilemmaFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (hasCameraSupport()) {
-                    takePictureIntent();
-                    isImageA = false;
-                } else {
-                    Toast.makeText(getContext(), "Device has no camera or app is not allowed to use it", Toast.LENGTH_SHORT).show();
-                }
+                isImageA = false;
+                selectImage();
             }
         });
 
 
         return view;
+    }
+
+    private void selectImage() {
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Add Photo!");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Take Photo")) {
+                    cameraIntent();
+                } else if (items[item].equals("Choose from Library")) {
+                    galleryIntent();
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
     }
 
     public boolean hasCameraSupport() {
@@ -208,11 +224,14 @@ public class CreateDilemmaFragment extends Fragment {
         return hasSupport;
     }
 
-    private void takePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    private void cameraIntent() {
+        if (hasCameraSupport()) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
         }
+
     }
 
     @Override
@@ -254,6 +273,12 @@ public class CreateDilemmaFragment extends Fragment {
 
             if (isImageA) {
                 mImageViewA.setImageBitmap(bitmap);
+                mDilemma.setPhotoA(selectedImage.toString());
+                Log.i(TAG, selectedImage.toString());
+            } else {
+                mImageViewB.setImageBitmap(bitmap);
+                mDilemma.setPhotoB(selectedImage.toString());
+                Log.i(TAG, selectedImage.toString());
             }
 
         }
@@ -267,9 +292,11 @@ public class CreateDilemmaFragment extends Fragment {
         return Uri.parse(path);
     }
 
-    public void FromCard() {
+    public void galleryIntent() {
         Intent i = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, 2);
+        startActivityForResult(i, REQUEST_IMAGE_GALLERY);
     }
+
+
 }

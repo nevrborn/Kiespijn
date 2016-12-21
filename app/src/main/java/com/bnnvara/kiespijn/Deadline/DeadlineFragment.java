@@ -57,6 +57,7 @@ public class DeadlineFragment extends Fragment {
 
             long deadline = (mDilemma.getDeadline() - mDilemma.getCreatedAt()) * 1000L;
             long timeToAdd = deadline / 3600000;
+            mDeadline = (int) timeToAdd;
             timeText.setText(getString(R.string.deadline_hours, timeToAdd));
             timeBar.setProgress((int) timeToAdd);
         } else {
@@ -101,6 +102,7 @@ public class DeadlineFragment extends Fragment {
                 Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);
+                getActivity().finish();
             }
         });
 
@@ -127,5 +129,18 @@ public class DeadlineFragment extends Fragment {
         mDilemma.setCreator_fb_id("12398740193856439");
 
         // SOME CODE TO POST DILEMMA TO DATABASE
+        Log.i(TAG, " DILLEMMA INFORMATION");
+        Log.i(TAG, " Title: " + mDilemma.getTitle());
+        Log.i(TAG, " Facebook ID: " + mDilemma.getCreator_fb_id());
+        Log.i(TAG, " PhotoA Title: " + mDilemma.getTitlePhotoA());
+        Log.i(TAG, " PhotoA Uti: " + mDilemma.getPhotoA());
+        Log.i(TAG, " PhotoB Title: " + mDilemma.getTitlePhotoB());
+        Log.i(TAG, " PhotoB Uri: " + mDilemma.getPhotoB());
+        Log.i(TAG, " Is To All: " + mDilemma.getIsToAll());
+        Log.i(TAG, " Is Anonynous: " + mDilemma.getIsAnonymous());
+        Log.i(TAG, " Created At: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
+        Log.i(TAG, " Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
+
+        mDilemma = null;
     }
 }

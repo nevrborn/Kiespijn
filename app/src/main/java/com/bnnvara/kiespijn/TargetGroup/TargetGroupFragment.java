@@ -63,7 +63,7 @@ public class TargetGroupFragment extends Fragment {
         everyoneButton.setTypeface(source_sans_extra_light);
         callSomeoneButton.setTypeface(source_sans_extra_light);
 
-        if (mDilemma != null && (mDilemma.getIsToAll() || !mDilemma.getIsToAll())) {
+        if (mDilemma != null && !mDilemma.getFirstTimeToTargetGroup()) {
 
             if (!mDilemma.getIsToAll()) {
                 friendsButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
@@ -95,6 +95,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
 
                 mDilemma.setIsToAll("false");
+                mDilemma.setFirstTimeToTargetGroup(false);
 
 
             }
@@ -112,6 +113,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
 
                 mDilemma.setIsToAll("true");
+                mDilemma.setFirstTimeToTargetGroup(false);
             }
         });
 
@@ -143,6 +145,7 @@ public class TargetGroupFragment extends Fragment {
                 Intent i = CreateDilemmaActivity.newIntent(getActivity());
                 i.putExtra(DILEMMA_OBJECT, mDilemma);
                 startActivity(i);
+                getActivity().finish();
             }
         });
 

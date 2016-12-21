@@ -4,7 +4,6 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 /**
  * Created by paulvancappelle on 08-11-16.
@@ -12,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface ApiEndpointInterface {
 
-    @GET("v2/58593e8c2400006e0b7c5ac3")
+    @GET("v2/585aa90e0f0000940f16182e")
     Call<DilemmaApiResponse> getDilemmaList();
 
 //    @GET("services/rest?method=flickr.photos.getRecent&extras=url_s&format=json&nojsoncallback=1")

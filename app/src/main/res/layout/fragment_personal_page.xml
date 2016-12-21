@@ -75,14 +75,14 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/relative_layout_personal_page"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_personal_page"
         android:layout_below="@id/linear_layout_lower_filter_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
         >
 
-    </RelativeLayout>
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

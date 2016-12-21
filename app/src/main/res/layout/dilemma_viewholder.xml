@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/linear_layout_user_personal_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGreen"
+            android:padding="3dp"
+            >
+
+            <ImageView
+                android:id="@+id/image_view_user_photo_personal_page"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:background="@color/colorRed"
+                android:src="@drawable/ic_action_user_photo"
+                android:contentDescription="@string/image_content"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_user_description_personal_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorGreen"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            >
+
+            <TextView
+                android:id="@+id/text_view_username_personal_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/dilemma_username"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/text_view_user_info_personal_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:hint="@string/dilemma_user_description"
+                android:textColorHint="@android:color/white"
+                android:textSize="12sp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_dilemma_personal_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp"
+        >
+
+        <TextView
+            android:id="@+id/text_view_dilemma_indicator_personal_page"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/de_kies"
+            android:textColor="@color/colorGreen"
+            />
+
+        <TextView
+            android:id="@+id/text_view_dilemma_personal_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorYellow"
+            android:padding="8dp"
+            android:hint="@string/dilemma_main_text"
+            android:textColorHint="@color/colorGreen"
+            android:textColor="@color/colorGreen"
+            android:textStyle="normal|bold"/>
+
+    </LinearLayout>
+
+</LinearLayout>

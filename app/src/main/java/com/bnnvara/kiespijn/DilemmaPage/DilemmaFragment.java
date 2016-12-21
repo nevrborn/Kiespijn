@@ -56,6 +56,7 @@ public class DilemmaFragment extends Fragment {
 
     // constants
     private static final String TAG = DialogFragment.class.getSimpleName();
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     // Views
     private ImageView mUserPhotoImageView;
@@ -69,7 +70,8 @@ public class DilemmaFragment extends Fragment {
 
     // regular variables
     private Dilemma mDilemma;
-    private List<Dilemma> mDilemmaList;
+    private static List<Dilemma> mDilemmaList;
+    private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
     private int mCurrentIndex;
     private String mUserFbId = "101283870370822";
 
@@ -279,10 +281,27 @@ public class DilemmaFragment extends Fragment {
                 startActivity(intent2);
                 return true;
             case R.id.menu_item_create_dilemma:
+                Dilemma dilemma = new Dilemma();
                 Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
+                intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
             default: return true;
+        }
+    }
+
+    public static void addDilemmaToTempList(Dilemma dilemma) {
+        mTempDilemmaList.add(dilemma);
+    }
+
+    public void addTempDilemmas() {
+        if (mTempDilemmaList != null) {
+            int i = 0;
+
+            while (i < mTempDilemmaList.size()) {
+                mDilemmaList.add(mTempDilemmaList.get(i));
+                i += 1;
+            }
         }
     }
 
@@ -342,6 +361,7 @@ public class DilemmaFragment extends Fragment {
             mDilemmaList = mDilemmaApiResponse.getDilemmaList();
             Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
             createDummyDate();
+            addTempDilemmas();
             updateUi();
         }
 

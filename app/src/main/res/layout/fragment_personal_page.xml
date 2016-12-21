@@ -5,10 +5,84 @@
     android:id="@+id/fragment_personal_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGrey"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_top_filter_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:divider="@color/cardview_dark_background"
+        >
+
+        <Button
+            android:id="@+id/button_pers_page_mine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/buttons_filter"
+            android:text="Mijn dilemma's"
+            android:textColor="@android:color/white"
+            />
+
+        <Button
+            android:id="@+id/button_pers_page_others"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/buttons_filter"
+            android:alpha=".65"
+            android:text="Van anderen"
+            android:textColor="@android:color/white"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_lower_filter_buttons"
+        android:layout_below="@id/linear_layout_top_filter_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:divider="@color/cardview_dark_background"
+        >
+
+        <Button
+            android:id="@+id/button_pers_page_running"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/buttons_filter"
+            android:alpha=".65"
+            android:text="Lopend"
+            android:textColor="@android:color/white"
+            />
+
+        <Button
+            android:id="@+id/button_pers_page_closed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/buttons_filter"
+            android:text="Gesloten"
+            android:textColor="@android:color/white"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_personal_page"
+        android:layout_below="@id/linear_layout_lower_filter_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        >
+
+    </RelativeLayout>
 
 </RelativeLayout>

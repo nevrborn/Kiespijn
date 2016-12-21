@@ -14,7 +14,7 @@ public class User {
     private String mEmail;
     private String mSex;
     private String mAge;
-    private Image mProfilePicture;
+    private String mProfilePictureURL;
     private DilemmaApiResponse mUserCreatedDilemmas;
     private DilemmaApiResponse mUserAnsweredDilemmas;
 
@@ -73,5 +73,29 @@ public class User {
 
     public void setUserAnsweredDilemmas(DilemmaApiResponse userAnsweredDilemmas) {
         mUserAnsweredDilemmas = userAnsweredDilemmas;
+    }
+
+    public String getSex() {
+        return mSex;
+    }
+
+    public void setSex(String sex) {
+        mSex = sex;
+    }
+
+    public String getAge() {
+        return mAge;
+    }
+
+    public void setAge(String age) {
+        mAge = age;
+    }
+
+    public String getProfilePictureURL() {
+        return mProfilePictureURL;
+    }
+
+    public void setProfilePictureURL(String profilePictureURL) {
+        mProfilePictureURL = profilePictureURL;
     }
 }

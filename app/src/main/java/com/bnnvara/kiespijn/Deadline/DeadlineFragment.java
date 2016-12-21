@@ -19,6 +19,7 @@ import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.User;
 
 public class DeadlineFragment extends Fragment {
 
@@ -121,10 +122,19 @@ public class DeadlineFragment extends Fragment {
         mDilemma.setDeadline(deadline);
     }
 
+    private void setUserDetails() {
+        User user = User.getInstance();
+        mDilemma.setCreator_fb_id(user.getUserKey());
+        mDilemma.setCreator_name(user.getName());
+        mDilemma.setCreator_sex(user.getSex());
+        mDilemma.setCreator_age(user.getAge());
+        mDilemma.setCreator_picture_url(user.getProfilePictureURL());
+    }
+
     private void postDilemma() {
+        setUserDetails();
         setDateCreatedAndDeadLine(mDeadline);
         mDilemma.setUuid();
-        mDilemma.setCreator_fb_id("12398740193856440");
 
         // SOME CODE TO POST DILEMMA TO DATABASE
         Log.i(TAG, " DILLEMMA INFORMATION");

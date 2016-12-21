@@ -304,11 +304,8 @@ public class CreateDilemmaFragment extends Fragment {
 
     public Boolean isFieldsFilledIn() {
 
-        if (!mDilemmaTitle.equals("") && !mOptionAText.equals("") && !mOptionBText.equals("") && mImageViewA != null && mImageB != null) {
-            return true;
-        }
+        return !mDilemma.getTitle().equals("") && !mDilemma.getTitlePhotoA().equals("") && !mDilemma.getTitlePhotoB().equals("") && mDilemma.getPhotoA() != null && mDilemma.getPhotoB() != null;
 
-        return false;
     }
 
 

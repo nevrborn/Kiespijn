@@ -1,6 +1,7 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,9 @@ import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TargetGroupFragment extends Fragment {
 
@@ -25,6 +29,9 @@ public class TargetGroupFragment extends Fragment {
     static final String DILEMMA_OBJECT = "dilemma_object";
 
     private static Dilemma mDilemma;
+    Button callSomeoneButton;
+
+    private static List<Integer> mListOfCallers = new ArrayList<>();
 
 
     public static TargetGroupFragment newInstance(Dilemma dilemma) {
@@ -37,6 +44,22 @@ public class TargetGroupFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        mListOfCallers.add(R.string.targetgroup_call_someone);
+        mListOfCallers.add(R.string.targetgroup_call_someone_2);
+        mListOfCallers.add(R.string.targetgroup_call_someone_3);
+        mListOfCallers.add(R.string.targetgroup_call_someone_4);
+        mListOfCallers.add(R.string.targetgroup_call_someone_5);
+        mListOfCallers.add(R.string.targetgroup_call_someone_6);
+        mListOfCallers.add(R.string.targetgroup_call_someone_7);
+        mListOfCallers.add(R.string.targetgroup_call_someone_8);
+        mListOfCallers.add(R.string.targetgroup_call_someone_9);
+        mListOfCallers.add(R.string.targetgroup_call_someone_10);
+        mListOfCallers.add(R.string.targetgroup_call_someone_11);
+        mListOfCallers.add(R.string.targetgroup_call_someone_12);
+        mListOfCallers.add(R.string.targetgroup_call_someone_13);
+
+
+
     }
 
     @Nullable
@@ -47,8 +70,8 @@ public class TargetGroupFragment extends Fragment {
         // Setting up the XML objects
         TextView title = (TextView) view.findViewById(R.id.textview_targetgroup_title);
         final Button friendsButton = (Button) view.findViewById(R.id.button_targetgroup_friends);
+        callSomeoneButton = (Button) view.findViewById(R.id.button_targetgroup_call_someone);
         final Button everyoneButton = (Button) view.findViewById(R.id.button_targetgroup_everyone);
-        final Button callSomeoneButton = (Button) view.findViewById(R.id.button_targetgroup_call_someone);
         Button nextButton = (Button) view.findViewById(R.id.button_next_target_group);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_target_group);
 
@@ -61,6 +84,9 @@ public class TargetGroupFragment extends Fragment {
         friendsButton.setTypeface(source_sans_extra_light);
         everyoneButton.setTypeface(source_sans_extra_light);
         callSomeoneButton.setTypeface(source_sans_extra_light);
+
+        setRandomCaller();
+
 
         if (mDilemma != null && !mDilemma.getFirstTimeToTargetGroup()) {
 
@@ -155,6 +181,11 @@ public class TargetGroupFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_no_create_button, menu);
+    }
+
+    private void setRandomCaller() {
+        int randomIndex = 1 + (int) (Math.random() * ((13 - 1) + 1));
+        callSomeoneButton.setText(mListOfCallers.get(randomIndex));
     }
 
 

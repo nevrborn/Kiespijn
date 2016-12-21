@@ -18,10 +18,23 @@
     <string name="targetgroup_title">VRAAG HET AAN</string>
     <string name="targetgroup_friends">VRIENDEN</string>
     <string name="targetgroup_everyone">IDEREEN</string>
-    <string name="targetgroup_call_someone">JE MOEDER BELLEN</string>
     <string name="targetgroup_profile">Profile</string>
     <string name="button_next">VOLGENDE STAP!</string>
     <string name="create_dilemma">Nieuw dilemma</string>
+    <string name="targetgroup_call_someone">JE MOEDERRR BELLEN</string>
+    <string name="targetgroup_call_someone_2">DARTH VADER BELLEN</string>
+    <string name="targetgroup_call_someone_3">DE FABELTJESKRANT BELLEN</string>
+    <string name="targetgroup_call_someone_4">ALFRED JODOCUS KWAK BELLEN</string>
+    <string name="targetgroup_call_someone_5">JESUS BELLEN</string>
+    <string name="targetgroup_call_someone_6">SHANIQUA BELLEN</string>
+    <string name="targetgroup_call_someone_7">HELP DESK BELLEN</string>
+    <string name="targetgroup_call_someone_8">BASSIE EN ADRIAAN BELLEN</string>
+    <string name="targetgroup_call_someone_9">HELP LINE BELLEN</string>
+    <string name="targetgroup_call_someone_10">JIP EN JANNEKE BELLEN</string>
+    <string name="targetgroup_call_someone_11">WILLEM HOLLEEDER BELLEN</string>
+    <string name="targetgroup_call_someone_12">ALBERT VERLINDE BELLEN</string>
+    <string name="targetgroup_call_someone_13">PATTY BRARD BELLEN</string>
+
 
     // DILEMMA FROM WHO SCREEN
     <string name="dilemma_from_who_title">HOE VRAGEN?</string>

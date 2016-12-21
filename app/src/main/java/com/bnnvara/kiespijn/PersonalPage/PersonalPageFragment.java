@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
@@ -23,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -35,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by paulvancappelle on 20-12-16.
  */
-public class PersonalPageFragment extends Fragment{
+public class PersonalPageFragment extends Fragment {
 
     // view variables
     Button mMineButton;
@@ -44,6 +49,8 @@ public class PersonalPageFragment extends Fragment{
     Button mClosedButton;
 
     // regular variables
+    DilemmaAdapter mDilemmaAdapter;
+    RecyclerView mRecyclerView;
     List<Dilemma> mDilemmaList;
     List<Dilemma> mMyRunningDilemmaList;
     List<Dilemma> mMyClosedDilemmaList;
@@ -73,10 +80,15 @@ public class PersonalPageFragment extends Fragment{
         apiDataFetcher.getData();
 
         // set references
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_personal_page);
         mMineButton = (Button) view.findViewById(R.id.button_pers_page_mine);
         mOhtersButton = (Button) view.findViewById(R.id.button_pers_page_others);
         mRunningButton = (Button) view.findViewById(R.id.button_pers_page_running);
         mClosedButton = (Button) view.findViewById(R.id.button_pers_page_closed);
+
+        // set the RecyclerView
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mDilemmaAdapter);
 
         // set listeners
         mMineButton.setOnClickListener(new View.OnClickListener() {
@@ -130,22 +142,27 @@ public class PersonalPageFragment extends Fragment{
                 Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
                 startActivity(intent3);
                 return true;
-            default: return true;
+            default:
+                return true;
         }
     }
 
     private void updateUi() {
-        if (mShowMyDilemmas){
-            if (mShowRunning){
+
+        if (mShowMyDilemmas) {
+            if (mShowRunning) {
 
             } else {
 
             }
-        } else if (mShowRunning){
+        } else if (mShowRunning) {
 
         } else {
 
         }
+
+        mDilemmaAdapter = new DilemmaAdapter(mDilemmaList);
+        mRecyclerView.setAdapter(mDilemmaAdapter);
     }
 
 
@@ -156,8 +173,62 @@ public class PersonalPageFragment extends Fragment{
 
     /**
      * inner class
-     *
-     *
+     * <p>
+     * <p>
+     * Created by paulvancappelle on 16-12-16.
+     */
+    public class DilemmaAdapter extends RecyclerView.Adapter<DilemmaHolder> {
+
+        List<Dilemma> mDilemmaListToShow;
+
+        public DilemmaAdapter(List<Dilemma> dilemmaListToShow) {
+            mDilemmaListToShow = dilemmaListToShow;
+        }
+
+        @Override
+        public DilemmaHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            View itemView = inflater.inflate(R.layout.dilemma_viewholder, parent, false);
+            return new DilemmaHolder(itemView);
+        }
+
+        @Override
+        public void onBindViewHolder(DilemmaHolder holder, int position) {
+            holder.mUserNameTextView.setText(mDilemmaListToShow.get(position).getCreator_name());
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDilemmaListToShow.size();
+        }
+    }
+
+    /**
+     * inner class
+     * <p>
+     * <p>
+     * Created by paulvancappelle on 16-12-16.
+     */
+    public class DilemmaHolder extends RecyclerView.ViewHolder {
+
+        private ImageView mUserPhotoImageView;
+        private TextView mUserNameTextView;
+        private TextView mUserDescriptionTextView;
+        private TextView mDilemmaTextView;
+
+        public DilemmaHolder(View itemView) {
+            super(itemView);
+            mUserPhotoImageView = (ImageView) itemView.findViewById(R.id.image_view_user_photo_personal_page);
+            mUserNameTextView = (TextView) itemView.findViewById(R.id.text_view_username_personal_page);
+            mUserDescriptionTextView = (TextView) itemView.findViewById(R.id.text_view_user_info_personal_page);
+            mDilemmaTextView = (TextView) itemView.findViewById(R.id.text_view_dilemma_personal_page);
+        }
+    }
+
+    /**
+     * inner class
+     * <p>
+     * <p>
      * Created by paulvancappelle on 16-12-16.
      */
     public class ApiDataFetcher {
@@ -170,7 +241,7 @@ public class PersonalPageFragment extends Fragment{
             // empty constructor
         }
 
-        public void getData(){
+        public void getData() {
 
             // Logging
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

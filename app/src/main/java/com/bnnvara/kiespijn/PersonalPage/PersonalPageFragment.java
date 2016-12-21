@@ -97,6 +97,8 @@ public class PersonalPageFragment extends Fragment {
             public void onClick(View view) {
                 mShowMyDilemmas = true;
                 updateUi();
+                mMineButton.setAlpha(1.0f);
+                mOhtersButton.setAlpha(0.65f);
             }
         });
         mOhtersButton.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +106,8 @@ public class PersonalPageFragment extends Fragment {
             public void onClick(View view) {
                 mShowMyDilemmas = false;
                 updateUi();
+                mMineButton.setAlpha(0.65f);
+                mOhtersButton.setAlpha(1.0f);
             }
         });
         mRunningButton.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +115,8 @@ public class PersonalPageFragment extends Fragment {
             public void onClick(View view) {
                 mShowRunning = true;
                 updateUi();
+                mRunningButton.setAlpha(1.0f);
+                mClosedButton.setAlpha(0.65f);
             }
         });
         mClosedButton.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +124,8 @@ public class PersonalPageFragment extends Fragment {
             public void onClick(View view) {
                 mShowRunning = false;
                 updateUi();
+                mRunningButton.setAlpha(0.65f);
+                mClosedButton.setAlpha(1.0f);
             }
         });
 

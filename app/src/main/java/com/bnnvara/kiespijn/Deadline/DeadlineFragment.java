@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
+import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.R;
 
 public class DeadlineFragment extends Fragment {
@@ -118,15 +119,12 @@ public class DeadlineFragment extends Fragment {
     private void setDateCreatedAndDeadLine(int deadline) {
         mDilemma.setCreatedAt();
         mDilemma.setDeadline(deadline);
-
-        Log.i(TAG, "CreatedAt: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
-        Log.i(TAG, "Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
     }
 
     private void postDilemma() {
         setDateCreatedAndDeadLine(mDeadline);
         mDilemma.setUuid();
-        mDilemma.setCreator_fb_id("12398740193856439");
+        mDilemma.setCreator_fb_id("12398740193856440");
 
         // SOME CODE TO POST DILEMMA TO DATABASE
         Log.i(TAG, " DILLEMMA INFORMATION");
@@ -140,6 +138,8 @@ public class DeadlineFragment extends Fragment {
         Log.i(TAG, " Is Anonynous: " + mDilemma.getIsAnonymous());
         Log.i(TAG, " Created At: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
         Log.i(TAG, " Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
+
+        DilemmaFragment.addDilemmaToTempList(mDilemma);
 
         mDilemma = null;
     }

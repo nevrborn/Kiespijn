@@ -1,5 +1,7 @@
 package com.bnnvara.kiespijn.Dilemma;
 
+import android.net.Uri;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -56,6 +58,8 @@ public class Dilemma implements Serializable {
 
     private Boolean isFirstTimeToTargetGroup = true;
     private Boolean isFirstTimeToFromWho = true;
+
+    private String mCreator_picture_url;
 
 
     public Dilemma() {
@@ -227,5 +231,11 @@ public class Dilemma implements Serializable {
         isFirstTimeToFromWho = firstTimeToFromWho;
     }
 
+    public String getCreator_picture_url() {
+        return mCreator_picture_url;
+    }
 
+    public void setCreator_picture_url(String creator_picture_url) {
+        mCreator_picture_url = creator_picture_url;
+    }
 }

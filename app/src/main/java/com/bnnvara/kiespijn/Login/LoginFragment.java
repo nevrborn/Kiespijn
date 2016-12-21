@@ -2,9 +2,7 @@ package com.bnnvara.kiespijn.Login;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
@@ -32,6 +29,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +45,9 @@ public class LoginFragment extends Fragment {
     private CallbackManager mCallbackManager;
     private String mFacebookID;
     private String mFacebookName;
-    private Image mFacebookPicture;
+    private String mFacebookGender;
+    private String mFacebookBirthday;
+    private String mFacebookPictureURL;
     private JSONObject mFacebookFriends;
 
     private Map<String, String> mFacebookFriendsMap = new HashMap<>();
@@ -156,7 +160,7 @@ public class LoginFragment extends Fragment {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,friends");
+        parameters.putString("fields", "id,name,friends,gender,birthday,picture{url}");
 
         request.setParameters(parameters);
         Log.i(TAG, parameters.toString());
@@ -167,11 +171,47 @@ public class LoginFragment extends Fragment {
 
     public void getFacebookParameters(JSONObject object) {
 
+        User user = User.getInstance();
+
         try {
             mFacebookID = object.getString("id");
             Log.i(TAG, "Facebook ID is: " + mFacebookID);
             mFacebookName = object.getString("name");
             Log.i(TAG, "Facebook NAME is: " + mFacebookName);
+            mFacebookGender = object.getString("gender");
+            Log.i(TAG, "Facebook GENDER is: " + mFacebookGender);
+
+            user.setUserKey(mFacebookID);
+            user.setName(mFacebookName);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // GET BIRTHDAY IF POSSIBLE
+        try {
+            mFacebookBirthday = object.getString("birthday");
+            Log.i(TAG, "Facebook BIRTHDAY is: " + mFacebookBirthday);
+            String age = calculateAge(mFacebookBirthday);
+            user.setAge(age);
+        } catch (JSONException e) {
+            user.setAge("Unknown");
+            e.printStackTrace();
+
+        }
+
+        // GET PHOTO URL IF POSSIBLE
+        try {
+            JSONObject pictureObject = object.getJSONObject("picture");
+            JSONObject pictureData = pictureObject.getJSONObject("data");
+            mFacebookPictureURL = pictureData.getString("url");
+            Log.i(TAG, "Facebook PICTURE URL is: " + mFacebookPictureURL);
+            user.setProfilePictureURL(mFacebookPictureURL);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
             mFacebookFriends = object.getJSONObject("friends");
 
             JSONArray friendsObject = mFacebookFriends.getJSONArray("data");
@@ -193,18 +233,56 @@ public class LoginFragment extends Fragment {
                 }
 
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        User user = User.getInstance();
-        user.setUserKey(mFacebookID);
-        user.setName(mFacebookName);
     }
 
     public void postToFacebook() {
+
+    }
+
+    public String calculateAge(String birthday) {
+
+        Calendar today = Calendar.getInstance();
+        Calendar birthDate = Calendar.getInstance();
+
+        int age = 0;
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(birthday);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        birthDate.setTime(convertedDate);
+        if (birthDate.after(today)) {
+            throw new IllegalArgumentException("Can't be born in the future");
+        }
+
+        age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+
+        // If birth date is greater than todays date (after 2 days adjustment of
+        // leap year) then decrement age one year
+        if ((birthDate.get(Calendar.DAY_OF_YEAR)
+                - today.get(Calendar.DAY_OF_YEAR) > 3)
+                || (birthDate.get(Calendar.MONTH) > today.get(Calendar.MONTH))) {
+            age--;
+
+            // If birth date and todays date are of same month and birth day of
+            // month is greater than todays day of month then decrement age
+        } else if ((birthDate.get(Calendar.MONTH) == today.get(Calendar.MONTH))
+                && (birthDate.get(Calendar.DAY_OF_MONTH) > today
+                .get(Calendar.DAY_OF_MONTH))) {
+            age--;
+        }
+
+        String ageString = String.valueOf(age);
+        return ageString;
 
     }
 

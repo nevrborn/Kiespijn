@@ -89,6 +89,10 @@ public class CreateDilemmaFragment extends Fragment {
         mImageViewB = (ImageView) view.findViewById(R.id.image_view_option_2_take_picture);
         mNextButton = (Button) view.findViewById(R.id.button_next_create_dilemma);
 
+        mDilemmaTitle.setText("What should I drink?");
+        mOptionAText.setText("Water");
+        mOptionBText.setText("Cola");
+
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
         Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");

@@ -1,6 +1,7 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -128,42 +129,53 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateUi() {
-            mDilemma = mDilemmaList.get(mCurrentIndex);
+        mDilemma = mDilemmaList.get(mCurrentIndex);
 
-            // do not show the current user's dilemma's
-            if (mDilemma.getCreator_fb_id().equals(mUserFbId)){
-                updateCurrentIndex();
-                return;
-            }
+        // do not show the current user's dilemma's
+        if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
+            updateCurrentIndex();
+            return;
+        }
 
-            // load image 1
-            mDilemmaTextView.setText(mDilemma.getTitle());
+        // set user profile picture
+        if (mDilemma.getCreator_picture_url() != null && !mDilemma.getIsAnonymous()) {
             Glide.with(getActivity())
-                    .load(mDilemma.getPhotoA())
+                    .load(mDilemma.getCreator_picture_url())
                     .centerCrop()
                     .placeholder(R.drawable.ic_action_sand_timer)
-                    .into(mDilemmaFirstImageView);
+                    .into(mUserPhotoImageView);
+        } else if (mDilemma.getIsAnonymous() || mDilemma.getCreator_picture_url() == null) {
+            mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
+        }
 
-            // load image 2
-            mDilemmaTextView.setText(mDilemma.getTitle());
-            Glide.with(getActivity())
-                    .load(mDilemma.getPhotoB())
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_action_sand_timer)
-                    .into(mDilemmaSecondImageView);
+        // load image 1
+        mDilemmaTextView.setText(mDilemma.getTitle());
+        Glide.with(getActivity())
+                .load(mDilemma.getPhotoA())
+                .centerCrop()
+                .placeholder(R.drawable.ic_action_sand_timer)
+                .into(mDilemmaFirstImageView);
 
-            // set creator and dilemma text
-            if (!mDilemma.getIsAnonymous()) {
-                mUserNameTextView.setText(mDilemma.getCreator_name());
-                mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
-            } else {
-                mUserNameTextView.setText(getString(R.string.dilemma_username));
-                mUserDescriptionTextView.setText("");
-            }
+        // load image 2
+        mDilemmaTextView.setText(mDilemma.getTitle());
+        Glide.with(getActivity())
+                .load(mDilemma.getPhotoB())
+                .centerCrop()
+                .placeholder(R.drawable.ic_action_sand_timer)
+                .into(mDilemmaSecondImageView);
 
-            // set image titles
-            mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
-            mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
+        // set creator and dilemma text
+        if (!mDilemma.getIsAnonymous()) {
+            mUserNameTextView.setText(mDilemma.getCreator_name());
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+        } else {
+            mUserNameTextView.setText(getString(R.string.dilemma_username));
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+        }
+
+        // set image titles
+        mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
+        mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
     }
 
 

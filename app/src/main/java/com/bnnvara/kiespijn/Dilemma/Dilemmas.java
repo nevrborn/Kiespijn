@@ -2,7 +2,6 @@ package com.bnnvara.kiespijn.Dilemma;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

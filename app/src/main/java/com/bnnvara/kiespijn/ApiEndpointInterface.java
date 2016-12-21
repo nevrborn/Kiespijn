@@ -1,6 +1,6 @@
 package com.bnnvara.kiespijn;
 
-import com.bnnvara.kiespijn.Model.DilemmaApiResponse;
+import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

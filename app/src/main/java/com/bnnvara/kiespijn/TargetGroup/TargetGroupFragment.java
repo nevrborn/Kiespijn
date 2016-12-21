@@ -1,7 +1,6 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -26,8 +26,8 @@ import com.bnnvara.kiespijn.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -43,21 +43,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PersonalPageFragment extends Fragment {
 
     // view variables
-    Button mMineButton;
-    Button mOhtersButton;
-    Button mRunningButton;
-    Button mClosedButton;
+    private Button mMineButton;
+    private Button mOhtersButton;
+    private Button mRunningButton;
+    private Button mClosedButton;
 
     // regular variables
-    DilemmaAdapter mDilemmaAdapter;
-    RecyclerView mRecyclerView;
-    List<Dilemma> mDilemmaList;
-    List<Dilemma> mMyRunningDilemmaList;
-    List<Dilemma> mMyClosedDilemmaList;
-    List<Dilemma> mOthersRunningDilemmaList;
-    List<Dilemma> mOthersClosedDilemmaList;
-    boolean mShowMyDilemmas = true;
-    boolean mShowRunning;
+    private DilemmaAdapter mDilemmaAdapter;
+    private RecyclerView mRecyclerView;
+    private String mUserFbId = "101283870370822";
+    private List<Dilemma> mDilemmaList;
+    private List<Dilemma> mMyRunningDilemmaList = new ArrayList<>();
+    private List<Dilemma> mMyClosedDilemmaList = new ArrayList<>();
+    private List<Dilemma> mOthersRunningDilemmaLst = new ArrayList<>();
+    private List<Dilemma> mOthersClosedDilemmaList = new ArrayList<>();
+    private boolean mShowMyDilemmas = true;
+    private boolean mShowRunning;
 
 
     public static PersonalPageFragment newInstance() {
@@ -94,25 +95,29 @@ public class PersonalPageFragment extends Fragment {
         mMineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mShowMyDilemmas = true;
+                updateUi();
             }
         });
         mOhtersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mShowMyDilemmas = false;
+                updateUi();
             }
         });
         mRunningButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mShowRunning = true;
+                updateUi();
             }
         });
         mClosedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mShowRunning = false;
+                updateUi();
             }
         });
 
@@ -149,25 +154,33 @@ public class PersonalPageFragment extends Fragment {
 
     private void updateUi() {
 
-        if (mShowMyDilemmas) {
-            if (mShowRunning) {
-
-            } else {
-
-            }
-        } else if (mShowRunning) {
-
+        if (mShowMyDilemmas && mShowRunning) {
+            mDilemmaAdapter = new DilemmaAdapter(mMyRunningDilemmaList);
+        } else if (mShowMyDilemmas && !mShowRunning) {
+            mDilemmaAdapter = new DilemmaAdapter(mMyClosedDilemmaList);
+        } else if (!mShowMyDilemmas && mShowRunning){
+            mDilemmaAdapter = new DilemmaAdapter(mOthersRunningDilemmaLst);
+        } else if (!mShowMyDilemmas && !mShowRunning){
+            mDilemmaAdapter = new DilemmaAdapter(mOthersClosedDilemmaList);
         } else {
-
+            mDilemmaAdapter = new DilemmaAdapter((mDilemmaList));
         }
 
-        mDilemmaAdapter = new DilemmaAdapter(mDilemmaList);
         mRecyclerView.setAdapter(mDilemmaAdapter);
     }
 
 
     private void createDilemmaLists() {
-
+        for (Dilemma dilemma: mDilemmaList){
+            long now = System.currentTimeMillis() / 1000L;
+            long deadline = dilemma.getDeadline();
+            boolean isRunning = dilemma.getDeadline() > (System.currentTimeMillis() / 1000L);
+            if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning){
+                mMyRunningDilemmaList.add(dilemma);
+            } else if (dilemma.getCreator_fb_id().equals(mUserFbId) && !isRunning){
+                mMyClosedDilemmaList.add(dilemma);
+            }
+        }
     }
 
 
@@ -194,7 +207,18 @@ public class PersonalPageFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(DilemmaHolder holder, int position) {
-            holder.mUserNameTextView.setText(mDilemmaListToShow.get(position).getCreator_name());
+            Dilemma dilemma = mDilemmaListToShow.get(position);
+
+            if (dilemma.getIsAnonymous()) {
+                holder.mUserDescriptionTextView.setText("-- anoniem anoniem --");
+                holder.mUserNameTextView.setText("Anoniem");
+            } else {
+                holder.mUserDescriptionTextView.setText(
+                        dilemma.getCreator_sex() + " | " + dilemma.getCreator_age());
+                holder.mUserNameTextView.setText(dilemma.getCreator_name());
+            }
+            holder.mDilemmaTextView.setText(dilemma.getTitle());
+
         }
 
         @Override

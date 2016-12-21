@@ -183,7 +183,6 @@ public class LoginFragment extends Fragment {
 
             user.setUserKey(mFacebookID);
             user.setName(mFacebookName);
-            user.setSex(mFacebookGender);
 
         } catch (JSONException e) {
             e.printStackTrace();

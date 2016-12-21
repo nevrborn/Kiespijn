@@ -144,7 +144,7 @@ public class DilemmaFragment extends Fragment {
                     .centerCrop()
                     .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mUserPhotoImageView);
-        } else if (mDilemma.getIsAnonymous()) {
+        } else if (mDilemma.getIsAnonymous() || mDilemma.getCreator_picture_url() == null) {
             mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
         }
 
@@ -170,7 +170,7 @@ public class DilemmaFragment extends Fragment {
             mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
-            mUserDescriptionTextView.setText("");
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
         }
 
         // set image titles

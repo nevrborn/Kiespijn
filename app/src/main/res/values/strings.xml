@@ -38,5 +38,6 @@
     <string name="title_hint_1">Dilemma 1</string>
     <string name="title_hint_2">Dilemma 2</string>
     <string name="image_title">image title</string>
+    <string name="not_all_fields_filled">Niet alle velden zijn gevuld</string>
 
 </resources>

@@ -195,7 +195,7 @@ public class LoginFragment extends Fragment {
             String age = calculateAge(mFacebookBirthday);
             user.setAge(age);
         } catch (JSONException e) {
-            user.setAge("Unknown");
+            user.setAge("Onbekend");
             e.printStackTrace();
 
         }

@@ -170,7 +170,31 @@ public class DilemmaFragment extends Fragment {
             mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+
+            String ageToShow = "";
+
+            if (!mDilemma.getCreator_age().equals("Onbekend")) {
+
+                int age = Integer.parseInt(mDilemma.getCreator_age());
+
+                if (age <= 16) {
+                    ageToShow = "0 - 16";
+                } else if (age > 16 && age <= 20) {
+                    ageToShow = "16 - 20";
+                } else if (age > 20 && age <= 25) {
+                    ageToShow = "20 - 25";
+                } else if (age > 25 && age <= 30) {
+                    ageToShow = "25 - 30";
+                } else if (age > 30 && age <= 35) {
+                    ageToShow = "30 - 35";
+                } else if (age > 35 && age <= 40) {
+                    ageToShow = "35 - 40";
+                }
+            } else {
+                ageToShow = "Onbekend";
+            }
+
+            mUserDescriptionTextView.setText("Onbekend | " + ageToShow);
         }
 
         // set image titles

@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.R;
@@ -40,17 +41,12 @@ public class CreateDilemmaFragment extends Fragment {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_GALLERY = 2;
-    private static final String DIALOG_PHOTO = "dialog_photo";
     static final String DILEMMA_OBJECT = "dilemma_object";
-    static final String DILEMMA_PHOTO_A = "dilemma_photo_a";
-    static final String DILEMMA_PHOTO_B = "dilemma_photo_b";
 
     // views
     private EditText mDilemmaTitle;
     private EditText mOptionAText;
     private EditText mOptionBText;
-    //    private SearchView mSearchView1;
-//    private SearchView mSearchView2;
     private ImageView mImageViewA;
     private ImageView mImageViewB;
     private Bitmap mImageA;
@@ -83,8 +79,6 @@ public class CreateDilemmaFragment extends Fragment {
         mDilemmaTitle = (EditText) view.findViewById(R.id.text_view_dilemma_title);
         mOptionAText = (EditText) view.findViewById(R.id.edit_text_option_1);
         mOptionBText = (EditText) view.findViewById(R.id.edit_text_option_2);
-//        mSearchView1 = (SearchView) view.findViewById(R.id.search_view_option_1_search_image);
-//        mSearchView2 = (SearchView) view.findViewById(R.id.search_view_option_2_search_image);
         mImageViewA = (ImageView) view.findViewById(R.id.image_view_option_1_take_picture);
         mImageViewB = (ImageView) view.findViewById(R.id.image_view_option_2_take_picture);
         mNextButton = (Button) view.findViewById(R.id.button_next_create_dilemma);
@@ -114,15 +108,19 @@ public class CreateDilemmaFragment extends Fragment {
             }
         }
 
-
         // set up the listeners
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i = TargetGroupActivity.newIntent(getActivity());
-                i.putExtra(DILEMMA_OBJECT, mDilemma);
-                startActivity(i);
+                if (isFieldsFilledIn()) {
+                    Intent i = TargetGroupActivity.newIntent(getActivity());
+                    i.putExtra(DILEMMA_OBJECT, mDilemma);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -276,10 +274,12 @@ public class CreateDilemmaFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
             if (isImageA) {
+                mImageA = bitmap;
                 mImageViewA.setImageBitmap(bitmap);
                 mDilemma.setPhotoA(selectedImage.toString());
                 Log.i(TAG, selectedImage.toString());
             } else {
+                mImageB = bitmap;
                 mImageViewB.setImageBitmap(bitmap);
                 mDilemma.setPhotoB(selectedImage.toString());
                 Log.i(TAG, selectedImage.toString());
@@ -300,6 +300,15 @@ public class CreateDilemmaFragment extends Fragment {
         Intent i = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, REQUEST_IMAGE_GALLERY);
+    }
+
+    public Boolean isFieldsFilledIn() {
+
+        if (!mDilemmaTitle.equals("") && !mOptionAText.equals("") && !mOptionBText.equals("") && mImageViewA != null && mImageB != null) {
+            return true;
+        }
+
+        return false;
     }
 
 

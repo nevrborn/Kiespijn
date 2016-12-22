@@ -192,6 +192,7 @@ public class LoginFragment extends Fragment {
 
             user.setUserKey(mFacebookID);
             user.setName(mFacebookName);
+            user.setSex(mFacebookGender);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -264,7 +265,6 @@ public class LoginFragment extends Fragment {
         try {
             convertedDate = dateFormat.parse(birthday);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

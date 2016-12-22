@@ -2,6 +2,7 @@ package com.bnnvara.kiespijn.PersonalPage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +43,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class PersonalPageFragment extends Fragment {
 
+    // constants
+    private static final String ARG_USER_FB_ID = "com.bnnvara.kiespijn.userFbId";
+
     // view variables
     private Button mMineButton;
     private Button mOhtersButton;
@@ -51,7 +55,6 @@ public class PersonalPageFragment extends Fragment {
     // regular variables
     private DilemmaAdapter mDilemmaAdapter;
     private RecyclerView mRecyclerView;
-    private String mUserFbId = "101283870370822";
     private List<Dilemma> mDilemmaList;
     private List<Dilemma> mMyRunningDilemmaList = new ArrayList<>();
     private List<Dilemma> mMyClosedDilemmaList = new ArrayList<>();
@@ -59,10 +62,15 @@ public class PersonalPageFragment extends Fragment {
     private List<Dilemma> mOthersClosedDilemmaList = new ArrayList<>();
     private boolean mShowMyDilemmas = true;
     private boolean mShowRunning;
+    private String mUserFbId;
 
 
-    public static PersonalPageFragment newInstance() {
-        return new PersonalPageFragment();
+    public static PersonalPageFragment newInstance(String userFbId) {
+        PersonalPageFragment personalPageFragment = new PersonalPageFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_USER_FB_ID, userFbId);
+        personalPageFragment.setArguments(bundle);
+        return personalPageFragment;
     }
 
     @Override
@@ -76,6 +84,8 @@ public class PersonalPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_page, container, false);
+
+        mUserFbId = getArguments().getString(ARG_USER_FB_ID);
 
         ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
         apiDataFetcher.getData();
@@ -183,6 +193,9 @@ public class PersonalPageFragment extends Fragment {
             long now = System.currentTimeMillis() / 1000L;
             long deadline = dilemma.getDeadline();
             boolean isRunning = dilemma.getDeadline() > (System.currentTimeMillis() / 1000L);
+            int timeLeft = (int) ((dilemma.getDeadline() - (System.currentTimeMillis() / 1000L) ) / 1000);
+            dilemma.setTimeLeft(timeLeft);
+
             if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning){
                 mMyRunningDilemmaList.add(dilemma);
             } else if (dilemma.getCreator_fb_id().equals(mUserFbId) && !isRunning){
@@ -227,6 +240,15 @@ public class PersonalPageFragment extends Fragment {
             }
             holder.mDilemmaTextView.setText(dilemma.getTitle());
 
+            if (dilemma.getTimeLeft() < 0){
+                holder.mClockImageView.setImageResource(R.drawable.ic_clock_expired);
+                holder.mTimeLeftTextView.setText("---");
+                holder.mTimeLeftTextView.setTextColor(getResources().getColor(R.color.colorRed));
+            } else if (dilemma.getTimeLeft() == 1){
+                holder.mTimeLeftTextView.setText("1 uur");
+            } else {
+                holder.mTimeLeftTextView.setText(dilemma.getTimeLeft() + " uren");
+            }
         }
 
         @Override
@@ -244,16 +266,20 @@ public class PersonalPageFragment extends Fragment {
     public class DilemmaHolder extends RecyclerView.ViewHolder {
 
         private ImageView mUserPhotoImageView;
+        private ImageView mClockImageView;
         private TextView mUserNameTextView;
         private TextView mUserDescriptionTextView;
         private TextView mDilemmaTextView;
+        private TextView mTimeLeftTextView;
 
         public DilemmaHolder(View itemView) {
             super(itemView);
             mUserPhotoImageView = (ImageView) itemView.findViewById(R.id.image_view_user_photo_personal_page);
+            mClockImageView = (ImageView) itemView.findViewById(R.id.image_view_clock);
             mUserNameTextView = (TextView) itemView.findViewById(R.id.text_view_username_personal_page);
             mUserDescriptionTextView = (TextView) itemView.findViewById(R.id.text_view_user_info_personal_page);
             mDilemmaTextView = (TextView) itemView.findViewById(R.id.text_view_dilemma_personal_page);
+            mTimeLeftTextView = (TextView) itemView.findViewById(R.id.text_view_time_left);
         }
     }
 

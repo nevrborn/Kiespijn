@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 >
 
                 <ImageView
@@ -90,9 +90,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/colorBrightGreen"
+                    android:textColor="@color/colorLightGreen"
                     android:hint="x uur"
-                    android:textColorHint="@color/colorBrightGreen"
+                    android:textColorHint="@color/colorLightGreen"
                     />
 
             </LinearLayout>

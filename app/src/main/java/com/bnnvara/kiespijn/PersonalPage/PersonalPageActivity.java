@@ -22,6 +22,7 @@ public class PersonalPageActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return PersonalPageFragment.newInstance();
+        String userFbId = getIntent().getStringExtra(EXTRA_USER_FB_ID);
+        return PersonalPageFragment.newInstance(userFbId);
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
@@ -98,6 +100,9 @@ public class DilemmaFragment extends Fragment {
         mSecondImageTitleTextView = (TextView) view.findViewById(R.id.text_view_second_image_title);
         mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
+        final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
+
+        filterSwitch.setChecked(true);
 
         // set up the listeners
         mDilemmaFirstImageView.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +115,17 @@ public class DilemmaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 updateCurrentIndex();
+            }
+        });
+
+        filterSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (filterSwitch.isChecked()) {
+                    // filter dilemmas to only friends
+                } else {
+                    // view all dilemmas
+                }
             }
         });
 

@@ -194,7 +194,7 @@ public class DilemmaFragment extends Fragment {
                 ageToShow = "Onbekend";
             }
 
-            mUserDescriptionTextView.setText("Onbekend | " + ageToShow);
+            mUserDescriptionTextView.setText(" - | " + ageToShow);
         }
 
         // set image titles

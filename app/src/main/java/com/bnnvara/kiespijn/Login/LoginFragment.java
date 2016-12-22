@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.facebook.AccessToken;
@@ -67,7 +69,6 @@ public class LoginFragment extends Fragment {
         FacebookSdk.sdkInitialize(this.getContext());
         mCallbackManager = CallbackManager.Factory.create();
         AppEventsLogger.activateApp(getActivity().getApplication());
-
 
         LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -127,7 +128,6 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
         return view;
     }
 
@@ -137,6 +137,9 @@ public class LoginFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
         getFacebookParameters();
+        Intent i = DilemmaActivity.newIntent(getContext());
+        startActivity(i);
+
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -284,6 +287,11 @@ public class LoginFragment extends Fragment {
         String ageString = String.valueOf(age);
         return ageString;
 
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 
 }

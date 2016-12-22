@@ -300,7 +300,7 @@ public class DilemmaFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_item_user:
-                Intent intent1 = PersonalPageActivity.newIntent(getActivity());
+                Intent intent1 = PersonalPageActivity.newIntent(getActivity(), mUserFbId);
                 startActivity(intent1);
                 return true;
             case R.id.menu_item_login:

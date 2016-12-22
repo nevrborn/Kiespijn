@@ -87,6 +87,12 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        if (isLoggedIn()) {
+            getFacebookParameters();
+            Intent i = DilemmaActivity.newIntent(getContext());
+            startActivity(i);
+        }
+
     }
 
     @Nullable

@@ -1,6 +1,7 @@
 package com.bnnvara.kiespijn.Deadline;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,46 +48,101 @@ public class DeadlineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_deadline, container, false);
 
         final TextView title = (TextView) view.findViewById(R.id.textview_deadline_title);
-        Button postDilemmaButton = (Button) view.findViewById(R.id.button_deadline_pick_time);
-        SeekBar timeBar = (SeekBar) view.findViewById(R.id.seekBar_deadline);
-        final TextView timeText = (TextView) view.findViewById(R.id.textview_deadline_hours);
+        final Button hourButton1 = (Button) view.findViewById(R.id.button_deadline_hours_1);
+        final Button hourButton2 = (Button) view.findViewById(R.id.button_deadline_hours_2);
+        final Button hourButton3 = (Button) view.findViewById(R.id.button_deadline_hours_3);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_deadline);
+        Button postDilemmaButton = (Button) view.findViewById(R.id.button_next_deadline);
+
+        // FONT setup
+        Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
+        Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        title.setTypeface(source_sans_bold);
+        hourButton1.setTypeface(source_sans_extra_light);
+        hourButton2.setTypeface(source_sans_extra_light);
+        hourButton3.setTypeface(source_sans_extra_light);
+        postDilemmaButton.setTypeface(source_sans_extra_light);
+
 
         if (mDilemma.getDeadline() != 0) {
-
-            Log.i(TAG, "CreatedAt: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
-            Log.i(TAG, "Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
 
             long deadline = (mDilemma.getDeadline() - mDilemma.getCreatedAt()) * 1000L;
             long timeToAdd = deadline / 3600000;
             mDeadline = (int) timeToAdd;
-            timeText.setText(getString(R.string.deadline_hours, timeToAdd));
-            timeBar.setProgress((int) timeToAdd);
+
+            if (mDeadline == 2) {
+                hourButton1.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                hourButton1.setTextColor(getResources().getColor(R.color.colorGreen));
+                hourButton2.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton2.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton3.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton3.setTextColor(getResources().getColor(R.color.colorYellow));
+            } else if (mDeadline == 12) {
+                hourButton1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton1.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton2.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                hourButton2.setTextColor(getResources().getColor(R.color.colorGreen));
+                hourButton3.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton3.setTextColor(getResources().getColor(R.color.colorYellow));
+            } else if (mDeadline == 24) {
+                hourButton1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton1.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton2.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton2.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton3.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                hourButton3.setTextColor(getResources().getColor(R.color.colorGreen));
+            }
+
+
+            Log.i(TAG, "CreatedAt: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
+            Log.i(TAG, "Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
+
         } else {
-            timeText.setText(getString(R.string.deadline_hours, 12));
+
         }
 
-
-        final int stepSize = 1;
-        timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        hourButton1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                progress = (Math.round(progress / stepSize)) * stepSize;
-                timeText.setText(getString(R.string.deadline_hours, progress));
-                title.setText(getString(R.string.deadline_title, progress));
-                mDeadline = progress;
-            }
+            public void onClick(View view) {
+                mDeadline = 2;
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+                hourButton1.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                hourButton1.setTextColor(getResources().getColor(R.color.colorGreen));
+                hourButton2.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton2.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton3.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton3.setTextColor(getResources().getColor(R.color.colorYellow));
             }
         });
+
+        hourButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDeadline = 12;
+
+                hourButton1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton1.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton2.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                hourButton2.setTextColor(getResources().getColor(R.color.colorGreen));
+                hourButton3.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton3.setTextColor(getResources().getColor(R.color.colorYellow));
+            }
+        });
+
+        hourButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDeadline = 24;
+
+                hourButton1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton1.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton2.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                hourButton2.setTextColor(getResources().getColor(R.color.colorYellow));
+                hourButton3.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                hourButton3.setTextColor(getResources().getColor(R.color.colorGreen));
+            }
+        });
+
 
         postDilemmaButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +150,7 @@ public class DeadlineFragment extends Fragment {
                 postDilemma();
                 Intent i = DilemmaActivity.newIntent(getActivity());
                 startActivity(i);
+                getActivity().finish();
             }
         });
 

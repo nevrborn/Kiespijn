@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="1.0f"
+                android:layout_weight="1.0"
                 >
 
             <TextView
@@ -127,10 +127,11 @@
             android:layout_marginLeft="8dp"
             android:background="@color/colorYellow"
             android:padding="8dp"
-            android:hint="@string/dilemma_main_text"
+            android:hint="@string/dilemma_main_text_short_version"
             android:textColorHint="@color/colorGreen"
             android:textColor="@color/colorGreen"
-            android:textStyle="normal|bold"/>
+            android:textStyle="normal|bold"
+            />
 
     </LinearLayout>
 

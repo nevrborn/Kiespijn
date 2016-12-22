@@ -61,6 +61,8 @@ public class Dilemma implements Serializable {
 
     private String mCreator_picture_url;
 
+    private int mTimeLeft;
+
 
     public Dilemma() {
 
@@ -237,5 +239,13 @@ public class Dilemma implements Serializable {
 
     public void setCreator_picture_url(String creator_picture_url) {
         mCreator_picture_url = creator_picture_url;
+    }
+
+    public void setTimeLeft(int timeLeft) {
+        mTimeLeft = timeLeft;
+    }
+
+    public int getTimeLeft(){
+        return mTimeLeft;
     }
 }

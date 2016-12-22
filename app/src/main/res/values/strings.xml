@@ -13,6 +13,7 @@
     <string name="dilemma_main_text">Mijn familie wil mijn vader cremeren maar ik wil dat hij begraven wordt, wat moet ik kiezen?</string>
     <string name="dilemma_username">ANONIEM</string>
     <string name="dilemma_user_description">Vrouw | 31 jaar</string>
+    <string name="dilemma_filter">Allen vrienden</string>
 
     // TARGET GROUP SCREEN
     <string name="targetgroup_title">VRAAG HET AAN</string>

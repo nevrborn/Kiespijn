@@ -23,4 +23,17 @@
         <item name="android:colorBackgroundCacheHint">@android:color/black</item>
     </style>
 
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorGreen</item>
+        <item name="colorAccent">@color/colorGreen</item>
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorGreen</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@android:color/darker_gray</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@android:color/darker_gray</item>
+    </style>
+
 </resources>

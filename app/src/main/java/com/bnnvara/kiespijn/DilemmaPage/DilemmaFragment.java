@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
@@ -49,6 +51,7 @@ public class DilemmaFragment extends Fragment {
     // constants
     private static final String TAG = DialogFragment.class.getSimpleName();
     private static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String LOGGING_OUT = "logging_out";
 
     // Views
     private ImageView mUserPhotoImageView;
@@ -305,6 +308,7 @@ public class DilemmaFragment extends Fragment {
                 return true;
             case R.id.menu_item_login:
                 Intent intent2 = LoginActivity.newIntent(getActivity());
+                intent2.putExtra(LOGGING_OUT, true);
                 startActivity(intent2);
                 return true;
             case R.id.menu_item_create_dilemma:

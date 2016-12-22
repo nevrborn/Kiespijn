@@ -19,9 +19,11 @@ import java.util.Collections;
 public class LoginActivity extends SingleFragmentActivity {
 
     private static final String TAG = "LoginActivity";
+    private static final String LOGGING_OUT = "logging_out";
 
     // Facebook Parameters
     CallbackManager mCallbackManager;
+    Boolean isLoggingOut = false;
 
 
     public static Intent newIntent(Context context) {
@@ -30,7 +32,9 @@ public class LoginActivity extends SingleFragmentActivity {
 
     @Override
     protected LoginFragment createFragment() {
-        return LoginFragment.newInstance();
+        Intent i = getIntent();
+        isLoggingOut = i.getBooleanExtra(LOGGING_OUT, false);
+        return LoginFragment.newInstance(isLoggingOut);
     }
 
     @Override

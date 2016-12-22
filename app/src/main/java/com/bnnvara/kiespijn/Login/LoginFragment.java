@@ -51,6 +51,7 @@ public class LoginFragment extends Fragment {
     private String mFacebookBirthday;
     private String mFacebookPictureURL;
     private JSONObject mFacebookFriends;
+    private static Boolean mIsLoggingOut = false;
 
     private Map<String, String> mFacebookFriendsMap = new HashMap<>();
 
@@ -58,7 +59,8 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static LoginFragment newInstance() {
+    public static LoginFragment newInstance(Boolean isLoggingOut) {
+        mIsLoggingOut = isLoggingOut;
         return new LoginFragment();
     }
 
@@ -87,7 +89,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        if (isLoggedIn()) {
+        if (isLoggedIn() && !mIsLoggingOut) {
             getFacebookParameters();
             Intent i = DilemmaActivity.newIntent(getContext());
             startActivity(i);
@@ -158,7 +160,7 @@ public class LoginFragment extends Fragment {
 
     public void getFacebookParameters() {
 
-        AccessToken.refreshCurrentAccessTokenAsync();
+        //AccessToken.refreshCurrentAccessTokenAsync();
 
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 

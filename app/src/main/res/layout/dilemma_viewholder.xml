@@ -37,11 +37,18 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:background="@color/colorGreen"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:gravity="center_vertical"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1.0f"
+                >
 
             <TextView
                 android:id="@+id/text_view_username_personal_page"
@@ -61,6 +68,33 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="12sp"
                 />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/image_view_clock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_clock_running"
+                    />
+
+                <TextView
+                    android:id="@+id/text_view_time_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/colorBrightGreen"
+                    android:hint="x uur"
+                    android:textColorHint="@color/colorBrightGreen"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 

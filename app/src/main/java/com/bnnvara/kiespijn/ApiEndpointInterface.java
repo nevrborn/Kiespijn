@@ -9,9 +9,11 @@ import retrofit2.http.GET;
  * Created by paulvancappelle on 08-11-16.
  */
 
+// http://www.mocky.io/
+
 public interface ApiEndpointInterface {
 
-    @GET("v2/585aa90e0f0000940f16182e")
+    @GET("v2/585cfb8c100000ef06501ddc")
     Call<DilemmaApiResponse> getDilemmaList();
 
 //    @GET("services/rest?method=flickr.photos.getRecent&extras=url_s&format=json&nojsoncallback=1")

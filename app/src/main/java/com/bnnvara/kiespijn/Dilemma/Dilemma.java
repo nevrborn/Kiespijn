@@ -68,11 +68,9 @@ public class Dilemma implements Serializable {
     private int mTimeLeft;
 
 
-
     public Dilemma() {
 
     }
-
 
 
     public String getCreator_name() {
@@ -250,7 +248,7 @@ public class Dilemma implements Serializable {
         mTimeLeft = timeLeft;
     }
 
-    public int getTimeLeft(){
+    public int getTimeLeft() {
         return mTimeLeft;
     }
 
@@ -259,9 +257,9 @@ public class Dilemma implements Serializable {
         List<Answer> answerList = this.getReplies().getOption1AnswerList();
         answerList.addAll(this.getReplies().getOption2AnswerList());
 
-        for (Answer answer: answerList){
+        for (Answer answer : answerList) {
             Log.i("Dilemma", answer.getUserFbId());
-            if (answer.getUserFbId().equals(userFbId)){
+            if (answer.getUserFbId().equals(userFbId)) {
                 return true;
             }
         }
@@ -270,4 +268,24 @@ public class Dilemma implements Serializable {
     }
 
 
+    public String getCreator_ageRange() {
+        String ageToShow;
+        int age = Integer.parseInt(mCreator_age);
+        if (age <= 16) {
+            ageToShow = "0 - 16 jaar";
+        } else if (age > 16 && age <= 20) {
+            ageToShow = "17 - 20 jaar";
+        } else if (age > 20 && age <= 25) {
+            ageToShow = "21 - 25 jaar";
+        } else if (age > 25 && age <= 30) {
+            ageToShow = "26 - 30 jaar";
+        } else if (age > 30 && age <= 35) {
+            ageToShow = "31 - 35 jaar";
+        } else if (age > 35 && age <= 40) {
+            ageToShow = "36 - 40 jaar";
+        } else {
+            ageToShow = "Leeftijd onbekend";
+        }
+        return ageToShow;
+    }
 }

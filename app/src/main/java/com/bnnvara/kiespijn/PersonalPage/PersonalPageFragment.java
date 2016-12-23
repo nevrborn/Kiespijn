@@ -198,9 +198,10 @@ public class PersonalPageFragment extends Fragment {
             // determine if current user answered for the dilemma (and is not the creator)
             boolean isAnsweredByCurrentUser = dilemma.isAnsweredByCurrentUser();
 
-            if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning){
+            if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning) {
                 mMyRunningDilemmaList.add(dilemma);
-            } else if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning == false){
+            }
+            else if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning == false){
                 mMyClosedDilemmaList.add(dilemma);
             } else if (isAnsweredByCurrentUser && isRunning){
                 mOthersRunningDilemmaList.add(dilemma);
@@ -239,7 +240,12 @@ public class PersonalPageFragment extends Fragment {
             Dilemma dilemma = mDilemmaListToShow.get(position);
 
             if (dilemma.getIsAnonymous()) {
-                holder.mUserDescriptionTextView.setText("-- anoniem anoniem --");
+                String ageToShow = "Leeftijd onbekend";
+                if (!dilemma.getCreator_age().equals("Leeftijd onbekend")) {
+                    ageToShow = dilemma.getCreator_ageRange();
+                }
+
+                holder.mUserDescriptionTextView.setText(ageToShow);
                 holder.mUserNameTextView.setText("Anoniem");
             } else {
                 holder.mUserDescriptionTextView.setText(

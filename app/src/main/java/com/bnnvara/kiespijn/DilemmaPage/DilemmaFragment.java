@@ -142,7 +142,7 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateCurrentIndex() {
-        if (mCurrentIndex == mDilemmaList.size() - 1){
+        if (mCurrentIndex == mDilemmaList.size() - 1) {
             mCurrentIndex = 0;
         } else {
             mCurrentIndex++;
@@ -193,35 +193,17 @@ public class DilemmaFragment extends Fragment {
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
 
-            String ageToShow = "";
-
-            if (!mDilemma.getCreator_age().equals("Onbekend")) {
-
-                int age = Integer.parseInt(mDilemma.getCreator_age());
-
-                if (age <= 16) {
-                    ageToShow = "0 - 16";
-                } else if (age > 16 && age <= 20) {
-                    ageToShow = "16 - 20";
-                } else if (age > 20 && age <= 25) {
-                    ageToShow = "20 - 25";
-                } else if (age > 25 && age <= 30) {
-                    ageToShow = "25 - 30";
-                } else if (age > 30 && age <= 35) {
-                    ageToShow = "30 - 35";
-                } else if (age > 35 && age <= 40) {
-                    ageToShow = "35 - 40";
-                }
-            } else {
-                ageToShow = "Onbekend";
+            String ageToShow = "Leeftijd onbekend";
+            if (!mDilemma.getCreator_age().equals("Leeftijd onbekend")) {
+                ageToShow = mDilemma.getCreator_ageRange();
             }
-
-            mUserDescriptionTextView.setText(" - | " + ageToShow);
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
         }
 
         // set image titles
         mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
         mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
+
     }
 
 
@@ -243,8 +225,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies1 = new Replies();
-        List<Answer> option1AnswerList = new ArrayList<>() ;
-        List<Answer> option2AnswerList = new ArrayList<>() ;
+        List<Answer> option1AnswerList = new ArrayList<>();
+        List<Answer> option2AnswerList = new ArrayList<>();
         option1AnswerList.add(new Answer("awef-2398"));
         option1AnswerList.add(new Answer("erg-rth98"));
         option2AnswerList.add(new Answer("qweasd-999"));
@@ -269,8 +251,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies2 = new Replies();
-        option1AnswerList = new ArrayList<>() ;
-        option2AnswerList = new ArrayList<>() ;
+        option1AnswerList = new ArrayList<>();
+        option2AnswerList = new ArrayList<>();
         option1AnswerList.add(new Answer("awef-2398"));
         option1AnswerList.add(new Answer("erg-rth98"));
         option2AnswerList.add(new Answer("qweasd-999"));
@@ -295,8 +277,8 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies3 = new Replies();
-        option1AnswerList = new ArrayList<>() ;
-        option2AnswerList = new ArrayList<>() ;
+        option1AnswerList = new ArrayList<>();
+        option2AnswerList = new ArrayList<>();
         option1AnswerList.add(new Answer("awef-2398"));
         option1AnswerList.add(new Answer("erg-rth98"));
         option2AnswerList.add(new Answer("qweasd-999"));
@@ -320,7 +302,7 @@ public class DilemmaFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_item_user:
                 Intent intent1 = PersonalPageActivity.newIntent(getActivity());
                 startActivity(intent1);
@@ -336,7 +318,8 @@ public class DilemmaFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
-            default: return true;
+            default:
+                return true;
         }
     }
 
@@ -358,8 +341,8 @@ public class DilemmaFragment extends Fragment {
 
     /**
      * inner class
-     *
-     *
+     * <p>
+     * <p>
      * Created by paulvancappelle on 16-12-16.
      */
     public class ApiDataFetcher {
@@ -372,7 +355,7 @@ public class DilemmaFragment extends Fragment {
             // empty constructor
         }
 
-        public void getData(){
+        public void getData() {
 
             // Logging
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

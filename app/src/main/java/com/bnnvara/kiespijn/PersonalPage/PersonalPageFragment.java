@@ -245,7 +245,7 @@ public class PersonalPageFragment extends Fragment {
                     ageToShow = dilemma.getCreator_ageRange();
                 }
 
-                holder.mUserDescriptionTextView.setText(ageToShow);
+                holder.mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + ageToShow);
                 holder.mUserNameTextView.setText("Anoniem");
             } else {
                 holder.mUserDescriptionTextView.setText(

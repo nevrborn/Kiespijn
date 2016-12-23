@@ -29,6 +29,7 @@ import com.bnnvara.kiespijn.Dilemma.Replies;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,7 +52,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DilemmaFragment extends Fragment {
 
     // constants
-    private static final String TAG = DialogFragment.class.getSimpleName();
+    private static final String TAG = DilemmaFragment.class.getSimpleName();
     private static final String DILEMMA_OBJECT = "dilemma_object";
     private static final String LOGGING_OUT = "logging_out";
 
@@ -70,7 +71,7 @@ public class DilemmaFragment extends Fragment {
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
     private int mCurrentIndex;
-    private String mUserFbId = "101283870370822";
+    private String mUserFbId; // = "101283870370822";
 
 
     public static Fragment newInstance() {
@@ -89,6 +90,7 @@ public class DilemmaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
+        mUserFbId = User.getInstance().getUserKey();
         getData();
 
         // set up the references
@@ -319,7 +321,7 @@ public class DilemmaFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_item_user:
-                Intent intent1 = PersonalPageActivity.newIntent(getActivity(), mUserFbId);
+                Intent intent1 = PersonalPageActivity.newIntent(getActivity());
                 startActivity(intent1);
                 return true;
             case R.id.menu_item_login:

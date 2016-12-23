@@ -24,6 +24,7 @@ import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -44,7 +45,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PersonalPageFragment extends Fragment {
 
     // constants
-    private static final String ARG_USER_FB_ID = "com.bnnvara.kiespijn.userFbId";
+    private static final String TAG = PersonalPageFragment.class.getSimpleName();
 
     // view variables
     private Button mMineButton;
@@ -65,11 +66,8 @@ public class PersonalPageFragment extends Fragment {
     private String mUserFbId;
 
 
-    public static PersonalPageFragment newInstance(String userFbId) {
+    public static PersonalPageFragment newInstance() {
         PersonalPageFragment personalPageFragment = new PersonalPageFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(ARG_USER_FB_ID, userFbId);
-        personalPageFragment.setArguments(bundle);
         return personalPageFragment;
     }
 
@@ -85,7 +83,7 @@ public class PersonalPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_page, container, false);
 
-        mUserFbId = getArguments().getString(ARG_USER_FB_ID);
+        mUserFbId = User.getInstance().getUserKey();
 
         ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
         apiDataFetcher.getData();

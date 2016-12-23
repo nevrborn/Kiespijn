@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@drawable/buttons_filter"
-            android:text="Mijn dilemma's"
+            android:text="@string/button_my_dilemmas"
             android:textColor="@android:color/white"
             />
 
@@ -37,7 +37,7 @@
             android:layout_weight="0.5"
             android:background="@drawable/buttons_filter"
             android:alpha=".65"
-            android:text="Van anderen"
+            android:text="@string/button_from_others"
             android:textColor="@android:color/white"
             />
 
@@ -59,7 +59,7 @@
             android:layout_weight="0.5"
             android:background="@drawable/buttons_filter"
             android:alpha=".65"
-            android:text="Lopend"
+            android:text="@string/button_running"
             android:textColor="@android:color/white"
             />
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@drawable/buttons_filter"
-            android:text="Gesloten"
+            android:text="@string/button_expired"
             android:textColor="@android:color/white"
             />
 

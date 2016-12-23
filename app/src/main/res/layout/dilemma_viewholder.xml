@@ -93,6 +93,7 @@
                     android:textColor="@color/colorLightGreen"
                     android:hint="x uur"
                     android:textColorHint="@color/colorLightGreen"
+                    android:textAlignment="center"
                     />
 
             </LinearLayout>

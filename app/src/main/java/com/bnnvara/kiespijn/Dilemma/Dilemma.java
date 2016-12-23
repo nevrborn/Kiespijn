@@ -1,11 +1,15 @@
 package com.bnnvara.kiespijn.Dilemma;
 
 import android.net.Uri;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -62,6 +66,7 @@ public class Dilemma implements Serializable {
     private String mCreator_picture_url;
 
     private int mTimeLeft;
+
 
 
     public Dilemma() {
@@ -248,4 +253,21 @@ public class Dilemma implements Serializable {
     public int getTimeLeft(){
         return mTimeLeft;
     }
+
+    public boolean isAnsweredByCurrentUser() {
+        String userFbId = User.getInstance().getUserKey();
+        List<Answer> answerList = this.getReplies().getOption1AnswerList();
+        answerList.addAll(this.getReplies().getOption2AnswerList());
+
+        for (Answer answer: answerList){
+            Log.i("Dilemma", answer.getUserFbId());
+            if (answer.getUserFbId().equals(userFbId)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }

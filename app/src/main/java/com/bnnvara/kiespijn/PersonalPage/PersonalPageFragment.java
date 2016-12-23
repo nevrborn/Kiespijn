@@ -2,7 +2,6 @@ package com.bnnvara.kiespijn.PersonalPage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,7 +58,7 @@ public class PersonalPageFragment extends Fragment {
     private List<Dilemma> mDilemmaList;
     private List<Dilemma> mMyRunningDilemmaList = new ArrayList<>();
     private List<Dilemma> mMyClosedDilemmaList = new ArrayList<>();
-    private List<Dilemma> mOthersRunningDilemmaLst = new ArrayList<>();
+    private List<Dilemma> mOthersRunningDilemmaList = new ArrayList<>();
     private List<Dilemma> mOthersClosedDilemmaList = new ArrayList<>();
     private boolean mShowMyDilemmas = true;
     private boolean mShowRunning;
@@ -175,7 +174,7 @@ public class PersonalPageFragment extends Fragment {
         } else if (mShowMyDilemmas && !mShowRunning) {
             mDilemmaAdapter = new DilemmaAdapter(mMyClosedDilemmaList);
         } else if (!mShowMyDilemmas && mShowRunning){
-            mDilemmaAdapter = new DilemmaAdapter(mOthersRunningDilemmaLst);
+            mDilemmaAdapter = new DilemmaAdapter(mOthersRunningDilemmaList);
         } else if (!mShowMyDilemmas && !mShowRunning){
             mDilemmaAdapter = new DilemmaAdapter(mOthersClosedDilemmaList);
         } else {
@@ -188,16 +187,27 @@ public class PersonalPageFragment extends Fragment {
 
     private void createDilemmaLists() {
         for (Dilemma dilemma: mDilemmaList){
+
+            // determine timeLeft of the dilemma
             long now = System.currentTimeMillis() / 1000L;
             long deadline = dilemma.getDeadline();
             boolean isRunning = dilemma.getDeadline() > (System.currentTimeMillis() / 1000L);
             int timeLeft = (int) ((dilemma.getDeadline() - (System.currentTimeMillis() / 1000L) ) / 1000);
             dilemma.setTimeLeft(timeLeft);
 
+            // determine if current user answered for the dilemma (and is not the creator)
+            boolean isAnsweredByCurrentUser = dilemma.isAnsweredByCurrentUser();
+
             if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning){
                 mMyRunningDilemmaList.add(dilemma);
-            } else if (dilemma.getCreator_fb_id().equals(mUserFbId) && !isRunning){
+            } else if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning == false){
                 mMyClosedDilemmaList.add(dilemma);
+            } else if (isAnsweredByCurrentUser && isRunning){
+                mOthersRunningDilemmaList.add(dilemma);
+            } else if (isAnsweredByCurrentUser && isRunning == false){
+                mOthersClosedDilemmaList.add(dilemma);
+            } else {
+                Log.i("dilemma", "kansloos");
             }
         }
     }

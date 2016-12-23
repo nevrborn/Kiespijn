@@ -91,8 +91,6 @@ public class LoginFragment extends Fragment {
 
         if (isLoggedIn() && !mIsLoggingOut) {
             getFacebookParameters();
-            Intent i = DilemmaActivity.newIntent(getContext());
-            startActivity(i);
         }
 
     }
@@ -167,6 +165,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
                 getFacebookParameters(object);
+                Intent i = DilemmaActivity.newIntent(getContext());
+                startActivity(i);
             }
         });
 

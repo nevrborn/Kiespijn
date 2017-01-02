@@ -15,9 +15,9 @@ public class FriendListActivity extends SingleFragmentActivity {
     }
 
     @Override
-    protected FriendListFragement createFragment() {
+    protected FriendListFragment createFragment() {
         Intent i = getIntent();
         Dilemma dilemma = (Dilemma) i.getSerializableExtra(DILEMMA_OBJECT);
-        return FriendListFragement.newInstance(dilemma);
+        return FriendListFragment.newInstance(dilemma);
     }
 }

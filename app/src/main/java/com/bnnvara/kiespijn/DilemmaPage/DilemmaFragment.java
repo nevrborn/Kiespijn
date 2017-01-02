@@ -1,10 +1,8 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -15,10 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
@@ -63,6 +59,7 @@ public class DilemmaFragment extends Fragment {
     private TextView mDilemmaTextView;
     private TextView mFirstImageTitleTextView;
     private TextView mSecondImageTitleTextView;
+    private TextView mNoDilemmasTextView;
     private ImageView mDilemmaFirstImageView;
     private ImageView mDilemmaSecondImageView;
 
@@ -101,6 +98,7 @@ public class DilemmaFragment extends Fragment {
         mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma);
         mFirstImageTitleTextView = (TextView) view.findViewById(R.id.text_view_first_image_title);
         mSecondImageTitleTextView = (TextView) view.findViewById(R.id.text_view_second_image_title);
+        mNoDilemmasTextView = (TextView) view.findViewById(R.id.text_view_no_dilemmas);
         mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
@@ -143,11 +141,15 @@ public class DilemmaFragment extends Fragment {
 
     private void updateCurrentIndex() {
         if (mCurrentIndex == mDilemmaList.size() - 1) {
-            mCurrentIndex = 0;
+            showNoDilemmas();
         } else {
             mCurrentIndex++;
         }
         updateUi();
+    }
+
+    private void showNoDilemmas() {
+        mNoDilemmasTextView.setVisibility(View.VISIBLE);
     }
 
     private void updateUi() {

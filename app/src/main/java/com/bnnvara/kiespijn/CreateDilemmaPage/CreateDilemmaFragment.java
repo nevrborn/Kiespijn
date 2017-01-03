@@ -195,7 +195,7 @@ public class CreateDilemmaFragment extends Fragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library",
+        final CharSequence[] items = {"Take Photo", "Choose from Library", "Google Search",
                 "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Add Photo!");
@@ -206,6 +206,8 @@ public class CreateDilemmaFragment extends Fragment {
                     cameraIntent();
                 } else if (items[item].equals("Choose from Library")) {
                     galleryIntent();
+                } else if (items[item].equals("Google Search")) {
+                    googleSearch();
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
@@ -302,6 +304,24 @@ public class CreateDilemmaFragment extends Fragment {
 
         return !mDilemma.getTitle().equals("") && !mDilemma.getTitlePhotoA().equals("") && !mDilemma.getTitlePhotoB().equals("");
 
+    }
+
+    public void googleSearch() {
+        String searchString;
+
+        if (isImageA) {
+            searchString = mOptionAText.getText().toString();
+        } else {
+            searchString = mOptionBText.getText().toString();
+        }
+
+        String googleURL = "https://www.google.com/search?tbm=isch&q=" + searchString;
+
+        Log.i(TAG, "Google URL is: " + googleURL);
+
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(googleURL));
+
+        startActivity(i);
     }
 
 

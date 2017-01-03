@@ -26,16 +26,33 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
+import com.bnnvara.kiespijn.GoogleApiRestInterface;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.app.Activity.RESULT_OK;
 
 
-public class CreateDilemmaFragment extends Fragment {
+public class CreateDilemmaFragment extends Fragment implements Callback<GoogleImageApiResponse> {
 
     private static final String TAG = "CreateDilemmaFragment";
 
@@ -207,7 +224,7 @@ public class CreateDilemmaFragment extends Fragment {
                 } else if (items[item].equals("Choose from Library")) {
                     galleryIntent();
                 } else if (items[item].equals("Google Search")) {
-                    googleSearch();
+                    googleImageSearch();
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
@@ -306,8 +323,11 @@ public class CreateDilemmaFragment extends Fragment {
 
     }
 
-    public void googleSearch() {
+    public void googleImageSearch() {
+
         String searchString;
+        String key = "AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4";
+        String cx = "005303562240230618745:fehybwiv3j0";
 
         if (isImageA) {
             searchString = mOptionAText.getText().toString();
@@ -315,14 +335,36 @@ public class CreateDilemmaFragment extends Fragment {
             searchString = mOptionBText.getText().toString();
         }
 
-        String googleURL = "https://www.google.com/search?tbm=isch&q=" + searchString;
+        // Logging
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        Gson gson = new GsonBuilder().setLenient().create();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        Log.i(TAG, "Google URL is: " + googleURL);
+        Retrofit restAdapter = new Retrofit.Builder()
+                .baseUrl("https://www.googleapis.com")
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
 
-        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(googleURL));
+        GoogleApiRestInterface apiResponse = restAdapter.create(GoogleApiRestInterface.class);
 
-        startActivity(i);
+        Call<GoogleImageApiResponse> call = apiResponse.customSearch(key, cx, searchString);
+
+        call.enqueue(this);
+
+        Log.i(TAG, apiResponse.toString());
+
     }
 
 
+    @Override
+    public void onResponse(Call<GoogleImageApiResponse> call, Response<GoogleImageApiResponse> response) {
+
+    }
+
+    @Override
+    public void onFailure(Call<GoogleImageApiResponse> call, Throwable t) {
+
+    }
 }

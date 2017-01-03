@@ -45,6 +45,8 @@ public class PersonalPageFragment extends Fragment {
 
     // constants
     private static final String TAG = PersonalPageFragment.class.getSimpleName();
+    private static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String LOGGING_OUT = "logging_out";
 
     // view variables
     private Button mMineButton;
@@ -152,14 +154,17 @@ public class PersonalPageFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_user:
-
+                // has to do nothing now, because user is already on the Personal Page
                 return true;
             case R.id.menu_item_login:
                 Intent intent2 = LoginActivity.newIntent(getActivity());
+                intent2.putExtra(LOGGING_OUT, true);
                 startActivity(intent2);
                 return true;
             case R.id.menu_item_create_dilemma:
+                Dilemma dilemma = new Dilemma();
                 Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
+                intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
             default:
@@ -238,6 +243,7 @@ public class PersonalPageFragment extends Fragment {
         @Override
         public void onBindViewHolder(DilemmaHolder holder, int position) {
             Dilemma dilemma = mDilemmaListToShow.get(position);
+            holder.setDilemma(dilemma);
 
             if (dilemma.getIsAnonymous()) {
                 String ageToShow = "Leeftijd onbekend";
@@ -277,7 +283,9 @@ public class PersonalPageFragment extends Fragment {
      * <p>
      * Created by paulvancappelle on 16-12-16.
      */
-    public class DilemmaHolder extends RecyclerView.ViewHolder {
+    public class DilemmaHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private Dilemma mDilemma;
 
         private ImageView mUserPhotoImageView;
         private ImageView mClockImageView;
@@ -294,6 +302,15 @@ public class PersonalPageFragment extends Fragment {
             mUserDescriptionTextView = (TextView) itemView.findViewById(R.id.text_view_user_info_personal_page);
             mDilemmaTextView = (TextView) itemView.findViewById(R.id.text_view_dilemma_personal_page);
             mTimeLeftTextView = (TextView) itemView.findViewById(R.id.text_view_time_left);
+        }
+
+        public void setDilemma(Dilemma dilemma) {
+            mDilemma = dilemma;
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 

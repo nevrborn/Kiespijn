@@ -2,12 +2,13 @@ package com.bnnvara.kiespijn.Dilemma;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by paulvancappelle on 15-12-16.
  */
-public class Replies {
+public class Replies implements Serializable{
 
     @SerializedName("optionA")
     private List<Answer> mOption1AnswerList;

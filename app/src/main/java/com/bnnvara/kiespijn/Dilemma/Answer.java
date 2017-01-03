@@ -2,7 +2,9 @@ package com.bnnvara.kiespijn.Dilemma;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Answer {
+import java.io.Serializable;
+
+public class Answer implements Serializable{
 
     @SerializedName("user_fb_id")
     private String mUserFbId;

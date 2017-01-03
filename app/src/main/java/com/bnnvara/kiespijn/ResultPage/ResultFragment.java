@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -29,14 +30,18 @@ public class ResultFragment extends Fragment {
     private static final String LOGGING_OUT = "logging_out";
 
     // Views
-
+    TextView mTest;
 
     // Regular variables
+    Dilemma mDilemma;
 
 
-
-    public static Fragment newInstance() {
-        return new ResultFragment();
+    public static Fragment newInstance(Dilemma dilemma) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DILEMMA_OBJECT, dilemma);
+        ResultFragment resultFragment = new ResultFragment();
+        resultFragment.setArguments(bundle);
+        return resultFragment;
     }
 
     @Override
@@ -50,15 +55,20 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result_page, container, false);
 
-
+        mDilemma = (Dilemma) savedInstanceState.getSerializable(DILEMMA_OBJECT);
 
         // set up the references
-
+        mTest = (TextView) view.findViewById(R.id.text_view_test);
 
         // set up the listeners
 
 
+        updateUi();
         return view;
+    }
+
+    private void updateUi() {
+        mTest.setText(mDilemma.getTitle());
     }
 
 

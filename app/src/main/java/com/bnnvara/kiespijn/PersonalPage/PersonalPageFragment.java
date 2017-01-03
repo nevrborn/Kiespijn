@@ -23,6 +23,7 @@ import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.ResultPage.ResultActivity;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -244,6 +245,7 @@ public class PersonalPageFragment extends Fragment {
         public void onBindViewHolder(DilemmaHolder holder, int position) {
             Dilemma dilemma = mDilemmaListToShow.get(position);
             holder.setDilemma(dilemma);
+            holder.itemView.setOnClickListener(holder);
 
             if (dilemma.getIsAnonymous()) {
                 String ageToShow = "Leeftijd onbekend";
@@ -310,7 +312,8 @@ public class PersonalPageFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-
+            Intent i = ResultActivity.newIntent(getActivity(), mDilemma);
+            startActivity(i);
         }
     }
 

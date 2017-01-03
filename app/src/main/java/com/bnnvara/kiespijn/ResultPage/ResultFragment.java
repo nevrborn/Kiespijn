@@ -55,7 +55,7 @@ public class ResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result_page, container, false);
 
-        mDilemma = (Dilemma) savedInstanceState.getSerializable(DILEMMA_OBJECT);
+        mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
 
         // set up the references
         mTest = (TextView) view.findViewById(R.id.text_view_test);

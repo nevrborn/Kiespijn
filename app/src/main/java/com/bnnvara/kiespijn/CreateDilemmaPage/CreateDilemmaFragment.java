@@ -26,20 +26,22 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
-import com.bnnvara.kiespijn.GoogleApiRestInterface;
+import com.bnnvara.kiespijn.GoogleImageSearch.GalleryItem;
+import com.bnnvara.kiespijn.GoogleImageSearch.GoogleApiRestInterface;
+import com.bnnvara.kiespijn.GoogleImageSearch.GoogleImageApiResponse;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.BufferedReader;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -52,7 +54,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.app.Activity.RESULT_OK;
 
 
-public class CreateDilemmaFragment extends Fragment implements Callback<GoogleImageApiResponse> {
+public class CreateDilemmaFragment extends Fragment {
 
     private static final String TAG = "CreateDilemmaFragment";
 
@@ -71,6 +73,9 @@ public class CreateDilemmaFragment extends Fragment implements Callback<GoogleIm
     private Button mNextButton;
     private Boolean isImageA = true;
     public static Boolean isFromCamera = false;
+
+    List<String> urlList = new ArrayList<>();
+    private static List<GalleryItem> mGalleryItems;
 
     // dilemma variables
     private static Dilemma mDilemma;
@@ -349,22 +354,26 @@ public class CreateDilemmaFragment extends Fragment implements Callback<GoogleIm
 
         GoogleApiRestInterface apiResponse = restAdapter.create(GoogleApiRestInterface.class);
 
-        Call<GoogleImageApiResponse> call = apiResponse.customSearch(key, cx, searchString);
+        Call<GoogleImageApiResponse> mGalleryResponse = apiResponse.customSearch(key, cx, searchString);
 
-        call.enqueue(this);
+        mGalleryResponse.enqueue(new Callback<GoogleImageApiResponse>() {
+            @Override
+            public void onResponse(Call<GoogleImageApiResponse> call, Response<GoogleImageApiResponse> response) {
+                GoogleImageApiResponse mGoogleImageApiResponse = response.body();
 
-        Log.i(TAG, apiResponse.toString());
+                if (response.body() == null) {
+                    Log.e("Retrofit body null", String.valueOf(response.code()));
+                }
+
+                mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
+            }
+
+            @Override
+            public void onFailure(Call<GoogleImageApiResponse> call, Throwable t) {
+                Log.e("Retrofit error", t.getMessage());
+            }
+        });
 
     }
 
-
-    @Override
-    public void onResponse(Call<GoogleImageApiResponse> call, Response<GoogleImageApiResponse> response) {
-
-    }
-
-    @Override
-    public void onFailure(Call<GoogleImageApiResponse> call, Throwable t) {
-
-    }
 }

@@ -13,7 +13,6 @@ public class GoogleImageApiResponse {
     @SerializedName("items")
     private List<GalleryItem> mGalleryItems;
 
-
     public GoogleImageApiResponse() {
 
     }

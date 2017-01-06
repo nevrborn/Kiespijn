@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.CreateDilemmaPage;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,7 +9,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -27,29 +30,19 @@ import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.GoogleImageSearch.GalleryItem;
-import com.bnnvara.kiespijn.GoogleImageSearch.GoogleApiRestInterface;
-import com.bnnvara.kiespijn.GoogleImageSearch.GoogleImageApiResponse;
+import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -61,6 +54,9 @@ public class CreateDilemmaFragment extends Fragment {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_IMAGE_GALLERY = 2;
     static final String DILEMMA_OBJECT = "dilemma_object";
+    static final String SEARCH_STRING = "search_string";
+    private static final String GOOGLE_IMAGE_URL = "google_image_url";
+    static final int GOOGLE_IMAGE = 3;
 
     // views
     private EditText mDilemmaTitle;
@@ -74,7 +70,8 @@ public class CreateDilemmaFragment extends Fragment {
     private Boolean isImageA = true;
     public static Boolean isFromCamera = false;
 
-    List<String> urlList = new ArrayList<>();
+    private static Bitmap mGoogleImage;
+
     private static List<GalleryItem> mGalleryItems;
 
     // dilemma variables
@@ -114,15 +111,26 @@ public class CreateDilemmaFragment extends Fragment {
 
         if (mDilemma != null) {
             if (mDilemma.getPhotoA() != null && mDilemma.getPhotoB() != null) {
-                try {
                     mDilemmaTitle.setText(mDilemma.getTitle());
                     mOptionAText.setText(mDilemma.getTitlePhotoA());
                     mOptionBText.setText(mDilemma.getTitlePhotoB());
-                    mImageViewA.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoA())));
-                    mImageViewB.setImageBitmap(MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), Uri.parse(mDilemma.getPhotoB())));
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                if (mDilemma.getPhotoA().contains("http")) {
+                    isImageA = true;
+                    GetBitmapAFromURLAsync getBitmapAFromURLAsync = new GetBitmapAFromURLAsync();
+                    getBitmapAFromURLAsync.execute(mDilemma.getPhotoA().toString());
+                } else {
+                    mImageViewA.setImageURI(Uri.parse(mDilemma.getPhotoA()));
                 }
+
+                if (mDilemma.getPhotoB().contains("http")) {
+                    isImageA = false;
+                    GetBitmapBFromURLAsync getBitmapBFromURLAsync = new GetBitmapBFromURLAsync();
+                    getBitmapBFromURLAsync.execute(mDilemma.getPhotoB().toString());
+                } else {
+                    mImageViewB.setImageURI(Uri.parse(mDilemma.getPhotoB()));
+                }
+
             }
         }
 
@@ -229,7 +237,15 @@ public class CreateDilemmaFragment extends Fragment {
                 } else if (items[item].equals("Choose from Library")) {
                     galleryIntent();
                 } else if (items[item].equals("Google Search")) {
-                    googleImageSearch();
+                    String searchString;
+                    if (isImageA) {
+                        searchString = mOptionAText.getText().toString();
+                    } else {
+                        searchString = mOptionBText.getText().toString();
+                    }
+                    Intent i = new Intent(GoogleSearchActivity.newIntent(getActivity()));
+                    i.putExtra(SEARCH_STRING, searchString);
+                    startActivityForResult(i, GOOGLE_IMAGE);
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
@@ -307,6 +323,12 @@ public class CreateDilemmaFragment extends Fragment {
 
         }
 
+        if (requestCode == GOOGLE_IMAGE && resultCode == Activity.RESULT_OK) {
+            Uri googleUri = Uri.parse(data.getStringExtra(GOOGLE_IMAGE_URL));
+            GetBitmapFromURLAsync getBitmapFromURLAsync = new GetBitmapFromURLAsync();
+            getBitmapFromURLAsync.execute(googleUri.toString());
+        }
+
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -328,51 +350,88 @@ public class CreateDilemmaFragment extends Fragment {
 
     }
 
-    public void googleImageSearch() {
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            mGoogleImage = myBitmap;
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-        String searchString;
-        String key = "AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4";
-        String cx = "005303562240230618745:fehybwiv3j0";
+    private class GetBitmapFromURLAsync extends AsyncTask<String, Void, Bitmap> {
+        String url;
 
-        if (isImageA) {
-            searchString = mOptionAText.getText().toString();
-        } else {
-            searchString = mOptionBText.getText().toString();
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            url = params[0];
+            return getBitmapFromURL(params[0]);
         }
 
-        // Logging
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        Gson gson = new GsonBuilder().setLenient().create();
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            //  return the bitmap by doInBackground and store in result
+            mGoogleImage = bitmap;
 
-        Retrofit restAdapter = new Retrofit.Builder()
-                .baseUrl("https://www.googleapis.com")
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        GoogleApiRestInterface apiResponse = restAdapter.create(GoogleApiRestInterface.class);
-
-        Call<GoogleImageApiResponse> mGalleryResponse = apiResponse.customSearch(key, cx, searchString);
-
-        mGalleryResponse.enqueue(new Callback<GoogleImageApiResponse>() {
-            @Override
-            public void onResponse(Call<GoogleImageApiResponse> call, Response<GoogleImageApiResponse> response) {
-                GoogleImageApiResponse mGoogleImageApiResponse = response.body();
-
-                if (response.body() == null) {
-                    Log.e("Retrofit body null", String.valueOf(response.code()));
-                }
-
-                mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
+            if (isImageA) {
+                String imageAUri = (Uri.parse(url)).toString();
+                mDilemma.setPhotoA(imageAUri);
+                mImageViewA.setImageBitmap(mGoogleImage);
+            } else {
+                String imageBUri = (Uri.parse(url)).toString();
+                mDilemma.setPhotoB(imageBUri);
+                mImageViewB.setImageBitmap(mGoogleImage);
             }
+        }
 
-            @Override
-            public void onFailure(Call<GoogleImageApiResponse> call, Throwable t) {
-                Log.e("Retrofit error", t.getMessage());
-            }
-        });
+    }
+
+    private class GetBitmapAFromURLAsync extends AsyncTask<String, Void, Bitmap> {
+        String url;
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            url = params[0];
+            return getBitmapFromURL(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            //  return the bitmap by doInBackground and store in result
+            mGoogleImage = bitmap;
+
+            String imageAUri = (Uri.parse(url)).toString();
+            mDilemma.setPhotoA(imageAUri);
+            mImageViewA.setImageBitmap(mGoogleImage);
+        }
+
+    }
+
+    private class GetBitmapBFromURLAsync extends AsyncTask<String, Void, Bitmap> {
+        String url;
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            url = params[0];
+            return getBitmapFromURL(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            //  return the bitmap by doInBackground and store in result
+            mGoogleImage = bitmap;
+
+            String imageBUri = (Uri.parse(url)).toString();
+            mDilemma.setPhotoB(imageBUri);
+            mImageViewB.setImageBitmap(mGoogleImage);
+        }
 
     }
 

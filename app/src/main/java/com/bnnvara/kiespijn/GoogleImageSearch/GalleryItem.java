@@ -12,6 +12,8 @@ public class GalleryItem {
     @SerializedName("link")
     private String mUrl;
 
+    private String mImageURL;
+
     public String getTitle() {
         return mTitle;
     }
@@ -28,4 +30,11 @@ public class GalleryItem {
         mUrl = url_s;
     }
 
+    public String getImageURL() {
+        return mImageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        mImageURL = imageURL;
+    }
 }

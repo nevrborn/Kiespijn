@@ -184,7 +184,7 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private void setRandomCaller() {
-        int randomIndex = 1 + (int) (Math.random() * ((13 - 1) + 1));
+        int randomIndex = 1 + (int) (Math.random() * ((12 - 1) + 1));
         callSomeoneButton.setText(mListOfCallers.get(randomIndex));
     }
 

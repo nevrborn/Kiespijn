@@ -14,7 +14,6 @@ import com.facebook.login.LoginResult;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 public class LoginActivity extends SingleFragmentActivity {
 
@@ -22,8 +21,8 @@ public class LoginActivity extends SingleFragmentActivity {
     private static final String LOGGING_OUT = "logging_out";
 
     // Facebook Parameters
-    CallbackManager mCallbackManager;
-    Boolean isLoggingOut = false;
+    private CallbackManager mCallbackManager;
+    private Boolean isLoggingOut = false;
 
 
     public static Intent newIntent(Context context) {

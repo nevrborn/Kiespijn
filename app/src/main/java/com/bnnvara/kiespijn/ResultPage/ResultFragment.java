@@ -21,9 +21,6 @@ import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
 
-/**
- * Created by paulvancappelle on 03-01-17.
- */
 public class ResultFragment extends Fragment {
 
     // constants
@@ -32,11 +29,11 @@ public class ResultFragment extends Fragment {
     private static final String LOGGING_OUT = "logging_out";
 
     // Views
-    TextView mTest;
-    SeekBar mSeekBarLeft;
+    private TextView mTest;
+    private SeekBar mSeekBarLeft;
 
     // Regular variables
-    Dilemma mDilemma;
+    private Dilemma mDilemma;
 
 
     public static Fragment newInstance(Dilemma dilemma) {

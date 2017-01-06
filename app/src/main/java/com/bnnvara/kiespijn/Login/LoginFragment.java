@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
 import com.bnnvara.kiespijn.R;
@@ -31,7 +30,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,12 +43,6 @@ public class LoginFragment extends Fragment {
 
     // Facebook Parameters
     private CallbackManager mCallbackManager;
-    private String mFacebookID;
-    private String mFacebookName;
-    private String mFacebookGender;
-    private String mFacebookBirthday;
-    private String mFacebookPictureURL;
-    private JSONObject mFacebookFriends;
     private static Boolean mIsLoggingOut = false;
 
     private Map<String, String> mFacebookFriendsMap = new HashMap<>();
@@ -107,8 +99,6 @@ public class LoginFragment extends Fragment {
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
-        Typeface source_sans_extra_light_italic = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLightItalic.ttf");
-        Typeface source_sans_regular = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Regular.ttf");
         title.setTypeface(source_sans_extra_light);
         text.setTypeface(source_sans_extra_light);
 
@@ -156,7 +146,7 @@ public class LoginFragment extends Fragment {
         LoginManager.getInstance().logOut();
     }
 
-    public void getFacebookParameters() {
+    private void getFacebookParameters() {
 
         //AccessToken.refreshCurrentAccessTokenAsync();
 
@@ -180,21 +170,21 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void getFacebookParameters(JSONObject object) {
+    private void getFacebookParameters(JSONObject object) {
 
         User user = User.getInstance();
 
         try {
-            mFacebookID = object.getString("id");
-            Log.i(TAG, "Facebook ID is: " + mFacebookID);
-            mFacebookName = object.getString("name");
-            Log.i(TAG, "Facebook NAME is: " + mFacebookName);
-            mFacebookGender = object.getString("gender");
-            Log.i(TAG, "Facebook GENDER is: " + mFacebookGender);
+            String facebookID = object.getString("id");
+            Log.i(TAG, "Facebook ID is: " + facebookID);
+            String facebookName = object.getString("name");
+            Log.i(TAG, "Facebook NAME is: " + facebookName);
+            String facebookGender = object.getString("gender");
+            Log.i(TAG, "Facebook GENDER is: " + facebookGender);
 
-            user.setUserKey(mFacebookID);
-            user.setName(mFacebookName);
-            user.setSex(mFacebookGender);
+            user.setUserKey(facebookID);
+            user.setName(facebookName);
+            user.setSex(facebookGender);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -202,9 +192,9 @@ public class LoginFragment extends Fragment {
 
         // GET BIRTHDAY IF POSSIBLE
         try {
-            mFacebookBirthday = object.getString("birthday");
-            Log.i(TAG, "Facebook BIRTHDAY is: " + mFacebookBirthday);
-            String age = calculateAge(mFacebookBirthday);
+            String facebookBirthday = object.getString("birthday");
+            Log.i(TAG, "Facebook BIRTHDAY is: " + facebookBirthday);
+            String age = calculateAge(facebookBirthday);
             user.setAge(age);
         } catch (JSONException e) {
             user.setAge("Onbekend");
@@ -216,17 +206,17 @@ public class LoginFragment extends Fragment {
         try {
             JSONObject pictureObject = object.getJSONObject("picture");
             JSONObject pictureData = pictureObject.getJSONObject("data");
-            mFacebookPictureURL = pictureData.getString("url");
-            Log.i(TAG, "Facebook PICTURE URL is: " + mFacebookPictureURL);
-            user.setProfilePictureURL(mFacebookPictureURL);
+            String facebookPictureURL = pictureData.getString("url");
+            Log.i(TAG, "Facebook PICTURE URL is: " + facebookPictureURL);
+            user.setProfilePictureURL(facebookPictureURL);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         try {
-            mFacebookFriends = object.getJSONObject("friends");
+            JSONObject facebookFriends = object.getJSONObject("friends");
 
-            JSONArray friendsObject = mFacebookFriends.getJSONArray("data");
+            JSONArray friendsObject = facebookFriends.getJSONArray("data");
             Log.i(TAG, "Facebook Friends Object is: " + friendsObject);
 
             int friendsCount = friendsObject.length();
@@ -255,12 +245,12 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public String calculateAge(String birthday) {
+    private String calculateAge(String birthday) {
 
         Calendar today = Calendar.getInstance();
         Calendar birthDate = Calendar.getInstance();
 
-        int age = 0;
+        int age;
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date convertedDate = new Date();
@@ -291,13 +281,11 @@ public class LoginFragment extends Fragment {
                 .get(Calendar.DAY_OF_MONTH))) {
             age--;
         }
-
-        String ageString = String.valueOf(age);
-        return ageString;
+        return String.valueOf(age);
 
     }
 
-    public boolean isLoggedIn() {
+    private boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
     }

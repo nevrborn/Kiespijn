@@ -8,7 +8,7 @@ import com.bnnvara.kiespijn.SingleFragmentActivity;
 
 public class FriendListActivity extends SingleFragmentActivity {
 
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FriendListActivity.class);

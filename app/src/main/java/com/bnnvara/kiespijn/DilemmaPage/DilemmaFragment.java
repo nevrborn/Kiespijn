@@ -64,8 +64,6 @@ public class DilemmaFragment extends Fragment {
     private ImageView mDilemmaFirstImageView;
     private ImageView mDilemmaSecondImageView;
 
-    // regular variables
-    private Dilemma mDilemma;
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
     private int mCurrentIndex;
@@ -162,58 +160,58 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateUi() {
-        mDilemma = mDilemmaList.get(mCurrentIndex);
+        Dilemma dilemma = mDilemmaList.get(mCurrentIndex);
 
         // do not show the current user's dilemma's
-        if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
+        if (dilemma.getCreator_fb_id().equals(mUserFbId)) {
             updateCurrentIndex();
             return;
         }
 
         // set user profile picture
-        if (mDilemma.getCreator_picture_url() != null && !mDilemma.getIsAnonymous()) {
+        if (dilemma.getCreator_picture_url() != null && !dilemma.getIsAnonymous()) {
             Glide.with(getActivity())
-                    .load(mDilemma.getCreator_picture_url())
+                    .load(dilemma.getCreator_picture_url())
                     .centerCrop()
                     .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mUserPhotoImageView);
-        } else if (mDilemma.getIsAnonymous() || mDilemma.getCreator_picture_url() == null) {
+        } else if (dilemma.getIsAnonymous() || dilemma.getCreator_picture_url() == null) {
             mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
         }
 
         // load image 1
-        mDilemmaTextView.setText(mDilemma.getTitle());
+        mDilemmaTextView.setText(dilemma.getTitle());
         Glide.with(getActivity())
-                .load(mDilemma.getPhotoA())
+                .load(dilemma.getPhotoA())
                 .centerCrop()
                 .placeholder(R.drawable.ic_action_sand_timer)
                 .into(mDilemmaFirstImageView);
 
         // load image 2
-        mDilemmaTextView.setText(mDilemma.getTitle());
+        mDilemmaTextView.setText(dilemma.getTitle());
         Glide.with(getActivity())
-                .load(mDilemma.getPhotoB())
+                .load(dilemma.getPhotoB())
                 .centerCrop()
                 .placeholder(R.drawable.ic_action_sand_timer)
                 .into(mDilemmaSecondImageView);
 
         // set creator and dilemma text
-        if (!mDilemma.getIsAnonymous()) {
-            mUserNameTextView.setText(mDilemma.getCreator_name());
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+        if (!dilemma.getIsAnonymous()) {
+            mUserNameTextView.setText(dilemma.getCreator_name());
+            mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + dilemma.getCreator_age());
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
 
             String ageToShow = "Leeftijd onbekend";
-            if (!mDilemma.getCreator_age().equals("Leeftijd onbekend")) {
-                ageToShow = mDilemma.getCreator_ageRange();
+            if (!dilemma.getCreator_age().equals("Leeftijd onbekend")) {
+                ageToShow = dilemma.getCreator_ageRange();
             }
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
+            mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + ageToShow);
         }
 
         // set image titles
-        mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
-        mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
+        mFirstImageTitleTextView.setText(dilemma.getTitlePhotoA());
+        mSecondImageTitleTextView.setText(dilemma.getTitlePhotoB());
 
     }
 
@@ -338,7 +336,7 @@ public class DilemmaFragment extends Fragment {
         mTempDilemmaList.add(dilemma);
     }
 
-    public void addTempDilemmas() {
+    private void addTempDilemmas() {
         if (mTempDilemmaList != null) {
             int i = 0;
 

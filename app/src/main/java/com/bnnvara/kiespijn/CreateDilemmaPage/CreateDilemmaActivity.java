@@ -9,7 +9,7 @@ import com.bnnvara.kiespijn.SingleFragmentActivity;
 
 public class CreateDilemmaActivity extends SingleFragmentActivity {
 
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     /*
     * create Intent to start this activity
@@ -26,5 +26,8 @@ public class CreateDilemmaActivity extends SingleFragmentActivity {
         return CreateDilemmaFragment.newInstance(dilemma);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

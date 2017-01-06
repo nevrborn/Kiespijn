@@ -5,10 +5,6 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-/**
- * Created by paulvancappelle on 08-11-16.
- */
-
 // http://www.mocky.io/
 
 public interface ApiEndpointInterface {

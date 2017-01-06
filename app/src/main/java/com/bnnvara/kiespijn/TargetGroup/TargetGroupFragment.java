@@ -1,7 +1,6 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -26,10 +26,11 @@ import java.util.List;
 public class TargetGroupFragment extends Fragment {
 
     private static final String TAG = "TargetGroupFragment";
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     private static Dilemma mDilemma;
-    Button callSomeoneButton;
+    private Button callSomeoneButton;
+    private Boolean isHasChosen = false;
 
     private static List<Integer> mListOfCallers = new ArrayList<>();
 
@@ -90,6 +91,8 @@ public class TargetGroupFragment extends Fragment {
 
         if (mDilemma != null && !mDilemma.getFirstTimeToTargetGroup()) {
 
+            isHasChosen = true;
+
             if (!mDilemma.getIsToAll()) {
                 friendsButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 friendsButton.setTextColor(getResources().getColor(R.color.colorGreen));
@@ -121,6 +124,7 @@ public class TargetGroupFragment extends Fragment {
 
                 mDilemma.setIsToAll("false");
                 mDilemma.setFirstTimeToTargetGroup(false);
+                isHasChosen = true;
 
 
             }
@@ -139,6 +143,7 @@ public class TargetGroupFragment extends Fragment {
 
                 mDilemma.setIsToAll("true");
                 mDilemma.setFirstTimeToTargetGroup(false);
+                isHasChosen = true;
             }
         });
 
@@ -158,9 +163,14 @@ public class TargetGroupFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
-                i.putExtra(DILEMMA_OBJECT, mDilemma);
-                startActivity(i);
+                if (isHasChosen) {
+                    Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
+                    i.putExtra(DILEMMA_OBJECT, mDilemma);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -184,7 +194,7 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private void setRandomCaller() {
-        int randomIndex = 1 + (int) (Math.random() * ((13 - 1) + 1));
+        int randomIndex = 1 + (int) (Math.random() * ((12 - 1) + 1));
         callSomeoneButton.setText(mListOfCallers.get(randomIndex));
     }
 

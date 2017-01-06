@@ -19,7 +19,7 @@
 
     <item
         android:id="@+id/menu_item_login"
-        android:title="Login"
+        android:title="@string/login_text"
         android:icon="@drawable/com_facebook_favicon_blue"
         app:showAsAction="ifRoom"
         />

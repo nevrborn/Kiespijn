@@ -1,8 +1,6 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;
@@ -212,7 +210,7 @@ public class Dilemma implements Serializable {
         mIsToAll = isToAll.equals("true");
     }
 
-    public Replies getReplies() {
+    private Replies getReplies() {
         return mReplies;
     }
 

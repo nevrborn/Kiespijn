@@ -1,7 +1,5 @@
 package com.bnnvara.kiespijn;
 
-import android.media.Image;
-
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 
 public class User {

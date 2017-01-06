@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Deadline.DeadlineActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -22,9 +23,10 @@ import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 public class DilemmaFromWhoFragment extends Fragment {
 
     private static final String TAG = "DilemmaFromWhoFragment";
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     private static Dilemma mDilemma;
+    private Boolean isHasChosen = false;
 
     public static DilemmaFromWhoFragment newInstance(Dilemma dilemma) {
         mDilemma = dilemma;
@@ -58,6 +60,8 @@ public class DilemmaFromWhoFragment extends Fragment {
 
         if (mDilemma != null && !mDilemma.getFirstTimeToFromWho()) {
 
+            isHasChosen = true;
+
             if (mDilemma.getIsAnonymous()) {
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
@@ -76,6 +80,7 @@ public class DilemmaFromWhoFragment extends Fragment {
             public void onClick(View view) {
                 mDilemma.setIsAnonymous("true");
                 mDilemma.setFirstTimeToFromWho(false);
+                isHasChosen = true;
 
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorGreen));
@@ -89,6 +94,7 @@ public class DilemmaFromWhoFragment extends Fragment {
             public void onClick(View view) {
                 mDilemma.setIsAnonymous("false");
                 mDilemma.setFirstTimeToFromWho(false);
+                isHasChosen = true;
 
                 anonymousButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 anonymousButton.setTextColor(getResources().getColor(R.color.colorYellow));
@@ -100,9 +106,14 @@ public class DilemmaFromWhoFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = DeadlineActivity.newIntent(getActivity());
-                i.putExtra(DILEMMA_OBJECT, mDilemma);
-                startActivity(i);
+                if (isHasChosen) {
+                    Intent i = DeadlineActivity.newIntent(getActivity());
+                    i.putExtra(DILEMMA_OBJECT, mDilemma);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

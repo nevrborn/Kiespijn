@@ -13,8 +13,7 @@ public class PersonalPageActivity extends SingleFragmentActivity {
     * create Intent to start this activity
     */
     public static Intent newIntent(Context context) {
-        Intent i = new Intent(context, PersonalPageActivity.class);
-        return i;
+        return new Intent(context, PersonalPageActivity.class);
     }
 
 

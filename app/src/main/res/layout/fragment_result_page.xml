@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:backgroundTint="@android:color/black"
     tools:context="com.bnnvara.kiespijn.ResultPage.ResultActivity">
 
     <TextView
@@ -19,4 +20,44 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/text_view_test"
         tools:text="TEST!"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="fill_horizontal"
+        >
+
+    <SeekBar
+        android:id="@+id/seekBar_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_marginBottom="20dp"
+        android:progressTint="@color/colorRed"
+        android:thumbTint="@color/colorRed"
+        android:progressBackgroundTint="@color/colorGrey"
+        android:layoutDirection="rtl"
+        android:progress="70"
+        android:max="100"
+        android:paddingStart="8dp"
+        />
+
+    <SeekBar
+        android:id="@+id/seekBar_question2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_marginBottom="20dp"
+        android:progressTint="@color/colorLightGreen"
+        android:thumbTint="@color/colorLightGreen"
+        android:progressBackgroundTint="@color/colorGrey"
+        android:layoutDirection="ltr"
+        android:progress="25"
+        android:max="100"
+        android:paddingStart="8dp"
+        />
+
+    </LinearLayout>
+
 </RelativeLayout>

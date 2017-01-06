@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
@@ -31,6 +33,7 @@ public class ResultFragment extends Fragment {
 
     // Views
     TextView mTest;
+    SeekBar mSeekBarLeft;
 
     // Regular variables
     Dilemma mDilemma;
@@ -59,9 +62,15 @@ public class ResultFragment extends Fragment {
 
         // set up the references
         mTest = (TextView) view.findViewById(R.id.text_view_test);
+        mSeekBarLeft = (SeekBar) view.findViewById(R.id.seekBar_question);
 
         // set up the listeners
-
+        mSeekBarLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
 
         updateUi();
         return view;

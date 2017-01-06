@@ -27,7 +27,7 @@
     // TARGET GROUP SCREEN
     <string name="targetgroup_title">VRAAG HET AAN</string>
     <string name="targetgroup_friends">VRIENDEN</string>
-    <string name="targetgroup_everyone">IDEREEN</string>
+    <string name="targetgroup_everyone">IEDEREEN</string>
     <string name="targetgroup_profile">Profile</string>
     <string name="button_next">VOLGENDE STAP!</string>
     <string name="create_dilemma">Nieuw dilemma</string>

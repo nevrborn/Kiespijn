@@ -346,8 +346,11 @@ public class CreateDilemmaFragment extends Fragment {
 
     public Boolean isFieldsFilledIn() {
 
-        return !mDilemma.getTitle().equals("") && !mDilemma.getTitlePhotoA().equals("") && !mDilemma.getTitlePhotoB().equals("");
-
+        if (mDilemma.getTitle() == null || mDilemma.getTitlePhotoA() == null || mDilemma.getTitlePhotoB() == null || mDilemma.getPhotoA() == null || mDilemma.getPhotoB() == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public static Bitmap getBitmapFromURL(String src) {

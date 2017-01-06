@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
@@ -29,6 +30,7 @@ public class DeadlineFragment extends Fragment {
 
     private static Dilemma mDilemma;
     private int mDeadline;
+    Boolean isHasChosen = false;
 
     public static DeadlineFragment newInstance(Dilemma dilemma) {
         mDilemma = dilemma;
@@ -66,6 +68,7 @@ public class DeadlineFragment extends Fragment {
 
         if (mDilemma.getDeadline() != 0) {
 
+            isHasChosen = true;
             long deadline = (mDilemma.getDeadline() - mDilemma.getCreatedAt()) * 1000L;
             long timeToAdd = deadline / 3600000;
             mDeadline = (int) timeToAdd;
@@ -105,6 +108,7 @@ public class DeadlineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mDeadline = 2;
+                isHasChosen = true;
 
                 hourButton1.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 hourButton1.setTextColor(getResources().getColor(R.color.colorGreen));
@@ -119,6 +123,7 @@ public class DeadlineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mDeadline = 12;
+                isHasChosen = true;
 
                 hourButton1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 hourButton1.setTextColor(getResources().getColor(R.color.colorYellow));
@@ -133,6 +138,7 @@ public class DeadlineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mDeadline = 24;
+                isHasChosen = true;
 
                 hourButton1.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 hourButton1.setTextColor(getResources().getColor(R.color.colorYellow));
@@ -147,10 +153,16 @@ public class DeadlineFragment extends Fragment {
         postDilemmaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postDilemma();
-                Intent i = DilemmaActivity.newIntent(getActivity());
-                startActivity(i);
-                getActivity().finish();
+                if (isHasChosen == true) {
+                    postDilemma();
+                    Intent i = DilemmaActivity.newIntent(getActivity());
+                    startActivity(i);
+                    getActivity().finish();
+                } else {
+                    Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

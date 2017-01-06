@@ -39,9 +39,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by paulvancappelle on 20-12-16.
- */
 public class PersonalPageFragment extends Fragment {
 
     // constants
@@ -69,8 +66,7 @@ public class PersonalPageFragment extends Fragment {
 
 
     public static PersonalPageFragment newInstance() {
-        PersonalPageFragment personalPageFragment = new PersonalPageFragment();
-        return personalPageFragment;
+        return new PersonalPageFragment();
     }
 
     @Override
@@ -195,8 +191,6 @@ public class PersonalPageFragment extends Fragment {
         for (Dilemma dilemma: mDilemmaList){
 
             // determine timeLeft of the dilemma
-            long now = System.currentTimeMillis() / 1000L;
-            long deadline = dilemma.getDeadline();
             boolean isRunning = dilemma.getDeadline() > (System.currentTimeMillis() / 1000L);
             int timeLeft = (int) ((dilemma.getDeadline() - (System.currentTimeMillis() / 1000L) ) / 1000);
             dilemma.setTimeLeft(timeLeft);
@@ -206,12 +200,11 @@ public class PersonalPageFragment extends Fragment {
 
             if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning) {
                 mMyRunningDilemmaList.add(dilemma);
-            }
-            else if (dilemma.getCreator_fb_id().equals(mUserFbId) && isRunning == false){
+            } else if (dilemma.getCreator_fb_id().equals(mUserFbId) && !isRunning) {
                 mMyClosedDilemmaList.add(dilemma);
             } else if (isAnsweredByCurrentUser && isRunning){
                 mOthersRunningDilemmaList.add(dilemma);
-            } else if (isAnsweredByCurrentUser && isRunning == false){
+            } else if (isAnsweredByCurrentUser && !isRunning) {
                 mOthersClosedDilemmaList.add(dilemma);
             } else {
                 Log.i("dilemma", "kansloos");
@@ -254,7 +247,7 @@ public class PersonalPageFragment extends Fragment {
                 }
 
                 holder.mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + ageToShow);
-                holder.mUserNameTextView.setText("Anoniem");
+                holder.mUserNameTextView.setText(R.string.anonymous);
             } else {
                 holder.mUserDescriptionTextView.setText(
                         dilemma.getCreator_sex() + " | " + dilemma.getCreator_age());
@@ -267,7 +260,7 @@ public class PersonalPageFragment extends Fragment {
                 holder.mTimeLeftTextView.setText("---");
                 holder.mTimeLeftTextView.setTextColor(getResources().getColor(R.color.colorRed));
             } else if (dilemma.getTimeLeft() == 1){
-                holder.mTimeLeftTextView.setText("1 uur");
+                holder.mTimeLeftTextView.setText(R.string.time_left_1_hour);
             } else {
                 holder.mTimeLeftTextView.setText(dilemma.getTimeLeft() + " uren");
             }

@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     @LayoutRes
-    int getLayoutResId() {
+    private int getLayoutResId() {
         return R.layout.activity_fragment;
     }
 

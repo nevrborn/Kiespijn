@@ -1,7 +1,5 @@
 package com.bnnvara.kiespijn.GoogleImageSearch;
 
-import android.net.Uri;
-
 import com.google.gson.annotations.SerializedName;
 
 

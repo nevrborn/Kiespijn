@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,14 +33,11 @@ import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -51,22 +47,17 @@ public class CreateDilemmaFragment extends Fragment {
 
     private static final String TAG = "CreateDilemmaFragment";
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_IMAGE_GALLERY = 2;
-    static final String DILEMMA_OBJECT = "dilemma_object";
-    static final String SEARCH_STRING = "search_string";
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_GALLERY = 2;
+    private static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String SEARCH_STRING = "search_string";
     private static final String GOOGLE_IMAGE_URL = "google_image_url";
-    static final int GOOGLE_IMAGE = 3;
+    private static final int GOOGLE_IMAGE = 3;
 
-    // views
-    private EditText mDilemmaTitle;
     private EditText mOptionAText;
     private EditText mOptionBText;
     private ImageView mImageViewA;
     private ImageView mImageViewB;
-    private Bitmap mImageA;
-    private Bitmap mImageB;
-    private Button mNextButton;
     private Boolean isImageA = true;
     public static Boolean isFromCamera = false;
 
@@ -95,30 +86,30 @@ public class CreateDilemmaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_dilemma, container, false);
 
         // set up the references
-        mDilemmaTitle = (EditText) view.findViewById(R.id.text_view_dilemma_title);
+        EditText dilemmaTitle = (EditText) view.findViewById(R.id.text_view_dilemma_title);
         mOptionAText = (EditText) view.findViewById(R.id.edit_text_option_1);
         mOptionBText = (EditText) view.findViewById(R.id.edit_text_option_2);
         mImageViewA = (ImageView) view.findViewById(R.id.image_view_option_1_take_picture);
         mImageViewB = (ImageView) view.findViewById(R.id.image_view_option_2_take_picture);
-        mNextButton = (Button) view.findViewById(R.id.button_next_create_dilemma);
+        Button nextButton = (Button) view.findViewById(R.id.button_next_create_dilemma);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
         Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
-        mDilemmaTitle.setTypeface(source_sans_bold);
+        dilemmaTitle.setTypeface(source_sans_bold);
         mOptionAText.setTypeface(source_sans_extra_light);
         mOptionBText.setTypeface(source_sans_extra_light);
 
         if (mDilemma != null) {
             if (mDilemma.getPhotoA() != null && mDilemma.getPhotoB() != null) {
-                    mDilemmaTitle.setText(mDilemma.getTitle());
+                dilemmaTitle.setText(mDilemma.getTitle());
                     mOptionAText.setText(mDilemma.getTitlePhotoA());
                     mOptionBText.setText(mDilemma.getTitlePhotoB());
 
                 if (mDilemma.getPhotoA().contains("http")) {
                     isImageA = true;
                     GetBitmapAFromURLAsync getBitmapAFromURLAsync = new GetBitmapAFromURLAsync();
-                    getBitmapAFromURLAsync.execute(mDilemma.getPhotoA().toString());
+                    getBitmapAFromURLAsync.execute(mDilemma.getPhotoA());
                 } else {
                     mImageViewA.setImageURI(Uri.parse(mDilemma.getPhotoA()));
                 }
@@ -126,7 +117,7 @@ public class CreateDilemmaFragment extends Fragment {
                 if (mDilemma.getPhotoB().contains("http")) {
                     isImageA = false;
                     GetBitmapBFromURLAsync getBitmapBFromURLAsync = new GetBitmapBFromURLAsync();
-                    getBitmapBFromURLAsync.execute(mDilemma.getPhotoB().toString());
+                    getBitmapBFromURLAsync.execute(mDilemma.getPhotoB());
                 } else {
                     mImageViewB.setImageURI(Uri.parse(mDilemma.getPhotoB()));
                 }
@@ -135,7 +126,7 @@ public class CreateDilemmaFragment extends Fragment {
         }
 
         // set up the listeners
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -150,7 +141,7 @@ public class CreateDilemmaFragment extends Fragment {
             }
         });
 
-        mDilemmaTitle.addTextChangedListener(new TextWatcher() {
+        dilemmaTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // leave blank
@@ -254,7 +245,7 @@ public class CreateDilemmaFragment extends Fragment {
         builder.show();
     }
 
-    public boolean hasCameraSupport() {
+    private boolean hasCameraSupport() {
         boolean hasSupport = false;
         if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             hasSupport = true;
@@ -274,20 +265,22 @@ public class CreateDilemmaFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bitmap imageA;
+        Bitmap imageB;
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             if (isImageA) {
-                mImageA = imageBitmap;
-                mImageViewA.setImageBitmap(mImageA);
-                String imageAUri = getImageUri(getContext(), mImageA).toString();
+                imageA = imageBitmap;
+                mImageViewA.setImageBitmap(imageA);
+                String imageAUri = getImageUri(getContext(), imageA).toString();
                 mDilemma.setPhotoA(imageAUri);
                 Log.i(TAG, imageAUri);
             } else {
-                mImageB = imageBitmap;
-                mImageViewB.setImageBitmap(mImageB);
-                String imageBUri = getImageUri(getContext(), mImageB).toString();
+                imageB = imageBitmap;
+                mImageViewB.setImageBitmap(imageB);
+                String imageBUri = getImageUri(getContext(), imageB).toString();
                 mDilemma.setPhotoB(imageBUri);
                 Log.i(TAG, imageBUri);
             }
@@ -310,12 +303,12 @@ public class CreateDilemmaFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
             if (isImageA) {
-                mImageA = bitmap;
+                imageA = bitmap;
                 mImageViewA.setImageBitmap(bitmap);
                 mDilemma.setPhotoA(selectedImage.toString());
                 Log.i(TAG, selectedImage.toString());
             } else {
-                mImageB = bitmap;
+                imageB = bitmap;
                 mImageViewB.setImageBitmap(bitmap);
                 mDilemma.setPhotoB(selectedImage.toString());
                 Log.i(TAG, selectedImage.toString());
@@ -331,29 +324,25 @@ public class CreateDilemmaFragment extends Fragment {
 
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+    private Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
 
-    public void galleryIntent() {
+    private void galleryIntent() {
         Intent i = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, REQUEST_IMAGE_GALLERY);
     }
 
-    public Boolean isFieldsFilledIn() {
+    private Boolean isFieldsFilledIn() {
 
-        if (mDilemma.getTitle() == null || mDilemma.getTitlePhotoA() == null || mDilemma.getTitlePhotoB() == null || mDilemma.getPhotoA() == null || mDilemma.getPhotoB() == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(mDilemma.getTitle() == null || mDilemma.getTitlePhotoA() == null || mDilemma.getTitlePhotoB() == null || mDilemma.getPhotoA() == null || mDilemma.getPhotoB() == null);
     }
 
-    public static Bitmap getBitmapFromURL(String src) {
+    private static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

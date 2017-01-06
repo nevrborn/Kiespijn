@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by paulvancappelle on 15-12-16.
- */
 public class Replies implements Serializable{
 
     @SerializedName("optionA")

@@ -9,7 +9,7 @@ import com.bnnvara.kiespijn.SingleFragmentActivity;
 
 public class GoogleSearchActivity extends SingleFragmentActivity {
 
-    static final String SEARCH_STRING = "search_string";
+    private static final String SEARCH_STRING = "search_string";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, GoogleSearchActivity.class);

@@ -23,10 +23,10 @@ import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 public class DilemmaFromWhoFragment extends Fragment {
 
     private static final String TAG = "DilemmaFromWhoFragment";
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     private static Dilemma mDilemma;
-    Boolean isHasChosen = false;
+    private Boolean isHasChosen = false;
 
     public static DilemmaFromWhoFragment newInstance(Dilemma dilemma) {
         mDilemma = dilemma;
@@ -106,7 +106,7 @@ public class DilemmaFromWhoFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isHasChosen == true) {
+                if (isHasChosen) {
                     Intent i = DeadlineActivity.newIntent(getActivity());
                     i.putExtra(DILEMMA_OBJECT, mDilemma);
                     startActivity(i);

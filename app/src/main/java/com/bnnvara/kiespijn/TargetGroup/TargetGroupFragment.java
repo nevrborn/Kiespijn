@@ -1,7 +1,6 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,11 +26,11 @@ import java.util.List;
 public class TargetGroupFragment extends Fragment {
 
     private static final String TAG = "TargetGroupFragment";
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     private static Dilemma mDilemma;
-    Button callSomeoneButton;
-    Boolean isHasChosen = false;
+    private Button callSomeoneButton;
+    private Boolean isHasChosen = false;
 
     private static List<Integer> mListOfCallers = new ArrayList<>();
 
@@ -164,7 +163,7 @@ public class TargetGroupFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isHasChosen == true) {
+                if (isHasChosen) {
                     Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
                     i.putExtra(DILEMMA_OBJECT, mDilemma);
                     startActivity(i);

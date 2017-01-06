@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +25,11 @@ import com.bnnvara.kiespijn.User;
 public class DeadlineFragment extends Fragment {
 
     private static final String TAG = "DeadlineFragment";
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     private static Dilemma mDilemma;
     private int mDeadline;
-    Boolean isHasChosen = false;
+    private Boolean isHasChosen = false;
 
     public static DeadlineFragment newInstance(Dilemma dilemma) {
         mDilemma = dilemma;
@@ -153,7 +152,7 @@ public class DeadlineFragment extends Fragment {
         postDilemmaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isHasChosen == true) {
+                if (isHasChosen) {
                     postDilemma();
                     Intent i = DilemmaActivity.newIntent(getActivity());
                     startActivity(i);

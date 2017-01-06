@@ -9,7 +9,7 @@ import com.bnnvara.kiespijn.SingleFragmentActivity;
 
 public class CreateDilemmaActivity extends SingleFragmentActivity {
 
-    static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final String DILEMMA_OBJECT = "dilemma_object";
 
     /*
     * create Intent to start this activity

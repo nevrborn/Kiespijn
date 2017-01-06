@@ -17,9 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 
-import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaFragment;
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -27,7 +25,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -97,7 +94,7 @@ public class GoogleSearchFragment extends Fragment {
         return view;
     }
 
-    public void getImages() {
+    private void getImages() {
 
 
         String key = "AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4";

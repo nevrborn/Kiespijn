@@ -4,16 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by paulvancappelle on 19-12-16.
- */
-public class Dilemmas {
+class Dilemmas {
 
     @SerializedName("dilemma")
     private List<Dilemma> mDilemmaList;
 
 
-    public List<Dilemma> getDilemmaList() {
+    List<Dilemma> getDilemmaList() {
         return mDilemmaList;
     }
 

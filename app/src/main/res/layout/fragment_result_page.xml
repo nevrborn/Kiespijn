@@ -27,7 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:layout_marginRight="8dp"
+            android:padding="4dp"
+            android:gravity="center"
+            android:textAlignment="gravity"
             android:background="@color/colorYellow"
             android:text="Opie A AAA AAAA"
             android:textColor="@color/colorGreen"
@@ -39,11 +41,12 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:layout_marginLeft="8dp"
-            android:gravity="right"
+            android:padding="4dp"
+            android:gravity="center"
+            android:textAlignment="gravity"
             android:background="@color/colorYellow"
             android:text="Optie B BBB BBBB"
             android:textColor="@color/colorGreen"
-            android:textAlignment="gravity"
             />
 
     </LinearLayout>
@@ -445,6 +448,7 @@
             android:background="@color/colorGreen"
             android:layout_marginRight="8dp"
             android:text="Bijgevoegde informatie"
+            android:textColor="@android:color/white"
             />
 
         <Button
@@ -454,6 +458,7 @@
             android:background="@color/colorGreen"
             android:layout_marginLeft="8dp"
             android:text="Bijgevoegde informatie"
+            android:textColor="@android:color/white"
             />
 
     </LinearLayout>

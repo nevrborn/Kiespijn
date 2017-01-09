@@ -40,7 +40,7 @@
             android:textColor="@color/colorGreen"
             android:textColorHint="@color/colorGreen"
             android:textSize="14sp"
-            />
+            android:inputType="textCapSentences"/>
 
 
         <LinearLayout
@@ -62,7 +62,8 @@
                 android:padding="8dp"
                 android:textColor="@color/colorYellow"
                 android:textColorHint="@color/colorYellow"
-                android:textStyle="normal|bold"/>
+                android:textStyle="normal|bold"
+                android:inputType="textCapSentences"/>
 
             <EditText
                 android:id="@+id/edit_text_option_2"
@@ -76,7 +77,8 @@
                 android:hint="@string/title_hint_2"
                 android:padding="8dp"
                 android:textColorHint="@color/colorYellow"
-                android:textStyle="normal|bold"/>
+                android:textStyle="normal|bold"
+                android:inputType="textCapSentences"/>
 
         </LinearLayout>
 

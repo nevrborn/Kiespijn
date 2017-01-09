@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:padding="8dp"
+                android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearlayout_add_content_top"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:weightSum="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview_add_content_dilemma"
+            android:text="@string/dilemma_main_text"
+            android:layout_width="match_parent"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorGreen"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/textview_add_content_answer"
+            android:text="Begraven"
+            android:padding="8dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorGreen"
+            android:background="@color/colorYellow"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edittext_add_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:inputType="textCapSentences|textMultiLine"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/add_content_hint"
+            android:ems="10"
+            android:background="@android:color/white"
+            android:gravity="top|center_vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/textView_add_media"
+            android:text="@string/add_content_media"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="0.9"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_add_photo"
+                android:text="Camera"
+                android:layout_weight="0.3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/button_add_gallery"
+                android:text="GALLERY"
+                android:layout_weight="0.3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/button_add_google"
+                android:text="GOOGLE"
+                android:layout_weight="0.3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/button_add_article"
+            android:text="Article / Link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_add_content_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="CANCEL"
+                android:textSize="18sp"
+                android:layout_marginRight="5dp"
+                android:textColor="@android:color/white"
+                android:background="@color/colorRed"
+                />
+
+            <Button
+                android:id="@+id/button_add_content"
+                android:text="VOEG TOE"
+                android:background="@color/colorGreen"
+                android:textColor="@color/colorYellow"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

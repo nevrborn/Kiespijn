@@ -12,11 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bnnvara.kiespijn.AddContentPage.AddContentActivity;
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Answer;
@@ -52,6 +54,7 @@ public class DilemmaFragment extends Fragment {
     private static final String TAG = DilemmaFragment.class.getSimpleName();
     private static final String DILEMMA_OBJECT = "dilemma_object";
     private static final String LOGGING_OUT = "logging_out";
+    private static final String DILEMMA_ANSWER_ADD_CONTENT = "answer_add_content";
 
     // Views
     private ImageView mUserPhotoImageView;
@@ -63,6 +66,8 @@ public class DilemmaFragment extends Fragment {
     private LinearLayout mNoDilemmasTextView;
     private ImageView mDilemmaFirstImageView;
     private ImageView mDilemmaSecondImageView;
+    private Button mDilemmaFirstAddContent;
+    private Button mDilemmaSecondAddContent;
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
@@ -101,6 +106,8 @@ public class DilemmaFragment extends Fragment {
         mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
+        mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
+        mDilemmaSecondAddContent = (Button) view.findViewById(R.id.button_add_content_second);
 
         filterSwitch.setChecked(true);
 
@@ -128,6 +135,20 @@ public class DilemmaFragment extends Fragment {
                     // view all dilemmas
                     resetCurrentIndex();
                 }
+            }
+        });
+
+        mDilemmaFirstAddContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addContentIntent(1);
+            }
+        });
+
+        mDilemmaSecondAddContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addContentIntent(2);
             }
         });
 
@@ -345,6 +366,24 @@ public class DilemmaFragment extends Fragment {
                 i += 1;
             }
         }
+    }
+
+    private void addContentIntent(int answer) {
+        Dilemma dilemma = mDilemmaList.get(mCurrentIndex);
+
+        String uuid = dilemma.getUuid();
+        String optionChosen = "";
+
+        if (answer == 1) {
+            optionChosen = "optionA";
+        } else if (answer == 2) {
+            optionChosen = "optionB";
+        }
+
+        Intent i = new Intent(AddContentActivity.newIntent(getContext()));
+        i.putExtra(DILEMMA_OBJECT, dilemma);
+        i.putExtra(DILEMMA_ANSWER_ADD_CONTENT, optionChosen);
+        startActivity(i);
     }
 
 

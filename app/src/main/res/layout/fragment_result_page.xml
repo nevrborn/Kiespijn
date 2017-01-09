@@ -24,23 +24,89 @@
 
         <TextView
             android:id="@+id/text_view_result_answer_A"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:layout_marginRight="8dp"
-            android:background="@color/colorRed"
+            android:background="@color/colorYellow"
             android:text="Opie A AAA AAAA"
+            android:textColor="@color/colorGreen"
             />
 
         <TextView
             android:id="@+id/text_view_result_answer_B"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:layout_marginLeft="8dp"
             android:gravity="right"
-            android:background="@color/colorLightGreen"
+            android:background="@color/colorYellow"
             android:text="Optie B BBB BBBB"
+            android:textColor="@color/colorGreen"
+            android:textAlignment="gravity"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_results_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Resultaat van alle stemmen"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="fill_horizontal"
+        >
+
+        <TextView
+            android:id="@+id/text_view_result_total_left"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:text="63%"
+            android:textStyle="bold"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar_men_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="0.5"
+            android:layoutDirection="rtl"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="63"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorRed"
+            android:thumbTint="@color/colorRed"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_men_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layoutDirection="ltr"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="37"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorLightGreen"
+            android:thumbTint="@color/colorLightGreen"/>
+
+        <TextView
+            android:id="@+id/text_view_result_total_right"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="37%"
+            android:textStyle="bold"
             android:textAlignment="gravity"
             />
 
@@ -172,7 +238,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <TableLayout
             android:layout_width="match_parent"
@@ -362,6 +429,36 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_weight="1.0">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/colorGreen"
+            android:layout_marginRight="8dp"
+            android:text="Bijgevoegde informatie"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/colorGreen"
+            android:layout_marginLeft="8dp"
+            android:text="Bijgevoegde informatie"
+            />
 
     </LinearLayout>
+
+</LinearLayout>

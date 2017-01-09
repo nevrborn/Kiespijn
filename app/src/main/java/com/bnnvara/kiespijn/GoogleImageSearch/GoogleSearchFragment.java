@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +46,7 @@ public class GoogleSearchFragment extends Fragment {
     private String mChosenURL;
     private List<CheckBox> mRadioButtonList;
     private List<ImageView> mImageViewList;
+    private android.widget.SearchView mSearchView;
 
     public static GoogleSearchFragment newInstance(String searchString) {
         mSearchString = searchString;
@@ -67,6 +69,7 @@ public class GoogleSearchFragment extends Fragment {
         inflater.inflate(R.menu.menu_google_search, menu);
 
         MenuItem useImage = menu.findItem(R.id.menu_google_search_use);
+        MenuItem newSearch = menu.findItem(R.id.menu_google_search);
 
         useImage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -81,6 +84,16 @@ public class GoogleSearchFragment extends Fragment {
             }
         });
 
+        newSearch.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                mSearchView.setVisibility(View.VISIBLE);
+
+                return false;
+            }
+        });
+
     }
 
     @Nullable
@@ -90,6 +103,18 @@ public class GoogleSearchFragment extends Fragment {
 
         mPhotoRecylerView = (RecyclerView) view.findViewById(R.id.fragment_photo_gallery_recycler_view);
         mPhotoRecylerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        ;
+        mSearchView = (android.widget.SearchView) view.findViewById(R.id.google_search_view);
+
+        mSearchView.setVisibility(View.GONE);
+
+        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSearchString = mSearchView.getQuery().toString();
+                getImages();
+            }
+        });
 
         return view;
     }

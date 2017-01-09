@@ -69,6 +69,11 @@
     <string name="image_title">image title</string>
     <string name="not_all_fields_filled">Niet alle velden zijn gevuld</string>
     <string name="use_image">Gebruik photo</string>
+    <string name="add_content">Voeg inhoud toe +</string>
+
+    // ADD CONTENT SCREEN
+    <string name="add_content_hint">Waar denk je aan?</string>
+    <string name="add_content_media">Voeg media toe</string>
 
 
 </resources>

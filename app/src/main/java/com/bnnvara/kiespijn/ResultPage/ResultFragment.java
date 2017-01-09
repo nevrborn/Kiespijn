@@ -30,7 +30,7 @@ public class ResultFragment extends Fragment {
 
     // Views
     private TextView mTest;
-    private SeekBar mSeekBarLeft;
+    private SeekBar mSeekBarMenLeft;
 
     // Regular variables
     private Dilemma mDilemma;
@@ -58,11 +58,11 @@ public class ResultFragment extends Fragment {
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
 
         // set up the references
-        mTest = (TextView) view.findViewById(R.id.text_view_test);
-        mSeekBarLeft = (SeekBar) view.findViewById(R.id.seekBar_question);
+        mTest = (TextView) view.findViewById(R.id.text_view_results_men);
+        mSeekBarMenLeft = (SeekBar) view.findViewById(R.id.seekBar_men_left);
 
         // set up the listeners
-        mSeekBarLeft.setOnTouchListener(new View.OnTouchListener() {
+        mSeekBarMenLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;

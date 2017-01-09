@@ -67,37 +67,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="0.9"
+            android:weightSum="1"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button_add_photo"
-                android:text="Camera"
-                android:layout_weight="0.3"
+                android:text="FOTO"
+                android:layout_weight="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/button_add_gallery"
                 android:text="GALLERY"
-                android:layout_weight="0.3"
+                android:layout_weight="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/button_add_google"
-                android:text="GOOGLE"
-                android:layout_weight="0.3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/button_add_google"
+            android:text="GOOGLE IMAGE SEARCH"
+            android:layout_weight="0.3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/button_add_article"
-            android:text="Article / Link"
+            android:text="Link article / blog / fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />

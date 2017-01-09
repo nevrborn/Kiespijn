@@ -16,135 +16,352 @@
     <include layout="@layout/dilemma_viewholder"/>
 
     <LinearLayout
-        android:id="@+id/linear_layout_results_sex"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.0"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:gravity="fill_horizontal"
+        android:layout_marginBottom="24dp"
         >
 
         <TextView
-            android:id="@+id/text_view_results_men"
+            android:id="@+id/text_view_result_answer_A"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="mannen (18)"
+            android:layout_weight="0.5"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorRed"
+            android:text="Opie A AAA AAAA"
             />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="fill_horizontal"
-            >
-
-            <TextView
-                android:id="@+id/text_view_result_men_left"
-                android:layout_width="34dp"
-                android:layout_height="wrap_content"
-                android:text="75%"
-                />
-
-            <SeekBar
-                android:id="@+id/seekBar_men_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_weight="0.5"
-                android:layoutDirection="rtl"
-                android:max="100"
-                android:paddingStart="8dp"
-                android:progress="75"
-                android:progressBackgroundTint="@color/colorGrey"
-                android:progressTint="@color/colorRed"
-                android:thumbTint="@color/colorRed"
-                android:paddingLeft="8dp"/>
-
-            <SeekBar
-                android:id="@+id/seekBar_men_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:layoutDirection="ltr"
-                android:max="100"
-                android:paddingStart="8dp"
-                android:progress="25"
-                android:progressBackgroundTint="@color/colorGrey"
-                android:progressTint="@color/colorLightGreen"
-                android:thumbTint="@color/colorLightGreen"
-                android:paddingLeft="8dp"/>
-
-            <TextView
-                android:id="@+id/text_view_result_men_right"
-                android:layout_width="34dp"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textAlignment="gravity"
-                android:text="25%"
-                />
-
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/text_view_results_women"
+            android:id="@+id/text_view_result_answer_B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Vrouwen (26)"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="8dp"
+            android:gravity="right"
+            android:background="@color/colorLightGreen"
+            android:text="Optie B BBB BBBB"
+            android:textAlignment="gravity"
             />
 
-        <LinearLayout
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_results_men"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Mannen (18)"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="fill_horizontal"
+        >
+
+        <TextView
+            android:id="@+id/text_view_result_men_left"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:text="75%"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar_men_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.5"
+            android:layoutDirection="rtl"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="75"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorRed"
+            android:thumbTint="@color/colorRed"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_men_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layoutDirection="ltr"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="25"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorLightGreen"
+            android:thumbTint="@color/colorLightGreen"/>
+
+        <TextView
+            android:id="@+id/text_view_result_men_right"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="25%"
+            android:textAlignment="gravity"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_results_women"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Vrouwen (26)"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="fill_horizontal"
+        >
+
+        <TextView
+            android:id="@+id/text_view_result_women_left"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:text="55%"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar_women_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="0.5"
+            android:layoutDirection="rtl"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="55"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorRed"
+            android:thumbTint="@color/colorRed"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_women_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layoutDirection="ltr"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="45"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorLightGreen"
+            android:thumbTint="@color/colorLightGreen"/>
+
+        <TextView
+            android:id="@+id/text_view_result_women_right"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="45%"
+            android:textAlignment="gravity"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="fill_horizontal"
+            android:layout_weight="0.5"
+            android:stretchColumns="*"
             >
 
-            <TextView
-                android:id="@+id/text_view_result_women_left"
-                android:layout_width="34dp"
-                android:layout_height="wrap_content"
-                android:text="75%"
-                />
+            <TableRow>
 
-            <SeekBar
-                android:id="@+id/seekBar_women_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_weight="0.5"
-                android:layoutDirection="rtl"
-                android:max="100"
-                android:paddingStart="8dp"
-                android:progress="55"
-                android:progressBackgroundTint="@color/colorGrey"
-                android:progressTint="@color/colorRed"
-                android:thumbTint="@color/colorRed"
-                android:paddingLeft="8dp"/>
+                <TextView
+                    android:text="Leeftijd"
+                    android:textStyle="bold"
+                    />
 
-            <SeekBar
-                android:id="@+id/seekBar_women_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:layoutDirection="ltr"
-                android:max="100"
-                android:paddingStart="8dp"
-                android:progress="45"
-                android:progressBackgroundTint="@color/colorGrey"
-                android:progressTint="@color/colorLightGreen"
-                android:thumbTint="@color/colorLightGreen"
-                android:paddingLeft="8dp"/>
+                <TextView
+                    android:text="Aantal"
+                    android:textStyle="bold"
+                    />
 
-            <TextView
-                android:id="@+id/text_view_result_women_right"
-                android:layout_width="34dp"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textAlignment="gravity"
-                android:text="25%"
-                />
+                <TextView
+                    android:text="%"
+                    android:textStyle="bold"
+                    />
+            </TableRow>
 
-        </LinearLayout>
+            <TableRow>
+
+                <TextView
+                    android:text="0   - 12"
+                    />
+
+                <TextView
+                    android:text="2"
+                    />
+
+                <TextView
+                    android:text="0%"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="13 - 20"
+                    />
+
+                <TextView
+                    android:text="31"
+                    />
+
+                <TextView
+                    android:text="71%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="21 - 35"
+                    />
+
+                <TextView
+                    android:text="8"
+                    />
+
+                <TextView
+                    android:text="88%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="35+"
+                    />
+
+                <TextView
+                    android:text="3"
+                    />
+
+                <TextView
+                    android:text="67%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+        </TableLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorYellow">
+        </View>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:stretchColumns="*"
+            >
+
+            <TableRow>
+
+                <TextView
+                    android:text="Leeftijd"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="Aantal"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="%"
+                    android:textStyle="bold"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="0   - 12"
+                    />
+
+                <TextView
+                    android:text="2"
+                    />
+
+                <TextView
+                    android:text="100%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="13 - 20"
+                    />
+
+                <TextView
+                    android:text="31"
+                    />
+
+                <TextView
+                    android:text="29%"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="21 - 35"
+                    />
+
+                <TextView
+                    android:text="8"
+                    />
+
+                <TextView
+                    android:text="12%"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="35+"
+                    />
+
+                <TextView
+                    android:text="3"
+                    />
+
+                <TextView
+                    android:text="33%"
+                    />
+            </TableRow>
+
+        </TableLayout>
 
     </LinearLayout>
 
 </LinearLayout>
+
+    </LinearLayout>

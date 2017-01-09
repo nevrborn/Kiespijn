@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -29,8 +30,20 @@ public class ResultFragment extends Fragment {
     private static final String LOGGING_OUT = "logging_out";
 
     // Views
-    private TextView mTest;
-    private SeekBar mSeekBarLeft;
+    private ImageView mUserPhotoImageView;
+    private ImageView mClockImageView;
+    private TextView mUserNameTextView;
+    private TextView mUserDescriptionTextView;
+    private TextView mDilemmaTextView;
+    private TextView mTimeLeftTextView;
+    private TextView mAnswerATextView;
+    private TextView mAnswerBTextView;
+    private SeekBar mSeekBarTotalLeft;
+    private SeekBar mSeekBarTotalRight;
+    private SeekBar mSeekBarMenLeft;
+    private SeekBar mSeekBarMenRight;
+    private SeekBar mSeekBarWomenLeft;
+    private SeekBar mSeekBarWomenRight;
 
     // Regular variables
     private Dilemma mDilemma;
@@ -58,11 +71,53 @@ public class ResultFragment extends Fragment {
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
 
         // set up the references
-        mTest = (TextView) view.findViewById(R.id.text_view_test);
-        mSeekBarLeft = (SeekBar) view.findViewById(R.id.seekBar_question);
+        mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo_personal_page);
+        mClockImageView = (ImageView) view.findViewById(R.id.image_view_clock);
+        mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username_personal_page);
+        mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_user_info_personal_page);
+        mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma_personal_page);
+        mTimeLeftTextView = (TextView) view.findViewById(R.id.text_view_time_left);
+        mAnswerATextView = (TextView) view.findViewById(R.id.text_view_result_answer_A);
+        mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
+        mSeekBarTotalLeft = (SeekBar) view.findViewById(R.id.seekBar_total_left);
+        mSeekBarTotalRight = (SeekBar) view.findViewById(R.id.seekBar_total_right);
+        mSeekBarMenLeft = (SeekBar) view.findViewById(R.id.seekBar_men_left);
+        mSeekBarMenRight = (SeekBar) view.findViewById(R.id.seekBar_men_right);
+        mSeekBarWomenLeft = (SeekBar) view.findViewById(R.id.seekBar_women_left);
+        mSeekBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
 
         // set up the listeners
-        mSeekBarLeft.setOnTouchListener(new View.OnTouchListener() {
+        mSeekBarTotalLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        mSeekBarTotalRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        mSeekBarMenLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        mSeekBarMenRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        mSeekBarWomenLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
+        mSeekBarWomenRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
@@ -74,7 +129,37 @@ public class ResultFragment extends Fragment {
     }
 
     private void updateUi() {
-        mTest.setText(mDilemma.getTitle());
+
+        // dilemma text, user etcetera
+        if (mDilemma.getIsAnonymous()) {
+            String ageToShow = "Leeftijd onbekend";
+            if (!mDilemma.getCreator_age().equals("Leeftijd onbekend")) {
+                ageToShow = mDilemma.getCreator_ageRange();
+            }
+
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
+            mUserNameTextView.setText(R.string.anonymous);
+        } else {
+            mUserDescriptionTextView.setText(
+                    mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+            mUserNameTextView.setText(mDilemma.getCreator_name());
+        }
+        mDilemmaTextView.setText(mDilemma.getTitle());
+
+        // time left
+        if (mDilemma.getTimeLeft() < 0){
+            mClockImageView.setImageResource(R.drawable.ic_clock_expired);
+            mTimeLeftTextView.setText("---");
+            mTimeLeftTextView.setTextColor(getResources().getColor(R.color.colorRed));
+        } else if (mDilemma.getTimeLeft() == 1){
+            mTimeLeftTextView.setText(R.string.time_left_1_hour);
+        } else {
+            mTimeLeftTextView.setText(mDilemma.getTimeLeft() + " uren");
+        }
+
+        // text of the two options
+        mAnswerATextView.setText(mDilemma.getTitlePhotoA());
+        mAnswerBTextView.setText(mDilemma.getTitlePhotoB());
     }
 
 

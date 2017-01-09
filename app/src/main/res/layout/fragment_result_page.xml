@@ -1,63 +1,461 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_result_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@android:color/black"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:backgroundTint="@android:color/black"
     tools:context="com.bnnvara.kiespijn.ResultPage.ResultActivity">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/text_view_test"
-        tools:text="TEST!"/>
+    <include layout="@layout/dilemma_viewholder"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:gravity="fill_horizontal"
+        android:layout_marginBottom="24dp"
         >
 
-    <SeekBar
-        android:id="@+id/seekBar_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:layout_marginBottom="20dp"
-        android:progressTint="@color/colorRed"
-        android:thumbTint="@color/colorRed"
-        android:progressBackgroundTint="@color/colorGrey"
-        android:layoutDirection="rtl"
-        android:progress="70"
-        android:max="100"
-        android:paddingStart="8dp"
-        />
+        <TextView
+            android:id="@+id/text_view_result_answer_A"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorYellow"
+            android:text="Opie A AAA AAAA"
+            android:textColor="@color/colorGreen"
+            />
 
-    <SeekBar
-        android:id="@+id/seekBar_question2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:layout_marginBottom="20dp"
-        android:progressTint="@color/colorLightGreen"
-        android:thumbTint="@color/colorLightGreen"
-        android:progressBackgroundTint="@color/colorGrey"
-        android:layoutDirection="ltr"
-        android:progress="25"
-        android:max="100"
-        android:paddingStart="8dp"
-        />
+        <TextView
+            android:id="@+id/text_view_result_answer_B"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="8dp"
+            android:gravity="right"
+            android:background="@color/colorYellow"
+            android:text="Optie B BBB BBBB"
+            android:textColor="@color/colorGreen"
+            android:textAlignment="gravity"
+            />
 
     </LinearLayout>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/text_view_results_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Resultaat van alle stemmen"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/text_view_result_total_left"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:text="63%"
+            android:textStyle="bold"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar_total_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="0.5"
+            android:layoutDirection="rtl"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="63"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorRed"
+            android:thumbTint="@color/colorRed"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_total_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layoutDirection="ltr"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="37"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorLightGreen"
+            android:thumbTint="@color/colorLightGreen"/>
+
+        <TextView
+            android:id="@+id/text_view_result_total_right"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="37%"
+            android:textStyle="bold"
+            android:textAlignment="gravity"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_results_men"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Mannen (18)"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/text_view_result_men_left"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:text="75%"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar_men_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="0.5"
+            android:layoutDirection="rtl"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="75"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorRed"
+            android:thumbTint="@color/colorRed"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_men_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layoutDirection="ltr"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="25"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorLightGreen"
+            android:thumbTint="@color/colorLightGreen"/>
+
+        <TextView
+            android:id="@+id/text_view_result_men_right"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="25%"
+            android:textAlignment="gravity"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_results_women"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Vrouwen (26)"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/text_view_result_women_left"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:text="55%"
+            />
+
+        <SeekBar
+            android:id="@+id/seekBar_women_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="0.5"
+            android:layoutDirection="rtl"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="55"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorRed"
+            android:thumbTint="@color/colorRed"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_women_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layoutDirection="ltr"
+            android:max="100"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:progress="45"
+            android:progressBackgroundTint="@color/colorGrey"
+            android:progressTint="@color/colorLightGreen"
+            android:thumbTint="@color/colorLightGreen"/>
+
+        <TextView
+            android:id="@+id/text_view_result_women_right"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="45%"
+            android:textAlignment="gravity"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:stretchColumns="*"
+            >
+
+            <TableRow>
+
+                <TextView
+                    android:text="Leeftijd"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="Aantal"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="%"
+                    android:textStyle="bold"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="0   - 12"
+                    />
+
+                <TextView
+                    android:text="2"
+                    />
+
+                <TextView
+                    android:text="0%"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="13 - 20"
+                    />
+
+                <TextView
+                    android:text="31"
+                    />
+
+                <TextView
+                    android:text="71%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="21 - 35"
+                    />
+
+                <TextView
+                    android:text="8"
+                    />
+
+                <TextView
+                    android:text="88%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="35+"
+                    />
+
+                <TextView
+                    android:text="3"
+                    />
+
+                <TextView
+                    android:text="67%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+        </TableLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/colorYellow">
+        </View>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:stretchColumns="*"
+            >
+
+            <TableRow>
+
+                <TextView
+                    android:text="Leeftijd"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="Aantal"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:text="%"
+                    android:textStyle="bold"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="0   - 12"
+                    />
+
+                <TextView
+                    android:text="2"
+                    />
+
+                <TextView
+                    android:text="100%"
+                    android:textColor="@color/colorRed"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="13 - 20"
+                    />
+
+                <TextView
+                    android:text="31"
+                    />
+
+                <TextView
+                    android:text="29%"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="21 - 35"
+                    />
+
+                <TextView
+                    android:text="8"
+                    />
+
+                <TextView
+                    android:text="12%"
+                    />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="35+"
+                    />
+
+                <TextView
+                    android:text="3"
+                    />
+
+                <TextView
+                    android:text="33%"
+                    />
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_weight="1.0">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/colorGreen"
+            android:layout_marginRight="8dp"
+            android:text="Bijgevoegde informatie"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/colorGreen"
+            android:layout_marginLeft="8dp"
+            android:text="Bijgevoegde informatie"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

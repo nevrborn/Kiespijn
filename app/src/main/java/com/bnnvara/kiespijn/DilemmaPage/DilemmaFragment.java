@@ -125,7 +125,7 @@ public class DilemmaFragment extends Fragment {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Achtergrond informatie");
-                builder.setIcon(R.drawable.ic_background_info);
+                builder.setIcon(R.mipmap.ic_info);
                 builder.setMessage(mDilemma.getBackgroundInfo());
                 builder.show();
             }

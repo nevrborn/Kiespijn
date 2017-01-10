@@ -175,7 +175,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="250dp"
+        android:layout_weight="1.0"
         android:layout_marginBottom="5dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
@@ -268,6 +269,15 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_skip_dilemma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sla dilemma over"
+        android:layout_gravity="right|bottom"
+
+        />
 
     <!--<LinearLayout-->
     <!--android:id="@+id/linear_layout_dicicion_buttons"-->

@@ -36,7 +36,7 @@
             <EditText
                 android:id="@+id/text_view_dilemma_title"
                 android:layout_width="0dp"
-                android:layout_height="35dp"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="35dp"
@@ -45,14 +45,13 @@
                 android:padding="10dp"
                 android:textColor="@color/colorGreen"
                 android:textColorHint="@color/colorGreen"
-                android:textSize="14sp"
                 android:inputType="textCapSentences"/>
 
             <ImageView
                 android:id="@+id/add_context"
-                android:layout_width="35dp"
+                android:layout_width="45dp"
                 android:padding="16dp"
-                android:layout_height="35dp"
+                android:layout_height="45dp"
                 android:layout_marginBottom="4dp"
                 android:layout_gravity="center_vertical"
                 android:background="@color/colorYellow"
@@ -60,7 +59,7 @@
 
             <ImageView
                 android:layout_width="5dp"
-                android:layout_height="35dp"
+                android:layout_height="45dp"
                 android:layout_marginRight="35dp"
                 android:background="@color/colorYellow"/>
 

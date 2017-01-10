@@ -50,6 +50,7 @@ public class GoogleSearchFragment extends Fragment {
     private android.widget.SearchView mSearchView;
     private int mImageIndex = 1;
     private int mTotalImageSize;
+    private MenuItem mNewSearch;
 
     public static GoogleSearchFragment newInstance(String searchString) {
         mSearchString = searchString;
@@ -72,7 +73,7 @@ public class GoogleSearchFragment extends Fragment {
         inflater.inflate(R.menu.menu_google_search, menu);
 
         MenuItem useImage = menu.findItem(R.id.menu_google_search_use);
-        MenuItem newSearch = menu.findItem(R.id.menu_google_search);
+        mNewSearch = menu.findItem(R.id.menu_google_search);
 
         useImage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -87,12 +88,12 @@ public class GoogleSearchFragment extends Fragment {
             }
         });
 
-        newSearch.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        mNewSearch.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
                 mSearchView.setVisibility(View.VISIBLE);
-
+                mNewSearch.setVisible(false);
                 return false;
             }
         });
@@ -137,6 +138,7 @@ public class GoogleSearchFragment extends Fragment {
                 mSearchString = mSearchView.getQuery().toString();
                 getImages();
                 mSearchView.setVisibility(View.GONE);
+                mNewSearch.setVisible(true);
                 return false;
             }
 
@@ -153,7 +155,7 @@ public class GoogleSearchFragment extends Fragment {
 
 
         String key = "AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4";
-        String cx = "005303562240230618745:fehybwiv3j0";
+        String cx = "005303562240230618745:khehmxdxd7s";
 
         // Logging
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -219,15 +221,13 @@ public class GoogleSearchFragment extends Fragment {
         public void bindGalleryItem(GalleryItem item) {
             mGalleryItem = item;
             String url = mGalleryItem.getUrl();
-            String substring = url.substring(url.lastIndexOf('/'), url.lastIndexOf('.'));
-            String imageUrl = "http://www.gstatic.com/hostedimg/" + substring + "_large";
-            mGalleryItem.setImageURL(imageUrl);
+            mGalleryItem.setImageURL(url);
             mRadioButtonList.add(mRadioButton);
             mImageViewList.add(mItemImageView);
-            Log.i(TAG, imageUrl);
+            Log.i(TAG, url);
 
             Glide.with(getActivity())
-                    .load(imageUrl)
+                    .load(url)
                     .placeholder(R.mipmap.ic_launcher)
                     .into(mItemImageView);
         }

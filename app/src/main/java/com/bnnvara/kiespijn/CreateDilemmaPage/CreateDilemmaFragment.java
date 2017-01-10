@@ -60,6 +60,7 @@ public class CreateDilemmaFragment extends Fragment {
     private ImageView mImageViewB;
     private Boolean isImageA = true;
     public static Boolean isFromCamera = false;
+    private ImageView mContextButton;
 
     private static Bitmap mGoogleImage;
 
@@ -92,6 +93,8 @@ public class CreateDilemmaFragment extends Fragment {
         mImageViewA = (ImageView) view.findViewById(R.id.image_view_option_1_take_picture);
         mImageViewB = (ImageView) view.findViewById(R.id.image_view_option_2_take_picture);
         Button nextButton = (Button) view.findViewById(R.id.button_next_create_dilemma);
+        mContextButton = (ImageView) view.findViewById(R.id.add_context);
+
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -124,6 +127,13 @@ public class CreateDilemmaFragment extends Fragment {
 
             }
         }
+
+        mContextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addContext();
+            }
+        });
 
         // set up the listeners
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -428,28 +438,28 @@ public class CreateDilemmaFragment extends Fragment {
     }
 
     private void addContext() {
-        AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
-        final EditText enterLink = new EditText(getContext());
+        final AlertDialog.Builder contextAlert = new AlertDialog.Builder(getContext());
+        final EditText enterContext = new EditText(getContext());
 
-        linkAlert.setMessage("Copy in link to article or blog");
-        linkAlert.setTitle("Article / Link");
-        linkAlert.setView(enterLink);
+        contextAlert.setMessage("Enter Dilemma Context");
+        contextAlert.setTitle("Dilemma Context");
+        contextAlert.setView(enterContext);
 
-        linkAlert.setPositiveButton("SAVE LINK", new DialogInterface.OnClickListener() {
+        contextAlert.setPositiveButton("SAVE CONTEXT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // mLink = enterLink.getText().toString();
+                mDilemma.setBackgroundInfo(enterContext.getText().toString());
             }
         });
 
-        linkAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        contextAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
 
-        linkAlert.show();
+        contextAlert.show();
     }
 
 }

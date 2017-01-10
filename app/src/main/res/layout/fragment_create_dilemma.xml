@@ -49,6 +49,7 @@
                 android:inputType="textCapSentences"/>
 
             <ImageView
+                android:id="@+id/add_context"
                 android:layout_width="35dp"
                 android:padding="16dp"
                 android:layout_height="35dp"

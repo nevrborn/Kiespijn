@@ -1,16 +1,19 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +35,10 @@ public class TargetGroupFragment extends Fragment {
     private static Dilemma mDilemma;
     private Button callSomeoneButton;
     private Boolean isHasChosen = false;
+    private int mCallerIndex;
 
     private static List<Integer> mListOfCallers = new ArrayList<>();
+    private static List<String> mListOfGifs = new ArrayList<>();
 
 
     public static TargetGroupFragment newInstance(Dilemma dilemma) {
@@ -59,6 +65,15 @@ public class TargetGroupFragment extends Fragment {
         mListOfCallers.add(R.string.targetgroup_call_someone_12);
         mListOfCallers.add(R.string.targetgroup_call_someone_13);
 
+        mListOfGifs.add("http://i.imgur.com/XVLXwM7.gif");
+        mListOfGifs.add("https://i.imgur.com/lVlPvCB.gif");
+        mListOfGifs.add("https://i.imgur.com/NMEguFf.gif");
+        mListOfGifs.add("https://i.imgur.com/m3welo2.gif");
+        mListOfGifs.add("https://i.imgur.com/CbRpymD.gif");
+        mListOfGifs.add("https://i.imgur.com/aLEjgN7.gif");
+        mListOfGifs.add("https://i.imgur.com/ujqkMEH.gif");
+        mListOfGifs.add("https://i.imgur.com/IlhEGbl.gif");
+        mListOfGifs.add("https://i.imgur.com/rZgwuld.gif");
 
 
     }
@@ -75,6 +90,7 @@ public class TargetGroupFragment extends Fragment {
         final Button everyoneButton = (Button) view.findViewById(R.id.button_targetgroup_everyone);
         Button nextButton = (Button) view.findViewById(R.id.button_next_target_group);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_target_group);
+        final ImageView gifView = (ImageView) view.findViewById(R.id.targetgroup_gif);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -157,6 +173,13 @@ public class TargetGroupFragment extends Fragment {
                 everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
+
+                gifView.setVisibility(View.VISIBLE);
+
+                Glide.with(getActivity())
+                        .load(getRandomGifURL())
+                        .asGif()
+                        .into(gifView);
             }
         });
 
@@ -184,6 +207,13 @@ public class TargetGroupFragment extends Fragment {
             }
         });
 
+        gifView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gifView.setVisibility(View.GONE);
+            }
+        });
+
         return view;
     }
 
@@ -194,8 +224,35 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private void setRandomCaller() {
-        int randomIndex = 1 + (int) (Math.random() * ((12 - 1) + 1));
-        callSomeoneButton.setText(mListOfCallers.get(randomIndex));
+        mCallerIndex = 1 + (int) (Math.random() * ((12 - 1) + 1));
+        callSomeoneButton.setText(mListOfCallers.get(mCallerIndex));
+    }
+
+    private String getRandomGifURL() {
+        int randomIndex = 1 + (int) (Math.random() * ((7 - 1) + 1));
+        return mListOfGifs.get(randomIndex);
+    }
+
+    private void showGif() {
+        AlertDialog.Builder gifAlert = new AlertDialog.Builder(getContext());
+        final ImageView gifView = new ImageView(getContext());
+
+        gifAlert.setTitle(mListOfCallers.get(mCallerIndex));
+        gifAlert.setView(gifView);
+
+        Glide.with(getActivity())
+                .load("http://i.imgur.com/1ALnB2s.gif")
+                .asGif()
+                .into(gifView);
+
+        gifAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        gifAlert.show();
     }
 
 

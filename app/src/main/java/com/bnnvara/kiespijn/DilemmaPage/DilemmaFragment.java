@@ -72,6 +72,7 @@ public class DilemmaFragment extends Fragment {
     private ImageView mBackgroundInfoImageView;
     private Button mDilemmaFirstAddContent;
     private Button mDilemmaSecondAddContent;
+    private Button mSkipDilemma;
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
@@ -114,6 +115,7 @@ public class DilemmaFragment extends Fragment {
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
         mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
         mDilemmaSecondAddContent = (Button) view.findViewById(R.id.button_add_content_second);
+        mSkipDilemma = (Button) view.findViewById(R.id.button_skip_dilemma);
 
         filterSwitch.setChecked(true);
 
@@ -136,6 +138,13 @@ public class DilemmaFragment extends Fragment {
             }
         });
         mDilemmaSecondImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateCurrentIndex();
+            }
+        });
+
+        mSkipDilemma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateCurrentIndex();

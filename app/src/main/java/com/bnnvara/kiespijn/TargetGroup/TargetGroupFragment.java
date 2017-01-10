@@ -1,12 +1,10 @@
 package com.bnnvara.kiespijn.TargetGroup;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -224,35 +222,13 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private void setRandomCaller() {
-        mCallerIndex = 1 + (int) (Math.random() * ((12 - 1) + 1));
+        mCallerIndex = 1 + (int) (Math.random() * ((13 - 1)));
         callSomeoneButton.setText(mListOfCallers.get(mCallerIndex));
     }
 
     private String getRandomGifURL() {
-        int randomIndex = 1 + (int) (Math.random() * ((7 - 1) + 1));
+        int randomIndex = 1 + (int) (Math.random() * ((9 - 1)));
         return mListOfGifs.get(randomIndex);
-    }
-
-    private void showGif() {
-        AlertDialog.Builder gifAlert = new AlertDialog.Builder(getContext());
-        final ImageView gifView = new ImageView(getContext());
-
-        gifAlert.setTitle(mListOfCallers.get(mCallerIndex));
-        gifAlert.setView(gifView);
-
-        Glide.with(getActivity())
-                .load("http://i.imgur.com/1ALnB2s.gif")
-                .asGif()
-                .into(gifView);
-
-        gifAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        gifAlert.show();
     }
 
 

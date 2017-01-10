@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -440,10 +441,11 @@ public class CreateDilemmaFragment extends Fragment {
     private void addContext() {
         final AlertDialog.Builder contextAlert = new AlertDialog.Builder(getContext());
         final EditText enterContext = new EditText(getContext());
+        enterContext.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
-        contextAlert.setMessage("Enter Dilemma Context");
-        contextAlert.setTitle("Dilemma Context");
+        contextAlert.setTitle("Enter Dilemma Context");
         contextAlert.setView(enterContext);
+
 
         contextAlert.setPositiveButton("SAVE CONTEXT", new DialogInterface.OnClickListener() {
             @Override

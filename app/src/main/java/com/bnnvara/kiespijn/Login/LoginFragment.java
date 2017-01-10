@@ -32,10 +32,10 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class LoginFragment extends Fragment {
 
@@ -44,8 +44,6 @@ public class LoginFragment extends Fragment {
     // Facebook Parameters
     private CallbackManager mCallbackManager;
     private static Boolean mIsLoggingOut = false;
-
-    private Map<String, String> mFacebookFriendsMap = new HashMap<>();
 
     public LoginFragment() {
         // Required empty public constructor
@@ -227,9 +225,8 @@ public class LoginFragment extends Fragment {
                 while (i < friendsCount) {
 
                     JSONObject friend = friendsObject.getJSONObject(i);
-                    String name = friend.getString("name");
                     String id = friend.getString("id");
-                    mFacebookFriendsMap.put(name, id);
+                    user.mFacebookFriendList.add(id);
 
                     i += 1;
                 }

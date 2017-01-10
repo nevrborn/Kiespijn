@@ -2,6 +2,9 @@ package com.bnnvara.kiespijn;
 
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     // Singleton
@@ -15,6 +18,7 @@ public class User {
     private String mProfilePictureURL;
     private DilemmaApiResponse mUserCreatedDilemmas;
     private DilemmaApiResponse mUserAnsweredDilemmas;
+    public List<String> mFacebookFriendList = new ArrayList<>();
 
 
     private User() {

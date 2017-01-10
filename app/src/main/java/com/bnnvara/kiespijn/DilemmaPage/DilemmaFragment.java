@@ -73,12 +73,14 @@ public class DilemmaFragment extends Fragment {
     private Button mDilemmaFirstAddContent;
     private Button mDilemmaSecondAddContent;
     private Button mSkipDilemma;
+    private ImageView mFriendIcon;
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
     private Dilemma mDilemma;
     private int mCurrentIndex;
     private String mUserFbId; // = "101283870370822";
+    private Boolean mFilterFriends;
 
 
     public static Fragment newInstance() {
@@ -116,8 +118,9 @@ public class DilemmaFragment extends Fragment {
         mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
         mDilemmaSecondAddContent = (Button) view.findViewById(R.id.button_add_content_second);
         mSkipDilemma = (Button) view.findViewById(R.id.button_skip_dilemma);
+        mFriendIcon = (ImageView) view.findViewById(R.id.imageview_friends);
 
-        filterSwitch.setChecked(true);
+        filterSwitch.setChecked(false);
 
         // set up the listeners
         mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
@@ -155,10 +158,13 @@ public class DilemmaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (filterSwitch.isChecked()) {
-                    // filter dilemmas to only friends
-                    resetCurrentIndex();
+                    mFilterFriends = true;
+
+                    if (!mDilemma.isFromAFriend()) {
+                        updateCurrentIndex();
+                    }
                 } else {
-                    // view all dilemmas
+                    mFilterFriends = false;
                     resetCurrentIndex();
                 }
             }
@@ -190,11 +196,22 @@ public class DilemmaFragment extends Fragment {
     private void updateCurrentIndex() {
         if (mCurrentIndex == mDilemmaList.size() - 1) {
             showNoDilemmas();
+            return;
         } else {
             mCurrentIndex++;
         }
         mDilemma = mDilemmaList.get(mCurrentIndex);
-        updateUi();
+
+        if (!mFilterFriends) {
+            updateUi();
+        } else {
+            if (mDilemma.isFromAFriend()) {
+                updateUi();
+            } else {
+                updateCurrentIndex();
+            }
+        }
+
     }
 
     private void resetCurrentIndex() {
@@ -262,6 +279,12 @@ public class DilemmaFragment extends Fragment {
                 ageToShow = mDilemma.getCreator_ageRange();
             }
             mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
+        }
+
+        if (mDilemma.isFromAFriend()) {
+            mFriendIcon.setVisibility(View.VISIBLE);
+        } else {
+            mFriendIcon.setVisibility(View.GONE);
         }
 
         // set image titles

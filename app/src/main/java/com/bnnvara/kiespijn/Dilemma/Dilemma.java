@@ -297,4 +297,9 @@ public class Dilemma implements Serializable {
         }
         return ageToShow;
     }
+
+    public Boolean isFromAFriend() {
+        User user = User.getInstance();
+        return user.mFacebookFriendList.contains(mCreator_fb_id);
+    }
 }

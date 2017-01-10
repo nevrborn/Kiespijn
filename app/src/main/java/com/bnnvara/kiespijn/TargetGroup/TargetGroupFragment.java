@@ -72,6 +72,23 @@ public class TargetGroupFragment extends Fragment {
         mListOfGifs.add("https://i.imgur.com/ujqkMEH.gif");
         mListOfGifs.add("https://i.imgur.com/IlhEGbl.gif");
         mListOfGifs.add("https://i.imgur.com/rZgwuld.gif");
+        mListOfGifs.add("https://i.imgur.com/JfDYRKv.gif");
+        mListOfGifs.add("https://i.imgur.com/0glopxW.gif");
+        mListOfGifs.add("https://i.imgur.com/rR8mwEL.gif");
+        mListOfGifs.add("https://i.imgur.com/Dgo1nxQ.gif");
+        mListOfGifs.add("https://i.imgur.com/QjbIiBA.gif");
+        mListOfGifs.add("https://i.imgur.com/baCcvq8.gif");
+        mListOfGifs.add("https://i.imgur.com/eEhpf79.gif");
+        mListOfGifs.add("https://i.imgur.com/yeSjKv2.gif");
+        mListOfGifs.add("https://i.imgur.com/AOBXHOO.gif");
+        mListOfGifs.add("https://i.imgur.com/SxuKpa8.gif");
+        mListOfGifs.add("https://i.imgur.com/tEUlfWt.gif");
+        mListOfGifs.add("https://i.imgur.com/5wkR8Sj.gif");
+        mListOfGifs.add("https://i.imgur.com/DBtFXw2.gif");
+        mListOfGifs.add("https://i.imgur.com/NTtD2QI.gif");
+        mListOfGifs.add("https://i.imgur.com/3wcLG9u.gif");
+        mListOfGifs.add("https://i.imgur.com/iZA2t5H.gif");
+        mListOfGifs.add("https://i.imgur.com/cGIBrMa.gif");
 
 
     }
@@ -89,6 +106,8 @@ public class TargetGroupFragment extends Fragment {
         Button nextButton = (Button) view.findViewById(R.id.button_next_target_group);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_target_group);
         final ImageView gifView = (ImageView) view.findViewById(R.id.targetgroup_gif);
+
+        gifView.setVisibility(View.GONE);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -176,6 +195,15 @@ public class TargetGroupFragment extends Fragment {
                         .load(getRandomGifURL())
                         .asGif()
                         .into(gifView);
+
+                friendsButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                friendsButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                everyoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+                callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+                callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
+
+
             }
         });
 
@@ -207,6 +235,7 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 gifView.setVisibility(View.GONE);
+                setRandomCaller();
             }
         });
 
@@ -225,7 +254,7 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private String getRandomGifURL() {
-        int randomIndex = 1 + (int) (Math.random() * ((9 - 1)));
+        int randomIndex = 1 + (int) (Math.random() * ((25 - 1)));
         return mListOfGifs.get(randomIndex);
     }
 

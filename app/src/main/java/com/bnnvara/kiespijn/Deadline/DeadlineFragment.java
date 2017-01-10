@@ -1,10 +1,12 @@
 package com.bnnvara.kiespijn.Deadline;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.ResultPage.ResultActivity;
 import com.bnnvara.kiespijn.User;
 
 public class DeadlineFragment extends Fragment {
@@ -154,9 +157,7 @@ public class DeadlineFragment extends Fragment {
             public void onClick(View view) {
                 if (isHasChosen) {
                     postDilemma();
-                    Intent i = DilemmaActivity.newIntent(getActivity());
-                    startActivity(i);
-                    getActivity().finish();
+                    shareDilemma();
                 } else {
                     Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
                 }
@@ -219,6 +220,44 @@ public class DeadlineFragment extends Fragment {
 
         DilemmaFragment.addDilemmaToTempList(mDilemma);
 
+    }
+
+    private void shareDilemma() {
+        AlertDialog shareDialog = new AlertDialog.Builder(getContext())
+                .setTitle("Share on social media")
+                .setMessage("Do you want to share the dilemma on social media?")
+                .setPositiveButton("Share", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Kiespijn");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Take this dilemma for me: " + mDilemma.getUuid());
+                        startActivityForResult(intent, 0);
+
+                    }
+                })
+                .setNegativeButton("Go to main", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        goToMain();
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0 && resultCode == ResultActivity.RESULT_OK) {
+            goToMain();
+        }
+    }
+
+    private void goToMain() {
         mDilemma = null;
+        Intent i = DilemmaActivity.newIntent(getActivity());
+        startActivity(i);
     }
 }

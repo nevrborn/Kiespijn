@@ -446,6 +446,9 @@ public class CreateDilemmaFragment extends Fragment {
         contextAlert.setTitle("Enter Dilemma Context");
         contextAlert.setView(enterContext);
 
+        if (mDilemma.getBackgroundInfo() != null) {
+            enterContext.setText(mDilemma.getBackgroundInfo());
+        }
 
         contextAlert.setPositiveButton("SAVE CONTEXT", new DialogInterface.OnClickListener() {
             @Override

@@ -427,4 +427,29 @@ public class CreateDilemmaFragment extends Fragment {
 
     }
 
+    private void addContext() {
+        AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
+        final EditText enterLink = new EditText(getContext());
+
+        linkAlert.setMessage("Copy in link to article or blog");
+        linkAlert.setTitle("Article / Link");
+        linkAlert.setView(enterLink);
+
+        linkAlert.setPositiveButton("SAVE LINK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // mLink = enterLink.getText().toString();
+            }
+        });
+
+        linkAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        linkAlert.show();
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Replies;
+import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
@@ -72,6 +75,7 @@ public class DilemmaFragment extends Fragment {
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
+    private Dilemma mDilemma;
     private int mCurrentIndex;
     private String mUserFbId; // = "101283870370822";
 
@@ -114,6 +118,17 @@ public class DilemmaFragment extends Fragment {
         filterSwitch.setChecked(true);
 
         // set up the listeners
+        mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Achtergrond informatie");
+                builder.setIcon(R.drawable.ic_background_info);
+                builder.setMessage(mDilemma.getBackgroundInfo());
+                builder.show();
+            }
+        });
+
         mDilemmaFirstImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,6 +184,7 @@ public class DilemmaFragment extends Fragment {
         } else {
             mCurrentIndex++;
         }
+        mDilemma = mDilemmaList.get(mCurrentIndex);
         updateUi();
     }
 
@@ -183,66 +199,65 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateUi() {
-        Dilemma dilemma = mDilemmaList.get(mCurrentIndex);
+        mDilemma = mDilemmaList.get(mCurrentIndex);
 
-        // do not show the current user's own dilemma's
-        if (dilemma.getCreator_fb_id().equals(mUserFbId)) {
+        // do not show the current user's own mDilemma's
+        if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
             updateCurrentIndex();
             return;
         }
 
         // make background info icon invisible if background info is not present
-        if (dilemma.getBackgroundInfo().equals("")){
+        if (mDilemma.getBackgroundInfo().equals("")){
             mBackgroundInfoImageView.setVisibility(View.GONE);
         } else {
             mBackgroundInfoImageView.setVisibility(View.VISIBLE);
         }
-        Toast.makeText(getActivity(), dilemma.getBackgroundInfo(), Toast.LENGTH_LONG).show();
 
         // set user profile picture
-        if (dilemma.getCreator_picture_url() != null && !dilemma.getIsAnonymous()) {
+        if (mDilemma.getCreator_picture_url() != null && !mDilemma.getIsAnonymous()) {
             Glide.with(getActivity())
-                    .load(dilemma.getCreator_picture_url())
+                    .load(mDilemma.getCreator_picture_url())
                     .centerCrop()
                     .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mUserPhotoImageView);
-        } else if (dilemma.getIsAnonymous() || dilemma.getCreator_picture_url() == null) {
+        } else if (mDilemma.getIsAnonymous() || mDilemma.getCreator_picture_url() == null) {
             mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
         }
 
         // load image 1
-        mDilemmaTextView.setText(dilemma.getTitle());
+        mDilemmaTextView.setText(mDilemma.getTitle());
         Glide.with(getActivity())
-                .load(dilemma.getPhotoA())
+                .load(mDilemma.getPhotoA())
                 .centerCrop()
                 .placeholder(R.drawable.ic_action_sand_timer)
                 .into(mDilemmaFirstImageView);
 
         // load image 2
-        mDilemmaTextView.setText(dilemma.getTitle());
+        mDilemmaTextView.setText(mDilemma.getTitle());
         Glide.with(getActivity())
-                .load(dilemma.getPhotoB())
+                .load(mDilemma.getPhotoB())
                 .centerCrop()
                 .placeholder(R.drawable.ic_action_sand_timer)
                 .into(mDilemmaSecondImageView);
 
-        // set creator and dilemma text
-        if (!dilemma.getIsAnonymous()) {
-            mUserNameTextView.setText(dilemma.getCreator_name());
-            mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + dilemma.getCreator_age());
+        // set creator and mDilemma text
+        if (!mDilemma.getIsAnonymous()) {
+            mUserNameTextView.setText(mDilemma.getCreator_name());
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
 
             String ageToShow = "Leeftijd onbekend";
-            if (!dilemma.getCreator_age().equals("Leeftijd onbekend")) {
-                ageToShow = dilemma.getCreator_ageRange();
+            if (!mDilemma.getCreator_age().equals("Leeftijd onbekend")) {
+                ageToShow = mDilemma.getCreator_ageRange();
             }
-            mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + ageToShow);
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
         }
 
         // set image titles
-        mFirstImageTitleTextView.setText(dilemma.getTitlePhotoA());
-        mSecondImageTitleTextView.setText(dilemma.getTitlePhotoB());
+        mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
+        mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
     }
 
 

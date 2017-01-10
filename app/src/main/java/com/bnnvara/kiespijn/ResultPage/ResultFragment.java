@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ public class ResultFragment extends Fragment {
     private SeekBar mSeekBarMenRight;
     private SeekBar mSeekBarWomenLeft;
     private SeekBar mSeekBarWomenRight;
+    private Button mAddedContentButtonA;
+    private Button mAddedContentButtonB;
 
     // Regular variables
     private Dilemma mDilemma;
@@ -79,6 +82,8 @@ public class ResultFragment extends Fragment {
         mTimeLeftTextView = (TextView) view.findViewById(R.id.text_view_time_left);
         mAnswerATextView = (TextView) view.findViewById(R.id.text_view_result_answer_A);
         mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
+        mAddedContentButtonA = (Button) view.findViewById(R.id.button_added_content_A);
+        mAddedContentButtonB = (Button) view.findViewById(R.id.button_added_content_B);
         mSeekBarTotalLeft = (SeekBar) view.findViewById(R.id.seekBar_total_left);
         mSeekBarTotalRight = (SeekBar) view.findViewById(R.id.seekBar_total_right);
         mSeekBarMenLeft = (SeekBar) view.findViewById(R.id.seekBar_men_left);
@@ -87,6 +92,18 @@ public class ResultFragment extends Fragment {
         mSeekBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
 
         // set up the listeners
+        mAddedContentButtonA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        mAddedContentButtonB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         mSeekBarTotalLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

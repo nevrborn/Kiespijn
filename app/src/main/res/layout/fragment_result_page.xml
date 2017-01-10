@@ -442,6 +442,7 @@
         >
 
         <Button
+            android:id="@+id/button_added_content_A"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -452,6 +453,7 @@
             />
 
         <Button
+            android:id="@+id/button_added_content_B"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"

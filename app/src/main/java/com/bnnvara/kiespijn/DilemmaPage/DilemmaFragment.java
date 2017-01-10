@@ -80,7 +80,7 @@ public class DilemmaFragment extends Fragment {
     private Dilemma mDilemma;
     private int mCurrentIndex;
     private String mUserFbId; // = "101283870370822";
-    private Boolean mFilterFriends;
+    private Boolean mFilterFriends = false;
 
 
     public static Fragment newInstance() {
@@ -231,6 +231,14 @@ public class DilemmaFragment extends Fragment {
         if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
             updateCurrentIndex();
             return;
+        }
+
+        // check to see if the dilemma is NOT FOR ALL and then check to see if its from a friend
+        if (!mDilemma.getIsToAll()) {
+            if (!mDilemma.isFromAFriend()) {
+                updateCurrentIndex();
+                return;
+            }
         }
 
         // make background info icon invisible if background info is not present

@@ -10,6 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,11 +50,11 @@ public class AddContentFragment extends Fragment {
         final TextView answerText = (TextView) view.findViewById(R.id.textview_add_content_answer);
         EditText editTextField = (EditText) view.findViewById(R.id.edittext_add_content);
         Button takePhotoButton = (Button) view.findViewById(R.id.button_add_photo);
-        Button galleryButton = (Button) view.findViewById(R.id.button_add_gallery);
         Button googleButton = (Button) view.findViewById(R.id.button_add_google);
         Button linkButton = (Button) view.findViewById(R.id.button_add_article);
         Button addButton = (Button) view.findViewById(R.id.button_add_content);
-        Button cancelButton = (Button) view.findViewById(R.id.button_add_content_cancel);
+
+        setHasOptionsMenu(true);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -60,11 +63,9 @@ public class AddContentFragment extends Fragment {
         answerText.setTypeface(source_sans_bold);
         editTextField.setTypeface(source_sans_extra_light);
         takePhotoButton.setTypeface(source_sans_extra_light);
-        galleryButton.setTypeface(source_sans_extra_light);
         googleButton.setTypeface(source_sans_extra_light);
         linkButton.setTypeface(source_sans_extra_light);
         addButton.setTypeface(source_sans_bold);
-        cancelButton.setTypeface(source_sans_bold);
 
         dilemmaTitle.setText(mDilemma.getTitle());
 
@@ -78,14 +79,7 @@ public class AddContentFragment extends Fragment {
         takePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cameraIntent();
-            }
-        });
-
-        galleryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                galleryIntent();
+                selectImage();
             }
         });
 
@@ -106,13 +100,6 @@ public class AddContentFragment extends Fragment {
             }
         });
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,8 +110,35 @@ public class AddContentFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, final MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_content, menu);
+
+        MenuItem infoItem = menu.findItem(R.id.menu_item_info);
+
+        infoItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                final AlertDialog.Builder infoDialog = new AlertDialog.Builder(getContext());
+                infoDialog.setTitle("Info");
+                infoDialog.setMessage("INFO TO COME LATER");
+                infoDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                infoDialog.show();
+
+                return false;
+            }
+        });
+
+    }
+
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library", "Google Search", "Cancel"};
+        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Add Photo or Video!");
         builder.setItems(items, new DialogInterface.OnClickListener() {

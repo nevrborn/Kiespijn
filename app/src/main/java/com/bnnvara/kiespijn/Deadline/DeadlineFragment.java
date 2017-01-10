@@ -234,7 +234,7 @@ public class DeadlineFragment extends Fragment {
                         intent.putExtra(Intent.EXTRA_SUBJECT, "Kiespijn");
                         intent.putExtra(Intent.EXTRA_TEXT, "Take this dilemma for me: " + mDilemma.getUuid());
                         startActivityForResult(intent, 0);
-
+                        goToMain();
                     }
                 })
                 .setNegativeButton("Go to main", new DialogInterface.OnClickListener() {
@@ -244,15 +244,6 @@ public class DeadlineFragment extends Fragment {
                     }
                 })
                 .show();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 0 && resultCode == ResultActivity.RESULT_OK) {
-            goToMain();
-        }
     }
 
     private void goToMain() {

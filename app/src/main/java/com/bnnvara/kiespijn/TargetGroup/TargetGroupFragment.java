@@ -86,6 +86,9 @@ public class TargetGroupFragment extends Fragment {
         mListOfGifs.add("https://i.imgur.com/5wkR8Sj.gif");
         mListOfGifs.add("https://i.imgur.com/DBtFXw2.gif");
         mListOfGifs.add("https://i.imgur.com/NTtD2QI.gif");
+        mListOfGifs.add("https://i.imgur.com/3wcLG9u.gif");
+        mListOfGifs.add("https://i.imgur.com/iZA2t5H.gif");
+        mListOfGifs.add("https://i.imgur.com/cGIBrMa.gif");
 
 
     }
@@ -251,7 +254,7 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private String getRandomGifURL() {
-        int randomIndex = 1 + (int) (Math.random() * ((23 - 1)));
+        int randomIndex = 1 + (int) (Math.random() * ((25 - 1)));
         return mListOfGifs.get(randomIndex);
     }
 

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
@@ -120,9 +121,8 @@ public class GoogleSearchFragment extends Fragment {
 
                     if (mImageIndex < (mTotalImageSize - 10)) {
                         mImageIndex += 10;
+                        getImages();
                     }
-
-                    getImages();
                 }
             }
         });
@@ -130,13 +130,6 @@ public class GoogleSearchFragment extends Fragment {
         mSearchView = (android.widget.SearchView) view.findViewById(R.id.google_search_view);
 
         mSearchView.setVisibility(View.GONE);
-
-        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         mSearchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
@@ -187,13 +180,19 @@ public class GoogleSearchFragment extends Fragment {
                     Log.e("Retrofit body null", String.valueOf(response.code()));
                 }
 
-                mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
-                Log.v("mGalleryItems", String.valueOf(response.body().getGalleryItems().size()));
-                mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
+                if (mGoogleImageApiResponse != null) {
+                    mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
+                    Log.v("mGalleryItems", String.valueOf(response.body().getGalleryItems().size()));
+                    mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
 
-                if (mPhotoRecylerView != null) {
-                    mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
+                    if (mPhotoRecylerView != null) {
+                        mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Geen photos for deze zoek, probeer opnieuw", Toast.LENGTH_SHORT).show();
+                    mSearchView.setVisibility(View.VISIBLE);
                 }
+
             }
 
             @Override

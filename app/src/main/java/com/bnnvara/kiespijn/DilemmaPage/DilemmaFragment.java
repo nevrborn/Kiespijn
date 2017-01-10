@@ -66,6 +66,7 @@ public class DilemmaFragment extends Fragment {
     private LinearLayout mNoDilemmasTextView;
     private ImageView mDilemmaFirstImageView;
     private ImageView mDilemmaSecondImageView;
+    private ImageView mBackgroundInfoImageView;
     private Button mDilemmaFirstAddContent;
     private Button mDilemmaSecondAddContent;
 
@@ -105,6 +106,7 @@ public class DilemmaFragment extends Fragment {
         mNoDilemmasTextView = (LinearLayout) view.findViewById(R.id.linear_layout_no_dilemmas);
         mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
         mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
+        mBackgroundInfoImageView = (ImageView) view.findViewById(R.id.image_view_background_info);
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
         mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
         mDilemmaSecondAddContent = (Button) view.findViewById(R.id.button_add_content_second);
@@ -172,7 +174,7 @@ public class DilemmaFragment extends Fragment {
 
     private void resetCurrentIndex() {
         mNoDilemmasTextView.setVisibility(View.GONE);
-        mCurrentIndex = 1;
+        mCurrentIndex = 0;
         updateUi();
     }
 
@@ -183,11 +185,19 @@ public class DilemmaFragment extends Fragment {
     private void updateUi() {
         Dilemma dilemma = mDilemmaList.get(mCurrentIndex);
 
-        // do not show the current user's dilemma's
+        // do not show the current user's own dilemma's
         if (dilemma.getCreator_fb_id().equals(mUserFbId)) {
             updateCurrentIndex();
             return;
         }
+
+        // make background info icon invisible if background info is not present
+        if (dilemma.getBackgroundInfo().equals("")){
+            mBackgroundInfoImageView.setVisibility(View.GONE);
+        } else {
+            mBackgroundInfoImageView.setVisibility(View.VISIBLE);
+        }
+        Toast.makeText(getActivity(), dilemma.getBackgroundInfo(), Toast.LENGTH_LONG).show();
 
         // set user profile picture
         if (dilemma.getCreator_picture_url() != null && !dilemma.getIsAnonymous()) {
@@ -233,7 +243,6 @@ public class DilemmaFragment extends Fragment {
         // set image titles
         mFirstImageTitleTextView.setText(dilemma.getTitlePhotoA());
         mSecondImageTitleTextView.setText(dilemma.getTitlePhotoB());
-
     }
 
 
@@ -241,6 +250,7 @@ public class DilemmaFragment extends Fragment {
         // SET UP TEST DATA!
         Dilemma dilemma_1 = new Dilemma();
         dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kist?");
+        dilemma_1.setBackgroundInfo("");
         dilemma_1.setUuid();
         dilemma_1.setCreator_fb_id("10156521655410158");
         dilemma_1.setCreator_name("Jarle Matland");
@@ -267,6 +277,7 @@ public class DilemmaFragment extends Fragment {
 
         Dilemma dilemma_2 = new Dilemma();
         dilemma_2.setTitle("Moet ik als man alleen toch ook een kerstboom optuigen?");
+        dilemma_2.setBackgroundInfo("");
         dilemma_2.setUuid();
         dilemma_2.setCreator_fb_id("103858760112750");
         dilemma_2.setCreator_name("Michael McDonaldberg");
@@ -293,6 +304,7 @@ public class DilemmaFragment extends Fragment {
 
         Dilemma dilemma_3 = new Dilemma();
         dilemma_3.setTitle("Ik heb 100 euro. Welk schilderij zal ik kopen?");
+        dilemma_3.setBackgroundInfo("");
         dilemma_3.setUuid();
         dilemma_3.setCreator_fb_id("100871300412741");
         dilemma_3.setCreator_name("Marietje Vergeetmenietje");

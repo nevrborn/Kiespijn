@@ -31,6 +31,9 @@ public class Dilemma implements Serializable {
     @SerializedName("title")
     private String mTitle;
 
+    @SerializedName("background_info")
+    private String mBackgroundInfo;
+
     @SerializedName("photoA")
     private String mPhotoA;
 
@@ -138,6 +141,14 @@ public class Dilemma implements Serializable {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public String getBackgroundInfo() {
+        return mBackgroundInfo;
+    }
+
+    public void setBackgroundInfo(String backgroundInfo) {
+        mBackgroundInfo = backgroundInfo;
     }
 
     public String getPhotoA() {

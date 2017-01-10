@@ -299,7 +299,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setTitle("Ik heb bloemen gekregen. Moet ik ze in een mooie vaas stoppen of in een houten kist?");
         dilemma_1.setBackgroundInfo("");
         dilemma_1.setUuid();
-        dilemma_1.setCreator_fb_id("10156521655410158");
+        dilemma_1.setCreator_fb_id("10157925351030158");
         dilemma_1.setCreator_name("Jarle Matland");
         dilemma_1.setCreator_age("32");
         dilemma_1.setCreator_sex("Man");

@@ -31,7 +31,7 @@ public class Dilemma implements Serializable {
     @SerializedName("title")
     private String mTitle;
 
-    @SerializedName("background_info")
+    @SerializedName("backgroundInfo")
     private String mBackgroundInfo;
 
     @SerializedName("photoA")

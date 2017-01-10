@@ -53,8 +53,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/noooo"
             android:contentDescription="@string/image_content"
+            android:src="@drawable/noooo"
             />
 
     </LinearLayout>
@@ -141,17 +141,34 @@
             android:textColor="@color/colorGreen"
             />
 
-        <TextView
-            android:id="@+id/text_view_dilemma"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginLeft="8dp"
             android:background="@color/colorYellow"
-            android:hint="@string/dilemma_main_text"
             android:padding="8dp"
-            android:textColor="@color/colorGreen"
-            android:textColorHint="@color/colorGreen"
-            android:textStyle="normal|bold"/>
+            >
+
+            <TextView
+                android:id="@+id/text_view_dilemma"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:hint="@string/dilemma_main_text"
+                android:textColor="@color/colorGreen"
+                android:textColorHint="@color/colorGreen"
+                android:textStyle="normal|bold"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_background_info"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -184,13 +201,13 @@
                 android:id="@+id/button_add_content_first"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_content"
-                android:textSize="15sp"
-                android:textColor="@color/colorGreen"
-                android:background="@color/colorYellow"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:background="@color/colorYellow"
+                android:text="@string/add_content"
+                android:textColor="@color/colorGreen"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/text_view_first_image_title"
@@ -198,11 +215,11 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@id/button_add_content_first"
                 android:layout_marginBottom="15dp"
-                android:textSize="15sp"
                 android:background="@color/colorTransparentWhite"
                 android:hint="@string/image_title"
                 android:textAlignment="center"
                 android:textColorHint="@android:color/black"
+                android:textSize="15sp"
                 />
 
         </RelativeLayout>
@@ -228,23 +245,23 @@
                 android:id="@+id/button_add_content_second"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorYellow"
                 android:text="@string/add_content"
                 android:textColor="@color/colorGreen"
-                android:textSize="15sp"
-                android:layout_alignParentBottom="true"
-                android:background="@color/colorYellow"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/text_view_second_image_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
                 android:layout_above="@id/button_add_content_second"
                 android:layout_marginBottom="15dp"
                 android:background="@color/colorTransparentWhite"
                 android:hint="@string/image_title"
                 android:textAlignment="center"
                 android:textColorHint="@android:color/black"
+                android:textSize="15sp"
                 />
 
         </RelativeLayout>

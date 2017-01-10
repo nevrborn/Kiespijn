@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 interface GoogleApiRestInterface {
 
     @GET("/customsearch/v1")
-    Call<GoogleImageApiResponse> customSearch(@Query("key") String key, @Query("cx") String cx, @Query("q") String query);
+    Call<GoogleImageApiResponse> customSearch(@Query("key") String key, @Query("cx") String cx, @Query("q") String query, @Query("start") String index);
 
 }
 

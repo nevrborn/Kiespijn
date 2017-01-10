@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +46,9 @@ public class GoogleSearchFragment extends Fragment {
     private String mChosenURL;
     private List<CheckBox> mRadioButtonList;
     private List<ImageView> mImageViewList;
+    private android.widget.SearchView mSearchView;
+    private int mImageIndex = 1;
+    private int mTotalImageSize;
 
     public static GoogleSearchFragment newInstance(String searchString) {
         mSearchString = searchString;
@@ -67,6 +71,7 @@ public class GoogleSearchFragment extends Fragment {
         inflater.inflate(R.menu.menu_google_search, menu);
 
         MenuItem useImage = menu.findItem(R.id.menu_google_search_use);
+        MenuItem newSearch = menu.findItem(R.id.menu_google_search);
 
         useImage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -81,6 +86,16 @@ public class GoogleSearchFragment extends Fragment {
             }
         });
 
+        newSearch.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                mSearchView.setVisibility(View.VISIBLE);
+
+                return false;
+            }
+        });
+
     }
 
     @Nullable
@@ -90,6 +105,53 @@ public class GoogleSearchFragment extends Fragment {
 
         mPhotoRecylerView = (RecyclerView) view.findViewById(R.id.fragment_photo_gallery_recycler_view);
         mPhotoRecylerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+        mPhotoRecylerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (!recyclerView.canScrollVertically(dy)) {
+
+                    if (mImageIndex < (mTotalImageSize - 10)) {
+                        mImageIndex += 10;
+                    }
+
+                    getImages();
+                }
+            }
+        });
+
+        mSearchView = (android.widget.SearchView) view.findViewById(R.id.google_search_view);
+
+        mSearchView.setVisibility(View.GONE);
+
+        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        mSearchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                mSearchString = mSearchView.getQuery().toString();
+                getImages();
+                mSearchView.setVisibility(View.GONE);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
 
         return view;
     }
@@ -114,7 +176,7 @@ public class GoogleSearchFragment extends Fragment {
 
         GoogleApiRestInterface apiResponse = restAdapter.create(GoogleApiRestInterface.class);
 
-        Call<GoogleImageApiResponse> mGalleryResponse = apiResponse.customSearch(key, cx, mSearchString);
+        Call<GoogleImageApiResponse> mGalleryResponse = apiResponse.customSearch(key, cx, mSearchString, String.valueOf(mImageIndex));
 
         mGalleryResponse.enqueue(new Callback<GoogleImageApiResponse>() {
             @Override
@@ -127,6 +189,7 @@ public class GoogleSearchFragment extends Fragment {
 
                 mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
                 Log.v("mGalleryItems", String.valueOf(response.body().getGalleryItems().size()));
+                mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
 
                 if (mPhotoRecylerView != null) {
                     mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));

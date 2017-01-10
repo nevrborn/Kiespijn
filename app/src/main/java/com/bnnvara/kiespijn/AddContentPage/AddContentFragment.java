@@ -17,12 +17,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
+import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
 
 public class AddContentFragment extends Fragment {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_GALLERY = 2;
+
+    private static final String SEARCH_STRING = "search_string";
 
     private static Dilemma mDilemma;
     private static String mAnswerOption;
@@ -41,9 +44,11 @@ public class AddContentFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_content, container, false);
 
         TextView dilemmaTitle = (TextView) view.findViewById(R.id.textview_add_content_dilemma);
-        TextView answerText = (TextView) view.findViewById(R.id.textview_add_content_answer);
+        final TextView answerText = (TextView) view.findViewById(R.id.textview_add_content_answer);
         EditText editTextField = (EditText) view.findViewById(R.id.edittext_add_content);
-        Button photoButton = (Button) view.findViewById(R.id.button_add_photo);
+        Button takePhotoButton = (Button) view.findViewById(R.id.button_add_photo);
+        Button galleryButton = (Button) view.findViewById(R.id.button_add_gallery);
+        Button googleButton = (Button) view.findViewById(R.id.button_add_google);
         Button linkButton = (Button) view.findViewById(R.id.button_add_article);
         Button addButton = (Button) view.findViewById(R.id.button_add_content);
         Button cancelButton = (Button) view.findViewById(R.id.button_add_content_cancel);
@@ -54,7 +59,9 @@ public class AddContentFragment extends Fragment {
         dilemmaTitle.setTypeface(source_sans_extra_light);
         answerText.setTypeface(source_sans_bold);
         editTextField.setTypeface(source_sans_extra_light);
-        photoButton.setTypeface(source_sans_extra_light);
+        takePhotoButton.setTypeface(source_sans_extra_light);
+        galleryButton.setTypeface(source_sans_extra_light);
+        googleButton.setTypeface(source_sans_extra_light);
         linkButton.setTypeface(source_sans_extra_light);
         addButton.setTypeface(source_sans_bold);
         cancelButton.setTypeface(source_sans_bold);
@@ -68,10 +75,27 @@ public class AddContentFragment extends Fragment {
             answerText.setText(mDilemma.getTitlePhotoB());
         }
 
-        photoButton.setOnClickListener(new View.OnClickListener() {
+        takePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectImage();
+                cameraIntent();
+            }
+        });
+
+        galleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                galleryIntent();
+            }
+        });
+
+        googleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchString = answerText.getText().toString();
+                Intent i = new Intent(GoogleSearchActivity.newIntent(getActivity()));
+                i.putExtra(SEARCH_STRING, searchString);
+                startActivity(i);
             }
         });
 

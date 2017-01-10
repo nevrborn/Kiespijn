@@ -12,7 +12,7 @@
 
     // DILEMMA PAGE
     <string name="de_kies">DE KIES</string>
-    <string name="dilemma_main_text">Mijn familie wil mijn vader cremeren maar ik wil dat hij begraven wordt...</string>
+    <string name="dilemma_main_text">Mijn familie wil mijn vader cremeren maar ik wil ...</string>
     <string name="dilemma_main_text_short_version">Oh wat een dilemma. Wat moet ik kiezen?</string>
     <string name="dilemma_username">ANONIEM</string>
     <string name="dilemma_user_description">Vrouw | 31 jaar</string>
@@ -69,7 +69,7 @@
     <string name="image_title">image title</string>
     <string name="not_all_fields_filled">Niet alle velden zijn gevuld</string>
     <string name="use_image">Gebruik photo</string>
-    <string name="add_content">Voeg inhoud toe +</string>
+    <string name="add_content">Licht jouw antwoord toe +</string>
 
     // ADD CONTENT SCREEN
     <string name="add_content_hint">Waar denk je aan?</string>

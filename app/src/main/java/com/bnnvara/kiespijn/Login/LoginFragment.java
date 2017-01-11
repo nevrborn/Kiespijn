@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
+import com.bnnvara.kiespijn.FriendList.Friend;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.facebook.AccessToken;
@@ -226,7 +227,9 @@ public class LoginFragment extends Fragment {
 
                     JSONObject friend = friendsObject.getJSONObject(i);
                     String id = friend.getString("id");
-                    user.mFacebookFriendList.add(id);
+                    String name = friend.getString("name");
+                    Friend newFriend = new Friend(name, id, name);
+                    user.mFacebookFriendList.add(newFriend);
 
                     i += 1;
                 }

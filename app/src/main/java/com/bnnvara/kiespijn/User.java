@@ -1,9 +1,11 @@
 package com.bnnvara.kiespijn;
 
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
+import com.bnnvara.kiespijn.FriendList.Friend;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class User {
 
@@ -18,7 +20,7 @@ public class User {
     private String mProfilePictureURL;
     private DilemmaApiResponse mUserCreatedDilemmas;
     private DilemmaApiResponse mUserAnsweredDilemmas;
-    public List<String> mFacebookFriendList = new ArrayList<>();
+    public List<Friend> mFacebookFriendList = new ArrayList<>();
 
 
     private User() {
@@ -99,5 +101,13 @@ public class User {
 
     public void setProfilePictureURL(String profilePictureURL) {
         mProfilePictureURL = profilePictureURL;
+    }
+
+    public List<Friend> getFacebookFriendList() {
+        return mFacebookFriendList;
+    }
+
+    public void setFacebookFriendList(List<Friend> facebookFriendList) {
+        mFacebookFriendList = facebookFriendList;
     }
 }

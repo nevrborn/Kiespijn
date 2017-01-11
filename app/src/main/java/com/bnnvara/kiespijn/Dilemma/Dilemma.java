@@ -300,6 +300,17 @@ public class Dilemma implements Serializable {
 
     public Boolean isFromAFriend() {
         User user = User.getInstance();
-        return user.mFacebookFriendList.contains(mCreator_fb_id);
+
+        int i = 0;
+
+        while (i < user.mFacebookFriendList.size()) {
+            if (user.mFacebookFriendList.get(i).getFacebookID().equals(mCreator_fb_id)) {
+                return true;
+            }
+
+            i += 1;
+        }
+
+        return false;
     }
 }

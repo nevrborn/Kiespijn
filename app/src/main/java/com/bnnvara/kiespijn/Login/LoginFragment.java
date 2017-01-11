@@ -160,7 +160,7 @@ public class LoginFragment extends Fragment {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,friends,gender,birthday,picture{url}");
+        parameters.putString("fields", "id,name,friends{id,name,picture},gender,birthday,picture{url}");
 
         request.setParameters(parameters);
         Log.i(TAG, parameters.toString());
@@ -214,7 +214,6 @@ public class LoginFragment extends Fragment {
 
         try {
             JSONObject facebookFriends = object.getJSONObject("friends");
-
             JSONArray friendsObject = facebookFriends.getJSONArray("data");
             Log.i(TAG, "Facebook Friends Object is: " + friendsObject);
 
@@ -223,12 +222,20 @@ public class LoginFragment extends Fragment {
             int i = 0;
 
             if (friendsCount != 0) {
+
+                user.mFacebookFriendList.clear();
+
                 while (i < friendsCount) {
 
                     JSONObject friend = friendsObject.getJSONObject(i);
-                    String id = friend.getString("id");
-                    String name = friend.getString("name");
-                    Friend newFriend = new Friend(name, id, name);
+                    String friendID = friend.getString("id");
+                    String friendName = friend.getString("name");
+
+                    JSONObject friendPictureObject = friend.getJSONObject("picture");
+                    JSONObject friendPictureData = friendPictureObject.getJSONObject("data");
+                    String friendFacebookPictureURL = friendPictureData.getString("url");
+
+                    Friend newFriend = new Friend(friendName, friendID, friendFacebookPictureURL);
                     user.mFacebookFriendList.add(newFriend);
 
                     i += 1;

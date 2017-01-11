@@ -66,6 +66,10 @@
             android:label="Toelichting">
         </activity>
         <activity
+            android:name=".FriendList.FriendListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"/>

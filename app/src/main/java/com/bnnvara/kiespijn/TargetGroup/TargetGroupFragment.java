@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
+import com.bnnvara.kiespijn.FriendList.FriendListActivity;
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
 
@@ -116,7 +117,6 @@ public class TargetGroupFragment extends Fragment {
                 mDilemma.setFirstTimeToTargetGroup(false);
                 isHasChosen = true;
 
-
             }
         });
 
@@ -149,6 +149,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
 
                 gifView.setVisibility(View.VISIBLE);
+                isHasChosen = false;
 
                 Glide.with(getActivity())
                         .load(getRandomGifURL())
@@ -162,7 +163,6 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
 
-
             }
         });
 
@@ -170,9 +170,16 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isHasChosen) {
-                    Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
-                    i.putExtra(DILEMMA_OBJECT, mDilemma);
-                    startActivity(i);
+
+                    if (mDilemma.getIsToAll()) {
+                        Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
+                        i.putExtra(DILEMMA_OBJECT, mDilemma);
+                        startActivity(i);
+                    } else {
+                        Intent i = FriendListActivity.newIntent(getActivity(), mDilemma);
+                        startActivity(i);
+                    }
+
                 } else {
                     Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
                 }

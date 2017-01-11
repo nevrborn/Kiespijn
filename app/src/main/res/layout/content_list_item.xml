@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:weightSum="1"
+              android:padding="8dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@mipmap/ic_launcher"
+            android:id="@+id/imageview_content_profile_picture"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_content_name"
+                android:layout_width="match_parent"
+                android:hint="Jarle Matland"
+                android:gravity="center|left"
+                android:textColor="@color/colorRed"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:id="@+id/textview_content_info"
+                android:layout_width="match_parent"
+                android:hint="Man, 24, Amsterdam"
+                android:layout_marginLeft="15dp"
+                android:textSize="11sp"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview_content_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:hint="I love it here!"/>
+
+    <ImageView
+        android:id="@+id/imageview_content_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/textview_content_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorGreen"/>
+
+</LinearLayout>

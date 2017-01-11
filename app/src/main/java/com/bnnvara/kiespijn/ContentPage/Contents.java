@@ -2,10 +2,11 @@ package com.bnnvara.kiespijn.ContentPage;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Contents {
+public class Contents implements Serializable {
 
     @SerializedName("optionA")
     private List<Content> mOptionAContent = new ArrayList<>();

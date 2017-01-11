@@ -2,7 +2,9 @@ package com.bnnvara.kiespijn.ContentPage;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Content {
+import java.io.Serializable;
+
+public class Content implements Serializable {
 
     @SerializedName("text")
     private String mText;
@@ -30,6 +32,9 @@ public class Content {
 
     @SerializedName("user_fb_photo_link")
     private String mUserFbPhoto;
+
+    public Content() {
+    }
 
     public Content(String text, Boolean isAPhoto, String userFbName, String userFbID, String userFbAge, String userFbGender, String userFbPhoto) {
         mText = text;

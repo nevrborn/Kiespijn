@@ -324,7 +324,7 @@ public class DilemmaFragment extends Fragment {
         List<String> mFacebookIDs = new ArrayList<>();
         mFacebookIDs.add("1272797916114496");
         mFacebookIDs.add("103858760112750");
-        mFacebookIDs.add("10210277093237768");
+        mFacebookIDs.add("10157925351030158");
         Answer optionA = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs);
         Answer optionB = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs);
         replies1.setOptionAAnswers(optionA);
@@ -356,7 +356,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setIsToAll("true");
         Replies replies2 = new Replies();
         List<String> mFacebookIDs2 = new ArrayList<>();
-        mFacebookIDs2.add("1272797916114496");
+        mFacebookIDs2.add("10157925351030158");
         mFacebookIDs2.add("103858760112750");
         mFacebookIDs2.add("10210277093237768");
         Answer optionA2 = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs2);
@@ -391,7 +391,7 @@ public class DilemmaFragment extends Fragment {
         Replies replies3 = new Replies();
         List<String> mFacebookIDs3 = new ArrayList<>();
         mFacebookIDs3.add("1272797916114496");
-        mFacebookIDs3.add("103858760112750");
+        mFacebookIDs3.add("10157925351030158");
         mFacebookIDs3.add("10210277093237768");
         Answer optionA3 = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs3);
         Answer optionB3 = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs3);

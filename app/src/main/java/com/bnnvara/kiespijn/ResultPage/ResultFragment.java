@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.ContentPage.ContentPageActivity;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
@@ -68,7 +69,7 @@ public class ResultFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result_page, container, false);
 
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
@@ -95,13 +96,15 @@ public class ResultFragment extends Fragment {
         mAddedContentButtonA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(ContentPageActivity.newIntent(getContext(), mDilemma, "A"));
+                startActivity(intent);
             }
         });
         mAddedContentButtonB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(ContentPageActivity.newIntent(getContext(), mDilemma, "B"));
+                startActivity(intent);
             }
         });
         mSeekBarTotalLeft.setOnTouchListener(new View.OnTouchListener() {

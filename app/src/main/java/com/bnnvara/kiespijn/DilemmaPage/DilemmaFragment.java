@@ -1,6 +1,5 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,12 +21,13 @@ import android.widget.Toast;
 
 import com.bnnvara.kiespijn.AddContentPage.AddContentActivity;
 import com.bnnvara.kiespijn.ApiEndpointInterface;
+import com.bnnvara.kiespijn.ContentPage.Content;
+import com.bnnvara.kiespijn.ContentPage.Contents;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Replies;
-import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
@@ -73,12 +73,14 @@ public class DilemmaFragment extends Fragment {
     private Button mDilemmaFirstAddContent;
     private Button mDilemmaSecondAddContent;
     private Button mSkipDilemma;
+    private ImageView mFriendIcon;
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
     private Dilemma mDilemma;
     private int mCurrentIndex;
     private String mUserFbId; // = "101283870370822";
+    private Boolean mFilterFriends = false;
 
 
     public static Fragment newInstance() {
@@ -116,8 +118,9 @@ public class DilemmaFragment extends Fragment {
         mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
         mDilemmaSecondAddContent = (Button) view.findViewById(R.id.button_add_content_second);
         mSkipDilemma = (Button) view.findViewById(R.id.button_skip_dilemma);
+        mFriendIcon = (ImageView) view.findViewById(R.id.imageview_friends);
 
-        filterSwitch.setChecked(true);
+        filterSwitch.setChecked(false);
 
         // set up the listeners
         mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
@@ -155,10 +158,13 @@ public class DilemmaFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (filterSwitch.isChecked()) {
-                    // filter dilemmas to only friends
-                    resetCurrentIndex();
+                    mFilterFriends = true;
+
+                    if (!mDilemma.isFromAFriend()) {
+                        updateCurrentIndex();
+                    }
                 } else {
-                    // view all dilemmas
+                    mFilterFriends = false;
                     resetCurrentIndex();
                 }
             }
@@ -190,11 +196,22 @@ public class DilemmaFragment extends Fragment {
     private void updateCurrentIndex() {
         if (mCurrentIndex == mDilemmaList.size() - 1) {
             showNoDilemmas();
+            return;
         } else {
             mCurrentIndex++;
         }
         mDilemma = mDilemmaList.get(mCurrentIndex);
-        updateUi();
+
+        if (!mFilterFriends) {
+            updateUi();
+        } else {
+            if (mDilemma.isFromAFriend()) {
+                updateUi();
+            } else {
+                updateCurrentIndex();
+            }
+        }
+
     }
 
     private void resetCurrentIndex() {
@@ -214,6 +231,14 @@ public class DilemmaFragment extends Fragment {
         if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
             updateCurrentIndex();
             return;
+        }
+
+        // check to see if the dilemma is NOT FOR ALL and then check to see if its from a friend
+        if (!mDilemma.getIsToAll()) {
+            if (!mDilemma.isFromAFriend()) {
+                updateCurrentIndex();
+                return;
+            }
         }
 
         // make background info icon invisible if background info is not present
@@ -264,6 +289,12 @@ public class DilemmaFragment extends Fragment {
             mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
         }
 
+        if (mDilemma.isFromAFriend()) {
+            mFriendIcon.setVisibility(View.VISIBLE);
+        } else {
+            mFriendIcon.setVisibility(View.GONE);
+        }
+
         // set image titles
         mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
         mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
@@ -280,6 +311,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setCreator_name("Jarle Matland");
         dilemma_1.setCreator_age("32");
         dilemma_1.setCreator_sex("Man");
+        dilemma_1.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c99.0.706.706/s320x320/602095_10153281849525158_1999443146_n.jpg?oh=3f4114034115e081fea631c0b4d30335&oe=58E2B1E7");
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
         dilemma_1.setTitlePhotoA("Vase");
@@ -289,15 +321,21 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies1 = new Replies();
-        List<Answer> option1AnswerList = new ArrayList<>();
-        List<Answer> option2AnswerList = new ArrayList<>();
-        option1AnswerList.add(new Answer("awef-2398"));
-        option1AnswerList.add(new Answer("erg-rth98"));
-        option2AnswerList.add(new Answer("qweasd-999"));
-        option2AnswerList.add(new Answer("lkmlk-8930"));
-        replies1.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
-        replies1.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
+        List<String> mFacebookIDs = new ArrayList<>();
+        mFacebookIDs.add("1272797916114496");
+        mFacebookIDs.add("103858760112750");
+        mFacebookIDs.add("10210277093237768");
+        Answer optionA = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs);
+        Answer optionB = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs);
+        replies1.setOptionAAnswers(optionA);
+        replies1.setOptionBAnswers(optionB);
         dilemma_1.setReplies(replies1);
+        Contents contents1 = new Contents();
+        Content contentA = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        Content contentB = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        contents1.addContentToOptionA(contentA);
+        contents1.addContentToOptionB(contentB);
+        dilemma_1.setContents(contents1);
 
         Dilemma dilemma_2 = new Dilemma();
         dilemma_2.setTitle("Moet ik als man alleen toch ook een kerstboom optuigen?");
@@ -307,6 +345,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setCreator_name("Michael McDonaldberg");
         dilemma_2.setCreator_age("45");
         dilemma_2.setCreator_sex("Man");
+        dilemma_2.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c99.0.706.706/s320x320/602095_10153281849525158_1999443146_n.jpg?oh=3f4114034115e081fea631c0b4d30335&oe=58E2B1E7");
         dilemma_2.setPhotoA("http://cvandaag.nl/wp-content/uploads/2015/12/Geen-Kerst-2.jpg");
         dilemma_2.setPhotoB("https://www.schoolplaten.com/img/crafts-att/16310-att%20kerstboom%201.jpg");
         dilemma_2.setTitlePhotoA("Geen boom");
@@ -316,24 +355,31 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies2 = new Replies();
-        option1AnswerList = new ArrayList<>();
-        option2AnswerList = new ArrayList<>();
-        option1AnswerList.add(new Answer("awef-2398"));
-        option1AnswerList.add(new Answer("erg-rth98"));
-        option2AnswerList.add(new Answer("qweasd-999"));
-        option2AnswerList.add(new Answer("lkmlk-8930"));
-        replies2.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
-        replies2.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
+        List<String> mFacebookIDs2 = new ArrayList<>();
+        mFacebookIDs2.add("1272797916114496");
+        mFacebookIDs2.add("103858760112750");
+        mFacebookIDs2.add("10210277093237768");
+        Answer optionA2 = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs2);
+        Answer optionB2 = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs2);
+        replies2.setOptionAAnswers(optionA2);
+        replies2.setOptionBAnswers(optionB2);
         dilemma_2.setReplies(replies2);
+        Contents contents2 = new Contents();
+        Content contentA2 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        Content contentB2 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        contents2.addContentToOptionA(contentA2);
+        contents2.addContentToOptionB(contentB2);
+        dilemma_2.setContents(contents2);
 
         Dilemma dilemma_3 = new Dilemma();
         dilemma_3.setTitle("Ik heb 100 euro. Welk schilderij zal ik kopen?");
         dilemma_3.setBackgroundInfo("");
         dilemma_3.setUuid();
-        dilemma_3.setCreator_fb_id("100871300412741");
-        dilemma_3.setCreator_name("Marietje Vergeetmenietje");
-        dilemma_3.setCreator_age("21");
+        dilemma_3.setCreator_fb_id("10210277093237768");
+        dilemma_3.setCreator_name("Eliza Cambre");
+        dilemma_3.setCreator_age("25");
         dilemma_3.setCreator_sex("Vrouw");
+        dilemma_3.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
         dilemma_3.setPhotoA("https://nyoobserver.files.wordpress.com/2013/12/vermeer-670-girl-with-a-pearl-earring_2000.jpg");
         dilemma_3.setPhotoB("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg/266px-Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg");
         dilemma_3.setTitlePhotoA("Meisje met een oorbel");
@@ -343,15 +389,21 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setIsAnonymous("false");
         dilemma_1.setIsToAll("true");
         Replies replies3 = new Replies();
-        option1AnswerList = new ArrayList<>();
-        option2AnswerList = new ArrayList<>();
-        option1AnswerList.add(new Answer("awef-2398"));
-        option1AnswerList.add(new Answer("erg-rth98"));
-        option2AnswerList.add(new Answer("qweasd-999"));
-        option2AnswerList.add(new Answer("lkmlk-8930"));
-        replies3.setOption1AnswerList((ArrayList<Answer>) option1AnswerList);
-        replies3.setOption2AnswerList((ArrayList<Answer>) option2AnswerList);
+        List<String> mFacebookIDs3 = new ArrayList<>();
+        mFacebookIDs3.add("1272797916114496");
+        mFacebookIDs3.add("103858760112750");
+        mFacebookIDs3.add("10210277093237768");
+        Answer optionA3 = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs3);
+        Answer optionB3 = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs3);
+        replies3.setOptionAAnswers(optionA3);
+        replies3.setOptionBAnswers(optionB3);
         dilemma_3.setReplies(replies3);
+        Contents contents3 = new Contents();
+        Content contentA3 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        Content contentB3 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        contents3.addContentToOptionA(contentA3);
+        contents3.addContentToOptionB(contentB3);
+        dilemma_3.setContents(contents3);
 
         mDilemmaList.add(dilemma_1);
         mDilemmaList.add(dilemma_2);

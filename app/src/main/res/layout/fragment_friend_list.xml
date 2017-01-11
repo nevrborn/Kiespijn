@@ -1,50 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1"
     android:background="@color/colorGrey"
+    android:orientation="vertical"
     >
-
-    <LinearLayout
-        android:id="@+id/linear_button_friend_list"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        >
-
-        <Button
-            android:id="@+id/button_previous_fromwho"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/ic_action_previous_arrow"
-            />
-
-        <Button
-            android:id="@+id/button_next_fromwho"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/ic_action_next_arrow"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_gravity="center"
-                  android:layout_above="@id/linear_button_friend_list"
-                  android:background="@color/colorGrey">
 
         <ImageView
             android:id="@+id/imageview_fromwho_user"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_gravity="center"
             android:background="@mipmap/ic_profile"
             android:backgroundTint="@color/colorYellow"
@@ -65,13 +32,31 @@
             android:textColor="@color/colorGreen"
             android:background="@color/colorYellow"/>
 
-        <ListView
-            android:id="@+id/listview_friend_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+    <SearchView
+        android:id="@+id/searchview_friends"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="8dp"/>
+
+    <ListView
+        android:id="@+id/listview_friend_list"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
 
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/button_previous_fromwho"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:padding="8dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:background="@color/colorGreen"
+        android:textColor="@color/colorYellow"
+        android:text="FINISHED"
+        />
 
 
-</RelativeLayout>
+</LinearLayout>

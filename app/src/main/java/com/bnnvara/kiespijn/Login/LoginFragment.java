@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
+import com.bnnvara.kiespijn.FriendList.Friend;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.facebook.AccessToken;
@@ -32,10 +33,10 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class LoginFragment extends Fragment {
 
@@ -44,8 +45,6 @@ public class LoginFragment extends Fragment {
     // Facebook Parameters
     private CallbackManager mCallbackManager;
     private static Boolean mIsLoggingOut = false;
-
-    private Map<String, String> mFacebookFriendsMap = new HashMap<>();
 
     public LoginFragment() {
         // Required empty public constructor
@@ -161,7 +160,7 @@ public class LoginFragment extends Fragment {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,friends,gender,birthday,picture{url}");
+        parameters.putString("fields", "id,name,friends{id,name,picture},gender,birthday,picture{url}");
 
         request.setParameters(parameters);
         Log.i(TAG, parameters.toString());
@@ -215,7 +214,6 @@ public class LoginFragment extends Fragment {
 
         try {
             JSONObject facebookFriends = object.getJSONObject("friends");
-
             JSONArray friendsObject = facebookFriends.getJSONArray("data");
             Log.i(TAG, "Facebook Friends Object is: " + friendsObject);
 
@@ -224,12 +222,21 @@ public class LoginFragment extends Fragment {
             int i = 0;
 
             if (friendsCount != 0) {
+
+                user.mFacebookFriendList.clear();
+
                 while (i < friendsCount) {
 
                     JSONObject friend = friendsObject.getJSONObject(i);
-                    String name = friend.getString("name");
-                    String id = friend.getString("id");
-                    mFacebookFriendsMap.put(name, id);
+                    String friendID = friend.getString("id");
+                    String friendName = friend.getString("name");
+
+                    JSONObject friendPictureObject = friend.getJSONObject("picture");
+                    JSONObject friendPictureData = friendPictureObject.getJSONObject("data");
+                    String friendFacebookPictureURL = friendPictureData.getString("url");
+
+                    Friend newFriend = new Friend(friendName, friendID, friendFacebookPictureURL);
+                    user.mFacebookFriendList.add(newFriend);
 
                     i += 1;
                 }

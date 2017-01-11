@@ -1,7 +1,6 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import android.util.Log;
-
+import com.bnnvara.kiespijn.ContentPage.Contents;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +26,9 @@ public class Dilemma implements Serializable {
 
     @SerializedName("creator_fb_age")
     private String mCreator_age;
+
+    @SerializedName("creator_fb_url")
+    private String mCreator_picture_url;
 
     @SerializedName("title")
     private String mTitle;
@@ -61,10 +63,13 @@ public class Dilemma implements Serializable {
     @SerializedName("replies")
     private Replies mReplies;
 
+    @SerializedName("content")
+    private Contents mContents;
+
     private Boolean isFirstTimeToTargetGroup = true;
     private Boolean isFirstTimeToFromWho = true;
 
-    private String mCreator_picture_url;
+
 
     private int mTimeLeft;
 
@@ -261,14 +266,21 @@ public class Dilemma implements Serializable {
         return mTimeLeft;
     }
 
+    public Contents getContents() {
+        return mContents;
+    }
+
+    public void setContents(Contents contents) {
+        mContents = contents;
+    }
+
     public boolean isAnsweredByCurrentUser() {
         String userFbId = User.getInstance().getUserKey();
-        List<Answer> answerList = this.getReplies().getOption1AnswerList();
-        answerList.addAll(this.getReplies().getOption2AnswerList());
+        List<String> answerList = this.getReplies().getOptionAAnswers().getAnswerFacebookIDs();
+        answerList.addAll(this.getReplies().getOptionBAnswers().getAnswerFacebookIDs());
 
-        for (Answer answer : answerList) {
-            Log.i("Dilemma", answer.getUserFbId());
-            if (answer.getUserFbId().equals(userFbId)) {
+        for (String answerID : answerList) {
+            if (answerID.contains(userFbId)) {
                 return true;
             }
         }
@@ -296,5 +308,21 @@ public class Dilemma implements Serializable {
             ageToShow = "Leeftijd onbekend";
         }
         return ageToShow;
+    }
+
+    public Boolean isFromAFriend() {
+        User user = User.getInstance();
+
+        int i = 0;
+
+        while (i < user.mFacebookFriendList.size()) {
+            if (user.mFacebookFriendList.get(i).getFacebookID().equals(mCreator_fb_id)) {
+                return true;
+            }
+
+            i += 1;
+        }
+
+        return false;
     }
 }

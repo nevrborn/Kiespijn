@@ -49,48 +49,7 @@ public class TargetGroupFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        mListOfCallers.add(R.string.targetgroup_call_someone);
-        mListOfCallers.add(R.string.targetgroup_call_someone_2);
-        mListOfCallers.add(R.string.targetgroup_call_someone_3);
-        mListOfCallers.add(R.string.targetgroup_call_someone_4);
-        mListOfCallers.add(R.string.targetgroup_call_someone_5);
-        mListOfCallers.add(R.string.targetgroup_call_someone_6);
-        mListOfCallers.add(R.string.targetgroup_call_someone_7);
-        mListOfCallers.add(R.string.targetgroup_call_someone_8);
-        mListOfCallers.add(R.string.targetgroup_call_someone_9);
-        mListOfCallers.add(R.string.targetgroup_call_someone_10);
-        mListOfCallers.add(R.string.targetgroup_call_someone_11);
-        mListOfCallers.add(R.string.targetgroup_call_someone_12);
-        mListOfCallers.add(R.string.targetgroup_call_someone_13);
-
-        mListOfGifs.add("http://i.imgur.com/XVLXwM7.gif");
-        mListOfGifs.add("https://i.imgur.com/lVlPvCB.gif");
-        mListOfGifs.add("https://i.imgur.com/NMEguFf.gif");
-        mListOfGifs.add("https://i.imgur.com/m3welo2.gif");
-        mListOfGifs.add("https://i.imgur.com/CbRpymD.gif");
-        mListOfGifs.add("https://i.imgur.com/aLEjgN7.gif");
-        mListOfGifs.add("https://i.imgur.com/ujqkMEH.gif");
-        mListOfGifs.add("https://i.imgur.com/IlhEGbl.gif");
-        mListOfGifs.add("https://i.imgur.com/rZgwuld.gif");
-        mListOfGifs.add("https://i.imgur.com/JfDYRKv.gif");
-        mListOfGifs.add("https://i.imgur.com/0glopxW.gif");
-        mListOfGifs.add("https://i.imgur.com/rR8mwEL.gif");
-        mListOfGifs.add("https://i.imgur.com/Dgo1nxQ.gif");
-        mListOfGifs.add("https://i.imgur.com/QjbIiBA.gif");
-        mListOfGifs.add("https://i.imgur.com/baCcvq8.gif");
-        mListOfGifs.add("https://i.imgur.com/eEhpf79.gif");
-        mListOfGifs.add("https://i.imgur.com/yeSjKv2.gif");
-        mListOfGifs.add("https://i.imgur.com/AOBXHOO.gif");
-        mListOfGifs.add("https://i.imgur.com/SxuKpa8.gif");
-        mListOfGifs.add("https://i.imgur.com/tEUlfWt.gif");
-        mListOfGifs.add("https://i.imgur.com/5wkR8Sj.gif");
-        mListOfGifs.add("https://i.imgur.com/DBtFXw2.gif");
-        mListOfGifs.add("https://i.imgur.com/NTtD2QI.gif");
-        mListOfGifs.add("https://i.imgur.com/3wcLG9u.gif");
-        mListOfGifs.add("https://i.imgur.com/iZA2t5H.gif");
-        mListOfGifs.add("https://i.imgur.com/cGIBrMa.gif");
-
-
+        updateLists();
     }
 
     @Nullable
@@ -254,8 +213,60 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private String getRandomGifURL() {
-        int randomIndex = 1 + (int) (Math.random() * ((25 - 1)));
+        int randomIndex = 1 + (int) (Math.random() * ((35 - 1)));
         return mListOfGifs.get(randomIndex);
+    }
+
+    public void updateLists() {
+        mListOfCallers.add(R.string.targetgroup_call_someone);
+        mListOfCallers.add(R.string.targetgroup_call_someone_2);
+        mListOfCallers.add(R.string.targetgroup_call_someone_3);
+        mListOfCallers.add(R.string.targetgroup_call_someone_4);
+        mListOfCallers.add(R.string.targetgroup_call_someone_5);
+        mListOfCallers.add(R.string.targetgroup_call_someone_6);
+        mListOfCallers.add(R.string.targetgroup_call_someone_7);
+        mListOfCallers.add(R.string.targetgroup_call_someone_8);
+        mListOfCallers.add(R.string.targetgroup_call_someone_9);
+        mListOfCallers.add(R.string.targetgroup_call_someone_10);
+        mListOfCallers.add(R.string.targetgroup_call_someone_11);
+        mListOfCallers.add(R.string.targetgroup_call_someone_12);
+        mListOfCallers.add(R.string.targetgroup_call_someone_13);
+
+        mListOfGifs.add("http://i.imgur.com/XVLXwM7.gif");
+        mListOfGifs.add("https://i.imgur.com/lVlPvCB.gif");
+        mListOfGifs.add("https://i.imgur.com/NMEguFf.gif");
+        mListOfGifs.add("https://i.imgur.com/m3welo2.gif");
+        mListOfGifs.add("https://i.imgur.com/CbRpymD.gif");
+        mListOfGifs.add("https://i.imgur.com/aLEjgN7.gif");
+        mListOfGifs.add("https://i.imgur.com/ujqkMEH.gif");
+        mListOfGifs.add("https://i.imgur.com/IlhEGbl.gif");
+        mListOfGifs.add("https://i.imgur.com/rZgwuld.gif");
+        mListOfGifs.add("https://i.imgur.com/JfDYRKv.gif");
+        mListOfGifs.add("https://i.imgur.com/0glopxW.gif");
+        mListOfGifs.add("https://i.imgur.com/rR8mwEL.gif");
+        mListOfGifs.add("https://i.imgur.com/Dgo1nxQ.gif");
+        mListOfGifs.add("https://i.imgur.com/QjbIiBA.gif");
+        mListOfGifs.add("https://i.imgur.com/baCcvq8.gif");
+        mListOfGifs.add("https://i.imgur.com/eEhpf79.gif");
+        mListOfGifs.add("https://i.imgur.com/yeSjKv2.gif");
+        mListOfGifs.add("https://i.imgur.com/AOBXHOO.gif");
+        mListOfGifs.add("https://i.imgur.com/SxuKpa8.gif");
+        mListOfGifs.add("https://i.imgur.com/tEUlfWt.gif");
+        mListOfGifs.add("https://i.imgur.com/5wkR8Sj.gif");
+        mListOfGifs.add("https://i.imgur.com/DBtFXw2.gif");
+        mListOfGifs.add("https://i.imgur.com/NTtD2QI.gif");
+        mListOfGifs.add("https://i.imgur.com/3wcLG9u.gif");
+        mListOfGifs.add("https://i.imgur.com/iZA2t5H.gif");
+        mListOfGifs.add("https://i.imgur.com/cGIBrMa.gif");
+        mListOfGifs.add("http://i.imgur.com/XR1DhfB.gif");
+        mListOfGifs.add("https://media.giphy.com/media/eYgVBZKw2LG6Y/giphy.gif");
+        mListOfGifs.add("https://media.giphy.com/media/LZElUsjl1Bu6c/giphy.gif");
+        mListOfGifs.add("https://media.giphy.com/media/QKKV7KFrG9XMY/giphy.gif");
+        mListOfGifs.add("https://media.giphy.com/media/JltOMwYmi0VrO/giphy.gif");
+        mListOfGifs.add("https://media.giphy.com/media/r1HGFou3mUwMw/giphy.gif");
+        mListOfGifs.add("https://media.giphy.com/media/F8bo1LU5U5ApG/giphy.gif");
+        mListOfGifs.add("https://media.giphy.com/media/QtG5CHQMMkyn6/giphy.gif");
+        mListOfGifs.add("https://media.giphy.com/media/8yeOM7vQVmoBa/giphy.gif");
     }
 
 

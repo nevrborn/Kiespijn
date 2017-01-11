@@ -8,27 +8,25 @@ import java.util.List;
 public class Replies implements Serializable{
 
     @SerializedName("optionA")
-    private List<Answer> mOption1AnswerList;
+    private Answer mOptionAAnswers;
 
 
     @SerializedName("optionB")
-    private List<Answer> mOption2AnswerList;
+    private Answer mOptionBAnswers;
 
-
-
-    public List<Answer> getOption1AnswerList() {
-        return mOption1AnswerList;
+    public Answer getOptionAAnswers() {
+        return mOptionAAnswers;
     }
 
-    public void setOption1AnswerList(List<Answer> option1AnswerList) {
-        mOption1AnswerList = option1AnswerList;
+    public void setOptionAAnswers(Answer optionAAnswers) {
+        mOptionAAnswers = optionAAnswers;
     }
 
-    public List<Answer> getOption2AnswerList() {
-        return mOption2AnswerList;
+    public Answer getOptionBAnswers() {
+        return mOptionBAnswers;
     }
 
-    public void setOption2AnswerList(List<Answer> option2AnswerList) {
-        mOption2AnswerList = option2AnswerList;
+    public void setOptionBAnswers(Answer optionBAnswers) {
+        mOptionBAnswers = optionBAnswers;
     }
 }

@@ -305,4 +305,9 @@ public class LoginFragment extends Fragment {
         return accessToken != null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((LoginActivity)getActivity()).hideStatusBar();
+    }
 }

@@ -28,6 +28,9 @@ public class Dilemma implements Serializable {
     @SerializedName("creator_fb_age")
     private String mCreator_age;
 
+    @SerializedName("creator_fb_url")
+    private String mCreator_picture_url;
+
     @SerializedName("title")
     private String mTitle;
 
@@ -64,7 +67,7 @@ public class Dilemma implements Serializable {
     private Boolean isFirstTimeToTargetGroup = true;
     private Boolean isFirstTimeToFromWho = true;
 
-    private String mCreator_picture_url;
+
 
     private int mTimeLeft;
 
@@ -263,12 +266,11 @@ public class Dilemma implements Serializable {
 
     public boolean isAnsweredByCurrentUser() {
         String userFbId = User.getInstance().getUserKey();
-        List<Answer> answerList = this.getReplies().getOption1AnswerList();
-        answerList.addAll(this.getReplies().getOption2AnswerList());
+        List<String> answerList = this.getReplies().getOptionAAnswers().getAnswerFacebookIDs();
+        answerList.addAll(this.getReplies().getOptionBAnswers().getAnswerFacebookIDs());
 
-        for (Answer answer : answerList) {
-            Log.i("Dilemma", answer.getUserFbId());
-            if (answer.getUserFbId().equals(userFbId)) {
+        for (String answerID : answerList) {
+            if (answerID.contains(userFbId)) {
                 return true;
             }
         }

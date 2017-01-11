@@ -18,6 +18,7 @@ public class User {
     private String mSex;
     private String mAge;
     private String mProfilePictureURL;
+    private String mHometown;
     private DilemmaApiResponse mUserCreatedDilemmas;
     private DilemmaApiResponse mUserAnsweredDilemmas;
     public List<Friend> mFacebookFriendList = new ArrayList<>();
@@ -109,5 +110,13 @@ public class User {
 
     public void setFacebookFriendList(List<Friend> facebookFriendList) {
         mFacebookFriendList = facebookFriendList;
+    }
+
+    public String getHometown() {
+        return mHometown;
+    }
+
+    public void setHometown(String hometown) {
+        mHometown = hometown;
     }
 }

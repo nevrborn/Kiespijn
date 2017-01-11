@@ -315,6 +315,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
         dilemma_1.setTitlePhotoA("Vase");
+        dilemma_1.setCreator_hometown("Amsterdam");
         dilemma_1.setTitlePhotoB("Box");
         dilemma_1.setDeadline(12);
         dilemma_1.setCreatedAt();
@@ -331,8 +332,8 @@ public class DilemmaFragment extends Fragment {
         replies1.setOptionBAnswers(optionB);
         dilemma_1.setReplies(replies1);
         Contents contents1 = new Contents();
-        Content contentA = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
-        Content contentB = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        Content contentA = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentB = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
         contents1.addContentToOptionA(contentA);
         contents1.addContentToOptionB(contentB);
         dilemma_1.setContents(contents1);
@@ -345,6 +346,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setCreator_name("Michael McDonaldberg");
         dilemma_2.setCreator_age("45");
         dilemma_2.setCreator_sex("Man");
+        dilemma_2.setCreator_hometown("Amsterdam");
         dilemma_2.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c99.0.706.706/s320x320/602095_10153281849525158_1999443146_n.jpg?oh=3f4114034115e081fea631c0b4d30335&oe=58E2B1E7");
         dilemma_2.setPhotoA("http://cvandaag.nl/wp-content/uploads/2015/12/Geen-Kerst-2.jpg");
         dilemma_2.setPhotoB("https://www.schoolplaten.com/img/crafts-att/16310-att%20kerstboom%201.jpg");
@@ -365,8 +367,8 @@ public class DilemmaFragment extends Fragment {
         replies2.setOptionBAnswers(optionB2);
         dilemma_2.setReplies(replies2);
         Contents contents2 = new Contents();
-        Content contentA2 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
-        Content contentB2 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        Content contentA2 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentB2 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
         contents2.addContentToOptionA(contentA2);
         contents2.addContentToOptionB(contentB2);
         dilemma_2.setContents(contents2);
@@ -379,6 +381,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setCreator_name("Eliza Cambre");
         dilemma_3.setCreator_age("25");
         dilemma_3.setCreator_sex("Vrouw");
+        dilemma_3.setCreator_hometown("Amsterdam");
         dilemma_3.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
         dilemma_3.setPhotoA("https://nyoobserver.files.wordpress.com/2013/12/vermeer-670-girl-with-a-pearl-earring_2000.jpg");
         dilemma_3.setPhotoB("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg/266px-Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg");
@@ -399,8 +402,8 @@ public class DilemmaFragment extends Fragment {
         replies3.setOptionBAnswers(optionB3);
         dilemma_3.setReplies(replies3);
         Contents contents3 = new Contents();
-        Content contentA3 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
-        Content contentB3 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        Content contentA3 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentB3 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
         contents3.addContentToOptionA(contentA3);
         contents3.addContentToOptionB(contentB3);
         dilemma_3.setContents(contents3);

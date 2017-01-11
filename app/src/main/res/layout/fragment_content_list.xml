@@ -8,6 +8,19 @@
     android:padding="10dp"
     >
 
+    <TextView
+        android:id="@+id/content_option_text"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:hint="Option Text"
+        android:textAlignment="center"
+        android:elevation="5dp"
+        android:background="@color/colorGreen"
+        android:textColor="@color/colorYellow"
+        android:layout_marginBottom="5dp"/>
+
     <android.support.v7.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_content_view_recycler_view"

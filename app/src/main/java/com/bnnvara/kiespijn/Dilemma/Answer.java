@@ -22,6 +22,9 @@ public class Answer implements Serializable {
     @SerializedName("answer_from_agegroup_3")
     private String mAnswerFromAgeGroup3;
 
+    @SerializedName("answer_from_agegroup_4")
+    private String mAnswerFromAgeGroup4;
+
     @SerializedName("answer_from_same_location")
     private String mAnswerFromSameLocation;
 
@@ -31,12 +34,13 @@ public class Answer implements Serializable {
     public Answer() {
     }
 
-    public Answer(String answerFromMen, String answerFromWomen, String answerFromAgeGroup1, String answerFromAgeGroup2, String answerFromAgeGroup3, String answerFromSameLocation, List<String> answerFacebookIDs) {
+    public Answer(String answerFromMen, String answerFromWomen, String answerFromAgeGroup1, String answerFromAgeGroup2, String answerFromAgeGroup3, String answerFromAgeGroup4, String answerFromSameLocation, List<String> answerFacebookIDs) {
         mAnswerFromMen = answerFromMen;
         mAnswerFromWomen = answerFromWomen;
         mAnswerFromAgeGroup1 = answerFromAgeGroup1;
         mAnswerFromAgeGroup2 = answerFromAgeGroup2;
         mAnswerFromAgeGroup3 = answerFromAgeGroup3;
+        mAnswerFromAgeGroup4 = answerFromAgeGroup4;
         mAnswerFromSameLocation = answerFromSameLocation;
         mAnswerFacebookIDs = answerFacebookIDs;
     }
@@ -109,6 +113,20 @@ public class Answer implements Serializable {
         int answer = Integer.parseInt(getAnswerFromAgeGroup3());
         answer += 1;
         setAnswerFromAgeGroup3(Integer.toString(answer));
+    }
+
+    public String getAnswerFromAgeGroup4() {
+        return mAnswerFromAgeGroup4;
+    }
+
+    public void setAnswerFromAgeGroup4(String answerFromAgeGroup4) {
+        mAnswerFromAgeGroup4 = answerFromAgeGroup4;
+    }
+
+    public void addAnswerCountFromAgeGroup4() {
+        int answer = Integer.parseInt(getAnswerFromAgeGroup4());
+        answer += 1;
+        setAnswerFromAgeGroup4(Integer.toString(answer));
     }
 
     public String getAnswerFromSameLocation() {

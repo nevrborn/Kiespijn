@@ -2,6 +2,7 @@ package com.bnnvara.kiespijn.Dilemma;
 
 import android.util.Log;
 
+import com.bnnvara.kiespijn.ContentPage.ContentProvider;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;
 
@@ -63,6 +64,9 @@ public class Dilemma implements Serializable {
 
     @SerializedName("replies")
     private Replies mReplies;
+
+    @SerializedName("content")
+    private ContentProvider mContentProvider;
 
     private Boolean isFirstTimeToTargetGroup = true;
     private Boolean isFirstTimeToFromWho = true;
@@ -262,6 +266,14 @@ public class Dilemma implements Serializable {
 
     public int getTimeLeft() {
         return mTimeLeft;
+    }
+
+    public ContentProvider getContentProvider() {
+        return mContentProvider;
+    }
+
+    public void setContentProvider(ContentProvider contentProvider) {
+        mContentProvider = contentProvider;
     }
 
     public boolean isAnsweredByCurrentUser() {

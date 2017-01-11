@@ -8,12 +8,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
@@ -38,10 +43,35 @@ public class FriendListFragment extends Fragment {
 
     private CheckBox mCheckBoxAllFriends;
     private List<CheckBox> mCheckBoxList = new ArrayList<>();
+    private SearchView mSearchView;
 
     public static FriendListFragment newInstance(Dilemma dilemma) {
         mDilemma = dilemma;
         return new FriendListFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_friend_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_make_group:
+//                Intent intent1 = PersonalPageActivity.newIntent(getActivity());
+//                startActivity(intent1);
+                return true;
+            default:
+                return true;
+        }
     }
 
     @Nullable
@@ -53,11 +83,10 @@ public class FriendListFragment extends Fragment {
         Button prevButton = (Button) view.findViewById(R.id.button_previous_friend_list);
         final Button friendsButton = (Button) view.findViewById(R.id.friend_list_all);
         final Button groupButton = (Button) view.findViewById(R.id.friend_list_groups);
-        android.widget.SearchView searchView = (android.widget.SearchView) view.findViewById(R.id.searchview_friends);
+        mSearchView = (SearchView) view.findViewById(R.id.searchview_friends);
         mCheckBoxAllFriends = (CheckBox) view.findViewById(R.id.checkbox_all_friends);
 
         // FONT setup
-        Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
         Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
         groupButton.setTypeface(source_sans_bold);
         friendsButton.setTypeface(source_sans_bold);
@@ -65,6 +94,8 @@ public class FriendListFragment extends Fragment {
         if (mDilemma.getTargetIDList() != null) {
             mCheckTargetList = true;
             mTargetIDList = mDilemma.getTargetIDList();
+        } else {
+            checkOffAllFriends(true);
         }
 
         mPhotoRecylerView = (RecyclerView) view.findViewById(R.id.friend_list_recycler_view);
@@ -100,13 +131,30 @@ public class FriendListFragment extends Fragment {
             }
         });
 
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDilemma.setTargetIDList(mTargetIDList);
-                Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
-                i.putExtra(DILEMMA_OBJECT, mDilemma);
-                startActivity(i);
+
+                if (mTargetIDList.size() == 0) {
+                    Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
+                } else {
+                    mDilemma.setTargetIDList(mTargetIDList);
+                    Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
+                    i.putExtra(DILEMMA_OBJECT, mDilemma);
+                    startActivity(i);
+                }
             }
         });
 
@@ -142,6 +190,14 @@ public class FriendListFragment extends Fragment {
 
             i += 1;
         }
+    }
+
+    private Boolean checkTargetList(String ID) {
+
+        if (mTargetIDList.contains(ID)) {
+            return true;
+        }
+        return false;
     }
 
     public class FriendHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -199,14 +255,6 @@ public class FriendListFragment extends Fragment {
 
     }
 
-    private Boolean checkTargetList(String ID) {
-
-        if (mTargetIDList.contains(ID)) {
-            return true;
-        }
-        return false;
-    }
-
     private class ListAdapter extends RecyclerView.Adapter<FriendHolder> {
 
         private List<Friend> mFriendList;
@@ -223,6 +271,13 @@ public class FriendListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(FriendHolder holder, int position) {
+
+            if (mSearchView.getQuery() != null) {
+                if (!searchForFriend(mSearchView.getQuery().toString())) {
+                    return;
+                }
+            }
+
             Friend mFriend = mFriendList.get(position);
             holder.bindFriendItem(mFriend);
         }
@@ -237,6 +292,19 @@ public class FriendListFragment extends Fragment {
                 mPhotoRecylerView.setAdapter(new FriendListFragment.ListAdapter(mFriendList));
             }
         }
+    }
+
+    private Boolean searchForFriend(String query) {
+
+        int i = 0;
+
+        while (i < mFriendList.size()) {
+            if (mFriendList.get(i).getName().contains(query)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

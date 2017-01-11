@@ -294,7 +294,6 @@ public class Dilemma implements Serializable {
         return false;
     }
 
-
     public String getCreator_ageRange() {
         String ageToShow;
         int age = Integer.parseInt(mCreator_age);

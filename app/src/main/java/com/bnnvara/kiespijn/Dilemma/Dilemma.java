@@ -30,6 +30,9 @@ public class Dilemma implements Serializable {
     @SerializedName("creator_fb_url")
     private String mCreator_picture_url;
 
+    @SerializedName("creator_hometown")
+    private String mCreator_hometown;
+
     @SerializedName("title")
     private String mTitle;
 
@@ -324,5 +327,13 @@ public class Dilemma implements Serializable {
         }
 
         return false;
+    }
+
+    public String getCreator_hometown() {
+        return mCreator_hometown;
+    }
+
+    public void setCreator_hometown(String creator_hometown) {
+        mCreator_hometown = creator_hometown;
     }
 }

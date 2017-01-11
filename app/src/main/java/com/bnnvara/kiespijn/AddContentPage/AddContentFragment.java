@@ -19,9 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.User;
 
 public class AddContentFragment extends Fragment {
 
@@ -32,6 +34,7 @@ public class AddContentFragment extends Fragment {
 
     private static Dilemma mDilemma;
     private static String mAnswerOption;
+    private Boolean mIsAPhoto;
 
     private String mLink;
 
@@ -48,7 +51,7 @@ public class AddContentFragment extends Fragment {
 
         TextView dilemmaTitle = (TextView) view.findViewById(R.id.textview_add_content_dilemma);
         final TextView answerText = (TextView) view.findViewById(R.id.textview_add_content_answer);
-        EditText editTextField = (EditText) view.findViewById(R.id.edittext_add_content);
+        final EditText editTextField = (EditText) view.findViewById(R.id.edittext_add_content);
         Button takePhotoButton = (Button) view.findViewById(R.id.button_add_photo);
         Button googleButton = (Button) view.findViewById(R.id.button_add_google);
         Button linkButton = (Button) view.findViewById(R.id.button_add_article);
@@ -80,6 +83,7 @@ public class AddContentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 selectImage();
+                mIsAPhoto = true;
             }
         });
 
@@ -90,6 +94,7 @@ public class AddContentFragment extends Fragment {
                 Intent i = new Intent(GoogleSearchActivity.newIntent(getActivity()));
                 i.putExtra(SEARCH_STRING, searchString);
                 startActivity(i);
+                mIsAPhoto = true;
             }
         });
 
@@ -97,18 +102,32 @@ public class AddContentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 addLink();
+                mIsAPhoto = false;
             }
         });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                User user = User.getInstance();
+                String text = editTextField.getText().toString();
+
+                Content content = new Content(text, mIsAPhoto, user.getName(), user.getUserKey(), user.getAge(), user.getSex(), user.getProfilePictureURL(), user.getHometown());
+
+                if (mAnswerOption.equals("optionA")) {
+                    mDilemma.getContents().addContentToOptionA(content);
+                }
+                if (mAnswerOption.equals("optionB")) {
+                    mDilemma.getContents().addContentToOptionB(content);
+                }
+
                 getActivity().finish();
             }
         });
 
         return view;
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, final MenuInflater inflater) {

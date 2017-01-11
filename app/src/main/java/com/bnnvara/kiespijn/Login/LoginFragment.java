@@ -147,8 +147,6 @@ public class LoginFragment extends Fragment {
 
     private void getFacebookParameters() {
 
-        //AccessToken.refreshCurrentAccessTokenAsync();
-
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
             @Override
@@ -160,7 +158,7 @@ public class LoginFragment extends Fragment {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,friends{id,name,picture},gender,birthday,picture{url}");
+        parameters.putString("fields", "id,name,hometown,friends{id,name,picture},gender,birthday,picture{url}");
 
         request.setParameters(parameters);
         Log.i(TAG, parameters.toString());
@@ -180,10 +178,15 @@ public class LoginFragment extends Fragment {
             Log.i(TAG, "Facebook NAME is: " + facebookName);
             String facebookGender = object.getString("gender");
             Log.i(TAG, "Facebook GENDER is: " + facebookGender);
+            String facebookHometown = object.getString("hometown");
 
             user.setUserKey(facebookID);
             user.setName(facebookName);
             user.setSex(facebookGender);
+
+            String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));
+
+            user.setHometown(hometown);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -33,10 +33,13 @@ public class Content implements Serializable {
     @SerializedName("user_fb_photo_link")
     private String mUserFbPhoto;
 
+    @SerializedName("user_fb_hometown")
+    private String mUserFbHometown;
+
     public Content() {
     }
 
-    public Content(String text, Boolean isAPhoto, String userFbName, String userFbID, String userFbAge, String userFbGender, String userFbPhoto) {
+    public Content(String text, Boolean isAPhoto, String userFbName, String userFbID, String userFbAge, String userFbGender, String userFbPhoto, String hometown) {
         mText = text;
         mIsAPhoto = isAPhoto;
         mUserFbName = userFbName;
@@ -44,6 +47,7 @@ public class Content implements Serializable {
         mUserFbAge = userFbAge;
         mUserFbGender = userFbGender;
         mUserFbPhoto = userFbPhoto;
+        mUserFbHometown = hometown;
     }
 
     public String getText() {
@@ -116,5 +120,13 @@ public class Content implements Serializable {
 
     public void setUserFbPhoto(String userFbPhoto) {
         mUserFbPhoto = userFbPhoto;
+    }
+
+    public String getUserFbHometown() {
+        return mUserFbHometown;
+    }
+
+    public void setUserFbHometown(String userFbHometown) {
+        mUserFbHometown = userFbHometown;
     }
 }

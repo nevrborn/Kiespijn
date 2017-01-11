@@ -39,13 +39,19 @@ public class ContentPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = (View) inflater.inflate(R.layout.fragment_content_list, container, false);
 
+        TextView optionText = (TextView) view.findViewById(R.id.content_option_text);
         mPhotoRecylerView = (RecyclerView) view.findViewById(R.id.fragment_content_view_recycler_view);
         mPhotoRecylerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        optionText.setTypeface(source_sans_bold);
+
         if (mAnswerOption.equals("A")) {
             mContentList = mDilemma.getContents().getOptionAContent();
+            optionText.setText(mDilemma.getTitlePhotoA().toUpperCase());
         } else if (mAnswerOption.equals("B")) {
             mContentList = mDilemma.getContents().getOptionBContent();
+            optionText.setText(mDilemma.getTitlePhotoB().toUpperCase());
         }
 
         mPhotoRecylerView.setAdapter(new PhotoAdapter(mContentList));
@@ -102,7 +108,7 @@ public class ContentPageFragment extends Fragment {
                     .into(mUserPhoto);
 
             mUserName.setText(mContent.getUserFbName());
-            mUserInfo.setText(mContent.getUserFbAge() + ", " + mContent.getUserFbGender());
+            mUserInfo.setText(mContent.getUserFbAge() + ", " + mContent.getUserFbGender() + ", " + mContent.getUserFbHometown());
             mText.setText(mContent.getText());
 
             if (mContent.getAPhoto()) {

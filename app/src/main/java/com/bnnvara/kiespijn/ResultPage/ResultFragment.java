@@ -39,12 +39,12 @@ public class ResultFragment extends Fragment {
     private TextView mTimeLeftTextView;
     private TextView mAnswerATextView;
     private TextView mAnswerBTextView;
-    private SeekBar mSeekBarTotalLeft;
-    private SeekBar mSeekBarTotalRight;
-    private SeekBar mSeekBarMenLeft;
-    private SeekBar mSeekBarMenRight;
-    private SeekBar mSeekBarWomenLeft;
-    private SeekBar mSeekBarWomenRight;
+    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarTotalLeft;
+    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarTotalRight;
+    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenLeft;
+    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenRight;
+    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarWomenLeft;
+    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarWomenRight;
     private Button mAddedContentButtonA;
     private Button mAddedContentButtonB;
 
@@ -73,6 +73,19 @@ public class ResultFragment extends Fragment {
 
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
 
+//        RoundCornerProgressBar progressBar1 = (RoundCornerProgressBar) view.findViewById(R.id.progress_1);
+//        progressBar1.setProgressColor(Color.parseColor("#ed3b27"));
+//        progressBar1.setProgressBackgroundColor(Color.parseColor("#808080"));
+//        progressBar1.setMax(100);
+//        progressBar1.setProgress(45);
+//        progressBar1.setReverse(true);
+//        progressBar1.setRadius(2);
+
+//        int progressColor1 = progressBar1.getProgressColor();
+//        int backgroundColor1 = progressBar1.getProgressBackgroundColor();
+//        float max1 = progressBar1.getMax();
+//        float progress1 = progressBar1.getProgress();
+
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo_personal_page);
         mClockImageView = (ImageView) view.findViewById(R.id.image_view_clock);
@@ -84,12 +97,12 @@ public class ResultFragment extends Fragment {
         mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
         mAddedContentButtonA = (Button) view.findViewById(R.id.button_added_content_A);
         mAddedContentButtonB = (Button) view.findViewById(R.id.button_added_content_B);
-        mSeekBarTotalLeft = (SeekBar) view.findViewById(R.id.seekBar_total_left);
-        mSeekBarTotalRight = (SeekBar) view.findViewById(R.id.seekBar_total_right);
-        mSeekBarMenLeft = (SeekBar) view.findViewById(R.id.seekBar_men_left);
-        mSeekBarMenRight = (SeekBar) view.findViewById(R.id.seekBar_men_right);
-        mSeekBarWomenLeft = (SeekBar) view.findViewById(R.id.seekBar_women_left);
-        mSeekBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
+        mProgressBarTotalLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
+//        mProgressBarTotalRight = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
+        mProgressBarMenLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
+//        mProgressBarMenRight = (SeekBar) view.findViewById(R.id.seekBar_men_right);
+//        mProgressBarWomenLeft = (SeekBar) view.findViewById(R.id.seekBar_women_left);
+//        mProgressBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
 
         // set up the listeners
         mAddedContentButtonA.setOnClickListener(new View.OnClickListener() {
@@ -104,42 +117,42 @@ public class ResultFragment extends Fragment {
 
             }
         });
-        mSeekBarTotalLeft.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
-        mSeekBarTotalRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
-        mSeekBarMenLeft.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
-        mSeekBarMenRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
-        mSeekBarWomenLeft.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
-        mSeekBarWomenRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
+//        mProgressBarTotalLeft.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return true;
+//            }
+//        });
+//        mProgressBarTotalRight.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return true;
+//            }
+//        });
+//        mProgressBarMenLeft.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return true;
+//            }
+//        });
+//        mProgressBarMenRight.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return true;
+//            }
+//        });
+//        mProgressBarWomenLeft.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return true;
+//            }
+//        });
+//        mProgressBarWomenRight.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                return true;
+//            }
+//        });
 
         updateUi();
         return view;

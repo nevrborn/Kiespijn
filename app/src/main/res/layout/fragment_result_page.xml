@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_result_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@android:color/black"
+    android:background="@color/colorGrey"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -18,20 +19,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="fill_horizontal"
         android:layout_marginBottom="24dp"
+        android:gravity="fill_horizontal"
         >
 
         <TextView
             android:id="@+id/text_view_result_answer_A"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
             android:layout_weight="0.5"
-            android:padding="4dp"
-            android:gravity="center"
-            android:textAlignment="gravity"
             android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="4dp"
             android:text="Opie A AAA AAAA"
+            android:textAlignment="gravity"
             android:textColor="@color/colorGreen"
             />
 
@@ -39,206 +41,714 @@
             android:id="@+id/text_view_result_answer_B"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
             android:layout_marginLeft="8dp"
-            android:padding="4dp"
-            android:gravity="center"
-            android:textAlignment="gravity"
+            android:layout_weight="0.5"
             android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="4dp"
             android:text="Optie B BBB BBBB"
+            android:textAlignment="gravity"
             android:textColor="@color/colorGreen"
             />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_view_results_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Resultaat van alle stemmen"
-        android:textStyle="bold"
-        />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <TextView
-            android:id="@+id/text_view_result_total_left"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
-            android:text="63%"
-            android:textStyle="bold"
-            />
-
-        <SeekBar
-            android:id="@+id/seekBar_total_left"
+        <RelativeLayout
+            android:id="@+id/relative_layout_middle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="0.5"
-            android:layoutDirection="rtl"
-            android:max="100"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:progress="63"
-            android:progressBackgroundTint="@color/colorGrey"
-            android:progressTint="@color/colorRed"
-            android:thumbTint="@color/colorRed"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            >
 
-        <SeekBar
-            android:id="@+id/seekBar_total_right"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/text_view_results_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:text="Alles (54)"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/text_view_results_men"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_results_total"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="21dp"
+                android:text="Mannen (18)"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/text_view_results_women"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_results_men"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Vrouwen (26)"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layoutDirection="ltr"
-            android:max="100"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:progress="37"
-            android:progressBackgroundTint="@color/colorGrey"
-            android:progressTint="@color/colorLightGreen"
-            android:thumbTint="@color/colorLightGreen"/>
+            android:layout_toLeftOf="@id/relative_layout_middle"
+            >
 
-        <TextView
-            android:id="@+id/text_view_result_total_right"
-            android:layout_width="34dp"
+            <RelativeLayout
+                android:id="@+id/relative_layout_total_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/progressBar_total_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:orientation="horizontal"
+                    app:rcBackgroundColor="@color/colorGrey"
+                    app:rcBackgroundPadding="0dp"
+                    app:rcProgress="63"
+                    app:rcProgressColor="@color/colorRed"
+                    app:rcRadius="6dp"
+                    app:rcReverse="true"/>
+
+                <TextView
+                    android:id="@+id/text_view_result_total_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:text="63%"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_men_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relative_layout_total_left"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/progressBar_men_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:orientation="horizontal"
+                    app:rcBackgroundColor="@color/colorGrey"
+                    app:rcBackgroundPadding="0dp"
+                    app:rcProgress="75"
+                    app:rcProgressColor="@color/colorRed"
+                    app:rcRadius="6dp"
+                    app:rcReverse="true"/>
+
+                <TextView
+                    android:id="@+id/text_view_result_men_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:text="75%"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_women_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relative_layout_men_left"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/progressBar_women_left"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:orientation="horizontal"
+                    app:rcBackgroundColor="@color/colorGrey"
+                    app:rcBackgroundPadding="0dp"
+                    app:rcProgress="55"
+                    app:rcProgressColor="@color/colorRed"
+                    app:rcRadius="6dp"
+                    app:rcReverse="true"/>
+
+                <TextView
+                    android:id="@+id/text_view_result_women_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:text="55%"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="37%"
-            android:textStyle="bold"
-            android:textAlignment="gravity"
-            />
+            android:layout_toRightOf="@id/relative_layout_middle"
+            >
 
-    </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/relative_layout_total_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                >
 
-    <TextView
-        android:id="@+id/text_view_results_men"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Mannen (18)"
-        android:textStyle="bold"
-        />
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/progressBar_total_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:orientation="horizontal"
+                    app:rcBackgroundColor="@color/colorGrey"
+                    app:rcBackgroundPadding="0dp"
+                    app:rcProgress="37"
+                    app:rcProgressColor="@color/colorGreen"
+                    app:rcRadius="6dp"
+                    app:rcReverse="false"/>
+
+                <TextView
+                    android:id="@+id/text_view_result_total_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:text="37%"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_men_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relative_layout_total_right"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/progressBar_men_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:orientation="horizontal"
+                    app:rcBackgroundColor="@color/colorGrey"
+                    app:rcBackgroundPadding="0dp"
+                    app:rcProgress="25"
+                    app:rcProgressColor="@color/colorGreen"
+                    app:rcRadius="6dp"
+                    app:rcReverse="false"/>
+
+                <TextView
+                    android:id="@+id/text_view_result_men_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:text="25%"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_layout_women_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relative_layout_men_right"
+                android:layout_marginBottom="16dp"
+                >
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/progressBar_women_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:orientation="horizontal"
+                    app:rcBackgroundColor="@color/colorGrey"
+                    app:rcBackgroundPadding="0dp"
+                    app:rcProgress="45"
+                    app:rcProgressColor="@color/colorGreen"
+                    app:rcRadius="6dp"
+                    app:rcReverse="false"/>
+
+                <TextView
+                    android:id="@+id/text_view_result_women_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:text="45%"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!--<TableLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1.0"-->
+    <!--android:stretchColumns="*"-->
+    <!--&gt;-->
+
+
+    <!--<TableRow>-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:paddingRight="4dp"-->
+    <!--&gt;-->
+
+    <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+    <!--android:id="@+id/progressBar_total_left"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="24dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:rcBackgroundColor="@color/colorGrey"-->
+    <!--app:rcBackgroundPadding="0dp"-->
+    <!--app:rcProgress="63"-->
+    <!--app:rcProgressColor="@color/colorRed"-->
+    <!--app:rcRadius="6dp"-->
+    <!--app:rcReverse="true"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_total_left"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginRight="4dp"-->
+    <!--android:text="63%"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_results_total"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:text="Alles (54)"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:paddingLeft="4dp"-->
+    <!--&gt;-->
+
+    <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+    <!--android:id="@+id/progressBar_total_right"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="24dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:rcBackgroundColor="@color/colorGrey"-->
+    <!--app:rcBackgroundPadding="0dp"-->
+    <!--app:rcProgress="37"-->
+    <!--app:rcProgressColor="@color/colorGreen"-->
+    <!--app:rcRadius="6dp"-->
+    <!--app:rcReverse="false"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_total_right"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="4dp"-->
+    <!--android:text="37%"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--</TableRow>-->
+
+    <!--<TableRow>-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:paddingRight="4dp"-->
+    <!--&gt;-->
+
+    <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+    <!--android:id="@+id/progressBar_men_left"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="24dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:rcBackgroundColor="@color/colorGrey"-->
+    <!--app:rcBackgroundPadding="0dp"-->
+    <!--app:rcProgress="75"-->
+    <!--app:rcProgressColor="@color/colorRed"-->
+    <!--app:rcRadius="6dp"-->
+    <!--app:rcReverse="true"-->
+    <!--/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_men_left"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginRight="4dp"-->
+    <!--android:text="75%"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_results_men"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:text="Mannen (18)"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:paddingLeft="4dp"-->
+    <!--&gt;-->
+
+    <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+    <!--android:id="@+id/progressBar_men_right"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="24dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:rcBackgroundColor="@color/colorGrey"-->
+    <!--app:rcBackgroundPadding="0dp"-->
+    <!--app:rcProgress="25"-->
+    <!--app:rcProgressColor="@color/colorGreen"-->
+    <!--app:rcRadius="6dp"-->
+    <!--app:rcReverse="false"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_men_right"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="4dp"-->
+    <!--android:text="25%"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--</TableRow>-->
+
+    <!--<TableRow>-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:paddingRight="4dp"-->
+    <!--&gt;-->
+
+    <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+    <!--android:id="@+id/progressBar_women_left"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="24dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:rcBackgroundColor="@color/colorGrey"-->
+    <!--app:rcBackgroundPadding="0dp"-->
+    <!--app:rcProgress="55"-->
+    <!--app:rcProgressColor="@color/colorRed"-->
+    <!--app:rcRadius="6dp"-->
+    <!--app:rcReverse="true"-->
+    <!--/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_women_left"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginRight="4dp"-->
+    <!--android:text="55%"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_results_women"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:text="Vrouwen (26)"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:paddingLeft="4dp"-->
+    <!--&gt;-->
+
+    <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+    <!--android:id="@+id/progressBar_women_right"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="24dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--app:rcBackgroundColor="@color/colorGrey"-->
+    <!--app:rcBackgroundPadding="0dp"-->
+    <!--app:rcProgress="45"-->
+    <!--app:rcProgressColor="@color/colorGreen"-->
+    <!--app:rcRadius="6dp"-->
+    <!--app:rcReverse="false"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_women_right"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginLeft="4dp"-->
+    <!--android:text="45%"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--</TableRow>-->
+
+    <!--</TableLayout>-->
+
+
+    <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+    <!--android:id="@+id/progressBar_total_right"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:layout_marginBottom="20dp"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:paddingLeft="8dp"-->
+    <!--android:paddingStart="8dp"-->
+    <!--app:rcBackgroundColor="@color/colorGrey"-->
+    <!--app:rcBackgroundPadding="0dp"-->
+    <!--app:rcProgress="63"-->
+    <!--app:rcProgressColor="@color/colorGreen"-->
+    <!--app:rcRadius="6dp"-->
+    <!--app:rcReverse="false"-->
+    <!--/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_total_right"-->
+    <!--android:layout_width="34dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="right"-->
+    <!--android:text="37%"-->
+    <!--android:textAlignment="gravity"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_results_men"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:text="Mannen (18)"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_men_leftttt"-->
+    <!--android:layout_width="34dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="75%"-->
+    <!--/>-->
+
+    <!--<SeekBar-->
+    <!--android:id="@+id/seekBar_men_left"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="12dp"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layoutDirection="rtl"-->
+    <!--android:max="100"-->
+    <!--android:paddingLeft="8dp"-->
+    <!--android:paddingStart="8dp"-->
+    <!--android:progress="75"-->
+    <!--android:progressBackgroundTint="@color/colorGrey"-->
+    <!--android:progressTint="@color/colorRed"-->
+    <!--android:thumbTint="@color/colorRed"/>-->
+
+    <!--<SeekBar-->
+    <!--android:id="@+id/seekBar_men_right"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layoutDirection="ltr"-->
+    <!--android:max="100"-->
+    <!--android:paddingLeft="8dp"-->
+    <!--android:paddingStart="8dp"-->
+    <!--android:progress="25"-->
+    <!--android:progressBackgroundTint="@color/colorGrey"-->
+    <!--android:progressTint="@color/colorLightGreen"-->
+    <!--android:thumbTint="@color/colorLightGreen"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_men_right"-->
+    <!--android:layout_width="34dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="right"-->
+    <!--android:text="25%"-->
+    <!--android:textAlignment="gravity"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_results_women"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:text="Vrouwen (26)"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_women_left"-->
+    <!--android:layout_width="34dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="55%"-->
+    <!--/>-->
+
+    <!--<SeekBar-->
+    <!--android:id="@+id/seekBar_women_left"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="24dp"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layoutDirection="rtl"-->
+    <!--android:max="100"-->
+    <!--android:paddingLeft="8dp"-->
+    <!--android:paddingStart="8dp"-->
+    <!--android:progress="55"-->
+    <!--android:progressBackgroundTint="@color/colorGrey"-->
+    <!--android:progressTint="@color/colorRed"-->
+    <!--android:thumbTint="@color/colorRed"/>-->
+
+    <!--<SeekBar-->
+    <!--android:id="@+id/seekBar_women_right"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.5"-->
+    <!--android:layoutDirection="ltr"-->
+    <!--android:max="100"-->
+    <!--android:paddingLeft="8dp"-->
+    <!--android:paddingStart="8dp"-->
+    <!--android:progress="45"-->
+    <!--android:progressBackgroundTint="@color/colorGrey"-->
+    <!--android:progressTint="@color/colorLightGreen"-->
+    <!--android:thumbTint="@color/colorLightGreen"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_view_result_women_right"-->
+    <!--android:layout_width="34dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="right"-->
+    <!--android:text="45%"-->
+    <!--android:textAlignment="gravity"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
+
+
+    <!--</ScrollView>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-        <TextView
-            android:id="@+id/text_view_result_men_left"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
-            android:text="75%"
-            />
-
-        <SeekBar
-            android:id="@+id/seekBar_men_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_weight="0.5"
-            android:layoutDirection="rtl"
-            android:max="100"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:progress="75"
-            android:progressBackgroundTint="@color/colorGrey"
-            android:progressTint="@color/colorRed"
-            android:thumbTint="@color/colorRed"/>
-
-        <SeekBar
-            android:id="@+id/seekBar_men_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layoutDirection="ltr"
-            android:max="100"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:progress="25"
-            android:progressBackgroundTint="@color/colorGrey"
-            android:progressTint="@color/colorLightGreen"
-            android:thumbTint="@color/colorLightGreen"/>
-
-        <TextView
-            android:id="@+id/text_view_result_men_right"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="25%"
-            android:textAlignment="gravity"
-            />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/text_view_results_women"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Vrouwen (26)"
-        android:textStyle="bold"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <TextView
-            android:id="@+id/text_view_result_women_left"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
-            android:text="55%"
-            />
-
-        <SeekBar
-            android:id="@+id/seekBar_women_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_weight="0.5"
-            android:layoutDirection="rtl"
-            android:max="100"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:progress="55"
-            android:progressBackgroundTint="@color/colorGrey"
-            android:progressTint="@color/colorRed"
-            android:thumbTint="@color/colorRed"/>
-
-        <SeekBar
-            android:id="@+id/seekBar_women_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layoutDirection="ltr"
-            android:max="100"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:progress="45"
-            android:progressBackgroundTint="@color/colorGrey"
-            android:progressTint="@color/colorLightGreen"
-            android:thumbTint="@color/colorLightGreen"/>
-
-        <TextView
-            android:id="@+id/text_view_result_women_right"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="45%"
-            android:textAlignment="gravity"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
         >
 
         <TableLayout
@@ -429,15 +939,18 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1.0">
-    </LinearLayout>
+
+    </View>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         >
 
@@ -445,9 +958,9 @@
             android:id="@+id/button_added_content_A"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
             android:layout_weight="0.5"
             android:background="@color/colorGreen"
-            android:layout_marginRight="8dp"
             android:text="Bijgevoegde informatie"
             android:textColor="@android:color/white"
             />
@@ -456,9 +969,9 @@
             android:id="@+id/button_added_content_B"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
             android:layout_weight="0.5"
             android:background="@color/colorGreen"
-            android:layout_marginLeft="8dp"
             android:text="Bijgevoegde informatie"
             android:textColor="@android:color/white"
             />

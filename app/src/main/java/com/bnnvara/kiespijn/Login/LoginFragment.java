@@ -178,19 +178,24 @@ public class LoginFragment extends Fragment {
             Log.i(TAG, "Facebook NAME is: " + facebookName);
             String facebookGender = object.getString("gender");
             Log.i(TAG, "Facebook GENDER is: " + facebookGender);
-            String facebookHometown = object.getString("hometown");
 
             user.setUserKey(facebookID);
             user.setName(facebookName);
             user.setSex(facebookGender);
 
-            String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));
-
-            user.setHometown(hometown);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        String facebookHometown = null;
+        try {
+            facebookHometown = object.getString("hometown");
+            String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));
+            user.setHometown(hometown);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         // GET BIRTHDAY IF POSSIBLE
         try {

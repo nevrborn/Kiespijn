@@ -315,6 +315,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_1.setPhotoA("http://s.hswstatic.com/gif/cremation-urn.jpg");
         dilemma_1.setPhotoB("http://www.gayworld.be/wp-content/uploads/2009/10/uitvaart-begrafenis-stephen-gately-300x252.jpg");
         dilemma_1.setTitlePhotoA("Vase");
+        dilemma_1.setCreator_hometown("Amsterdam");
         dilemma_1.setTitlePhotoB("Box");
         dilemma_1.setDeadline(12);
         dilemma_1.setCreatedAt();
@@ -345,6 +346,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_2.setCreator_name("Michael McDonaldberg");
         dilemma_2.setCreator_age("45");
         dilemma_2.setCreator_sex("Man");
+        dilemma_2.setCreator_hometown("Amsterdam");
         dilemma_2.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c99.0.706.706/s320x320/602095_10153281849525158_1999443146_n.jpg?oh=3f4114034115e081fea631c0b4d30335&oe=58E2B1E7");
         dilemma_2.setPhotoA("http://cvandaag.nl/wp-content/uploads/2015/12/Geen-Kerst-2.jpg");
         dilemma_2.setPhotoB("https://www.schoolplaten.com/img/crafts-att/16310-att%20kerstboom%201.jpg");
@@ -379,6 +381,7 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setCreator_name("Eliza Cambre");
         dilemma_3.setCreator_age("25");
         dilemma_3.setCreator_sex("Vrouw");
+        dilemma_3.setCreator_hometown("Amsterdam");
         dilemma_3.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
         dilemma_3.setPhotoA("https://nyoobserver.files.wordpress.com/2013/12/vermeer-670-girl-with-a-pearl-earring_2000.jpg");
         dilemma_3.setPhotoB("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg/266px-Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg");

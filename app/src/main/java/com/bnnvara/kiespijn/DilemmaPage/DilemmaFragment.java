@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.bnnvara.kiespijn.AddContentPage.AddContentActivity;
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.ContentPage.Content;
-import com.bnnvara.kiespijn.ContentPage.ContentProvider;
+import com.bnnvara.kiespijn.ContentPage.Contents;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -330,12 +330,12 @@ public class DilemmaFragment extends Fragment {
         replies1.setOptionAAnswers(optionA);
         replies1.setOptionBAnswers(optionB);
         dilemma_1.setReplies(replies1);
-        ContentProvider contentProvider1 = new ContentProvider();
+        Contents contents1 = new Contents();
         Content contentA = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
         Content contentB = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
-        contentProvider1.addContentToOptionA(contentA);
-        contentProvider1.addContentToOptionB(contentB);
-        dilemma_1.setContentProvider(contentProvider1);
+        contents1.addContentToOptionA(contentA);
+        contents1.addContentToOptionB(contentB);
+        dilemma_1.setContents(contents1);
 
         Dilemma dilemma_2 = new Dilemma();
         dilemma_2.setTitle("Moet ik als man alleen toch ook een kerstboom optuigen?");
@@ -364,12 +364,12 @@ public class DilemmaFragment extends Fragment {
         replies2.setOptionAAnswers(optionA2);
         replies2.setOptionBAnswers(optionB2);
         dilemma_2.setReplies(replies2);
-        ContentProvider contentProvider2 = new ContentProvider();
+        Contents contents2 = new Contents();
         Content contentA2 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
         Content contentB2 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
-        contentProvider2.addContentToOptionA(contentA2);
-        contentProvider2.addContentToOptionB(contentB2);
-        dilemma_2.setContentProvider(contentProvider2);
+        contents2.addContentToOptionA(contentA2);
+        contents2.addContentToOptionB(contentB2);
+        dilemma_2.setContents(contents2);
 
         Dilemma dilemma_3 = new Dilemma();
         dilemma_3.setTitle("Ik heb 100 euro. Welk schilderij zal ik kopen?");
@@ -398,12 +398,12 @@ public class DilemmaFragment extends Fragment {
         replies3.setOptionAAnswers(optionA3);
         replies3.setOptionBAnswers(optionB3);
         dilemma_3.setReplies(replies3);
-        ContentProvider contentProvider3 = new ContentProvider();
+        Contents contents3 = new Contents();
         Content contentA3 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
         Content contentB3 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
-        contentProvider3.addContentToOptionA(contentA3);
-        contentProvider3.addContentToOptionB(contentB3);
-        dilemma_3.setContentProvider(contentProvider3);
+        contents3.addContentToOptionA(contentA3);
+        contents3.addContentToOptionB(contentB3);
+        dilemma_3.setContents(contents3);
 
         mDilemmaList.add(dilemma_1);
         mDilemmaList.add(dilemma_2);

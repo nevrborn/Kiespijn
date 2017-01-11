@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentProvider {
+public class Contents {
 
     @SerializedName("optionA")
     private List<Content> mOptionAContent = new ArrayList<>();

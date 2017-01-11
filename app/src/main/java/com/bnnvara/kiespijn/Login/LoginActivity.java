@@ -1,8 +1,10 @@
 package com.bnnvara.kiespijn.Login;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 import com.facebook.CallbackManager;
@@ -68,6 +70,14 @@ public class LoginActivity extends SingleFragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void hideStatusBar()
+    {
+        View decorView = this.getWindow().getDecorView();
+        // int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        int uiOptions = View.SYSTEM_UI_FLAG_LOW_PROFILE;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
 }

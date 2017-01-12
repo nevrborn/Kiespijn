@@ -23,6 +23,7 @@ import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
+import com.bumptech.glide.Glide;
 
 public class ResultFragment extends Fragment {
 
@@ -65,6 +66,13 @@ public class ResultFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
     }
 
     @Nullable
@@ -182,6 +190,17 @@ public class ResultFragment extends Fragment {
             mTimeLeftTextView.setText(mDilemma.getTimeLeft() + " uren");
         }
 
+        // set user profile picture
+        if (mDilemma.getCreator_picture_url() != null && !mDilemma.getIsAnonymous()) {
+            Glide.with(getActivity())
+                    .load(mDilemma.getCreator_picture_url())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mUserPhotoImageView);
+        } else if (mDilemma.getIsAnonymous() || mDilemma.getCreator_picture_url() == null) {
+            mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
+        }
+
         // text of the two options
         mAnswerATextView.setText(mDilemma.getTitlePhotoA());
         mAnswerBTextView.setText(mDilemma.getTitlePhotoB());
@@ -213,6 +232,8 @@ public class ResultFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
+            case R.id.home:
+                getActivity().onBackPressed();
             default:
                 return true;
         }

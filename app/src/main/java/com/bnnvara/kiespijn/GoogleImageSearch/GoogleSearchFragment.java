@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -64,7 +63,12 @@ public class GoogleSearchFragment extends Fragment {
         setHasOptionsMenu(true);
         mRadioButtonList = new ArrayList<>();
         mImageViewList = new ArrayList<>();
-        getImages();
+
+        if (mSearchString != null) {
+            getImages();
+        }
+
+
     }
 
     @Override
@@ -155,7 +159,7 @@ public class GoogleSearchFragment extends Fragment {
 
 
         String key = "AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4";
-        String cx = "005303562240230618745:khehmxdxd7s";
+        String cx = "005303562240230618745:fehybwiv3j0";
 
         // Logging
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

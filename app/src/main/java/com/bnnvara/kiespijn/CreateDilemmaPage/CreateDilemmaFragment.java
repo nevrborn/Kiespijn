@@ -61,7 +61,6 @@ public class CreateDilemmaFragment extends Fragment {
     private ImageView mImageViewB;
     private Boolean isImageA = true;
     public static Boolean isFromCamera = false;
-    private ImageView mContextButton;
 
     private static Bitmap mGoogleImage;
 
@@ -94,7 +93,7 @@ public class CreateDilemmaFragment extends Fragment {
         mImageViewA = (ImageView) view.findViewById(R.id.image_view_option_1_take_picture);
         mImageViewB = (ImageView) view.findViewById(R.id.image_view_option_2_take_picture);
         Button nextButton = (Button) view.findViewById(R.id.button_next_create_dilemma);
-        mContextButton = (ImageView) view.findViewById(R.id.add_context);
+        ImageView contextButton = (ImageView) view.findViewById(R.id.add_context);
 
 
         // FONT setup
@@ -129,7 +128,7 @@ public class CreateDilemmaFragment extends Fragment {
             }
         }
 
-        mContextButton.setOnClickListener(new View.OnClickListener() {
+        contextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addContext();
@@ -227,16 +226,16 @@ public class CreateDilemmaFragment extends Fragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library", "Google Search",
-                "Cancel"};
+        final CharSequence[] items = {"Maak Foto", "Fotogalerij", "Google Search",
+                "Annuleer"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Add Photo!");
+        builder.setTitle("Voeg foto toe");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Take Photo")) {
+                if (items[item].equals("Maak Foto")) {
                     cameraIntent();
-                } else if (items[item].equals("Choose from Library")) {
+                } else if (items[item].equals("Fotogalerij")) {
                     galleryIntent();
                 } else if (items[item].equals("Google Search")) {
                     String searchString;
@@ -248,7 +247,7 @@ public class CreateDilemmaFragment extends Fragment {
                     Intent i = new Intent(GoogleSearchActivity.newIntent(getActivity()));
                     i.putExtra(SEARCH_STRING, searchString);
                     startActivityForResult(i, GOOGLE_IMAGE);
-                } else if (items[item].equals("Cancel")) {
+                } else if (items[item].equals("Annuleer")) {
                     dialog.dismiss();
                 }
             }

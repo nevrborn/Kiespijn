@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -132,8 +133,6 @@ public class LoginFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
         getFacebookParameters();
-        Intent i = DilemmaActivity.newIntent(getContext());
-        startActivity(i);
 
     }
 
@@ -152,8 +151,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
                 getFacebookParameters(object);
-                Intent i = DilemmaActivity.newIntent(getContext());
-                startActivity(i);
             }
         });
 
@@ -161,8 +158,6 @@ public class LoginFragment extends Fragment {
         parameters.putString("fields", "id,name,hometown,friends{id,name,picture},gender,birthday,picture{url}");
 
         request.setParameters(parameters);
-        Log.i(TAG, parameters.toString());
-        Log.i(TAG, AccessToken.getCurrentAccessToken().getToken());
         request.executeAsync();
 
     }
@@ -254,9 +249,8 @@ public class LoginFragment extends Fragment {
             e.printStackTrace();
         }
 
-    }
-
-    public void postToFacebook() {
+        Intent i = DilemmaActivity.newIntent(getContext());
+        startActivity(i);
 
     }
 
@@ -309,5 +303,10 @@ public class LoginFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((LoginActivity)getActivity()).hideStatusBar();
+
+        if (isLoggedIn() && !mIsLoggingOut) {
+            Intent i = DilemmaActivity.newIntent(getContext());
+            startActivity(i);
+        }
     }
 }

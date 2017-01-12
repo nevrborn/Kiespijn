@@ -10,14 +10,15 @@ public class FriendListActivity extends SingleFragmentActivity {
 
     private static final String DILEMMA_OBJECT = "dilemma_object";
 
-    public static Intent newIntent(Context context) {
-        return new Intent(context, FriendListActivity.class);
+    public static Intent newIntent(Context context, Dilemma dilemma) {
+        Intent i = new Intent(context, FriendListActivity.class);
+        i.putExtra(DILEMMA_OBJECT, dilemma);
+        return i;
     }
 
     @Override
     protected FriendListFragment createFragment() {
-        Intent i = getIntent();
-        Dilemma dilemma = (Dilemma) i.getSerializableExtra(DILEMMA_OBJECT);
+        Dilemma dilemma = (Dilemma) getIntent().getSerializableExtra(DILEMMA_OBJECT);
         return FriendListFragment.newInstance(dilemma);
     }
 }

@@ -25,6 +25,7 @@ import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.ResultPage.ResultActivity;
 import com.bnnvara.kiespijn.User;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -248,12 +249,24 @@ public class PersonalPageFragment extends Fragment {
 
                 holder.mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + ageToShow);
                 holder.mUserNameTextView.setText(R.string.anonymous);
+
             } else {
                 holder.mUserDescriptionTextView.setText(
                         dilemma.getCreator_sex() + " | " + dilemma.getCreator_age());
                 holder.mUserNameTextView.setText(dilemma.getCreator_name());
             }
             holder.mDilemmaTextView.setText(dilemma.getTitle());
+
+            // set user profile picture
+            if (dilemma.getCreator_picture_url() != null && !dilemma.getIsAnonymous()) {
+                Glide.with(getActivity())
+                        .load(dilemma.getCreator_picture_url())
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_action_sand_timer)
+                        .into(holder.mUserPhotoImageView);
+            } else if (dilemma.getIsAnonymous() || dilemma.getCreator_picture_url() == null) {
+                holder.mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
+            }
 
             if (dilemma.getTimeLeft() < 0){
                 holder.mClockImageView.setImageResource(R.drawable.ic_clock_expired);

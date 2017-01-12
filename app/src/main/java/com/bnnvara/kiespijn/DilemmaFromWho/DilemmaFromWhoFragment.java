@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Deadline.DeadlineActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
+import com.bnnvara.kiespijn.FriendList.FriendListActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 
@@ -120,10 +121,17 @@ public class DilemmaFromWhoFragment extends Fragment {
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = TargetGroupActivity.newIntent(getActivity());
-                i.putExtra(DILEMMA_OBJECT, mDilemma);
-                startActivity(i);
-                getActivity().finish();
+                if (mDilemma.getIsToAll()) {
+                    Intent i = TargetGroupActivity.newIntent(getActivity());
+                    i.putExtra(DILEMMA_OBJECT, mDilemma);
+                    startActivity(i);
+                    getActivity().finish();
+                } else if (!mDilemma.getIsToAll()) {
+                    Intent i = FriendListActivity.newIntent(getActivity(), mDilemma);
+                    startActivity(i);
+                    getActivity().finish();
+                }
+
             }
         });
 

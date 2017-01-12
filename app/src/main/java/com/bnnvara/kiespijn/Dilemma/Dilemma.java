@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -68,6 +69,8 @@ public class Dilemma implements Serializable {
 
     @SerializedName("content")
     private Contents mContents;
+
+    private List<String> mTargetIDList;
 
     private Boolean isFirstTimeToTargetGroup = true;
     private Boolean isFirstTimeToFromWho = true;
@@ -291,7 +294,6 @@ public class Dilemma implements Serializable {
         return false;
     }
 
-
     public String getCreator_ageRange() {
         String ageToShow;
         int age = Integer.parseInt(mCreator_age);
@@ -335,5 +337,13 @@ public class Dilemma implements Serializable {
 
     public void setCreator_hometown(String creator_hometown) {
         mCreator_hometown = creator_hometown;
+    }
+
+    public List<String> getTargetIDList() {
+        return mTargetIDList;
+    }
+
+    public void setTargetIDList(List<String> targetIDList) {
+        mTargetIDList = targetIDList;
     }
 }

@@ -9,6 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.ResultPage.ResultActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.vision.text.Text;
 
@@ -32,6 +36,12 @@ public class ContentPageFragment extends Fragment {
         mDilemma = dilemma;
         mAnswerOption = answerOption;
         return new ContentPageFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -57,6 +67,19 @@ public class ContentPageFragment extends Fragment {
         mPhotoRecylerView.setAdapter(new PhotoAdapter(mContentList));
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            getActivity().onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

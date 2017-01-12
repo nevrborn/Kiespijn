@@ -167,7 +167,7 @@ public class AddContentFragment extends Fragment {
                 if (mAnswerOption.equals("optionA")) {
                     mDilemma.getContents().addContentToOptionA(content);
                 }
-                
+
                 if (mAnswerOption.equals("optionB")) {
                     mDilemma.getContents().addContentToOptionB(content);
                 }
@@ -208,9 +208,15 @@ public class AddContentFragment extends Fragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {getString(R.string.take_photo), getString(R.string.photo_gallery), getString(R.string.cancel)};
+        final CharSequence[] items = {getString(R.string.take_photo), getString(R.string.photo_gallery)};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.add_photo));
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
@@ -218,8 +224,6 @@ public class AddContentFragment extends Fragment {
                     cameraIntent();
                 } else if (items[item].equals(getString(R.string.photo_gallery))) {
                     galleryIntent();
-                } else if (items[item].equals(getString(R.string.cancel))) {
-                    dialog.dismiss();
                 }
             }
         });

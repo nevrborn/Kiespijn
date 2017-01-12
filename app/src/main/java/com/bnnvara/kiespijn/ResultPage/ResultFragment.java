@@ -23,6 +23,7 @@ import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
+import com.bumptech.glide.Glide;
 
 public class ResultFragment extends Fragment {
 
@@ -188,6 +189,17 @@ public class ResultFragment extends Fragment {
             mTimeLeftTextView.setText(R.string.time_left_1_hour);
         } else {
             mTimeLeftTextView.setText(mDilemma.getTimeLeft() + " uren");
+        }
+
+        // set user profile picture
+        if (mDilemma.getCreator_picture_url() != null && !mDilemma.getIsAnonymous()) {
+            Glide.with(getActivity())
+                    .load(mDilemma.getCreator_picture_url())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mUserPhotoImageView);
+        } else if (mDilemma.getIsAnonymous() || mDilemma.getCreator_picture_url() == null) {
+            mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
         }
 
         // text of the two options

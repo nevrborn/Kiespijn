@@ -100,7 +100,7 @@ public class DilemmaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
         mUserFbId = User.getInstance().getUserKey();
-        Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
         getData();
 
         // set up the references

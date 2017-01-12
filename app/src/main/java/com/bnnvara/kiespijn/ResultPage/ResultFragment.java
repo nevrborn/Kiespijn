@@ -66,6 +66,13 @@ public class ResultFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        setRetainInstance(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
     }
 
     @Nullable
@@ -233,6 +240,8 @@ public class ResultFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
+            case R.id.home:
+                getActivity().onBackPressed();
             default:
                 return true;
         }

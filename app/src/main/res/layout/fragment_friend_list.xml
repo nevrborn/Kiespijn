@@ -44,7 +44,7 @@
 
         <Button
             android:id="@+id/friend_list_all"
-            android:text="IEDERREN"
+            android:text="@string/everybody"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -54,7 +54,7 @@
 
         <Button
             android:id="@+id/friend_list_groups"
-            android:text="GROEPEN"
+            android:text="@string/groups"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/buttons_filter"
@@ -79,12 +79,12 @@
         android:layout_marginRight="25dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Iedeere vrienden"
+            android:text="@string/everybody"
             android:layout_marginRight="5dp"
             android:layout_weight="0.8"
-            android:gravity="right"/>
+            android:gravity="end"/>
 
         <CheckBox
             android:id="@+id/checkbox_all_friends"
@@ -99,7 +99,7 @@
         android:id="@+id/friend_list_recycler_view"
         android:layout_width="match_parent"
         android:padding="8dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         >
     </android.support.v7.widget.RecyclerView>
@@ -110,8 +110,6 @@
         android:layout_height="30dp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
         >
 

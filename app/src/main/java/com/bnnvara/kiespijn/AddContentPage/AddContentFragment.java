@@ -44,6 +44,20 @@ public class AddContentFragment extends Fragment {
         return new AddContentFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            getActivity().onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -140,9 +154,9 @@ public class AddContentFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 final AlertDialog.Builder infoDialog = new AlertDialog.Builder(getContext());
-                infoDialog.setTitle("Info");
-                infoDialog.setMessage("INFO TO COME LATER");
-                infoDialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                infoDialog.setTitle(R.string.add_content_purpose_title);
+                infoDialog.setMessage(R.string.add_content_purpose_text);
+                infoDialog.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -157,17 +171,17 @@ public class AddContentFragment extends Fragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
+        final CharSequence[] items = {"Maak Foto", "Fotogalerij", "Annuleer"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Add Photo or Video!");
+        builder.setTitle("Voeg foto toe");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Open Camera")) {
+                if (items[item].equals("Maak Foto")) {
                     cameraIntent();
-                } else if (items[item].equals("Choose from Library")) {
+                } else if (items[item].equals("Fotogalerij")) {
                     galleryIntent();
-                } else if (items[item].equals("Cancel")) {
+                } else if (items[item].equals("Annuleer")) {
                     dialog.dismiss();
                 }
             }

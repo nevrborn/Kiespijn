@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_make_group"
         android:icon="@drawable/places_ic_search"
-        android:title="Groepen"
+        android:title="@string/groups"
         app:showAsAction="always|withText"/>
 
 </menu>

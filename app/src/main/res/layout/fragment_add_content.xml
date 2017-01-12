@@ -25,7 +25,7 @@
 
         <TextView
             android:id="@+id/textview_add_content_answer"
-            android:text="Begraven"
+            android:hint="@string/optionA"
             android:padding="8dp"
             android:textSize="20sp"
             android:textColor="@color/colorGreen"
@@ -74,7 +74,7 @@
 
             <Button
                 android:id="@+id/button_add_photo"
-                android:text="FOTO / VIDEO"
+                android:text="@string/add_content_foto_video"
                 android:layout_weight="0.5"
                 android:textSize="12sp"
                 android:layout_width="match_parent"
@@ -82,7 +82,7 @@
 
             <Button
                 android:id="@+id/button_add_google"
-                android:text="GOOGLE Verrassing"
+                android:text="@string/add_content_google"
                 android:layout_weight="0.5"
                 android:textSize="12sp"
                 android:layout_width="match_parent"
@@ -92,7 +92,7 @@
 
         <Button
             android:id="@+id/button_add_article"
-            android:text="article / blog / fragment"
+            android:text="@string/add_content_article"
             android:textSize="12sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
 
             <Button
                 android:id="@+id/button_add_content"
-                android:text="VOEG TOE"
+                android:text="@string/add_content_add"
                 android:background="@color/colorGreen"
                 android:textColor="@color/colorYellow"
                 android:textSize="18sp"

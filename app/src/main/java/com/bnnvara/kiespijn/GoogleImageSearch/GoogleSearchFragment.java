@@ -157,7 +157,7 @@ public class GoogleSearchFragment extends Fragment {
 
     private void getImages() {
 
-        String apiKey = getString(R.string.google_api_key);
+        String apiKey = getString(R.string.google_search_api_key);
         String cx = getString(R.string.google_cx_key);
 
         // Logging

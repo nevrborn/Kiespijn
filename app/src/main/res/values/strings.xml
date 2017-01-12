@@ -71,6 +71,8 @@
     <string name="title_hint_2">Dilemma 2</string>
     <string name="image_title">image title</string>
     <string name="not_all_fields_filled">Niet alle velden zijn gevuld</string>
+    <string name="use_image">Gebruik photo</string>
+    <string name="add_content">Licht jouw antwoord toe +</string>
     <string name="add_photo">Voeg foto toe</string>
     <string name="take_photo">Maak Foto</string>
     <string name="photo_gallery">Fotogalerij</string>
@@ -78,11 +80,9 @@
 
     // GOOGLE SEARCH SCREEN
     <string name="google_cx_key">AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4</string>
-    <string name="google_api_key">005303562240230618745:fehybwiv3j0</string>
+    <string name="google_search_api_key">005303562240230618745:fehybwiv3j0</string>
     <string name="google_baseURL">https://www.googleapis.com</string>
     <string name="google_no_photos">Geen photos for deze zoek, probeer opnieuw</string>
-    <string name="use_image">Gebruik photo</string>
-    <string name="add_content">Licht jouw antwoord toe +</string>
 
     // ADD CONTENT SCREEN
     <string name="add_content_hint">Waar denk je aan?</string>

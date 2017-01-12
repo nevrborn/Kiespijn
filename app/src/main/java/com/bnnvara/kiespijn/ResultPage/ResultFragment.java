@@ -41,7 +41,7 @@ public class ResultFragment extends Fragment {
     private TextView mTimeLeftTextView;
     private TextView mAnswerATextView;
     private TextView mAnswerBTextView;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarTotalLeft;
+    private com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar mProgressBarTotalLeft;
     private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarTotalRight;
     private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenLeft;
     private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenRight;
@@ -82,19 +82,6 @@ public class ResultFragment extends Fragment {
 
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
 
-//        RoundCornerProgressBar progressBar1 = (RoundCornerProgressBar) view.findViewById(R.id.progress_1);
-//        progressBar1.setProgressColor(Color.parseColor("#ed3b27"));
-//        progressBar1.setProgressBackgroundColor(Color.parseColor("#808080"));
-//        progressBar1.setMax(100);
-//        progressBar1.setProgress(45);
-//        progressBar1.setReverse(true);
-//        progressBar1.setRadius(2);
-
-//        int progressColor1 = progressBar1.getProgressColor();
-//        int backgroundColor1 = progressBar1.getProgressBackgroundColor();
-//        float max1 = progressBar1.getMax();
-//        float progress1 = progressBar1.getProgress();
-
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo_personal_page);
         mClockImageView = (ImageView) view.findViewById(R.id.image_view_clock);
@@ -106,12 +93,17 @@ public class ResultFragment extends Fragment {
         mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
         mAddedContentButtonA = (Button) view.findViewById(R.id.button_added_content_A);
         mAddedContentButtonB = (Button) view.findViewById(R.id.button_added_content_B);
-        mProgressBarTotalLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
+        mProgressBarTotalLeft = (com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
 //        mProgressBarTotalRight = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
-        mProgressBarMenLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
+//        mProgressBarMenLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
 //        mProgressBarMenRight = (SeekBar) view.findViewById(R.id.seekBar_men_right);
 //        mProgressBarWomenLeft = (SeekBar) view.findViewById(R.id.seekBar_women_left);
 //        mProgressBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
+
+
+        mProgressBarTotalLeft.setProgress(20);
+        mProgressBarTotalLeft.setProgressText("2055%");
+
 
         // set up the listeners
         mAddedContentButtonA.setOnClickListener(new View.OnClickListener() {

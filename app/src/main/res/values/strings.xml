@@ -81,10 +81,14 @@
     <string name="google_api_key">005303562240230618745:fehybwiv3j0</string>
     <string name="google_baseURL">https://www.googleapis.com</string>
     <string name="google_no_photos">Geen photos for deze zoek, probeer opnieuw</string>
+    <string name="use_image">Gebruik photo</string>
+    <string name="add_content">Licht jouw antwoord toe +</string>
 
     // ADD CONTENT SCREEN
     <string name="add_content_hint">Waar denk je aan?</string>
     <string name="add_content_media">Voeg media toe</string>
+    <string name="result_page_content_buttons">Toelichtingen</string>
+
     <string name="add_content_foto_video">FOTO / VIDEO</string>
     <string name="add_content_google">Google Verrassing</string>
     <string name="add_content_add">VOEG TOE</string>

@@ -961,7 +961,7 @@
             android:layout_marginRight="8dp"
             android:layout_weight="0.5"
             android:background="@color/colorGreen"
-            android:text="Bijgevoegde informatie"
+            android:text="@string/result_content"
             android:textColor="@android:color/white"
             />
 
@@ -972,7 +972,7 @@
             android:layout_marginLeft="8dp"
             android:layout_weight="0.5"
             android:background="@color/colorGreen"
-            android:text="Bijgevoegde informatie"
+            android:text="@string/result_content"
             android:textColor="@android:color/white"
             />
 

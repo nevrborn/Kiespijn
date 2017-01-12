@@ -93,7 +93,7 @@ public class ResultFragment extends Fragment {
         mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
         mAddedContentButtonA = (Button) view.findViewById(R.id.button_added_content_A);
         mAddedContentButtonB = (Button) view.findViewById(R.id.button_added_content_B);
-        mProgressBarTotalLeft = (com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
+//        mProgressBarTotalLeft = (com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
 //        mProgressBarTotalRight = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
 //        mProgressBarMenLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
 //        mProgressBarMenRight = (SeekBar) view.findViewById(R.id.seekBar_men_right);
@@ -101,8 +101,8 @@ public class ResultFragment extends Fragment {
 //        mProgressBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
 
 
-        mProgressBarTotalLeft.setProgress(20);
-        mProgressBarTotalLeft.setProgressText("2055%");
+//        mProgressBarTotalLeft.setProgress(20);
+//        mProgressBarTotalLeft.setProgressText("2055%");
 
 
         // set up the listeners

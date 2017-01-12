@@ -74,6 +74,7 @@
     // ADD CONTENT SCREEN
     <string name="add_content_hint">Waar denk je aan?</string>
     <string name="add_content_media">Voeg media toe</string>
+    <string name="result_page_content_buttons">Toelichtingen</string>
 
 
 </resources>

@@ -157,9 +157,8 @@ public class GoogleSearchFragment extends Fragment {
 
     private void getImages() {
 
-
-        String key = "AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4";
-        String cx = "005303562240230618745:fehybwiv3j0";
+        String apiKey = getString(R.string.google_api_key);
+        String cx = getString(R.string.google_cx_key);
 
         // Logging
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -168,14 +167,14 @@ public class GoogleSearchFragment extends Fragment {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit restAdapter = new Retrofit.Builder()
-                .baseUrl("https://www.googleapis.com")
+                .baseUrl(getString(R.string.google_baseURL))
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         GoogleApiRestInterface apiResponse = restAdapter.create(GoogleApiRestInterface.class);
 
-        Call<GoogleImageApiResponse> mGalleryResponse = apiResponse.customSearch(key, cx, mSearchString, String.valueOf(mImageIndex));
+        Call<GoogleImageApiResponse> mGalleryResponse = apiResponse.customSearch(apiKey, cx, mSearchString, String.valueOf(mImageIndex));
 
         mGalleryResponse.enqueue(new Callback<GoogleImageApiResponse>() {
             @Override
@@ -195,7 +194,7 @@ public class GoogleSearchFragment extends Fragment {
                         mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Geen photos for deze zoek, probeer opnieuw", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.google_no_photos), Toast.LENGTH_SHORT).show();
                     mSearchView.setVisibility(View.VISIBLE);
                 }
 

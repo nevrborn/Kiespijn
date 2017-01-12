@@ -226,18 +226,18 @@ public class CreateDilemmaFragment extends Fragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {"Maak Foto", "Fotogalerij", "Google Search",
-                "Annuleer"};
+        final CharSequence[] items = {getString(R.string.take_photo), getString(R.string.photo_gallery), getString(R.string.google_search),
+                getString(R.string.cancel)};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Voeg foto toe");
+        builder.setTitle(getString(R.string.add_photo));
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals("Maak Foto")) {
+                if (items[item].equals(getString(R.string.take_photo))) {
                     cameraIntent();
-                } else if (items[item].equals("Fotogalerij")) {
+                } else if (items[item].equals(getString(R.string.photo_gallery))) {
                     galleryIntent();
-                } else if (items[item].equals("Google Search")) {
+                } else if (items[item].equals(getString(R.string.google_search))) {
                     String searchString;
                     if (isImageA) {
                         searchString = mOptionAText.getText().toString();
@@ -247,7 +247,7 @@ public class CreateDilemmaFragment extends Fragment {
                     Intent i = new Intent(GoogleSearchActivity.newIntent(getActivity()));
                     i.putExtra(SEARCH_STRING, searchString);
                     startActivityForResult(i, GOOGLE_IMAGE);
-                } else if (items[item].equals("Annuleer")) {
+                } else if (items[item].equals(getString(R.string.cancel))) {
                     dialog.dismiss();
                 }
             }

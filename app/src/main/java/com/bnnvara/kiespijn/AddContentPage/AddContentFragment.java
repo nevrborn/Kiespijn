@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
+import com.bnnvara.kiespijn.CapiModel.Article;
 import com.bnnvara.kiespijn.CapiModel.ArticleRoot;
 import com.bnnvara.kiespijn.CapiModel.CapiApiResponse;
 import com.bnnvara.kiespijn.ContentPage.Content;
@@ -315,7 +316,9 @@ public class AddContentFragment extends Fragment {
             }
             mArticleRootList = mCapiApiResponse.getArticleList();
             Log.v("mDilemmaList", String.valueOf(mArticleRootList.size()));
-            Toast.makeText(getActivity(), mArticleRootList.get(0).getArticle().getId(), Toast.LENGTH_LONG).show();
+            Article article = mArticleRootList.get(0).getArticle();
+            Toast.makeText(getActivity(), mArticleRootList.get(0).getArticle().getContent(), Toast.LENGTH_LONG).show();
+
 //            createDilemmaLists();
 //            updateUi();
         }

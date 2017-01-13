@@ -17,13 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.bnnvara.kiespijn.ApiEndpointInterface;
+import com.bnnvara.kiespijn.CapiModel.ArticleRoot;
+import com.bnnvara.kiespijn.CapiModel.CapiApiResponse;
 import com.bnnvara.kiespijn.GoogleImageSearch.GalleryItem;
-import com.bnnvara.kiespijn.GoogleImageSearch.GoogleApiRestInterface;
-import com.bnnvara.kiespijn.GoogleImageSearch.GoogleImageApiResponse;
 import com.bnnvara.kiespijn.R;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,12 +39,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ArticleSearchFragment extends Fragment {
 
-    private static final String TAG = "PhotoGalleryFragment";
-    private static final String GOOGLE_IMAGE_URL = "google_image_url";
+    private static final String TAG = ArticleSearchFragment.class.getSimpleName();
+    private static final String ARTICLE_URL = "article_url";
 
     private RecyclerView mPhotoRecylerView;
-    private static String mSearchString;
-    private static List<GalleryItem> mGalleryItems;
+    private String mSearchString;
+    private List<ArticleRoot> mArticleRootList;
     private String mChosenURL;
     private List<CheckBox> mRadioButtonList;
     private List<ImageView> mImageViewList;
@@ -54,8 +53,7 @@ public class ArticleSearchFragment extends Fragment {
     private int mTotalImageSize;
     private MenuItem mNewSearch;
 
-    public static ArticleSearchFragment newInstance(String searchString) {
-        mSearchString = searchString;
+    public static ArticleSearchFragment newInstance() {
         return new ArticleSearchFragment();
     }
 
@@ -66,12 +64,6 @@ public class ArticleSearchFragment extends Fragment {
         setHasOptionsMenu(true);
         mRadioButtonList = new ArrayList<>();
         mImageViewList = new ArrayList<>();
-
-        if (mSearchString != null) {
-            getImages();
-        }
-
-
     }
 
     @Override
@@ -87,7 +79,7 @@ public class ArticleSearchFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem menuItem) {
 
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra(GOOGLE_IMAGE_URL, mChosenURL);
+                resultIntent.putExtra(ARTICLE_URL, mChosenURL);
                 getActivity().setResult(Activity.RESULT_OK, resultIntent);
                 getActivity().finish();
 
@@ -115,25 +107,9 @@ public class ArticleSearchFragment extends Fragment {
         mPhotoRecylerView = (RecyclerView) view.findViewById(R.id.fragment_photo_gallery_recycler_view);
         mPhotoRecylerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        mPhotoRecylerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (!recyclerView.canScrollVertically(dy)) {
-
-                    if (mImageIndex < (mTotalImageSize - 10)) {
-                        mImageIndex += 10;
-                        getImages();
-                    }
-                }
-            }
-        });
+        // Retrieve Article Data CAPI
+        ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
+        apiDataFetcher.getData();
 
         mSearchView = (android.widget.SearchView) view.findViewById(R.id.google_search_view);
 
@@ -143,7 +119,7 @@ public class ArticleSearchFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 mSearchString = mSearchView.getQuery().toString();
-                getImages();
+//                getImages();
                 mSearchView.setVisibility(View.GONE);
                 mNewSearch.setVisible(true);
                 return false;
@@ -158,58 +134,6 @@ public class ArticleSearchFragment extends Fragment {
         return view;
     }
 
-    private void getImages() {
-
-        String apiKey = getString(R.string.google_search_api_key);
-        String cx = getString(R.string.google_cx_key);
-
-        // Logging
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        Gson gson = new GsonBuilder().setLenient().create();
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit restAdapter = new Retrofit.Builder()
-                .baseUrl(getString(R.string.google_baseURL))
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        GoogleApiRestInterface apiResponse = restAdapter.create(GoogleApiRestInterface.class);
-
-        Call<GoogleImageApiResponse> mGalleryResponse = apiResponse.customSearch(apiKey, cx, mSearchString, String.valueOf(mImageIndex));
-
-        mGalleryResponse.enqueue(new Callback<GoogleImageApiResponse>() {
-            @Override
-            public void onResponse(Call<GoogleImageApiResponse> call, Response<GoogleImageApiResponse> response) {
-                GoogleImageApiResponse mGoogleImageApiResponse = response.body();
-
-                if (response.body() == null) {
-                    Log.e("Retrofit body null", String.valueOf(response.code()));
-                }
-
-                if (mGoogleImageApiResponse != null) {
-                    mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
-                    Log.v("mGalleryItems", String.valueOf(response.body().getGalleryItems().size()));
-                    mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
-
-                    if (mPhotoRecylerView != null) {
-                        mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
-                    }
-                } else {
-                    Toast.makeText(getActivity(), getString(R.string.google_no_photos), Toast.LENGTH_SHORT).show();
-                    mSearchView.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<GoogleImageApiResponse> call, Throwable t) {
-                Log.e("Retrofit error", t.getMessage());
-            }
-        });
-
-    }
 
     public class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -231,11 +155,6 @@ public class ArticleSearchFragment extends Fragment {
             mRadioButtonList.add(mRadioButton);
             mImageViewList.add(mItemImageView);
             Log.i(TAG, url);
-
-            Glide.with(getActivity())
-                    .load(url)
-                    .placeholder(R.mipmap.ic_launcher)
-                    .into(mItemImageView);
         }
 
         @Override
@@ -286,5 +205,63 @@ public class ArticleSearchFragment extends Fragment {
                 mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
             }
         }
+    }
+
+    /**
+     * inner class
+     * <p>
+     * <p>
+     * Created by paulvancappelle on 16-12-16.
+     */
+    public class ApiDataFetcher {
+
+        private static final String BASE_URL = "http://www.mocky.io/";
+        private static final String TAG = "kiespijn.ApiDataFetcher";
+
+
+        public ApiDataFetcher() {
+            // empty constructor
+        }
+
+        public void getData() {
+
+            // Logging
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            Gson gson = new GsonBuilder().setLenient().create();
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+            ApiEndpointInterface apiResponse = retrofit.create(ApiEndpointInterface.class);
+
+            apiResponse.getCapiResponse().enqueue(new Callback<CapiApiResponse>() {
+                @Override
+                public void onResponse(Call<CapiApiResponse> call, Response<CapiApiResponse> response) {
+                    Log.e(TAG, "Retrofit response");
+                    setResponse(response);
+                }
+
+                @Override
+                public void onFailure(Call<CapiApiResponse> call, Throwable t) {
+                    Log.e(TAG, "Retrofit error: " + t.getMessage());
+                }
+            });
+
+        }
+
+        private void setResponse(Response<CapiApiResponse> response) {
+            CapiApiResponse mCapiApiResponse = response.body();
+            if (response.body() == null) {
+                Log.e(TAG, "Retrofit body null: " + String.valueOf(response.code()));
+            }
+            mArticleRootList = mCapiApiResponse.getArticleList();
+            Log.v("mDilemmaList", String.valueOf(mArticleRootList.size()));
+        }
+
     }
 }

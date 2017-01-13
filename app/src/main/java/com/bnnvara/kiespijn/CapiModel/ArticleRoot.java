@@ -11,14 +11,14 @@ import java.io.Serializable;
 public class ArticleRoot implements Serializable {
 
     @SerializedName("_source")
-    private String mArticle;
+    private Article mArticle;
 
 
-    public String getArticle() {
+    public Article getArticle() {
         return mArticle;
     }
 
-    public void setArticle(String article) {
+    public void setArticle(Article article) {
         mArticle = article;
     }
 }

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class Article implements Serializable {
 
-    @SerializedName("_id")
+    @SerializedName("id")
     private String mId;
 
     public String getId() {

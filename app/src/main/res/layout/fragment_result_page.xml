@@ -1009,7 +1009,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:text="500"
+            android:text="12"
             android:textSize="16dp"
             android:textColor="@android:color/white"
             android:background="@drawable/ic_action_badge"

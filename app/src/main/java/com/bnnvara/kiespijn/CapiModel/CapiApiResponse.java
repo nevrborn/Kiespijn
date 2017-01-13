@@ -7,14 +7,14 @@ import java.util.List;
 
 public class CapiApiResponse  implements Serializable {
 
-    @SerializedName("")
+    @SerializedName("hits")
     private Articles mArticles;
 
     public CapiApiResponse() {
 
     }
 
-    public List<Article> getArticleList() {
-        return mArticles.getArticleList();
+    public List<ArticleRoot> getArticleList() {
+        return mArticles.getArticleRootList();
     }
 }

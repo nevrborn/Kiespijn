@@ -5,21 +5,19 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 /**
- * Created by paulvancappelle on 12-01-17.
+ * Created by paulvancappelle on 13-01-17.
  */
 
 public class Article implements Serializable {
 
-    @SerializedName("uuid")
-    private String mUuid;
+    @SerializedName("_id")
+    private String mId;
 
-
-
-    public String getUuid() {
-        return mUuid;
+    public String getId() {
+        return mId;
     }
 
-    public void setUuid(String uuid) {
-        mUuid = uuid;
+    public void setId(String id) {
+        mId = id;
     }
 }

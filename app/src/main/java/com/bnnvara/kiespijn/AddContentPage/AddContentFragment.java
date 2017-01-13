@@ -19,17 +19,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
+import com.bnnvara.kiespijn.CapiModel.ArticleRoot;
 import com.bnnvara.kiespijn.CapiModel.CapiApiResponse;
 import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
-import com.bnnvara.kiespijn.PersonalPage.PersonalPageFragment;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -51,6 +54,9 @@ public class AddContentFragment extends Fragment {
     private Boolean mIsAPhoto;
 
     private String mLink;
+
+    private List<ArticleRoot> mArticleRootList;
+
 
     public static Fragment newInstance(Dilemma dilemma, String answerOption) {
         mDilemma = dilemma;
@@ -235,7 +241,7 @@ public class AddContentFragment extends Fragment {
         final EditText enterLink = new EditText(getContext());
 
         linkAlert.setMessage("Copy in link to article or blog");
-        linkAlert.setTitle("Article / Link");
+        linkAlert.setTitle("ArticleRoot / Link");
         linkAlert.setView(enterLink);
 
         linkAlert.setPositiveButton("SAVE LINK", new DialogInterface.OnClickListener() {
@@ -307,8 +313,9 @@ public class AddContentFragment extends Fragment {
             if (response.body() == null) {
                 Log.e(TAG, "Retrofit body null: " + String.valueOf(response.code()));
             }
-//            mDilemmaList = mDilemmaApiResponse.getDilemmaList();
-//            Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
+            mArticleRootList = mCapiApiResponse.getArticleList();
+            Log.v("mDilemmaList", String.valueOf(mArticleRootList.size()));
+            Toast.makeText(getActivity(), mArticleRootList.get(0).getUuid(), Toast.LENGTH_LONG).show();
 //            createDilemmaLists();
 //            updateUi();
         }

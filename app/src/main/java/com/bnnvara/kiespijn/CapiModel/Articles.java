@@ -1,10 +1,8 @@
 package com.bnnvara.kiespijn.CapiModel;
 
-import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +11,16 @@ import java.util.List;
 
 public class Articles implements Serializable{
 
-    @SerializedName("")
-    private List<Article> mArticleList;
+    @SerializedName("hits")
+    private List<ArticleRoot> mArticleRootList;
 
-    public List<Article> getArticleList() {
-        return mArticleList;
+
+
+    public List<ArticleRoot> getArticleRootList() {
+        return mArticleRootList;
     }
 
-    public void setArticleList(List<Article> articleList) {
-        mArticleList = articleList;
+    public void setArticleRootList(List<ArticleRoot> articleRootList) {
+        mArticleRootList = articleRootList;
     }
 }

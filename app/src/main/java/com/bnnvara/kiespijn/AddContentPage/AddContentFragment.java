@@ -316,11 +316,6 @@ public class AddContentFragment extends Fragment {
             }
             mArticleRootList = mCapiApiResponse.getArticleList();
             Log.v("mDilemmaList", String.valueOf(mArticleRootList.size()));
-            Article article = mArticleRootList.get(0).getArticle();
-            Toast.makeText(getActivity(), mArticleRootList.get(0).getArticle().getContent(), Toast.LENGTH_LONG).show();
-
-//            createDilemmaLists();
-//            updateUi();
         }
 
     }

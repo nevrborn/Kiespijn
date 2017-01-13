@@ -307,6 +307,63 @@ public class AddContentFragment extends Fragment {
         linkAlert.show();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            mImageThumbnail.setImageBitmap(imageBitmap);
+            String imageUri = getImageUri(getContext(), imageBitmap).toString();
+            mImageLink = imageUri;
+
+        }
+
+        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK
+                && null != data) {
+
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContext().getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+
+            mImageThumbnail.setImageBitmap(bitmap);
+
+        }
+
+        if (requestCode == GOOGLE_IMAGE && resultCode == Activity.RESULT_OK) {
+            Uri googleUri = Uri.parse(data.getStringExtra(GOOGLE_IMAGE_URL));
+
+            Glide.with(getActivity())
+                    .load(googleUri)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(mImageThumbnail);
+
+        }
+
+        mImageThumbnail.setVisibility(View.VISIBLE);
+        mLinkView.setVisibility(View.GONE);
+        mAddedContentLayout.setVisibility(View.VISIBLE);
+
+    }
+
+    private Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
     /**
      * inner class
      * <p>
@@ -365,60 +422,6 @@ public class AddContentFragment extends Fragment {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-            mImageThumbnail.setImageBitmap(imageBitmap);
-            String imageUri = getImageUri(getContext(), imageBitmap).toString();
-            mImageLink = imageUri;
-
-        }
-
-        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK
-                && null != data) {
-
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = getContext().getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-
-            mImageThumbnail.setImageBitmap(bitmap);
-
-        }
-
-        if (requestCode == GOOGLE_IMAGE && resultCode == Activity.RESULT_OK) {
-            Uri googleUri = Uri.parse(data.getStringExtra(GOOGLE_IMAGE_URL));
-
-            Glide.with(getActivity())
-                    .load(googleUri)
-                    .placeholder(R.mipmap.ic_launcher)
-                    .into(mImageThumbnail);
-
-        }
-
-        mImageThumbnail.setVisibility(View.VISIBLE);
-        mLinkView.setVisibility(View.GONE);
-        mAddedContentLayout.setVisibility(View.VISIBLE);
-
-    }
-
-    private Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
 
 }

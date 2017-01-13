@@ -226,8 +226,7 @@ public class CreateDilemmaFragment extends Fragment {
     }
 
     private void selectImage() {
-        final CharSequence[] items = {getString(R.string.take_photo), getString(R.string.photo_gallery), getString(R.string.google_search),
-                getString(R.string.cancel)};
+        final CharSequence[] items = {getString(R.string.take_photo), getString(R.string.photo_gallery), getString(R.string.google_search)};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.add_photo));
         builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -247,9 +246,13 @@ public class CreateDilemmaFragment extends Fragment {
                     Intent i = new Intent(GoogleSearchActivity.newIntent(getActivity()));
                     i.putExtra(SEARCH_STRING, searchString);
                     startActivityForResult(i, GOOGLE_IMAGE);
-                } else if (items[item].equals(getString(R.string.cancel))) {
-                    dialog.dismiss();
                 }
+            }
+        });
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
             }
         });
         builder.show();

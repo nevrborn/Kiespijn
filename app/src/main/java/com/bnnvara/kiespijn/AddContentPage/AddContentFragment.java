@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,11 +20,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.ApiEndpointInterface;
+import com.bnnvara.kiespijn.CapiModel.CapiApiResponse;
 import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
+import com.bnnvara.kiespijn.PersonalPage.PersonalPageFragment;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddContentFragment extends Fragment {
 
@@ -139,6 +153,9 @@ public class AddContentFragment extends Fragment {
             }
         });
 
+        ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
+        apiDataFetcher.getData();
+
         return view;
     }
 
@@ -236,5 +253,65 @@ public class AddContentFragment extends Fragment {
         });
 
         linkAlert.show();
+    }
+
+    /**
+     * inner class
+     * <p>
+     * <p>
+     * Created by paulvancappelle on 16-12-16.
+     */
+    public class ApiDataFetcher {
+
+        private static final String BASE_URL = "http://www.mocky.io/";
+        private static final String TAG = "kiespijn.ApiDataFetcher";
+
+
+        public ApiDataFetcher() {
+            // empty constructor
+        }
+
+        public void getData() {
+
+            // Logging
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            Gson gson = new GsonBuilder().setLenient().create();
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+            ApiEndpointInterface apiResponse = retrofit.create(ApiEndpointInterface.class);
+
+            apiResponse.getCapiResponse().enqueue(new Callback<CapiApiResponse>() {
+                @Override
+                public void onResponse(Call<CapiApiResponse> call, Response<CapiApiResponse> response) {
+                    Log.e(TAG, "Retrofit response");
+                    setResponse(response);
+                }
+
+                @Override
+                public void onFailure(Call<CapiApiResponse> call, Throwable t) {
+                    Log.e(TAG, "Retrofit error: " + t.getMessage());
+                }
+            });
+
+        }
+
+        private void setResponse(Response<CapiApiResponse> response) {
+            CapiApiResponse mCapiApiResponse = response.body();
+            if (response.body() == null) {
+                Log.e(TAG, "Retrofit body null: " + String.valueOf(response.code()));
+            }
+//            mDilemmaList = mDilemmaApiResponse.getDilemmaList();
+//            Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
+//            createDilemmaLists();
+//            updateUi();
+        }
+
     }
 }

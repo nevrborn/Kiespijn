@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.AddContentPage.AddContentActivity;
 import com.bnnvara.kiespijn.ApiEndpointInterface;
@@ -35,6 +35,8 @@ import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mindorks.placeholderview.SwipeDecor;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +49,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
-/**
- *
- */
 public class DilemmaFragment extends Fragment {
 
     // constants
@@ -64,11 +62,7 @@ public class DilemmaFragment extends Fragment {
     private TextView mUserNameTextView;
     private TextView mUserDescriptionTextView;
     private TextView mDilemmaTextView;
-    private TextView mFirstImageTitleTextView;
-    private TextView mSecondImageTitleTextView;
     private LinearLayout mNoDilemmasTextView;
-    private ImageView mDilemmaFirstImageView;
-    private ImageView mDilemmaSecondImageView;
     private ImageView mBackgroundInfoImageView;
     private Button mDilemmaFirstAddContent;
     private Button mDilemmaSecondAddContent;
@@ -82,6 +76,9 @@ public class DilemmaFragment extends Fragment {
     private String mUserFbId; // = "101283870370822";
     private Boolean mFilterFriends = false;
 
+    private SwipePlaceHolderView mSwipeView1;
+    private SwipePlaceHolderView mSwipeView2;
+    private Context mContext;
 
     public static Fragment newInstance() {
         return new DilemmaFragment();
@@ -100,6 +97,9 @@ public class DilemmaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
         mUserFbId = User.getInstance().getUserKey();
+        mSwipeView1 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
+        mSwipeView2 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView2);
+        mContext = getContext();
         //Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
         getData();
 
@@ -108,11 +108,7 @@ public class DilemmaFragment extends Fragment {
         mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username);
         mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_user_info);
         mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma);
-        mFirstImageTitleTextView = (TextView) view.findViewById(R.id.text_view_first_image_title);
-        mSecondImageTitleTextView = (TextView) view.findViewById(R.id.text_view_second_image_title);
         mNoDilemmasTextView = (LinearLayout) view.findViewById(R.id.linear_layout_no_dilemmas);
-        mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
-        mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
         mBackgroundInfoImageView = (ImageView) view.findViewById(R.id.image_view_background_info);
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
         mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
@@ -121,6 +117,22 @@ public class DilemmaFragment extends Fragment {
         mFriendIcon = (ImageView) view.findViewById(R.id.imageview_friends);
 
         filterSwitch.setChecked(false);
+
+        mSwipeView1.getBuilder()
+                .setDisplayViewCount(3)
+                .setSwipeDecor(new SwipeDecor()
+                        .setPaddingTop(5)
+                        .setRelativeScale(0.01f)
+                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
+                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
+
+        mSwipeView2.getBuilder()
+                .setDisplayViewCount(3)
+                .setSwipeDecor(new SwipeDecor()
+                        .setPaddingTop(5)
+                        .setRelativeScale(0.01f)
+                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
+                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
 
         // set up the listeners
         mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
@@ -131,19 +143,6 @@ public class DilemmaFragment extends Fragment {
                 builder.setIcon(R.mipmap.ic_info);
                 builder.setMessage(mDilemma.getBackgroundInfo());
                 builder.show();
-            }
-        });
-
-        mDilemmaFirstImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateCurrentIndex();
-            }
-        });
-        mDilemmaSecondImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateCurrentIndex();
             }
         });
 
@@ -259,21 +258,8 @@ public class DilemmaFragment extends Fragment {
             mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
         }
 
-        // load image 1
-        mDilemmaTextView.setText(mDilemma.getTitle());
-        Glide.with(getActivity())
-                .load(mDilemma.getPhotoA())
-                .centerCrop()
-                .placeholder(R.drawable.ic_action_sand_timer)
-                .into(mDilemmaFirstImageView);
-
-        // load image 2
-        mDilemmaTextView.setText(mDilemma.getTitle());
-        Glide.with(getActivity())
-                .load(mDilemma.getPhotoB())
-                .centerCrop()
-                .placeholder(R.drawable.ic_action_sand_timer)
-                .into(mDilemmaSecondImageView);
+        mSwipeView1.addView(new DilemmaSwipeCard(mContext, mDilemma, mSwipeView1, 1));
+        mSwipeView2.addView(new DilemmaSwipeCard(mContext, mDilemma, mSwipeView2, 2));
 
         // set creator and mDilemma text
         if (!mDilemma.getIsAnonymous()) {
@@ -295,9 +281,6 @@ public class DilemmaFragment extends Fragment {
             mFriendIcon.setVisibility(View.GONE);
         }
 
-        // set image titles
-        mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
-        mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
     }
 
 

@@ -232,7 +232,7 @@ public class ResultFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
-            case R.id.home:
+            case android.R.id.home:
                 getActivity().onBackPressed();
             default:
                 return true;

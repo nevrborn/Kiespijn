@@ -205,7 +205,7 @@ public class DeadlineFragment extends Fragment {
         setDateCreatedAndDeadLine(mDeadline);
         mDilemma.setUuid();
 
-        // SOME CODE TO POST DILEMMA TO DATABASE
+        //SOME CODE TO POST DILEMMA TO DATABASE
         Log.i(TAG, " DILLEMMA INFORMATION");
         Log.i(TAG, " Title: " + mDilemma.getTitle());
         Log.i(TAG, " Facebook ID: " + mDilemma.getCreator_fb_id());
@@ -218,7 +218,7 @@ public class DeadlineFragment extends Fragment {
         Log.i(TAG, " Created At: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
         Log.i(TAG, " Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
 
-        DilemmaFragment.addDilemmaToTempList(mDilemma);
+        //DilemmaFragment.addDilemmaToTempList(mDilemma);
 
     }
 

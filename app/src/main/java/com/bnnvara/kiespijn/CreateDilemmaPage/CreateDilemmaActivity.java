@@ -40,9 +40,8 @@ public class CreateDilemmaActivity extends SingleFragmentActivity {
         if (count == 0) {
             super.onBackPressed();
 
-            closeDilemma();
-
         } else {
+
             getFragmentManager().popBackStack();
         }
     }

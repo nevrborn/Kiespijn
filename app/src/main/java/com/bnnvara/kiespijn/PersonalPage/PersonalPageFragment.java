@@ -269,9 +269,7 @@ public class PersonalPageFragment extends Fragment {
             }
 
             if (dilemma.getTimeLeft() < 0){
-                holder.mClockImageView.setImageResource(R.drawable.ic_clock_expired);
                 holder.mTimeLeftTextView.setText("---");
-                holder.mTimeLeftTextView.setTextColor(getResources().getColor(R.color.colorRed));
             } else if (dilemma.getTimeLeft() == 1){
                 holder.mTimeLeftTextView.setText(R.string.time_left_1_hour);
             } else {

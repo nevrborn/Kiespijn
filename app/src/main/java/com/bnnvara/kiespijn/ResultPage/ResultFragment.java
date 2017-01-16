@@ -181,9 +181,7 @@ public class ResultFragment extends Fragment {
 
         // time left
         if (mDilemma.getTimeLeft() < 0){
-            mClockImageView.setImageResource(R.drawable.ic_clock_expired);
             mTimeLeftTextView.setText("---");
-            mTimeLeftTextView.setTextColor(getResources().getColor(R.color.colorRed));
         } else if (mDilemma.getTimeLeft() == 1){
             mTimeLeftTextView.setText(R.string.time_left_1_hour);
         } else {

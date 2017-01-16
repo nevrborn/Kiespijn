@@ -82,7 +82,10 @@ public class DilemmaFragment extends Fragment {
     private String mUserFbId;
     private Boolean mFilterFriends = false;
 
-    //    private SwipePlaceHolderView mSwipeView1;
+    private float mImageAlpha = 1.0f;
+    private int tempOffset;
+
+    // private SwipePlaceHolderView mSwipeView1;
 //    private SwipePlaceHolderView mSwipeView2;
     private Context mContext;
 
@@ -106,7 +109,7 @@ public class DilemmaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
         mUserFbId = User.getInstance().getUserKey();
-//        mSwipeView1 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
+        //mSwipeView1 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
 //        mSwipeView2 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView2);
         mContext = getContext();
 
@@ -144,7 +147,6 @@ public class DilemmaFragment extends Fragment {
         swipeLayout2.setShowMode(SwipeLayout.ShowMode.PullOut);
 
         swipeLayout1.addDrag(SwipeLayout.DragEdge.Left, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_first));
-        swipeLayout1.addDrag(SwipeLayout.DragEdge.Top, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_second));
         swipeLayout2.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout2.findViewById(R.id.swipe_bottom_wrapper_second));
 
         swipeLayout1.addSwipeListener(new SwipeLayout.SwipeListener() {
@@ -175,7 +177,29 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                Log.i("LEFT OFFSET", Integer.toString(leftOffset));
+                Log.i("Alpha", Float.toString(mImageAlpha));
 
+                if (leftOffset > tempOffset) {
+                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                        mImageAlpha = mImageAlpha - 0.065f;
+                    }
+                } else if (leftOffset < tempOffset) {
+                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                        mImageAlpha = mImageAlpha + 0.065f;
+                    }
+                }
+
+                if (mImageAlpha < 0.1f) {
+                    mImageAlpha = 0.1f;
+                } else if (mImageAlpha > 1.0f) {
+                    mImageAlpha = 1.0f;
+                }
+
+                mSecondDilemmaImage.setAlpha(mImageAlpha);
+                mSecondDilemmaImageText.setAlpha(mImageAlpha);
+
+                tempOffset = leftOffset;
             }
 
             @Override
@@ -192,19 +216,7 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                nextDilemma2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        updateCurrentIndex();
-                    }
-                });
 
-                addContent.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        addContentIntent(2);
-                    }
-                });
             }
 
             @Override
@@ -219,12 +231,48 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                Log.i("TOP OFFSET", Integer.toString(topOffset));
+                Log.i("Alpha", Float.toString(mImageAlpha));
 
+                if (topOffset > tempOffset) {
+                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                        mImageAlpha = mImageAlpha + 0.04f;
+                    }
+                } else if (topOffset < tempOffset) {
+                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                        mImageAlpha = mImageAlpha - 0.04f;
+                    }
+                }
+
+                if (mImageAlpha < 0.1f) {
+                    mImageAlpha = 0.1f;
+                } else if (mImageAlpha > 1.0f) {
+                    mImageAlpha = 1.0f;
+                }
+
+                mFirstDilemmaImage.setAlpha(mImageAlpha);
+                mFirstDilemmaImageText.setAlpha(mImageAlpha);
+
+                tempOffset = topOffset;
             }
 
             @Override
             public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
 
+            }
+        });
+
+        nextDilemma2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateCurrentIndex();
+            }
+        });
+
+        addContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addContentIntent(2);
             }
         });
 
@@ -336,11 +384,19 @@ public class DilemmaFragment extends Fragment {
     private void updateUi() {
         mDilemma = mDilemmaList.get(mCurrentIndex);
 
+        mFirstDilemmaImage.setAlpha(1.0f);
+        mSecondDilemmaImage.setAlpha(1.0f);
+
+        mFirstDilemmaImageText.setAlpha(1.0f);
+        mSecondDilemmaImageText.setAlpha(1.0f);
+
         // do not show the current user's own mDilemma's
         if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
             updateCurrentIndex();
             return;
         }
+
+        //mSwipeView1.addView(new DilemmaSwipeCard(mContext, mDilemma, mSwipeView1, 1));
 
         // check to see if the dilemma is NOT FOR ALL and then check to see if its from a friend
         if (!mDilemma.getIsToAll()) {
@@ -388,6 +444,8 @@ public class DilemmaFragment extends Fragment {
                     .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mSecondDilemmaImage);
             mSecondDilemmaImageText.setText(mDilemma.getTitlePhotoB());
+        } else {
+            mSecondDilemmaImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_sand_timer));
         }
 
         // set creator and mDilemma text

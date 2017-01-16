@@ -200,6 +200,12 @@
         android:orientation="horizontal"
         >
 
+        <!--<com.mindorks.placeholderview.SwipePlaceHolderView-->
+        <!--android:id="@+id/swipeView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="0.5"/>-->
+
         <com.daimajia.swipe.SwipeLayout
             android:id="@+id/swipeview_first"
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -298,7 +304,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.6"
                     android:background="@color/colorYellow"
-                    android:text="Volgende Dilemma"
+                    android:text="Volgende\nDilemma"
                     android:textColor="@color/colorGreen"
                     android:textSize="20sp"
                     android:gravity="center_vertical|center_horizontal"/>
@@ -451,6 +457,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:visibility="gone"
         android:layout_marginTop="4dp">
 
         <Button

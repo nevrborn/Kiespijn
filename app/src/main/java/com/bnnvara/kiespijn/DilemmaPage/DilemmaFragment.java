@@ -84,6 +84,7 @@ public class DilemmaFragment extends Fragment {
 
     private float mImageAlpha = 1.0f;
     private int tempOffset;
+    private Boolean hasChosen = false;
 
     // private SwipePlaceHolderView mSwipeView1;
 //    private SwipePlaceHolderView mSwipeView2;
@@ -95,7 +96,6 @@ public class DilemmaFragment extends Fragment {
     public static Fragment newInstance() {
         return new DilemmaFragment();
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,6 +149,7 @@ public class DilemmaFragment extends Fragment {
         swipeLayout1.addDrag(SwipeLayout.DragEdge.Left, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_first));
         swipeLayout2.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout2.findViewById(R.id.swipe_bottom_wrapper_second));
 
+
         swipeLayout1.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
@@ -157,12 +158,8 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                nextDilemma1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        updateCurrentIndex();
-                    }
-                });
+                updateCurrentIndex();
+                hasChosen = true;
             }
 
             @Override
@@ -172,7 +169,7 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onClose(SwipeLayout layout) {
-
+                hasChosen = false;
             }
 
             @Override

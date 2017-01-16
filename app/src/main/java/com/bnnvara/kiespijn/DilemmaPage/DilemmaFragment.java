@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -58,6 +59,8 @@ public class DilemmaFragment extends Fragment {
     private static final String DILEMMA_OBJECT = "dilemma_object";
     private static final String LOGGING_OUT = "logging_out";
     private static final String DILEMMA_ANSWER_ADD_CONTENT = "answer_add_content";
+    private static final String CURRENT_INDEX = "current_index";
+    private static final String USER_ID = "current_user_id";
 
     // Views
     private ImageView mUserPhotoImageView;
@@ -79,7 +82,7 @@ public class DilemmaFragment extends Fragment {
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
     private Dilemma mDilemma;
     private int mCurrentIndex;
-    private String mUserFbId; // = "101283870370822";
+    private String mUserFbId;
     private Boolean mFilterFriends = false;
 
 
@@ -92,6 +95,11 @@ public class DilemmaFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(CURRENT_INDEX);
+            mUserFbId = savedInstanceState.getString(USER_ID);
+        }
     }
 
     @Nullable
@@ -475,6 +483,14 @@ public class DilemmaFragment extends Fragment {
         i.putExtra(DILEMMA_OBJECT, dilemma);
         i.putExtra(DILEMMA_ANSWER_ADD_CONTENT, optionChosen);
         startActivity(i);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG, "onSavedInstanceSTate");
+        outState.putInt(CURRENT_INDEX, mCurrentIndex);
+        outState.putString(USER_ID, mUserFbId);
     }
 
 

@@ -189,11 +189,10 @@ public class GoogleSearchFragment extends Fragment {
 
                     if (mGoogleImageApiResponse.getGalleryItems() != null) {
                         mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
-                        Log.v("mGalleryItems", String.valueOf(response.body().getGalleryItems().size()));
                         mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
                     }
 
-                    if (mPhotoRecylerView != null) {
+                    if (mPhotoRecylerView != null && mGalleryItems.size() != 0) {
                         mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
                     }
                 } else {

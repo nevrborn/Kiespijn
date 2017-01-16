@@ -218,7 +218,7 @@ public class DeadlineFragment extends Fragment {
         Log.i(TAG, " Created At: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
         Log.i(TAG, " Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
 
-        DilemmaFragment.addDilemmaToTempList(mDilemma);
+        //DilemmaFragment.addDilemmaToTempList(mDilemma);
 
     }
 

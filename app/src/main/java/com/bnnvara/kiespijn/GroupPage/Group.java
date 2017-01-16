@@ -1,4 +1,6 @@
-package com.bnnvara.kiespijn.FriendList;
+package com.bnnvara.kiespijn.GroupPage;
+
+import com.bnnvara.kiespijn.FriendList.Friend;
 
 import java.util.List;
 
@@ -26,5 +28,6 @@ public class Group {
     public void addFriendToGroup(Friend friend) {
         mGroupMembers.add(friend);
     }
+
 
 }

@@ -1,6 +1,7 @@
-package com.bnnvara.kiespijn.FriendList;
+package com.bnnvara.kiespijn.GroupPage;
 
 import java.util.List;
+
 
 public class Groups {
 

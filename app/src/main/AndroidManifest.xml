@@ -79,6 +79,11 @@
             android:label="Vrienden">
         </activity>
         <activity
+            android:name=".GroupPage.GroupPageActivity"
+            android:screenOrientation="portrait"
+            android:label="Groepen beheren">
+        </activity>
+        <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"

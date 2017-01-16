@@ -185,12 +185,14 @@ public class GoogleSearchFragment extends Fragment {
                     Log.e("Retrofit body null", String.valueOf(response.code()));
                 }
 
-                if (mGoogleImageApiResponse != null) {
-                    mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
-                    Log.v("mGalleryItems", String.valueOf(response.body().getGalleryItems().size()));
-                    mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
+                if (mGoogleImageApiResponse != null && response.body() != null) {
 
-                    if (mPhotoRecylerView != null) {
+                    if (mGoogleImageApiResponse.getGalleryItems() != null) {
+                        mGalleryItems = mGoogleImageApiResponse.getGalleryItems();
+                        mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
+                    }
+
+                    if (mPhotoRecylerView != null && mGalleryItems.size() != 0) {
                         mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
                     }
                 } else {

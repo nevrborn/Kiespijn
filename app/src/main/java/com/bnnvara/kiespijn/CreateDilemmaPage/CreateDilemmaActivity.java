@@ -8,11 +8,14 @@ import android.support.v7.app.AlertDialog;
 
 import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchFragment;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
+import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 
 public class CreateDilemmaActivity extends SingleFragmentActivity {
 
     private static final String DILEMMA_OBJECT = "dilemma_object";
+    private boolean mCancelDilemma;
+
 
     /*
     * create Intent to start this activity
@@ -36,38 +39,21 @@ public class CreateDilemmaActivity extends SingleFragmentActivity {
 
     @Override
     public void onBackPressed() {
-        int count = getFragmentManager().getBackStackEntryCount();
-
-        if (count == 0) {
-            super.onBackPressed();
-
-            closeDilemma();
-
-        } else {
-            getFragmentManager().popBackStack();
-        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.SureToCancel)
+                .setCancelable(false)
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        CreateDilemmaActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("Nee", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
-    private void closeDilemma() {
-        AlertDialog.Builder closeDilemmaAlert = new AlertDialog.Builder(getBaseContext());
-        closeDilemmaAlert.setMessage("Are you sure you want to exit? ");
-        closeDilemmaAlert.setCancelable(false);
-
-        closeDilemmaAlert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                finish();
-
-            }
-        });
-
-        closeDilemmaAlert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-
-            }
-        });
-
-        closeDilemmaAlert.show();
-    }
 }

@@ -1,10 +1,16 @@
 package com.bnnvara.kiespijn.Login;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -46,6 +52,7 @@ public class LoginFragment extends Fragment {
     // Facebook Parameters
     private CallbackManager mCallbackManager;
     private static Boolean mIsLoggingOut = false;
+    private Boolean hasInternetConnection = false;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -81,7 +88,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        if (isLoggedIn() && !mIsLoggingOut) {
+        if (isLoggedIn() && !mIsLoggingOut && isConnected()) {
             getFacebookParameters();
         }
 
@@ -304,9 +311,47 @@ public class LoginFragment extends Fragment {
         super.onResume();
         ((LoginActivity)getActivity()).hideStatusBar();
 
-        if (isLoggedIn() && !mIsLoggingOut) {
+        if (isLoggedIn() && !mIsLoggingOut && isConnected()) {
             Intent i = DilemmaActivity.newIntent(getContext());
             startActivity(i);
         }
+    }
+
+    public boolean isConnected() {
+        //Checks if the device is connected to the internet (WIFI or mobile data)
+        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            internetConnectionAlert();
+        return false;
+    }
+
+    public void internetConnectionAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("No Internet Connection");
+        builder.setMessage("Your device is not connected to the Internet");
+        builder.setPositiveButton("WiFi Settings", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent settings = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                settings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(settings);
+            }
+        });
+        builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
     }
 }

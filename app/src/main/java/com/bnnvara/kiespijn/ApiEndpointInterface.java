@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 
 public interface ApiEndpointInterface {
 
-    @GET("v2/5877dff40f0000bd0e0d4922")
+    @GET("v2/587cf4340f000031045df5a4")
     Call<DilemmaApiResponse> getDilemmaList();
 
     @GET("v2/58779aa40f00009b070d489f")

@@ -350,6 +350,10 @@ public class DilemmaFragment extends Fragment {
             }
         }
 
+        if (mDilemma.getTitle() != null) {
+            mDilemmaTextView.setText(mDilemma.getTitle());
+        }
+
         // make background info icon invisible if background info is not present
         if (mDilemma.getBackgroundInfo().equals("")){
             mBackgroundInfoImageView.setVisibility(View.GONE);

@@ -33,6 +33,7 @@ import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mindorks.placeholderview.SwipeDecor;
@@ -69,16 +70,24 @@ public class DilemmaFragment extends Fragment {
     private Button mSkipDilemma;
     private ImageView mFriendIcon;
 
+    private ImageView mFirstDilemmaImage;
+    private ImageView mSecondDilemmaImage;
+    private TextView mFirstDilemmaImageText;
+    private TextView mSecondDilemmaImageText;
+
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
     private Dilemma mDilemma;
     private int mCurrentIndex;
-    private String mUserFbId; // = "101283870370822";
+    private String mUserFbId;
     private Boolean mFilterFriends = false;
 
-    private SwipePlaceHolderView mSwipeView1;
-    private SwipePlaceHolderView mSwipeView2;
+    //    private SwipePlaceHolderView mSwipeView1;
+//    private SwipePlaceHolderView mSwipeView2;
     private Context mContext;
+
+    private SwipeLayout swipeLayout1;
+    private SwipeLayout swipeLayout2;
 
     public static Fragment newInstance() {
         return new DilemmaFragment();
@@ -97,9 +106,10 @@ public class DilemmaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
         mUserFbId = User.getInstance().getUserKey();
-        mSwipeView1 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
-        mSwipeView2 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView2);
+//        mSwipeView1 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
+//        mSwipeView2 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView2);
         mContext = getContext();
+
         //Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
         getData();
 
@@ -118,21 +128,121 @@ public class DilemmaFragment extends Fragment {
 
         filterSwitch.setChecked(false);
 
-        mSwipeView1.getBuilder()
-                .setDisplayViewCount(3)
-                .setSwipeDecor(new SwipeDecor()
-                        .setPaddingTop(5)
-                        .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
-                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
+        mFirstDilemmaImage = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
+        mSecondDilemmaImage = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
+        mFirstDilemmaImageText = (TextView) view.findViewById(R.id.text_view_first_image_title);
+        mSecondDilemmaImageText = (TextView) view.findViewById(R.id.text_view_second_image_title);
 
-        mSwipeView2.getBuilder()
-                .setDisplayViewCount(3)
-                .setSwipeDecor(new SwipeDecor()
-                        .setPaddingTop(5)
-                        .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
-                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
+        final TextView nextDilemma1 = (TextView) view.findViewById(R.id.textview_next_dilemma_1);
+        final TextView nextDilemma2 = (TextView) view.findViewById(R.id.textview_next_dilemma);
+        final TextView addContent = (TextView) view.findViewById(R.id.textview_add_content_swipe);
+
+        swipeLayout1 = (SwipeLayout) view.findViewById(R.id.swipeview_first);
+        swipeLayout2 = (SwipeLayout) view.findViewById(R.id.swipeview_second);
+
+        swipeLayout1.setShowMode(SwipeLayout.ShowMode.PullOut);
+        swipeLayout2.setShowMode(SwipeLayout.ShowMode.PullOut);
+
+        swipeLayout1.addDrag(SwipeLayout.DragEdge.Left, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_first));
+        swipeLayout1.addDrag(SwipeLayout.DragEdge.Top, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_second));
+        swipeLayout2.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout2.findViewById(R.id.swipe_bottom_wrapper_second));
+
+        swipeLayout1.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                nextDilemma1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        updateCurrentIndex();
+                    }
+                });
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
+
+        swipeLayout2.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                nextDilemma2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        updateCurrentIndex();
+                    }
+                });
+
+                addContent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addContentIntent(2);
+                    }
+                });
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
+
+//        mSwipeView1.getBuilder()
+//                .setDisplayViewCount(3)
+//                .setSwipeDecor(new SwipeDecor()
+//                        .setPaddingTop(5)
+//                        .setRelativeScale(0.01f)
+//                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
+//                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
+//
+//        mSwipeView2.getBuilder()
+//                .setDisplayViewCount(3)
+//                .setSwipeDecor(new SwipeDecor()
+//                        .setPaddingTop(5)
+//                        .setRelativeScale(0.01f)
+//                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
+//                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
 
         // set up the listeners
         mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
@@ -258,8 +368,23 @@ public class DilemmaFragment extends Fragment {
             mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
         }
 
-        mSwipeView1.addView(new DilemmaSwipeCard(mContext, mDilemma, mSwipeView1, 1));
-        mSwipeView2.addView(new DilemmaSwipeCard(mContext, mDilemma, mSwipeView2, 2));
+        if (mDilemma.getPhotoA() != null && mDilemma.getTitlePhotoA() != null) {
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoA())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mFirstDilemmaImage);
+            mFirstDilemmaImageText.setText(mDilemma.getTitlePhotoA());
+        }
+
+        if (mDilemma.getPhotoB() != null && mDilemma.getTitlePhotoB() != null) {
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoB())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mSecondDilemmaImage);
+            mSecondDilemmaImageText.setText(mDilemma.getTitlePhotoB());
+        }
 
         // set creator and mDilemma text
         if (!mDilemma.getIsAnonymous()) {

@@ -194,22 +194,193 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0"
+        android:weightSum="1"
         android:layout_marginBottom="5dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
         >
 
-        <com.mindorks.placeholderview.SwipePlaceHolderView
-            android:id="@+id/swipeView"
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/swipeview_first"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"/>
+            android:layout_weight="0.5"
+            android:layout_height="match_parent">
+            <!-- Bottom View Start-->
+            <LinearLayout
+                android:background="#66ddff00"
+                android:id="@+id/swipe_bottom_wrapper_first"
+                android:layout_width="match_parent"
+                android:weightSum="1"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <!--What you want to show-->
 
-        <com.mindorks.placeholderview.SwipePlaceHolderView
-            android:id="@+id/swipeView2"
+                <TextView
+                    android:id="@+id/textview_next_dilemma_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="GEKOZEN"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorGreen"
+                    android:background="@color/colorYellow"/>
+
+            </LinearLayout>
+            <!-- Bottom View End-->
+
+            <!-- Surface View Start -->
+            <LinearLayout
+                android:padding="10dp"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--What you want to show in SurfaceView-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorGreen"
+                    android:padding="6dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/image_view_first_option_decicision_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/image_content"
+                        android:src="@drawable/ic_action_sand_timer"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_view_first_image_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/colorTransparentWhite"
+                        android:hint="@string/image_title"
+                        android:textAlignment="center"
+                        android:textColorHint="@android:color/black"
+                        android:textSize="15sp"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!-- Surface View End -->
+        </com.daimajia.swipe.SwipeLayout>
+
+        <com.daimajia.swipe.SwipeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeview_second"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"/>
+            android:layout_weight="0.5"
+            android:layout_height="match_parent">
+
+            <!-- Bottom View Start-->
+            <LinearLayout
+                android:id="@+id/swipe_bottom_wrapper_second"
+                android:padding="10dp"
+                android:background="#ffffff"
+                android:weightSum="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!--What you want to show in SurfaceView-->
+
+                <TextView
+                    android:id="@+id/textview_next_dilemma"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:background="@color/colorYellow"
+                    android:text="Volgende Dilemma"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="0.1"-->
+                <!--android:background="@color/colorRed"-->
+                <!--android:text="OF"-->
+                <!--android:textSize="25sp"-->
+                <!--android:gravity="center_vertical|center_horizontal"/>-->
+
+                <TextView
+                    android:id="@+id/textview_add_content_swipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:background="@color/colorGreen"
+                    android:text="@string/add_content"
+                    android:textColor="@color/colorYellow"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            </LinearLayout>
+            <!-- Bottom View End-->
+
+            <!-- Surface View Start -->
+            <LinearLayout
+                android:padding="10dp"
+                android:background="#ffffff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--What you want to show in SurfaceView-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorGreen"
+                    android:padding="6dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/image_view_second_option_decicision_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/image_content"
+                        android:src="@drawable/ic_action_sand_timer"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_view_second_image_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/colorTransparentWhite"
+                        android:hint="@string/image_title"
+                        android:textAlignment="center"
+                        android:textColorHint="@android:color/black"
+                        android:textSize="15sp"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!-- Surface View End -->
+        </com.daimajia.swipe.SwipeLayout>
+
+        <!--<com.mindorks.placeholderview.SwipePlaceHolderView-->
+        <!--android:id="@+id/swipeView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1.0"/>-->
+
+        <!--<com.mindorks.placeholderview.SwipePlaceHolderView-->
+        <!--android:id="@+id/swipeView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1.0"/>-->
 
         <!--<RelativeLayout-->
         <!--android:layout_width="match_parent"-->

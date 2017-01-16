@@ -2,7 +2,9 @@ package com.bnnvara.kiespijn.Deadline;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 
+import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchFragment;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 
@@ -16,7 +18,7 @@ public class DeadlineActivity extends SingleFragmentActivity {
     }
 
     @Override
-    protected DeadlineFragment createFragment() {
+    protected Fragment createFragment() {
         Intent i = getIntent();
         Dilemma dilemma = (Dilemma) i.getSerializableExtra(DILEMMA_OBJECT);
         return DeadlineFragment.newInstance(dilemma);

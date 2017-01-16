@@ -1,11 +1,12 @@
 package com.bnnvara.kiespijn.Login;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchFragment;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -32,7 +33,7 @@ public class LoginActivity extends SingleFragmentActivity {
     }
 
     @Override
-    protected LoginFragment createFragment() {
+    protected Fragment createFragment() {
         Intent i = getIntent();
         isLoggingOut = i.getBooleanExtra(LOGGING_OUT, false);
         return LoginFragment.newInstance(isLoggingOut);

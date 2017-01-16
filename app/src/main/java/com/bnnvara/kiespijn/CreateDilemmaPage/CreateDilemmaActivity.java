@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 
+import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchFragment;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 

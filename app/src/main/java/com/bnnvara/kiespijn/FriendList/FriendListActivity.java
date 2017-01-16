@@ -2,7 +2,9 @@ package com.bnnvara.kiespijn.FriendList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 
+import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchFragment;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 
@@ -17,7 +19,7 @@ public class FriendListActivity extends SingleFragmentActivity {
     }
 
     @Override
-    protected FriendListFragment createFragment() {
+    protected Fragment createFragment() {
         Dilemma dilemma = (Dilemma) getIntent().getSerializableExtra(DILEMMA_OBJECT);
         return FriendListFragment.newInstance(dilemma);
     }

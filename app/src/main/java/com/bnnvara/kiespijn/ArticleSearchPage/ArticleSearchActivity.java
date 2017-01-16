@@ -1,25 +1,21 @@
-package com.bnnvara.kiespijn.GoogleImageSearch;
+package com.bnnvara.kiespijn.ArticleSearchPage;
 
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchFragment;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 
-public class GoogleSearchActivity extends SingleFragmentActivity {
-
-    private static final String SEARCH_STRING = "search_string";
+public class ArticleSearchActivity extends SingleFragmentActivity {
 
     public static Intent newIntent(Context context) {
-        return new Intent(context, GoogleSearchActivity.class);
+        return new Intent(context, ArticleSearchActivity.class);
     }
 
     @Override
     protected Fragment createFragment() {
-        String searchString = getIntent().getStringExtra(SEARCH_STRING);
-        return GoogleSearchFragment.newInstance(searchString);
+        return ArticleSearchFragment.newInstance();
     }
 
     @Override

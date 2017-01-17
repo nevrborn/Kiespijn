@@ -34,7 +34,13 @@
         </activity>
         <activity
             android:name=".PersonalPage.PersonalPageActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:label="Jouw Kiespagina">
+        </activity>
+        <activity
+            android:name=".ArticleSearchPage.ArticleSearchActivity"
+            android:screenOrientation="portrait"
+            android:label="Artikel">
         </activity>
         <activity
             android:name=".CreateDilemmaPage.CreateDilemmaActivity"
@@ -70,7 +76,7 @@
         <activity
             android:name=".ContentPage.ContentPageActivity"
             android:screenOrientation="portrait"
-            android:label="Toelichting"
+            android:label="Kiesresultaat"
             android:parentActivityName=".ResultPage.ResultActivity">
         </activity>
         <activity

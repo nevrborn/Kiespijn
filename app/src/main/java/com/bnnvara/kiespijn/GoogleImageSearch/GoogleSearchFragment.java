@@ -48,7 +48,7 @@ public class GoogleSearchFragment extends Fragment {
     private List<ImageView> mImageViewList;
     private android.widget.SearchView mSearchView;
     private int mImageIndex = 1;
-    private int mTotalImageSize;
+    private long mTotalImageSize;
     private MenuItem mNewSearch;
 
     public static GoogleSearchFragment newInstance(String searchString) {

@@ -25,10 +25,10 @@ class GoogleImageApiResponse {
         return mSearchInfo;
     }
 
-    public int getTotalImages() {
-        int totalImages;
+    public long getTotalImages() {
+        long totalImages;
 
-        totalImages = Integer.parseInt(mSearchInfo.get("totalResults"));
+        totalImages = Long.parseLong(mSearchInfo.get("totalResults"));
 
         return totalImages;
     }

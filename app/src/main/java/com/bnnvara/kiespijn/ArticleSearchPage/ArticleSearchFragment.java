@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
+import com.bnnvara.kiespijn.CapiModel.Article;
 import com.bnnvara.kiespijn.CapiModel.ArticleRoot;
 import com.bnnvara.kiespijn.CapiModel.CapiApiResponse;
-import com.bnnvara.kiespijn.GoogleImageSearch.GalleryItem;
 import com.bnnvara.kiespijn.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,15 +42,12 @@ public class ArticleSearchFragment extends Fragment {
     private static final String TAG = ArticleSearchFragment.class.getSimpleName();
     private static final String ARTICLE_URL = "article_url";
 
-    private RecyclerView mPhotoRecylerView;
+    private RecyclerView mArticleRecylerView;
     private String mSearchString;
     private List<ArticleRoot> mArticleRootList;
     private String mChosenURL;
-    private List<CheckBox> mRadioButtonList;
-    private List<ImageView> mImageViewList;
+    private List<CheckBox> mRadioButtonList = new ArrayList<>();
     private android.widget.SearchView mSearchView;
-    private int mImageIndex = 1;
-    private int mTotalImageSize;
     private MenuItem mNewSearch;
 
     public static ArticleSearchFragment newInstance() {
@@ -62,8 +59,39 @@ public class ArticleSearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         setHasOptionsMenu(true);
-        mRadioButtonList = new ArrayList<>();
-        mImageViewList = new ArrayList<>();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_google_search, container, false);
+
+        mArticleRecylerView = (RecyclerView) view.findViewById(R.id.fragment_article_recycler_view);
+        mArticleRecylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // Retrieve Article Data CAPI
+        ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
+        apiDataFetcher.getData();
+
+        mSearchView = (android.widget.SearchView) view.findViewById(R.id.article_search_view);
+        mSearchView.setVisibility(View.GONE);
+        mSearchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                mSearchString = mSearchView.getQuery().toString();
+//                getImages();
+                mSearchView.setVisibility(View.GONE);
+                mNewSearch.setVisible(true);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -99,88 +127,61 @@ public class ArticleSearchFragment extends Fragment {
 
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_google_search, container, false);
-
-        mPhotoRecylerView = (RecyclerView) view.findViewById(R.id.fragment_photo_gallery_recycler_view);
-        mPhotoRecylerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-        // Retrieve Article Data CAPI
-        ApiDataFetcher apiDataFetcher = new ApiDataFetcher();
-        apiDataFetcher.getData();
-
-        mSearchView = (android.widget.SearchView) view.findViewById(R.id.google_search_view);
-
-        mSearchView.setVisibility(View.GONE);
-
-        mSearchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                mSearchString = mSearchView.getQuery().toString();
-//                getImages();
-                mSearchView.setVisibility(View.GONE);
-                mNewSearch.setVisible(true);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
-
-        return view;
-    }
-
-
+    //
+    // INNER CLASS
+    //
+    //
     public class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private ImageView mItemImageView;
+        private TextView mTitle;
         private CheckBox mRadioButton;
-        private GalleryItem mGalleryItem;
+        private Article mArticle;
 
         public PhotoHolder(View itemView) {
             super(itemView);
             mRadioButton = (CheckBox) itemView.findViewById(R.id.radioButton);
-            mItemImageView = (ImageView) itemView.findViewById(R.id.iv_photo_gallery_fragment);
+            mTitle = (TextView) itemView.findViewById(R.id.itext_view_article_kassa_title);
             itemView.setOnClickListener(this);
         }
 
-        public void bindGalleryItem(GalleryItem item) {
-            mGalleryItem = item;
-            String url = mGalleryItem.getUrl();
-            mGalleryItem.setImageURL(url);
-            mRadioButtonList.add(mRadioButton);
-            mImageViewList.add(mItemImageView);
-            Log.i(TAG, url);
+        public void bindGalleryItem(Article article) {
+            mArticle = article;
+            mTitle.setText(article.getTitle());
+//            String url = mGalleryItem.getUrl();
+//            mGalleryItem.setImageURL(url);
+//            mRadioButtonList.add(mRadioButton);
+//            mImageViewList.add(mItemImageView);
+//            Log.i(TAG, url);
         }
 
         @Override
         public void onClick(View view) {
-            int i = 0;
-
-            while (i < mRadioButtonList.size()) {
-                mRadioButtonList.get(i).setChecked(false);
-                mImageViewList.get(i).setAlpha(1f);
-                i += 1;
-            }
-
-            mRadioButton.setChecked(true);
-            mItemImageView.setAlpha(0.7f);
-            mChosenURL = mGalleryItem.getImageURL();
+//            int i = 0;
+//
+//            while (i < mRadioButtonList.size()) {
+//                mRadioButtonList.get(i).setChecked(false);
+//                mImageViewList.get(i).setAlpha(1f);
+//                i += 1;
+//            }
+//
+//            mRadioButton.setChecked(true);
+//            mItemImageView.setAlpha(0.7f);
+//            mChosenURL = mGalleryItem.getImageURL();
 
         }
 
     }
 
-    private class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
+    //
+    // INNER CLASS
+    //
+    //
+    private class ArticleAdapter extends RecyclerView.Adapter<PhotoHolder> {
 
-        private List<GalleryItem> mGalleryItems;
+        private List<ArticleRoot> mArticleRoots;
 
-        public PhotoAdapter(List<GalleryItem> galleryItems) {
-            mGalleryItems = galleryItems;
+        public ArticleAdapter(List<ArticleRoot> articleList) {
+            mArticleRoots = articleList;
         }
 
         @Override
@@ -191,20 +192,20 @@ public class ArticleSearchFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(PhotoHolder holder, int position) {
-            GalleryItem mGalleryItem = mGalleryItems.get(position);
-            holder.bindGalleryItem(mGalleryItem);
+            Article article = mArticleRoots.get(position).getArticle();
+            holder.bindGalleryItem(article);
         }
 
         @Override
         public int getItemCount() {
-            return mGalleryItems.size();
+            return mArticleRoots.size();
         }
 
-        public void setupAdapter() {
-            if (isAdded()) {
-                mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
-            }
-        }
+//        public void setupAdapter() {
+//            if (isAdded()) {
+//                mArticleRecylerView.setAdapter(new ArticleAdapter(mArticleList));
+//            }
+//        }
     }
 
     /**
@@ -260,8 +261,13 @@ public class ArticleSearchFragment extends Fragment {
                 Log.e(TAG, "Retrofit body null: " + String.valueOf(response.code()));
             }
             mArticleRootList = mCapiApiResponse.getArticleList();
-            Log.v("mDilemmaList", String.valueOf(mArticleRootList.size()));
+            Log.v("mArticleRootList", String.valueOf(mArticleRootList.size()));
+            updateUi();
         }
 
+    }
+
+    private void updateUi() {
+        mArticleRecylerView.setAdapter(new ArticleAdapter(mArticleRootList));
     }
 }

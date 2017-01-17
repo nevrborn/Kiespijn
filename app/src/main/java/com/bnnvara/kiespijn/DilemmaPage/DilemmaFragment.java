@@ -1,5 +1,7 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
+import android.animation.AnimatorSet;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -65,8 +70,6 @@ public class DilemmaFragment extends Fragment {
     private TextView mDilemmaTextView;
     private LinearLayout mNoDilemmasTextView;
     private ImageView mBackgroundInfoImageView;
-    private Button mDilemmaFirstAddContent;
-    private Button mDilemmaSecondAddContent;
     private Button mSkipDilemma;
     private ImageView mFriendIcon;
 
@@ -74,6 +77,11 @@ public class DilemmaFragment extends Fragment {
     private ImageView mSecondDilemmaImage;
     private TextView mFirstDilemmaImageText;
     private TextView mSecondDilemmaImageText;
+
+    private SwipeLayout swipeLayout1;
+    private SwipeLayout swipeLayout2;
+    private LinearLayout mTopDilemmaLayer1;
+    private LinearLayout mTopDilemmaLayer2;
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
@@ -85,13 +93,6 @@ public class DilemmaFragment extends Fragment {
     private float mImageAlpha = 1.0f;
     private int tempOffset;
     private Boolean hasChosen = false;
-
-    // private SwipePlaceHolderView mSwipeView1;
-//    private SwipePlaceHolderView mSwipeView2;
-    private Context mContext;
-
-    private SwipeLayout swipeLayout1;
-    private SwipeLayout swipeLayout2;
 
     public static Fragment newInstance() {
         return new DilemmaFragment();
@@ -109,9 +110,6 @@ public class DilemmaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
         mUserFbId = User.getInstance().getUserKey();
-        //mSwipeView1 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
-//        mSwipeView2 = (SwipePlaceHolderView) view.findViewById(R.id.swipeView2);
-        mContext = getContext();
 
         //Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
         getData();
@@ -124,8 +122,6 @@ public class DilemmaFragment extends Fragment {
         mNoDilemmasTextView = (LinearLayout) view.findViewById(R.id.linear_layout_no_dilemmas);
         mBackgroundInfoImageView = (ImageView) view.findViewById(R.id.image_view_background_info);
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
-        mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
-        mDilemmaSecondAddContent = (Button) view.findViewById(R.id.button_add_content_second);
         mSkipDilemma = (Button) view.findViewById(R.id.button_skip_dilemma);
         mFriendIcon = (ImageView) view.findViewById(R.id.imageview_friends);
 
@@ -136,9 +132,13 @@ public class DilemmaFragment extends Fragment {
         mFirstDilemmaImageText = (TextView) view.findViewById(R.id.text_view_first_image_title);
         mSecondDilemmaImageText = (TextView) view.findViewById(R.id.text_view_second_image_title);
 
-        final TextView nextDilemma1 = (TextView) view.findViewById(R.id.textview_next_dilemma_1);
-        final TextView nextDilemma2 = (TextView) view.findViewById(R.id.textview_next_dilemma);
-        final TextView addContent = (TextView) view.findViewById(R.id.textview_add_content_swipe);
+        final TextView nextDilemma1 = (TextView) view.findViewById(R.id.textview_next_dilemma_first);
+        final TextView nextDilemma2 = (TextView) view.findViewById(R.id.textview_next_dilemma_second);
+        final TextView addContent1 = (TextView) view.findViewById(R.id.textview_add_content_swipe_first);
+        final TextView addContent2 = (TextView) view.findViewById(R.id.textview_add_content_swipe_second);
+
+        mTopDilemmaLayer1 = (LinearLayout) view.findViewById(R.id.swipe_top_first);
+        mTopDilemmaLayer2 = (LinearLayout) view.findViewById(R.id.swipe_top_second);
 
         swipeLayout1 = (SwipeLayout) view.findViewById(R.id.swipeview_first);
         swipeLayout2 = (SwipeLayout) view.findViewById(R.id.swipeview_second);
@@ -146,7 +146,7 @@ public class DilemmaFragment extends Fragment {
         swipeLayout1.setShowMode(SwipeLayout.ShowMode.PullOut);
         swipeLayout2.setShowMode(SwipeLayout.ShowMode.PullOut);
 
-        swipeLayout1.addDrag(SwipeLayout.DragEdge.Left, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_first));
+        swipeLayout1.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_first));
         swipeLayout2.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout2.findViewById(R.id.swipe_bottom_wrapper_second));
 
 
@@ -158,7 +158,6 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                updateCurrentIndex();
                 hasChosen = true;
             }
 
@@ -174,29 +173,8 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-                Log.i("LEFT OFFSET", Integer.toString(leftOffset));
-                Log.i("Alpha", Float.toString(mImageAlpha));
 
-                if (leftOffset > tempOffset) {
-                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
-                        mImageAlpha = mImageAlpha - 0.065f;
-                    }
-                } else if (leftOffset < tempOffset) {
-                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
-                        mImageAlpha = mImageAlpha + 0.065f;
-                    }
-                }
-
-                if (mImageAlpha < 0.1f) {
-                    mImageAlpha = 0.1f;
-                } else if (mImageAlpha > 1.0f) {
-                    mImageAlpha = 1.0f;
-                }
-
-                mSecondDilemmaImage.setAlpha(mImageAlpha);
-                mSecondDilemmaImageText.setAlpha(mImageAlpha);
-
-                tempOffset = leftOffset;
+                setDilemmaAlpha(topOffset, 1);
             }
 
             @Override
@@ -228,34 +206,20 @@ public class DilemmaFragment extends Fragment {
 
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-                Log.i("TOP OFFSET", Integer.toString(topOffset));
-                Log.i("Alpha", Float.toString(mImageAlpha));
 
-                if (topOffset > tempOffset) {
-                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
-                        mImageAlpha = mImageAlpha + 0.04f;
-                    }
-                } else if (topOffset < tempOffset) {
-                    if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
-                        mImageAlpha = mImageAlpha - 0.04f;
-                    }
-                }
-
-                if (mImageAlpha < 0.1f) {
-                    mImageAlpha = 0.1f;
-                } else if (mImageAlpha > 1.0f) {
-                    mImageAlpha = 1.0f;
-                }
-
-                mFirstDilemmaImage.setAlpha(mImageAlpha);
-                mFirstDilemmaImageText.setAlpha(mImageAlpha);
-
-                tempOffset = topOffset;
+                setDilemmaAlpha(topOffset, 2);
             }
 
             @Override
             public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
 
+            }
+        });
+
+        nextDilemma1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateCurrentIndex();
             }
         });
 
@@ -266,28 +230,20 @@ public class DilemmaFragment extends Fragment {
             }
         });
 
-        addContent.setOnClickListener(new View.OnClickListener() {
+        addContent1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addContentIntent(1);
+            }
+        });
+
+        addContent2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addContentIntent(2);
             }
         });
 
-//        mSwipeView1.getBuilder()
-//                .setDisplayViewCount(3)
-//                .setSwipeDecor(new SwipeDecor()
-//                        .setPaddingTop(5)
-//                        .setRelativeScale(0.01f)
-//                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
-//                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
-//
-//        mSwipeView2.getBuilder()
-//                .setDisplayViewCount(3)
-//                .setSwipeDecor(new SwipeDecor()
-//                        .setPaddingTop(5)
-//                        .setRelativeScale(0.01f)
-//                        .setSwipeInMsgLayoutId(R.layout.swipe_card_chosen_message)
-//                        .setSwipeOutMsgLayoutId(R.layout.swipe_card_chosen_message));
 
         // set up the listeners
         mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
@@ -324,20 +280,19 @@ public class DilemmaFragment extends Fragment {
             }
         });
 
-        mDilemmaFirstAddContent.setOnClickListener(new View.OnClickListener() {
+        mTopDilemmaLayer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addContentIntent(1);
+                swipeJumpOnClick(1);
             }
         });
 
-        mDilemmaSecondAddContent.setOnClickListener(new View.OnClickListener() {
+        mTopDilemmaLayer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addContentIntent(2);
+                swipeJumpOnClick(2);
             }
         });
-
 
         return view;
     }
@@ -392,8 +347,6 @@ public class DilemmaFragment extends Fragment {
             updateCurrentIndex();
             return;
         }
-
-        //mSwipeView1.addView(new DilemmaSwipeCard(mContext, mDilemma, mSwipeView1, 1));
 
         // check to see if the dilemma is NOT FOR ALL and then check to see if its from a friend
         if (!mDilemma.getIsToAll()) {
@@ -703,6 +656,79 @@ public class DilemmaFragment extends Fragment {
             addTempDilemmas();
             updateUi();
         }
+
+    }
+
+    private void setDilemmaAlpha(int offset, int dilemma) {
+        if (offset > tempOffset) {
+            if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                mImageAlpha = mImageAlpha + 0.04f;
+            }
+        } else if (offset < tempOffset) {
+            if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                mImageAlpha = mImageAlpha - 0.04f;
+            }
+        }
+
+        if (mImageAlpha < 0.1f) {
+            mImageAlpha = 0.1f;
+        } else if (mImageAlpha > 1.0f) {
+            mImageAlpha = 1.0f;
+        }
+
+        if (dilemma == 1) {
+            swipeLayout2.setAlpha(mImageAlpha);
+        } else if (dilemma == 2) {
+            swipeLayout1.setAlpha(mImageAlpha);
+        }
+
+        tempOffset = offset;
+    }
+
+    private void swipeJumpOnClick(final int dilemma) {
+        final ValueAnimator upAnimator = ValueAnimator.ofInt(mTopDilemmaLayer1.getTop(), mTopDilemmaLayer1.getTop() - 100);
+        final ValueAnimator downAnimator = ValueAnimator.ofInt(mTopDilemmaLayer1.getTop() - 100, mTopDilemmaLayer1.getTop());
+
+        upAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int value = (int) valueAnimator.getAnimatedValue();
+
+                if (dilemma == 1) {
+                    mTopDilemmaLayer1.setTranslationY(value);
+                } else if (dilemma == 2) {
+                    mTopDilemmaLayer2.setTranslationY(value);
+                }
+
+            }
+        });
+
+        downAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int value = (int) valueAnimator.getAnimatedValue();
+
+                if (dilemma == 1) {
+                    mTopDilemmaLayer1.setTranslationY(value);
+                } else if (dilemma == 2) {
+                    mTopDilemmaLayer2.setTranslationY(value);
+                }
+
+            }
+        });
+
+        upAnimator.setInterpolator(new LinearInterpolator());
+        upAnimator.setDuration(1000);
+
+        downAnimator.setInterpolator(new BounceInterpolator());
+        downAnimator.setDuration(1500);
+
+        AnimatorSet animationSet = new AnimatorSet();
+
+
+        animationSet.play(upAnimator).before(downAnimator);
+        animationSet.start();
+
 
     }
 }

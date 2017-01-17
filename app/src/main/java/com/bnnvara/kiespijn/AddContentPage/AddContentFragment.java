@@ -50,7 +50,7 @@ public class AddContentFragment extends Fragment {
 
     private static Dilemma mDilemma;
     private static String mAnswerOption;
-    private Boolean mIsAPhoto;
+    private boolean mIsAPhoto;
 
     private String mLink;
     private String mImageLink;

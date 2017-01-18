@@ -261,36 +261,6 @@ public class AddContentFragment extends Fragment {
         startActivityForResult(i, REQUEST_IMAGE_GALLERY);
     }
 
-    private void addLink() {
-        AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
-        final EditText enterLink = new EditText(getContext());
-
-        linkAlert.setMessage("Copy in link to article or blog");
-        linkAlert.setTitle("Article / Link");
-        linkAlert.setView(enterLink);
-
-        linkAlert.setPositiveButton("SAVE LINK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mLink = enterLink.getText().toString();
-                mLinkView.setText(mLink);
-
-                mImageThumbnail.setVisibility(View.GONE);
-                mLinkView.setVisibility(View.VISIBLE);
-                mAddedContentLayout.setVisibility(View.VISIBLE);
-            }
-        });
-
-        linkAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        linkAlert.show();
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 

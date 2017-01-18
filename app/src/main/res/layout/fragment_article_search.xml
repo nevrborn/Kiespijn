@@ -15,9 +15,16 @@
         android:background="@color/colorGreen"
         android:padding="5dp"
         >
-
     </SearchView>
 
+    <Button
+        android:id="@+id/button_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type of plak een url"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_article_recycler_view"

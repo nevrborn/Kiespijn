@@ -2,10 +2,12 @@ package com.bnnvara.kiespijn.ArticleSearchPage;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,7 +17,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +54,7 @@ public class ArticleSearchFragment extends Fragment {
     private List<CheckBox> mRadioButtonList = new ArrayList<>();
     private android.widget.SearchView mSearchView;
     private MenuItem mNewSearch;
+    private String mLink;
 
     public static ArticleSearchFragment newInstance() {
         return new ArticleSearchFragment();
@@ -126,6 +131,37 @@ public class ArticleSearchFragment extends Fragment {
             }
         });
 
+
+    }
+
+    private void addLink() {
+        AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
+        final EditText enterLink = new EditText(getContext());
+
+        linkAlert.setMessage("Type of plak hier een link");
+        linkAlert.setTitle("Artikel");
+        linkAlert.setView(enterLink);
+
+        linkAlert.setPositiveButton("Sla op", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mLink = enterLink.getText().toString();
+
+//                mLinkView.setText(mLink);
+//                mImageThumbnail.setVisibility(View.GONE);
+//                mLinkView.setVisibility(View.VISIBLE);
+//                mAddedContentLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        linkAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        linkAlert.show();
     }
 
     //
@@ -138,6 +174,7 @@ public class ArticleSearchFragment extends Fragment {
         private TextView mIntroduction;
         private TextView mMainText;
         private TextView mMoreLess;
+        private Button mUrLButton;
 
         private Article mArticle;
         private boolean mState; // if true, the the main text of the article is shown
@@ -148,6 +185,7 @@ public class ArticleSearchFragment extends Fragment {
             mIntroduction = (TextView) itemView.findViewById(R.id.text_view_article_kassa_introduction);
             mMainText = (TextView) itemView.findViewById(R.id.text_view_article_kassa_main_text);
             mMoreLess = (TextView) itemView.findViewById(R.id.text_view_read_more_or_less);
+            mUrLButton = (Button) itemView.findViewById(R.id.button_url);
 
             mMoreLess.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -163,6 +201,13 @@ public class ArticleSearchFragment extends Fragment {
                         mIntroduction.setVisibility(View.VISIBLE);
                         mMainText.setVisibility(View.GONE);
                     }
+                }
+            });
+
+            mUrLButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addLink();
                 }
             });
         }

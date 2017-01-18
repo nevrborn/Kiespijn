@@ -194,107 +194,184 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0"
+        android:weightSum="1"
         android:layout_marginBottom="5dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
         >
 
-        <RelativeLayout
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/swipeview_first"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="4dp"
             android:layout_weight="0.5"
-            android:background="@color/colorGreen"
-            android:padding="6dp"
-            >
-
-            <ImageView
-                android:id="@+id/image_view_first_option_decicision_page"
+            android:layout_marginRight="8dp"
+            android:layout_height="match_parent">
+            <!-- Bottom View Start-->
+            <LinearLayout
+                android:id="@+id/swipe_bottom_wrapper_first"
+                android:padding="5dp"
+                android:background="#ffffff"
+                android:weightSum="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/image_content"
-                android:src="@drawable/ic_action_sand_timer"
-                />
+                android:orientation="vertical">
+                <!--What you want to show in SurfaceView-->
 
-            <TextView
-                android:id="@+id/text_view_first_image_title"
+                <TextView
+                    android:id="@+id/textview_next_dilemma_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:background="@color/colorYellow"
+                    android:text="@string/choose_dilemma"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/textview_add_content_swipe_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:background="@color/colorGreen"
+                    android:text="@string/add_content"
+                    android:textColor="@color/colorYellow"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            </LinearLayout>
+            <!-- Bottom View End-->
+
+            <!-- Surface View Start -->
+            <LinearLayout
+                android:id="@+id/swipe_top_first"
+                android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="15dp"
-                android:background="@color/colorTransparentWhite"
-                android:hint="@string/image_title"
-                android:textAlignment="center"
-                android:textColorHint="@android:color/black"
-                android:textSize="15sp"
-                />
+                android:layout_height="match_parent">
+                <!--What you want to show in SurfaceView-->
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colorGreen"
+                    android:padding="5dp"
+                    >
 
-        <RelativeLayout
+                    <ImageView
+                        android:id="@+id/image_view_first_option_decicision_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/image_content"
+                        android:src="@drawable/ic_action_sand_timer"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_view_first_image_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/colorTransparentWhite"
+                        android:hint="@string/image_title"
+                        android:textAlignment="center"
+                        android:textColorHint="@android:color/black"
+                        android:textSize="15sp"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!-- Surface View End -->
+        </com.daimajia.swipe.SwipeLayout>
+
+        <com.daimajia.swipe.SwipeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeview_second"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
             android:layout_weight="0.5"
-            android:background="@color/colorGreen"
-            android:padding="6dp"
-            >
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/image_view_second_option_decicision_page"
+            <!-- Bottom View Start-->
+            <LinearLayout
+                android:id="@+id/swipe_bottom_wrapper_second"
+                android:padding="5dp"
+                android:background="#ffffff"
+                android:weightSum="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/image_content"
-                android:src="@drawable/ic_action_sand_timer"
-                />
+                android:orientation="vertical">
+                <!--What you want to show in SurfaceView-->
 
-            <TextView
-                android:id="@+id/text_view_second_image_title"
+                <TextView
+                    android:id="@+id/textview_next_dilemma_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.6"
+                    android:background="@color/colorYellow"
+                    android:text="@string/choose_dilemma"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/textview_add_content_swipe_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:background="@color/colorGreen"
+                    android:text="@string/add_content"
+                    android:textColor="@color/colorYellow"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            </LinearLayout>
+            <!-- Bottom View End-->
+
+            <!-- Surface View Start -->
+            <LinearLayout
+                android:id="@+id/swipe_top_second"
+                android:background="#ffffff"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="15dp"
-                android:background="@color/colorTransparentWhite"
-                android:hint="@string/image_title"
-                android:textAlignment="center"
-                android:textColorHint="@android:color/black"
-                android:textSize="15sp"
-                />
+                android:layout_height="match_parent">
+                <!--What you want to show in SurfaceView-->
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="0.5"
+                    android:padding="5dp"
+                    android:background="@color/colorGreen">
 
-    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/image_view_second_option_decicision_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/image_content"
+                        android:src="@drawable/ic_action_sand_timer"
+                        />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp">
+                    <TextView
+                        android:id="@+id/text_view_second_image_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/colorTransparentWhite"
+                        android:hint="@string/image_title"
+                        android:textAlignment="center"
+                        android:textColorHint="@android:color/black"
+                        android:textSize="15sp"
+                        />
 
-        <Button
-            android:id="@+id/button_add_content_first"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layout_marginRight="4dp"
-            android:background="@color/colorGreen"
-            android:text="@string/add_content"
-            android:textColor="@color/colorYellow"
-            android:textSize="16sp"
-            android:padding="8dp"
-            />
+                </RelativeLayout>
 
-        <Button
-            android:id="@+id/button_add_content_second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="4dp"
-            android:background="@color/colorGreen"
-            android:text="@string/add_content"
-            android:textColor="@color/colorYellow"
-            android:textSize="16sp"
-            android:padding="8dp"
-            />
+            </LinearLayout>
+            <!-- Surface View End -->
+        </com.daimajia.swipe.SwipeLayout>
 
     </LinearLayout>
 
@@ -309,31 +386,5 @@
         android:layout_marginTop="4dp"
         />
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/linear_layout_dicicion_buttons"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--&gt;-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/image_view_choose_left"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/ic_action_choose"-->
-    <!--android:layout_weight="1"-->
-    <!--android:contentDescription="@string/image_content"-->
-    <!--/>-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/image_view_choose_right"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/ic_action_choose"-->
-    <!--android:layout_weight="1"-->
-    <!--android:contentDescription="@string/image_content"-->
-    <!--/>-->
-
-    <!--</LinearLayout>-->
 
 </LinearLayout>

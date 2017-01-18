@@ -205,7 +205,7 @@ public class DeadlineFragment extends Fragment {
         setDateCreatedAndDeadLine(mDeadline);
         mDilemma.setUuid();
 
-        // SOME CODE TO POST DILEMMA TO DATABASE
+        //SOME CODE TO POST DILEMMA TO DATABASE
         Log.i(TAG, " DILLEMMA INFORMATION");
         Log.i(TAG, " Title: " + mDilemma.getTitle());
         Log.i(TAG, " Facebook ID: " + mDilemma.getCreator_fb_id());

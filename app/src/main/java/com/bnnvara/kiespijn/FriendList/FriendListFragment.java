@@ -64,14 +64,12 @@ public class FriendListFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_make_group:
-//                Intent intent1 = PersonalPageActivity.newIntent(getActivity());
-//                startActivity(intent1);
-                return true;
-            default:
-                return true;
-        }
+        Intent i = TargetGroupActivity.newIntent(getActivity());
+        i.putExtra(DILEMMA_OBJECT, mDilemma);
+        startActivity(i);
+        getActivity().finish();
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Nullable

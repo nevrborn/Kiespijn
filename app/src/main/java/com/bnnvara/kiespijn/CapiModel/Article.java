@@ -22,6 +22,9 @@ public class Article implements Serializable {
     @SerializedName("content")
     private String mContent;
 
+    @SerializedName("url")
+    private String mUrl;
+
 
 
     public String getId() {
@@ -54,5 +57,13 @@ public class Article implements Serializable {
 
     public void setContent(String content) {
         mContent = content;
+    }
+
+    public String getUrl() {
+        return mUrl;
+    }
+
+    public void setUrl(String url) {
+        mUrl = url;
     }
 }

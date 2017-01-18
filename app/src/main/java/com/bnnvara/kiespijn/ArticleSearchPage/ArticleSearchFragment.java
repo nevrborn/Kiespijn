@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CapiModel.Article;
@@ -46,6 +45,7 @@ public class ArticleSearchFragment extends Fragment {
 
     private static final String TAG = ArticleSearchFragment.class.getSimpleName();
     private static final String ARTICLE_URL = "article_url";
+    private static final String KASSA_BASE_URL = "http://www.kassa.vara.nl";
 
     private RecyclerView mArticleRecylerView;
     private Button mUrLButton;
@@ -103,7 +103,7 @@ public class ArticleSearchFragment extends Fragment {
         mUrLButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addLink();
+                addLink("");
             }
         });
 
@@ -144,9 +144,10 @@ public class ArticleSearchFragment extends Fragment {
 
     }
 
-    private void addLink() {
+    private void addLink(String url) {
         AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
         final EditText enterLink = new EditText(getContext());
+        enterLink.setText(url);
 
         linkAlert.setMessage("Type of plak hier een link");
         linkAlert.setTitle("Artikel");
@@ -222,8 +223,8 @@ public class ArticleSearchFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), "Gekozen", Toast.LENGTH_LONG).show();
-
+            String url = KASSA_BASE_URL + mArticle.getUrl();
+            addLink(url);
         }
 
     }

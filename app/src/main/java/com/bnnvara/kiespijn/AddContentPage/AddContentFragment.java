@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchActivity;
 import com.bnnvara.kiespijn.CapiModel.ArticleRoot;
 import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -148,7 +149,10 @@ public class AddContentFragment extends Fragment {
         linkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addLink();
+                Intent i = ArticleSearchActivity.newIntent(getActivity());
+                startActivity(i);
+
+                //addLink();
                 mIsAPhoto = false;
             }
         });

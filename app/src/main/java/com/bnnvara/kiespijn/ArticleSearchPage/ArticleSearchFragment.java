@@ -64,7 +64,7 @@ public class ArticleSearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_google_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_article_search, container, false);
 
         mArticleRecylerView = (RecyclerView) view.findViewById(R.id.fragment_article_recycler_view);
         mArticleRecylerView.setLayoutManager(new LinearLayoutManager(getActivity()));

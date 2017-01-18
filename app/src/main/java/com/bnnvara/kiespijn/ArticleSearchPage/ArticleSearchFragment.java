@@ -48,6 +48,8 @@ public class ArticleSearchFragment extends Fragment {
     private static final String ARTICLE_URL = "article_url";
 
     private RecyclerView mArticleRecylerView;
+    private Button mUrLButton;
+
     private String mSearchString;
     private List<ArticleRoot> mArticleRootList;
     private String mChosenURL;
@@ -94,6 +96,14 @@ public class ArticleSearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
+            }
+        });
+
+        mUrLButton = (Button) view.findViewById(R.id.button_url);
+        mUrLButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addLink();
             }
         });
 
@@ -174,7 +184,6 @@ public class ArticleSearchFragment extends Fragment {
         private TextView mIntroduction;
         private TextView mMainText;
         private TextView mMoreLess;
-        private Button mUrLButton;
 
         private Article mArticle;
         private boolean mState; // if true, the the main text of the article is shown
@@ -185,7 +194,6 @@ public class ArticleSearchFragment extends Fragment {
             mIntroduction = (TextView) itemView.findViewById(R.id.text_view_article_kassa_introduction);
             mMainText = (TextView) itemView.findViewById(R.id.text_view_article_kassa_main_text);
             mMoreLess = (TextView) itemView.findViewById(R.id.text_view_read_more_or_less);
-            mUrLButton = (Button) itemView.findViewById(R.id.button_url);
 
             mMoreLess.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -201,13 +209,6 @@ public class ArticleSearchFragment extends Fragment {
                         mIntroduction.setVisibility(View.VISIBLE);
                         mMainText.setVisibility(View.GONE);
                     }
-                }
-            });
-
-            mUrLButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addLink();
                 }
             });
         }

@@ -1,6 +1,11 @@
 package com.bnnvara.kiespijn.DilemmaPage;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,11 +18,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.AddContentPage.AddContentActivity;
 import com.bnnvara.kiespijn.ApiEndpointInterface;
@@ -33,8 +40,12 @@ import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.internal.Primitives;
+import com.mindorks.placeholderview.SwipeDecor;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,10 +59,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
-/**
- *
- */
 public class DilemmaFragment extends Fragment {
 
     // constants
@@ -67,16 +74,20 @@ public class DilemmaFragment extends Fragment {
     private TextView mUserNameTextView;
     private TextView mUserDescriptionTextView;
     private TextView mDilemmaTextView;
-    private TextView mFirstImageTitleTextView;
-    private TextView mSecondImageTitleTextView;
     private LinearLayout mNoDilemmasTextView;
-    private ImageView mDilemmaFirstImageView;
-    private ImageView mDilemmaSecondImageView;
     private ImageView mBackgroundInfoImageView;
-    private Button mDilemmaFirstAddContent;
-    private Button mDilemmaSecondAddContent;
     private Button mSkipDilemma;
     private ImageView mFriendIcon;
+
+    private ImageView mFirstDilemmaImage;
+    private ImageView mSecondDilemmaImage;
+    private TextView mFirstDilemmaImageText;
+    private TextView mSecondDilemmaImageText;
+    private TextView mChooseDilemmaText1;
+    private TextView mChooseDilemmaText2;
+
+    private SwipeLayout swipeLayout1;
+    private SwipeLayout swipeLayout2;
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
@@ -85,11 +96,13 @@ public class DilemmaFragment extends Fragment {
     private String mUserFbId;
     private Boolean mFilterFriends = false;
 
+    private float mImageAlpha = 1.0f;
+    private int tempOffset;
+    private Boolean hasChosen = false;
 
     public static Fragment newInstance() {
         return new DilemmaFragment();
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,6 +121,7 @@ public class DilemmaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dilemma_page, container, false);
 
         mUserFbId = User.getInstance().getUserKey();
+
         //Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
         getData();
 
@@ -116,19 +130,163 @@ public class DilemmaFragment extends Fragment {
         mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username);
         mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_user_info);
         mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma);
-        mFirstImageTitleTextView = (TextView) view.findViewById(R.id.text_view_first_image_title);
-        mSecondImageTitleTextView = (TextView) view.findViewById(R.id.text_view_second_image_title);
         mNoDilemmasTextView = (LinearLayout) view.findViewById(R.id.linear_layout_no_dilemmas);
-        mDilemmaFirstImageView = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
-        mDilemmaSecondImageView = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
         mBackgroundInfoImageView = (ImageView) view.findViewById(R.id.image_view_background_info);
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
-        mDilemmaFirstAddContent = (Button) view.findViewById(R.id.button_add_content_first);
-        mDilemmaSecondAddContent = (Button) view.findViewById(R.id.button_add_content_second);
         mSkipDilemma = (Button) view.findViewById(R.id.button_skip_dilemma);
         mFriendIcon = (ImageView) view.findViewById(R.id.imageview_friends);
 
         filterSwitch.setChecked(false);
+
+        mFirstDilemmaImage = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
+        mSecondDilemmaImage = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
+        mFirstDilemmaImageText = (TextView) view.findViewById(R.id.text_view_first_image_title);
+        mSecondDilemmaImageText = (TextView) view.findViewById(R.id.text_view_second_image_title);
+
+        mChooseDilemmaText1 = (TextView) view.findViewById(R.id.textview_next_dilemma_first);
+        mChooseDilemmaText2 = (TextView) view.findViewById(R.id.textview_next_dilemma_second);
+        final TextView addContent1 = (TextView) view.findViewById(R.id.textview_add_content_swipe_first);
+        final TextView addContent2 = (TextView) view.findViewById(R.id.textview_add_content_swipe_second);
+
+        swipeLayout1 = (SwipeLayout) view.findViewById(R.id.swipeview_first);
+        swipeLayout2 = (SwipeLayout) view.findViewById(R.id.swipeview_second);
+
+        swipeLayout1.setShowMode(SwipeLayout.ShowMode.PullOut);
+        swipeLayout2.setShowMode(SwipeLayout.ShowMode.PullOut);
+
+        swipeLayout1.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_first));
+        swipeLayout2.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout2.findViewById(R.id.swipe_bottom_wrapper_second));
+
+        swipeLayout1.setRightSwipeEnabled(false);
+        swipeLayout1.setLeftSwipeEnabled(false);
+        swipeLayout2.setRightSwipeEnabled(false);
+        swipeLayout2.setLeftSwipeEnabled(false);
+
+        // FONT setup
+        Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
+        Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        mChooseDilemmaText1.setTypeface(source_sans_extra_light);
+        mChooseDilemmaText2.setTypeface(source_sans_extra_light);
+        addContent1.setTypeface(source_sans_extra_light);
+        addContent2.setTypeface(source_sans_extra_light);
+        mDilemmaTextView.setTypeface(source_sans_bold);
+
+
+        swipeLayout1.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                swipeLayout2.setBottomSwipeEnabled(false);
+                swipeLayout2.setClickable(false);
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout layout) {
+                swipeLayout2.setBottomSwipeEnabled(true);
+                swipeLayout2.setClickable(true);
+                swipeLayout2.setAlpha(1.0f);
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                setDilemmaAlpha(topOffset, 1);
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
+
+        swipeLayout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animateSwipeJump(swipeLayout1);
+            }
+        });
+
+
+        swipeLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animateSwipeJump(swipeLayout2);
+            }
+        });
+
+
+
+        swipeLayout2.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                swipeLayout1.setBottomSwipeEnabled(false);
+                swipeLayout1.setClickable(false);
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout layout) {
+                swipeLayout1.setBottomSwipeEnabled(true);
+                swipeLayout1.setClickable(true);
+                swipeLayout1.setAlpha(1.0f);
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                setDilemmaAlpha(topOffset, 2);
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
+
+        mChooseDilemmaText1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateCurrentIndex();
+            }
+        });
+
+        mChooseDilemmaText2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateCurrentIndex();
+            }
+        });
+
+        addContent1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addContentIntent(1);
+            }
+        });
+
+        addContent2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addContentIntent(2);
+            }
+        });
+
 
         // set up the listeners
         mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
@@ -139,19 +297,6 @@ public class DilemmaFragment extends Fragment {
                 builder.setIcon(R.mipmap.ic_info);
                 builder.setMessage(mDilemma.getBackgroundInfo());
                 builder.show();
-            }
-        });
-
-        mDilemmaFirstImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateCurrentIndex();
-            }
-        });
-        mDilemmaSecondImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateCurrentIndex();
             }
         });
 
@@ -177,21 +322,6 @@ public class DilemmaFragment extends Fragment {
                 }
             }
         });
-
-        mDilemmaFirstAddContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addContentIntent(1);
-            }
-        });
-
-        mDilemmaSecondAddContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addContentIntent(2);
-            }
-        });
-
 
         return view;
     }
@@ -235,6 +365,9 @@ public class DilemmaFragment extends Fragment {
     private void updateUi() {
         mDilemma = mDilemmaList.get(mCurrentIndex);
 
+        swipeLayout1.setAlpha(1.0f);
+        swipeLayout2.setAlpha(1.0f);
+
         // do not show the current user's own mDilemma's
         if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
             updateCurrentIndex();
@@ -247,6 +380,10 @@ public class DilemmaFragment extends Fragment {
                 updateCurrentIndex();
                 return;
             }
+        }
+
+        if (mDilemma.getTitle() != null) {
+            mDilemmaTextView.setText(mDilemma.getTitle());
         }
 
         // make background info icon invisible if background info is not present
@@ -267,21 +404,30 @@ public class DilemmaFragment extends Fragment {
             mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);
         }
 
-        // load image 1
-        mDilemmaTextView.setText(mDilemma.getTitle());
-        Glide.with(getActivity())
-                .load(mDilemma.getPhotoA())
-                .centerCrop()
-                .placeholder(R.drawable.ic_action_sand_timer)
-                .into(mDilemmaFirstImageView);
+        if (mDilemma.getPhotoA() != null && mDilemma.getTitlePhotoA() != null) {
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoA())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mFirstDilemmaImage);
+            mFirstDilemmaImageText.setText(mDilemma.getTitlePhotoA());
+            mChooseDilemmaText1.setText(getString(R.string.choose_dilemma, mDilemma.getTitlePhotoA().toUpperCase()));
+        } else {
+            mFirstDilemmaImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_sand_timer));
+        }
 
-        // load image 2
-        mDilemmaTextView.setText(mDilemma.getTitle());
-        Glide.with(getActivity())
-                .load(mDilemma.getPhotoB())
-                .centerCrop()
-                .placeholder(R.drawable.ic_action_sand_timer)
-                .into(mDilemmaSecondImageView);
+        if (mDilemma.getPhotoB() != null && mDilemma.getTitlePhotoB() != null) {
+            Glide.with(getActivity())
+                    .load(mDilemma.getPhotoB())
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_action_sand_timer)
+                    .into(mSecondDilemmaImage);
+            mSecondDilemmaImageText.setText(mDilemma.getTitlePhotoB());
+            mChooseDilemmaText2.setText(getString(R.string.choose_dilemma, mDilemma.getTitlePhotoB().toUpperCase()));
+        } else {
+            mSecondDilemmaImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_sand_timer));
+        }
+
 
         // set creator and mDilemma text
         if (!mDilemma.getIsAnonymous()) {
@@ -303,9 +449,6 @@ public class DilemmaFragment extends Fragment {
             mFriendIcon.setVisibility(View.GONE);
         }
 
-        // set image titles
-        mFirstImageTitleTextView.setText(mDilemma.getTitlePhotoA());
-        mSecondImageTitleTextView.setText(mDilemma.getTitlePhotoB());
     }
 
 
@@ -554,4 +697,43 @@ public class DilemmaFragment extends Fragment {
         }
 
     }
+
+    private void setDilemmaAlpha(int offset, int dilemma) {
+        if (offset > tempOffset) {
+            if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                mImageAlpha = mImageAlpha + 0.04f;
+            }
+        } else if (offset < tempOffset) {
+            if (mImageAlpha >= 0.1f && mImageAlpha <= 1.0f) {
+                mImageAlpha = mImageAlpha - 0.04f;
+            }
+        }
+
+        if (mImageAlpha < 0.1f) {
+            mImageAlpha = 0.1f;
+        } else if (mImageAlpha > 1.0f) {
+            mImageAlpha = 1.0f;
+        }
+
+        if (dilemma == 1) {
+            swipeLayout2.setAlpha(mImageAlpha);
+        } else if (dilemma == 2) {
+            swipeLayout1.setAlpha(mImageAlpha);
+        }
+
+        tempOffset = offset;
+    }
+
+    private void animateSwipeJump(SwipeLayout swipelayout) {
+
+        ObjectAnimator animUp = ObjectAnimator.ofFloat(swipelayout, "translationY", swipelayout.getTop(), swipelayout.getTop() - 50);
+        ObjectAnimator animDown = ObjectAnimator.ofFloat(swipelayout, "translationY", swipelayout.getTop() - 50, swipelayout.getTop());
+        animDown.setInterpolator(new BounceInterpolator());
+
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(animUp).before(animDown);
+        animSet.setDuration(300);
+        animSet.start();
+    }
+
 }

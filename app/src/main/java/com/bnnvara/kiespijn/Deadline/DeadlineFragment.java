@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -161,8 +162,6 @@ public class DeadlineFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 
@@ -205,7 +204,7 @@ public class DeadlineFragment extends Fragment {
         setDateCreatedAndDeadLine(mDeadline);
         mDilemma.setUuid();
 
-        // SOME CODE TO POST DILEMMA TO DATABASE
+        //SOME CODE TO POST DILEMMA TO DATABASE
         Log.i(TAG, " DILLEMMA INFORMATION");
         Log.i(TAG, " Title: " + mDilemma.getTitle());
         Log.i(TAG, " Facebook ID: " + mDilemma.getCreator_fb_id());
@@ -234,7 +233,6 @@ public class DeadlineFragment extends Fragment {
                         intent.putExtra(Intent.EXTRA_SUBJECT, "Kiespijn");
                         intent.putExtra(Intent.EXTRA_TEXT, "Take this dilemma for me: " + mDilemma.getUuid());
                         startActivityForResult(intent, 0);
-                        goToMain();
                     }
                 })
                 .setNegativeButton("Go to main", new DialogInterface.OnClickListener() {
@@ -250,5 +248,6 @@ public class DeadlineFragment extends Fragment {
         mDilemma = null;
         Intent i = DilemmaActivity.newIntent(getActivity());
         startActivity(i);
+        getActivity().finish();
     }
 }

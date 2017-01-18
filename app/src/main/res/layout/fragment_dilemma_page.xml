@@ -235,7 +235,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.4"
                     android:background="@color/colorGreen"
-                    android:text="@string/add_content"
+                    android:text="@string/add_content_swipe"
                     android:textColor="@color/colorYellow"
                     android:textSize="20sp"
                     android:gravity="center_vertical|center_horizontal"/>
@@ -322,7 +322,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.4"
                     android:background="@color/colorGreen"
-                    android:text="@string/add_content"
+                    android:text="@string/add_content_swipe"
                     android:textColor="@color/colorYellow"
                     android:textSize="20sp"
                     android:gravity="center_vertical|center_horizontal"/>

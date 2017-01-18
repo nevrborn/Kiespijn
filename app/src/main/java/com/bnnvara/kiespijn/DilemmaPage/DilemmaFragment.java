@@ -169,6 +169,7 @@ public class DilemmaFragment extends Fragment {
         mChooseDilemmaText2.setTypeface(source_sans_extra_light);
         addContent1.setTypeface(source_sans_extra_light);
         addContent2.setTypeface(source_sans_extra_light);
+        mDilemmaTextView.setTypeface(source_sans_bold);
 
 
         swipeLayout1.addSwipeListener(new SwipeLayout.SwipeListener() {

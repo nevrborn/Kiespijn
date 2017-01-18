@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CapiModel.Article;
@@ -134,39 +135,48 @@ public class ArticleSearchFragment extends Fragment {
     public class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mTitle;
-        private CheckBox mRadioButton;
+        private TextView mIntroduction;
+        private TextView mMainText;
+        private TextView mMoreLess;
+
         private Article mArticle;
+        private boolean mState; // if true, the the main text of the article is shown
 
         public PhotoHolder(View itemView) {
             super(itemView);
-            mRadioButton = (CheckBox) itemView.findViewById(R.id.radioButton);
-            mTitle = (TextView) itemView.findViewById(R.id.itext_view_article_kassa_title);
-            itemView.setOnClickListener(this);
+            mTitle = (TextView) itemView.findViewById(R.id.text_view_article_kassa_title);
+            mIntroduction = (TextView) itemView.findViewById(R.id.text_view_article_kassa_introduction);
+            mMainText = (TextView) itemView.findViewById(R.id.text_view_article_kassa_main_text);
+            mMoreLess = (TextView) itemView.findViewById(R.id.text_view_read_more_or_less);
+
+            mMoreLess.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!mState){
+                        mState = !mState;
+                        mMoreLess.setText("Lees minder");
+                        mIntroduction.setVisibility(View.GONE);
+                        mMainText.setVisibility(View.VISIBLE);
+                    } else {
+                        mState = !mState;
+                        mMoreLess.setText("Lees meer");
+                        mIntroduction.setVisibility(View.VISIBLE);
+                        mMainText.setVisibility(View.GONE);
+                    }
+                }
+            });
         }
 
         public void bindGalleryItem(Article article) {
             mArticle = article;
             mTitle.setText(article.getTitle());
-//            String url = mGalleryItem.getUrl();
-//            mGalleryItem.setImageURL(url);
-//            mRadioButtonList.add(mRadioButton);
-//            mImageViewList.add(mItemImageView);
-//            Log.i(TAG, url);
+            mIntroduction.setText(article.getIntroduction());
+            mMainText.setText(article.getContent());
         }
 
         @Override
         public void onClick(View view) {
-//            int i = 0;
-//
-//            while (i < mRadioButtonList.size()) {
-//                mRadioButtonList.get(i).setChecked(false);
-//                mImageViewList.get(i).setAlpha(1f);
-//                i += 1;
-//            }
-//
-//            mRadioButton.setChecked(true);
-//            mItemImageView.setAlpha(0.7f);
-//            mChosenURL = mGalleryItem.getImageURL();
+            Toast.makeText(getActivity(), "Gekozen", Toast.LENGTH_LONG).show();
 
         }
 
@@ -186,13 +196,14 @@ public class ArticleSearchFragment extends Fragment {
 
         @Override
         public PhotoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.google_search_gallery_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.kassa_article_viewholder, parent, false);
             return new PhotoHolder(view);
         }
 
         @Override
         public void onBindViewHolder(PhotoHolder holder, int position) {
             Article article = mArticleRoots.get(position).getArticle();
+            holder.itemView.setOnClickListener(holder);
             holder.bindGalleryItem(article);
         }
 

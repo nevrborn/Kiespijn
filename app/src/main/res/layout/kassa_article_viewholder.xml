@@ -4,22 +4,56 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:padding="16dp"
     >
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/radioButton"
-        />
-
     <TextView
-        android:id="@+id/itext_view_article_kassa_title"
+        android:id="@+id/text_view_article_kassa_title"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:hint="Titel"
+        android:textStyle="bold"
+        android:textSize="18dp"
         >
     </TextView>
+
+    <TextView
+        android:id="@+id/text_view_article_kassa_introduction"
+        android:layout_below="@id/text_view_article_kassa_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Introductie"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/text_view_article_kassa_main_text"
+        android:layout_below="@id/text_view_article_kassa_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Main text"
+        android:visibility="gone"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/text_view_read_more_or_less"
+        android:layout_below="@id/text_view_article_kassa_main_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lees meer"
+        android:textStyle="italic"
+        android:textColor="@color/colorGreen"
+        android:layout_marginBottom="8dp"
+        >
+    </TextView>
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/colorGreen"
+        />
 
 
 </RelativeLayout>

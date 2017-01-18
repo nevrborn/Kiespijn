@@ -62,16 +62,6 @@ public class FriendListFragment extends Fragment {
         inflater.inflate(R.menu.menu_friend_list, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent i = TargetGroupActivity.newIntent(getActivity());
-        i.putExtra(DILEMMA_OBJECT, mDilemma);
-        startActivity(i);
-        getActivity().finish();
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -152,6 +142,7 @@ public class FriendListFragment extends Fragment {
                     Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
                     i.putExtra(DILEMMA_OBJECT, mDilemma);
                     startActivity(i);
+                    getActivity().finish();
                 }
             }
         });

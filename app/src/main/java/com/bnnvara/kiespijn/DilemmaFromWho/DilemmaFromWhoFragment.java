@@ -112,6 +112,7 @@ public class DilemmaFromWhoFragment extends Fragment {
                     Intent i = DeadlineActivity.newIntent(getActivity());
                     i.putExtra(DILEMMA_OBJECT, mDilemma);
                     startActivity(i);
+                    getActivity().finish();
                 } else {
                     Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
                 }
@@ -144,25 +145,6 @@ public class DilemmaFromWhoFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_no_create_button, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == android.R.id.home) {
-            if (mDilemma.getIsToAll()) {
-                Intent i = TargetGroupActivity.newIntent(getActivity());
-                i.putExtra(DILEMMA_OBJECT, mDilemma);
-                startActivity(i);
-                getActivity().finish();
-            } else if (!mDilemma.getIsToAll()) {
-                Intent i = FriendListActivity.newIntent(getActivity(), mDilemma);
-                startActivity(i);
-                getActivity().finish();
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 }

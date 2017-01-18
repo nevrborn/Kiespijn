@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,7 @@ import com.bumptech.glide.Glide;
 import com.daimajia.swipe.SwipeLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.internal.Primitives;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -81,6 +83,8 @@ public class DilemmaFragment extends Fragment {
     private ImageView mSecondDilemmaImage;
     private TextView mFirstDilemmaImageText;
     private TextView mSecondDilemmaImageText;
+    private TextView mChooseDilemmaText1;
+    private TextView mChooseDilemmaText2;
 
     private SwipeLayout swipeLayout1;
     private SwipeLayout swipeLayout2;
@@ -139,8 +143,8 @@ public class DilemmaFragment extends Fragment {
         mFirstDilemmaImageText = (TextView) view.findViewById(R.id.text_view_first_image_title);
         mSecondDilemmaImageText = (TextView) view.findViewById(R.id.text_view_second_image_title);
 
-        final TextView nextDilemma1 = (TextView) view.findViewById(R.id.textview_next_dilemma_first);
-        final TextView nextDilemma2 = (TextView) view.findViewById(R.id.textview_next_dilemma_second);
+        mChooseDilemmaText1 = (TextView) view.findViewById(R.id.textview_next_dilemma_first);
+        mChooseDilemmaText2 = (TextView) view.findViewById(R.id.textview_next_dilemma_second);
         final TextView addContent1 = (TextView) view.findViewById(R.id.textview_add_content_swipe_first);
         final TextView addContent2 = (TextView) view.findViewById(R.id.textview_add_content_swipe_second);
 
@@ -157,6 +161,14 @@ public class DilemmaFragment extends Fragment {
         swipeLayout1.setLeftSwipeEnabled(false);
         swipeLayout2.setRightSwipeEnabled(false);
         swipeLayout2.setLeftSwipeEnabled(false);
+
+        // FONT setup
+        Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
+        Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        mChooseDilemmaText1.setTypeface(source_sans_extra_light);
+        mChooseDilemmaText2.setTypeface(source_sans_extra_light);
+        addContent1.setTypeface(source_sans_extra_light);
+        addContent2.setTypeface(source_sans_extra_light);
 
 
         swipeLayout1.addSwipeListener(new SwipeLayout.SwipeListener() {
@@ -246,14 +258,14 @@ public class DilemmaFragment extends Fragment {
             }
         });
 
-        nextDilemma1.setOnClickListener(new View.OnClickListener() {
+        mChooseDilemmaText1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateCurrentIndex();
             }
         });
 
-        nextDilemma2.setOnClickListener(new View.OnClickListener() {
+        mChooseDilemmaText2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateCurrentIndex();
@@ -398,6 +410,9 @@ public class DilemmaFragment extends Fragment {
                     .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mFirstDilemmaImage);
             mFirstDilemmaImageText.setText(mDilemma.getTitlePhotoA());
+            mChooseDilemmaText1.setText(getString(R.string.choose_dilemma, mDilemma.getTitlePhotoA().toUpperCase()));
+        } else {
+            mFirstDilemmaImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_sand_timer));
         }
 
         if (mDilemma.getPhotoB() != null && mDilemma.getTitlePhotoB() != null) {
@@ -407,9 +422,11 @@ public class DilemmaFragment extends Fragment {
                     .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mSecondDilemmaImage);
             mSecondDilemmaImageText.setText(mDilemma.getTitlePhotoB());
+            mChooseDilemmaText2.setText(getString(R.string.choose_dilemma, mDilemma.getTitlePhotoB().toUpperCase()));
         } else {
             mSecondDilemmaImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_sand_timer));
         }
+
 
         // set creator and mDilemma text
         if (!mDilemma.getIsAnonymous()) {

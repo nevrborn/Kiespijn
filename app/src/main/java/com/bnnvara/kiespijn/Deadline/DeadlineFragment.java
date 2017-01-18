@@ -159,7 +159,6 @@ public class DeadlineFragment extends Fragment {
                 if (isHasChosen) {
                     postDilemma();
                     shareDilemma();
-                    getActivity().finish();
                 } else {
                     Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
                 }
@@ -184,20 +183,6 @@ public class DeadlineFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_no_create_button, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == android.R.id.home) {
-            setDateCreatedAndDeadLine(mDeadline);
-            Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
-            i.putExtra(DILEMMA_OBJECT, mDilemma);
-            startActivity(i);
-            getActivity().finish();
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void setDateCreatedAndDeadLine(int deadline) {
@@ -248,7 +233,6 @@ public class DeadlineFragment extends Fragment {
                         intent.putExtra(Intent.EXTRA_SUBJECT, "Kiespijn");
                         intent.putExtra(Intent.EXTRA_TEXT, "Take this dilemma for me: " + mDilemma.getUuid());
                         startActivityForResult(intent, 0);
-                        goToMain();
                     }
                 })
                 .setNegativeButton("Go to main", new DialogInterface.OnClickListener() {
@@ -264,5 +248,6 @@ public class DeadlineFragment extends Fragment {
         mDilemma = null;
         Intent i = DilemmaActivity.newIntent(getActivity());
         startActivity(i);
+        getActivity().finish();
     }
 }

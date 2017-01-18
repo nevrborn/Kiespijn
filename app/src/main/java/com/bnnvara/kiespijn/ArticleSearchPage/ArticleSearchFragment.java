@@ -103,7 +103,7 @@ public class ArticleSearchFragment extends Fragment {
         mUrLButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addLink("");
+                addLink("", null);
             }
         });
 
@@ -136,16 +136,17 @@ public class ArticleSearchFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
+                mSearchView.setIconifiedByDefault(false);
                 mSearchView.setVisibility(View.VISIBLE);
                 mNewSearch.setVisible(false);
-                return false;
+                return true;
             }
         });
 
 
     }
 
-    private void addLink(String url) {
+    private void addLink(String url, final View view) {
         AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
         final EditText enterLink = new EditText(getContext());
         enterLink.setText(url);
@@ -169,7 +170,9 @@ public class ArticleSearchFragment extends Fragment {
         linkAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                if (view != null) {
+                    view.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                }
             }
         });
 
@@ -224,8 +227,9 @@ public class ArticleSearchFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
+            view.setBackgroundColor(getResources().getColor(R.color.colorGreen));
             String url = KASSA_BASE_URL + mArticle.getUrl();
-            addLink(url);
+            addLink(url, view);
         }
 
     }

@@ -122,12 +122,13 @@ public class ArticleSearchFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra(ARTICLE_URL, mChosenURL);
-                getActivity().setResult(Activity.RESULT_OK, resultIntent);
-                getActivity().finish();
-
-                return false;
+//                Intent resultIntent = new Intent();
+//                resultIntent.putExtra(ARTICLE_URL, mChosenURL);
+//                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+//                getActivity().finish();
+//
+//                return false;
+                return true;
             }
         });
 
@@ -158,10 +159,10 @@ public class ArticleSearchFragment extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 mLink = enterLink.getText().toString();
 
-//                mLinkView.setText(mLink);
-//                mImageThumbnail.setVisibility(View.GONE);
-//                mLinkView.setVisibility(View.VISIBLE);
-//                mAddedContentLayout.setVisibility(View.VISIBLE);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(ARTICLE_URL, mLink);
+                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+                getActivity().finish();
             }
         });
 

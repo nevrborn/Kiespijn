@@ -79,14 +79,6 @@ public class AddContentFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            getActivity().onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

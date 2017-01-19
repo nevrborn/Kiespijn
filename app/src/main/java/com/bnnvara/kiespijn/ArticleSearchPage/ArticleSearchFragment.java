@@ -221,8 +221,8 @@ public class ArticleSearchFragment extends Fragment {
         public void bindGalleryItem(Article article) {
             mArticle = article;
             mTitle.setText(article.getTitle());
-            mIntroduction.setText(article.getIntroduction());
-            mMainText.setText(article.getContent());
+            mIntroduction.setText(editText(article.getIntroduction()));
+            mMainText.setText(editText(article.getContent()));
         }
 
         @Override
@@ -230,6 +230,18 @@ public class ArticleSearchFragment extends Fragment {
             view.setBackgroundColor(getResources().getColor(R.color.colorGreen));
             String url = KASSA_BASE_URL + mArticle.getUrl();
             addLink(url, view);
+        }
+
+        private String editText(String article) {
+
+            if (article != null) {
+                article = article.replace("<b>", "");
+                article = article.replace("</b>", "");
+                article = article.replace("<br /><br />", "\n\n");
+                article = article.replaceAll("<(.*?)>", "");
+            }
+
+            return article;
         }
 
     }

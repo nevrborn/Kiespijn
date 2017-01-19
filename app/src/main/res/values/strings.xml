@@ -1,13 +1,14 @@
 <resources>
-    <string name="app_name">Kiespijn</string>
+    <string name="app_name">HALPP</string>
     <string name="image_content">image</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuleer</string>
     <string name="everybody">Iedereen</string>
     <string name="groups">GROEPEN</string>
+    <string name="skip">Niet nu</string>
 
     // LOGIN SCREEN
-    <string name="login_title">KIESPIJN</string>
+    <string name="login_title">HALPP</string>
     <string name="login_text">Inloggen</string>
     <string name="login_email_text">email</string>
     <string name="login_password_text">wachtwoord</string>
@@ -16,7 +17,7 @@
 
     // DILEMMA PAGE
     <string name="de_kies">DE KIES</string>
-    <string name="dilemma_main_text">Mijn familie wil mijn vader cremeren maar ik wil ...</string>
+    <string name="dilemma_main_text">Mijn familie wil mijn vader cremeren maar ik wil</string>
     <string name="dilemma_main_text_short_version">Oh wat een dilemma. Wat moet ik kiezen?</string>
     <string name="dilemma_username">ANONIEM</string>
     <string name="dilemma_user_description">Vrouw | 31 jaar</string>
@@ -25,6 +26,7 @@
     <string name="dilemma_x_uur">x uur</string>
     <string name="choose_dilemma">KIES\n%1$s</string>
     <string name="add_content_swipe">Licht jouw\nantwoord toe +</string>
+    <string name="create_dilemma_yourself">Do you want to create your own dilemma?</string>
 
     // PERSONAL PAGE
     <string name="button_expired">Gesloten</string>

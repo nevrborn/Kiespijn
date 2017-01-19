@@ -170,11 +170,11 @@ public class ResultFragment extends Fragment {
                 ageToShow = mDilemma.getCreator_ageRange();
             }
 
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow + " jaar | " + mDilemma.getCreator_hometown());
             mUserNameTextView.setText(R.string.anonymous);
         } else {
             mUserDescriptionTextView.setText(
-                    mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+                    mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age() + " jaar | " + mDilemma.getCreator_hometown());
             mUserNameTextView.setText(mDilemma.getCreator_name());
         }
         mDilemmaTextView.setText(mDilemma.getTitle());

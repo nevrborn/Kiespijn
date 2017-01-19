@@ -22,6 +22,7 @@ public class User {
     private DilemmaApiResponse mUserCreatedDilemmas;
     private DilemmaApiResponse mUserAnsweredDilemmas;
     public List<Friend> mFacebookFriendList = new ArrayList<>();
+    private Boolean hasCreatedDilemma = false;
 
 
     private User() {
@@ -118,5 +119,13 @@ public class User {
 
     public void setHometown(String hometown) {
         mHometown = hometown;
+    }
+
+    public Boolean getHasCreatedDilemma() {
+        return hasCreatedDilemma;
+    }
+
+    public void setHasCreatedDilemma(Boolean hasCreatedDilemma) {
+        this.hasCreatedDilemma = hasCreatedDilemma;
     }
 }

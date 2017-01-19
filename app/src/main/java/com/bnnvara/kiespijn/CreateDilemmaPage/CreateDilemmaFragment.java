@@ -35,6 +35,7 @@ import com.bnnvara.kiespijn.GoogleImageSearch.GalleryItem;
 import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
+import com.bumptech.glide.Glide;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -62,11 +63,6 @@ public class CreateDilemmaFragment extends Fragment {
     private ImageView mImageViewA;
     private ImageView mImageViewB;
     private Boolean isImageA = true;
-    public static Boolean isFromCamera = false;
-
-    private static Bitmap mGoogleImage;
-
-    private static List<GalleryItem> mGalleryItems;
 
     // dilemma variables
     private static Dilemma mDilemma;
@@ -111,22 +107,8 @@ public class CreateDilemmaFragment extends Fragment {
                     mOptionAText.setText(mDilemma.getTitlePhotoA());
                     mOptionBText.setText(mDilemma.getTitlePhotoB());
 
-                if (mDilemma.getPhotoA().contains("http")) {
-                    isImageA = true;
-                    GetBitmapAFromURLAsync getBitmapAFromURLAsync = new GetBitmapAFromURLAsync();
-                    getBitmapAFromURLAsync.execute(mDilemma.getPhotoA());
-                } else {
-                    mImageViewA.setImageURI(Uri.parse(mDilemma.getPhotoA()));
-                }
-
-                if (mDilemma.getPhotoB().contains("http")) {
-                    isImageA = false;
-                    GetBitmapBFromURLAsync getBitmapBFromURLAsync = new GetBitmapBFromURLAsync();
-                    getBitmapBFromURLAsync.execute(mDilemma.getPhotoB());
-                } else {
-                    mImageViewB.setImageURI(Uri.parse(mDilemma.getPhotoB()));
-                }
-
+                displayPicture(mDilemma.getPhotoA(), mImageViewA);
+                displayPicture(mDilemma.getPhotoB(), mImageViewB);
             }
         }
 
@@ -248,6 +230,7 @@ public class CreateDilemmaFragment extends Fragment {
                 }
             }
         });
+
         builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -285,16 +268,13 @@ public class CreateDilemmaFragment extends Fragment {
 
             if (isImageA) {
                 imageA = imageBitmap;
-                mImageViewA.setImageBitmap(imageA);
                 String imageAUri = getImageUri(getContext(), imageA).toString();
                 mDilemma.setPhotoA(imageAUri);
-                Log.i(TAG, imageAUri);
+                displayPicture(imageAUri, mImageViewA);
             } else {
                 imageB = imageBitmap;
-                mImageViewB.setImageBitmap(imageB);
                 String imageBUri = getImageUri(getContext(), imageB).toString();
                 mDilemma.setPhotoB(imageBUri);
-                Log.i(TAG, imageBUri);
             }
         }
 
@@ -302,36 +282,26 @@ public class CreateDilemmaFragment extends Fragment {
                 && null != data) {
 
             Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            Cursor cursor = getContext().getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
             if (isImageA) {
-                imageA = bitmap;
-                mImageViewA.setImageBitmap(bitmap);
                 mDilemma.setPhotoA(selectedImage.toString());
-                Log.i(TAG, selectedImage.toString());
+                displayPicture(selectedImage.toString(), mImageViewA);
             } else {
-                imageB = bitmap;
-                mImageViewB.setImageBitmap(bitmap);
                 mDilemma.setPhotoB(selectedImage.toString());
-                Log.i(TAG, selectedImage.toString());
+                displayPicture(selectedImage.toString(), mImageViewB);
             }
 
         }
 
         if (requestCode == GOOGLE_IMAGE && resultCode == Activity.RESULT_OK) {
-            Uri googleUri = Uri.parse(data.getStringExtra(GOOGLE_IMAGE_URL));
-            GetBitmapFromURLAsync getBitmapFromURLAsync = new GetBitmapFromURLAsync();
-            getBitmapFromURLAsync.execute(googleUri.toString());
+            String googleUri = data.getStringExtra(GOOGLE_IMAGE_URL);
+
+            if (isImageA) {
+                displayPicture(googleUri, mImageViewA);
+            } else {
+                displayPicture(googleUri, mImageViewB);
+            }
+
         }
 
     }
@@ -353,92 +323,6 @@ public class CreateDilemmaFragment extends Fragment {
 
         return !(mDilemma.getTitle() == null || mDilemma.getTitlePhotoA() == null || mDilemma.getTitlePhotoB() == null || mDilemma.getPhotoA() == null || mDilemma.getPhotoB() == null);
     }
-
-    private static Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            mGoogleImage = myBitmap;
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private class GetBitmapFromURLAsync extends AsyncTask<String, Void, Bitmap> {
-        String url;
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            url = params[0];
-            return getBitmapFromURL(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            //  return the bitmap by doInBackground and store in result
-            mGoogleImage = bitmap;
-
-            if (isImageA) {
-                String imageAUri = (Uri.parse(url)).toString();
-                mDilemma.setPhotoA(imageAUri);
-                mImageViewA.setImageBitmap(mGoogleImage);
-            } else {
-                String imageBUri = (Uri.parse(url)).toString();
-                mDilemma.setPhotoB(imageBUri);
-                mImageViewB.setImageBitmap(mGoogleImage);
-            }
-        }
-
-    }
-
-    private class GetBitmapAFromURLAsync extends AsyncTask<String, Void, Bitmap> {
-        String url;
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            url = params[0];
-            return getBitmapFromURL(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            //  return the bitmap by doInBackground and store in result
-            mGoogleImage = bitmap;
-
-            String imageAUri = (Uri.parse(url)).toString();
-            mDilemma.setPhotoA(imageAUri);
-            mImageViewA.setImageBitmap(mGoogleImage);
-        }
-
-    }
-
-    private class GetBitmapBFromURLAsync extends AsyncTask<String, Void, Bitmap> {
-        String url;
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            url = params[0];
-            return getBitmapFromURL(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            //  return the bitmap by doInBackground and store in result
-            mGoogleImage = bitmap;
-
-            String imageBUri = (Uri.parse(url)).toString();
-            mDilemma.setPhotoB(imageBUri);
-            mImageViewB.setImageBitmap(mGoogleImage);
-        }
-
-    }
-
 
     private void addContext() {
         final AlertDialog.Builder contextAlert = new AlertDialog.Builder(getContext());
@@ -467,6 +351,14 @@ public class CreateDilemmaFragment extends Fragment {
         });
 
         contextAlert.show();
+    }
+
+    private void displayPicture(String pictureURL, ImageView imageView) {
+        Glide.with(getActivity())
+                .load(pictureURL)
+                .centerCrop()
+                .placeholder(R.drawable.ic_action_sand_timer)
+                .into(imageView);
     }
 
 

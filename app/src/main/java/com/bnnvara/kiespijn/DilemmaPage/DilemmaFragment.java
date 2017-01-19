@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -122,7 +123,6 @@ public class DilemmaFragment extends Fragment {
 
         mUserFbId = User.getInstance().getUserKey();
 
-        //Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
         getData();
 
         // set up the references
@@ -363,10 +363,20 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateUi() {
+
+        if (mCurrentIndex == 4 && !User.getInstance().getHasCreatedDilemma()) {
+            askToCreateDilemma();
+        }
+
         mDilemma = mDilemmaList.get(mCurrentIndex);
 
         swipeLayout1.setAlpha(1.0f);
         swipeLayout2.setAlpha(1.0f);
+
+        swipeLayout1.setClickable(true);
+        swipeLayout2.setClickable(true);
+        swipeLayout1.setBottomSwipeEnabled(true);
+        swipeLayout2.setBottomSwipeEnabled(true);
 
         // do not show the current user's own mDilemma's
         if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {
@@ -432,7 +442,7 @@ public class DilemmaFragment extends Fragment {
         // set creator and mDilemma text
         if (!mDilemma.getIsAnonymous()) {
             mUserNameTextView.setText(mDilemma.getCreator_name());
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age() + " jaar | " + mDilemma.getCreator_hometown());
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
 
@@ -440,7 +450,7 @@ public class DilemmaFragment extends Fragment {
             if (!mDilemma.getCreator_age().equals("Leeftijd onbekend")) {
                 ageToShow = mDilemma.getCreator_ageRange();
             }
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow + " jaar | " + mDilemma.getCreator_hometown());
         }
 
         if (mDilemma.isFromAFriend()) {
@@ -734,6 +744,28 @@ public class DilemmaFragment extends Fragment {
         animSet.play(animUp).before(animDown);
         animSet.setDuration(300);
         animSet.start();
+    }
+
+    private void askToCreateDilemma() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getString(R.string.create_dilemma_yourself))
+                .setCancelable(false)
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Dilemma dilemma = new Dilemma();
+                        Intent intent = CreateDilemmaActivity.newIntent(getActivity());
+                        intent.putExtra(DILEMMA_OBJECT, dilemma);
+                        startActivity(intent);
+                        User.getInstance().setHasCreatedDilemma(true);
+                    }
+                })
+                .setNegativeButton("Nee", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 }

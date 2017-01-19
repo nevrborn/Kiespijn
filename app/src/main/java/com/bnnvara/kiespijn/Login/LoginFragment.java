@@ -71,23 +71,6 @@ public class LoginFragment extends Fragment {
         mCallbackManager = CallbackManager.Factory.create();
         AppEventsLogger.activateApp(getActivity().getApplication());
 
-        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });
-
         if (isLoggedIn() && !mIsLoggingOut && isConnected()) {
             getFacebookParameters();
         }
@@ -117,7 +100,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
+                getFacebookParameters();
             }
 
             @Override
@@ -138,13 +121,9 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // TODO: Do we need this? Can we delete it?
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
-        getFacebookParameters();
-
-    }
-
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
+        // getFacebookParameters();
     }
 
     public void signOut() {

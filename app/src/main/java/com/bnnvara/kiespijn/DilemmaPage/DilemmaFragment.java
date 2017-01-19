@@ -122,7 +122,6 @@ public class DilemmaFragment extends Fragment {
 
         mUserFbId = User.getInstance().getUserKey();
 
-        //Toast.makeText(getActivity(), mUserFbId, Toast.LENGTH_LONG).show();
         getData();
 
         // set up the references
@@ -367,6 +366,11 @@ public class DilemmaFragment extends Fragment {
 
         swipeLayout1.setAlpha(1.0f);
         swipeLayout2.setAlpha(1.0f);
+
+        swipeLayout1.setClickable(true);
+        swipeLayout2.setClickable(true);
+        swipeLayout1.setBottomSwipeEnabled(true);
+        swipeLayout2.setBottomSwipeEnabled(true);
 
         // do not show the current user's own mDilemma's
         if (mDilemma.getCreator_fb_id().equals(mUserFbId)) {

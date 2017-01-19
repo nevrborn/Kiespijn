@@ -260,6 +260,12 @@
                     android:padding="5dp"
                     >
 
+                    <ProgressBar
+                        android:id="@+id/progress_first_image"
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"/>
+
                     <ImageView
                         android:id="@+id/image_view_first_option_decicision_page"
                         android:layout_width="match_parent"
@@ -345,6 +351,12 @@
                     android:layout_weight="0.5"
                     android:padding="5dp"
                     android:background="@color/colorGreen">
+
+                    <ProgressBar
+                        android:id="@+id/progress_second_image"
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"/>
 
                     <ImageView
                         android:id="@+id/image_view_second_option_decicision_page"

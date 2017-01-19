@@ -247,12 +247,12 @@ public class PersonalPageFragment extends Fragment {
                     ageToShow = dilemma.getCreator_ageRange();
                 }
 
-                holder.mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + ageToShow);
+                holder.mUserDescriptionTextView.setText(dilemma.getCreator_sex() + " | " + ageToShow + " jaar | " + dilemma.getCreator_hometown());
                 holder.mUserNameTextView.setText(R.string.anonymous);
 
             } else {
                 holder.mUserDescriptionTextView.setText(
-                        dilemma.getCreator_sex() + " | " + dilemma.getCreator_age());
+                        dilemma.getCreator_sex() + " | " + dilemma.getCreator_age() + " jaar | " + dilemma.getCreator_hometown());
                 holder.mUserNameTextView.setText(dilemma.getCreator_name());
             }
             holder.mDilemmaTextView.setText(dilemma.getTitle());

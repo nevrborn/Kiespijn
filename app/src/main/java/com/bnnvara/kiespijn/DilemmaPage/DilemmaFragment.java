@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -362,6 +363,11 @@ public class DilemmaFragment extends Fragment {
     }
 
     private void updateUi() {
+
+        if (mCurrentIndex == 4 && !User.getInstance().getHasCreatedDilemma()) {
+            askToCreateDilemma();
+        }
+
         mDilemma = mDilemmaList.get(mCurrentIndex);
 
         swipeLayout1.setAlpha(1.0f);
@@ -738,6 +744,28 @@ public class DilemmaFragment extends Fragment {
         animSet.play(animUp).before(animDown);
         animSet.setDuration(300);
         animSet.start();
+    }
+
+    private void askToCreateDilemma() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getString(R.string.create_dilemma_yourself))
+                .setCancelable(false)
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Dilemma dilemma = new Dilemma();
+                        Intent intent = CreateDilemmaActivity.newIntent(getActivity());
+                        intent.putExtra(DILEMMA_OBJECT, dilemma);
+                        startActivity(intent);
+                        User.getInstance().setHasCreatedDilemma(true);
+                    }
+                })
+                .setNegativeButton("Nee", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 }

@@ -26,6 +26,7 @@
     <string name="dilemma_x_uur">x uur</string>
     <string name="choose_dilemma">KIES\n%1$s</string>
     <string name="add_content_swipe">Licht jouw\nantwoord toe +</string>
+    <string name="create_dilemma_yourself">Do you want to create your own dilemma?</string>
 
     // PERSONAL PAGE
     <string name="button_expired">Gesloten</string>

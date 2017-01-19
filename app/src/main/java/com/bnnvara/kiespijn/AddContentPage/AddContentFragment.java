@@ -45,9 +45,11 @@ public class AddContentFragment extends Fragment {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_IMAGE_GALLERY = 2;
+    private static final int GOOGLE_IMAGE = 3;
+    private static final int REQUEST_ARTICLE_URL = 4;
     private static final String SEARCH_STRING = "search_string";
     private static final String GOOGLE_IMAGE_URL = "google_image_url";
-    private static final int GOOGLE_IMAGE = 3;
+    private static final String ARTICLE_URL = "article_url";
 
     private static Dilemma mDilemma;
     private static String mAnswerOption;
@@ -151,7 +153,7 @@ public class AddContentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = ArticleSearchActivity.newIntent(getActivity());
-                startActivity(i);
+                startActivityForResult(i, REQUEST_ARTICLE_URL);
 
                 //addLink();
                 mIsAPhoto = false;
@@ -262,36 +264,6 @@ public class AddContentFragment extends Fragment {
         startActivityForResult(i, REQUEST_IMAGE_GALLERY);
     }
 
-    private void addLink() {
-        AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
-        final EditText enterLink = new EditText(getContext());
-
-        linkAlert.setMessage("Copy in link to article or blog");
-        linkAlert.setTitle("Article / Link");
-        linkAlert.setView(enterLink);
-
-        linkAlert.setPositiveButton("SAVE LINK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mLink = enterLink.getText().toString();
-                mLinkView.setText(mLink);
-
-                mImageThumbnail.setVisibility(View.GONE);
-                mLinkView.setVisibility(View.VISIBLE);
-                mAddedContentLayout.setVisibility(View.VISIBLE);
-            }
-        });
-
-        linkAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        linkAlert.show();
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -325,6 +297,13 @@ public class AddContentFragment extends Fragment {
 
         }
 
+        if (requestCode == REQUEST_ARTICLE_URL && resultCode == Activity.RESULT_OK) {
+            mLinkView.setText(data.getStringExtra(ARTICLE_URL));
+            mImageThumbnail.setVisibility(View.GONE);
+            mLinkView.setVisibility(View.VISIBLE);
+            mAddedContentLayout.setVisibility(View.VISIBLE);
+        }
+
         if (requestCode == GOOGLE_IMAGE && resultCode == Activity.RESULT_OK) {
             Uri googleUri = Uri.parse(data.getStringExtra(GOOGLE_IMAGE_URL));
 
@@ -334,11 +313,6 @@ public class AddContentFragment extends Fragment {
                     .into(mImageThumbnail);
 
         }
-
-        mImageThumbnail.setVisibility(View.VISIBLE);
-        mLinkView.setVisibility(View.GONE);
-        mAddedContentLayout.setVisibility(View.VISIBLE);
-
     }
 
     private Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -347,6 +321,5 @@ public class AddContentFragment extends Fragment {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
-
 
 }

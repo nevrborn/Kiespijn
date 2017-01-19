@@ -2,10 +2,12 @@ package com.bnnvara.kiespijn.ArticleSearchPage;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,9 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CapiModel.Article;
@@ -42,14 +45,18 @@ public class ArticleSearchFragment extends Fragment {
 
     private static final String TAG = ArticleSearchFragment.class.getSimpleName();
     private static final String ARTICLE_URL = "article_url";
+    private static final String KASSA_BASE_URL = "http://www.kassa.vara.nl";
 
     private RecyclerView mArticleRecylerView;
+    private Button mUrLButton;
+
     private String mSearchString;
     private List<ArticleRoot> mArticleRootList;
     private String mChosenURL;
     private List<CheckBox> mRadioButtonList = new ArrayList<>();
     private android.widget.SearchView mSearchView;
     private MenuItem mNewSearch;
+    private String mLink;
 
     public static ArticleSearchFragment newInstance() {
         return new ArticleSearchFragment();
@@ -92,6 +99,14 @@ public class ArticleSearchFragment extends Fragment {
             }
         });
 
+        mUrLButton = (Button) view.findViewById(R.id.button_url);
+        mUrLButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addLink("", null);
+            }
+        });
+
         return view;
     }
 
@@ -107,12 +122,13 @@ public class ArticleSearchFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra(ARTICLE_URL, mChosenURL);
-                getActivity().setResult(Activity.RESULT_OK, resultIntent);
-                getActivity().finish();
-
-                return false;
+//                Intent resultIntent = new Intent();
+//                resultIntent.putExtra(ARTICLE_URL, mChosenURL);
+//                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+//                getActivity().finish();
+//
+//                return false;
+                return true;
             }
         });
 
@@ -120,12 +136,47 @@ public class ArticleSearchFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
+                mSearchView.setIconifiedByDefault(false);
                 mSearchView.setVisibility(View.VISIBLE);
                 mNewSearch.setVisible(false);
-                return false;
+                return true;
             }
         });
 
+
+    }
+
+    private void addLink(String url, final View view) {
+        AlertDialog.Builder linkAlert = new AlertDialog.Builder(getContext());
+        final EditText enterLink = new EditText(getContext());
+        enterLink.setText(url);
+
+        linkAlert.setMessage("Type of plak hier een link");
+        linkAlert.setTitle("Artikel");
+        linkAlert.setView(enterLink);
+
+        linkAlert.setPositiveButton("Sla op", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mLink = enterLink.getText().toString();
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(ARTICLE_URL, mLink);
+                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+                getActivity().finish();
+            }
+        });
+
+        linkAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (view != null) {
+                    view.setBackgroundColor(getResources().getColor(R.color.colorGrey));
+                }
+            }
+        });
+
+        linkAlert.show();
     }
 
     //
@@ -176,8 +227,9 @@ public class ArticleSearchFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), "Gekozen", Toast.LENGTH_LONG).show();
-
+            view.setBackgroundColor(getResources().getColor(R.color.colorGreen));
+            String url = KASSA_BASE_URL + mArticle.getUrl();
+            addLink(url, view);
         }
 
     }

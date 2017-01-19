@@ -125,6 +125,7 @@ public class DilemmaFragment extends Fragment {
 
         getData();
 
+
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo);
         mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username);
@@ -436,6 +437,10 @@ public class DilemmaFragment extends Fragment {
             mChooseDilemmaText2.setText(getString(R.string.choose_dilemma, mDilemma.getTitlePhotoB().toUpperCase()));
         } else {
             mSecondDilemmaImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_sand_timer));
+        }
+
+        if (mDilemma.getCreator_hometown() == null) {
+            mDilemma.setCreator_hometown("Onbekend");
         }
 
 

@@ -163,6 +163,10 @@ public class ResultFragment extends Fragment {
 
     private void updateUi() {
 
+        if (mDilemma.getCreator_hometown() == null) {
+            mDilemma.setCreator_hometown("Onbekend");
+        }
+
         // dilemma text, user etcetera
         if (mDilemma.getIsAnonymous()) {
             String ageToShow = "Leeftijd onbekend";

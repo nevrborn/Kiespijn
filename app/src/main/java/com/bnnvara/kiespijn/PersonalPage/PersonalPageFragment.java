@@ -241,6 +241,10 @@ public class PersonalPageFragment extends Fragment {
             holder.setDilemma(dilemma);
             holder.itemView.setOnClickListener(holder);
 
+            if (dilemma.getCreator_hometown() == null) {
+                dilemma.setCreator_hometown("Onbekend");
+            }
+
             if (dilemma.getIsAnonymous()) {
                 String ageToShow = "Leeftijd onbekend";
                 if (!dilemma.getCreator_age().equals("Leeftijd onbekend")) {

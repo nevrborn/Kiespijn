@@ -174,6 +174,7 @@ public class LoginFragment extends Fragment {
             String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));
             user.setHometown(hometown);
         } catch (JSONException e) {
+            user.setHometown("Onbekend");
             e.printStackTrace();
         }
 

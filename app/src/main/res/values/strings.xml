@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kiespijn</string>
+    <string name="app_name">HALPP</string>
     <string name="image_content">image</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuleer</string>
@@ -7,7 +7,7 @@
     <string name="groups">GROEPEN</string>
 
     // LOGIN SCREEN
-    <string name="login_title">KIESPIJN</string>
+    <string name="login_title">HALPP</string>
     <string name="login_text">Inloggen</string>
     <string name="login_email_text">email</string>
     <string name="login_password_text">wachtwoord</string>

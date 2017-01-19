@@ -2,7 +2,10 @@ package com.bnnvara.kiespijn.GoogleImageSearch;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bnnvara.kiespijn.Login.LoginFragment;
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -64,7 +68,7 @@ public class GoogleSearchFragment extends Fragment {
         mRadioButtonList = new ArrayList<>();
         mImageViewList = new ArrayList<>();
 
-        if (mSearchString != null) {
+        if (mSearchString != null && isConnected()) {
             getImages();
         }
 
@@ -139,7 +143,12 @@ public class GoogleSearchFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 mSearchString = mSearchView.getQuery().toString();
-                getImages();
+
+                if (isConnected()) {
+                    getImages();
+                }
+
+
                 mSearchView.setVisibility(View.GONE);
                 mNewSearch.setVisible(true);
                 return false;
@@ -191,7 +200,7 @@ public class GoogleSearchFragment extends Fragment {
                         mTotalImageSize = mGoogleImageApiResponse.getTotalImages();
                     }
 
-                    if (mPhotoRecylerView != null && mGalleryItems.size() != 0) {
+                    if (mPhotoRecylerView != null && mGalleryItems != null) {
                         mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
                     }
                 } else {
@@ -284,5 +293,17 @@ public class GoogleSearchFragment extends Fragment {
                 mPhotoRecylerView.setAdapter(new PhotoAdapter(mGalleryItems));
             }
         }
+    }
+
+    public boolean isConnected() {
+        //Checks if the device is connected to the internet (WIFI or mobile data)
+        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+
+            return false;
     }
 }

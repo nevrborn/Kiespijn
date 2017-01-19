@@ -127,6 +127,8 @@ public class CreateDilemmaFragment extends Fragment {
                     mImageViewB.setImageURI(Uri.parse(mDilemma.getPhotoB()));
                 }
 
+                mImageViewA.setScaleType(ImageView.ScaleType.MATRIX);
+                mImageViewB.setScaleType(ImageView.ScaleType.MATRIX);
             }
         }
 
@@ -248,6 +250,7 @@ public class CreateDilemmaFragment extends Fragment {
                 }
             }
         });
+
         builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -286,12 +289,14 @@ public class CreateDilemmaFragment extends Fragment {
             if (isImageA) {
                 imageA = imageBitmap;
                 mImageViewA.setImageBitmap(imageA);
+                mImageViewA.setScaleType(ImageView.ScaleType.MATRIX);
                 String imageAUri = getImageUri(getContext(), imageA).toString();
                 mDilemma.setPhotoA(imageAUri);
                 Log.i(TAG, imageAUri);
             } else {
                 imageB = imageBitmap;
                 mImageViewB.setImageBitmap(imageB);
+                mImageViewB.setScaleType(ImageView.ScaleType.MATRIX);
                 String imageBUri = getImageUri(getContext(), imageB).toString();
                 mDilemma.setPhotoB(imageBUri);
                 Log.i(TAG, imageBUri);
@@ -317,11 +322,13 @@ public class CreateDilemmaFragment extends Fragment {
             if (isImageA) {
                 imageA = bitmap;
                 mImageViewA.setImageBitmap(bitmap);
+                mImageViewA.setScaleType(ImageView.ScaleType.MATRIX);
                 mDilemma.setPhotoA(selectedImage.toString());
                 Log.i(TAG, selectedImage.toString());
             } else {
                 imageB = bitmap;
                 mImageViewB.setImageBitmap(bitmap);
+                mImageViewB.setScaleType(ImageView.ScaleType.MATRIX);
                 mDilemma.setPhotoB(selectedImage.toString());
                 Log.i(TAG, selectedImage.toString());
             }
@@ -387,11 +394,13 @@ public class CreateDilemmaFragment extends Fragment {
             if (isImageA) {
                 String imageAUri = (Uri.parse(url)).toString();
                 mDilemma.setPhotoA(imageAUri);
+                mImageViewA.setScaleType(ImageView.ScaleType.MATRIX);
                 mImageViewA.setImageBitmap(mGoogleImage);
             } else {
                 String imageBUri = (Uri.parse(url)).toString();
                 mDilemma.setPhotoB(imageBUri);
                 mImageViewB.setImageBitmap(mGoogleImage);
+                mImageViewB.setScaleType(ImageView.ScaleType.MATRIX);
             }
         }
 
@@ -414,6 +423,7 @@ public class CreateDilemmaFragment extends Fragment {
             String imageAUri = (Uri.parse(url)).toString();
             mDilemma.setPhotoA(imageAUri);
             mImageViewA.setImageBitmap(mGoogleImage);
+            mImageViewA.setScaleType(ImageView.ScaleType.MATRIX);
         }
 
     }
@@ -435,6 +445,7 @@ public class CreateDilemmaFragment extends Fragment {
             String imageBUri = (Uri.parse(url)).toString();
             mDilemma.setPhotoB(imageBUri);
             mImageViewB.setImageBitmap(mGoogleImage);
+            mImageViewB.setScaleType(ImageView.ScaleType.MATRIX);
         }
 
     }

@@ -432,7 +432,7 @@ public class DilemmaFragment extends Fragment {
         // set creator and mDilemma text
         if (!mDilemma.getIsAnonymous()) {
             mUserNameTextView.setText(mDilemma.getCreator_name());
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age());
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + mDilemma.getCreator_age() + " jaar | " + mDilemma.getCreator_hometown());
         } else {
             mUserNameTextView.setText(getString(R.string.dilemma_username));
 
@@ -440,7 +440,7 @@ public class DilemmaFragment extends Fragment {
             if (!mDilemma.getCreator_age().equals("Leeftijd onbekend")) {
                 ageToShow = mDilemma.getCreator_ageRange();
             }
-            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow);
+            mUserDescriptionTextView.setText(mDilemma.getCreator_sex() + " | " + ageToShow + " jaar | " + mDilemma.getCreator_hometown());
         }
 
         if (mDilemma.isFromAFriend()) {

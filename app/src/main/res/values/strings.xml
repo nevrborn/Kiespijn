@@ -5,6 +5,7 @@
     <string name="cancel">Annuleer</string>
     <string name="everybody">Iedereen</string>
     <string name="groups">GROEPEN</string>
+    <string name="skip">Niet nu</string>
 
     // LOGIN SCREEN
     <string name="login_title">HALPP</string>

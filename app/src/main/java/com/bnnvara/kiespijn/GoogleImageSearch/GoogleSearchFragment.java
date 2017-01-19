@@ -99,6 +99,7 @@ public class GoogleSearchFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
+                mSearchView.setIconifiedByDefault(false);
                 mSearchView.setVisibility(View.VISIBLE);
                 mNewSearch.setVisible(false);
                 return false;

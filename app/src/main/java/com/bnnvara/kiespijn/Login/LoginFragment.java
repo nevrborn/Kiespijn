@@ -53,6 +53,7 @@ public class LoginFragment extends Fragment {
     private CallbackManager mCallbackManager;
     private static Boolean mIsLoggingOut = false;
     private Boolean hasInternetConnection = false;
+    private User mUser;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -71,9 +72,11 @@ public class LoginFragment extends Fragment {
         mCallbackManager = CallbackManager.Factory.create();
         AppEventsLogger.activateApp(getActivity().getApplication());
 
-        if (isLoggedIn() && !mIsLoggingOut && isConnected()) {
-            getFacebookParameters();
-        }
+//        if (User.getInstance().getUserKey().equals("")) {
+//            if (isLoggedIn() && !mIsLoggingOut && isConnected()) {
+//                getFacebookParameters();
+//            }
+//        }
 
     }
 
@@ -123,7 +126,6 @@ public class LoginFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         // TODO: Do we need this? Can we delete it?
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
-        // getFacebookParameters();
     }
 
     public void signOut() {
@@ -150,7 +152,7 @@ public class LoginFragment extends Fragment {
 
     private void getFacebookParameters(JSONObject object) {
 
-        User user = User.getInstance();
+        mUser = User.getInstance();
 
         try {
             String facebookID = object.getString("id");
@@ -160,9 +162,9 @@ public class LoginFragment extends Fragment {
             String facebookGender = object.getString("gender");
             Log.i(TAG, "Facebook GENDER is: " + facebookGender);
 
-            user.setUserKey(facebookID);
-            user.setName(facebookName);
-            user.setSex(facebookGender);
+            mUser.setUserKey(facebookID);
+            mUser.setName(facebookName);
+            mUser.setSex(facebookGender);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -172,9 +174,9 @@ public class LoginFragment extends Fragment {
         try {
             facebookHometown = object.getString("hometown");
             String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));
-            user.setHometown(hometown);
+            mUser.setHometown(hometown);
         } catch (JSONException e) {
-            user.setHometown("Onbekend");
+            mUser.setHometown("Onbekend");
             e.printStackTrace();
         }
 
@@ -184,9 +186,9 @@ public class LoginFragment extends Fragment {
             String facebookBirthday = object.getString("birthday");
             Log.i(TAG, "Facebook BIRTHDAY is: " + facebookBirthday);
             String age = calculateAge(facebookBirthday);
-            user.setAge(age);
+            mUser.setAge(age);
         } catch (JSONException e) {
-            user.setAge("Onbekend");
+            mUser.setAge("Onbekend");
             e.printStackTrace();
 
         }
@@ -197,7 +199,7 @@ public class LoginFragment extends Fragment {
             JSONObject pictureData = pictureObject.getJSONObject("data");
             String facebookPictureURL = pictureData.getString("url");
             Log.i(TAG, "Facebook PICTURE URL is: " + facebookPictureURL);
-            user.setProfilePictureURL(facebookPictureURL);
+            mUser.setProfilePictureURL(facebookPictureURL);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -213,7 +215,7 @@ public class LoginFragment extends Fragment {
 
             if (friendsCount != 0) {
 
-                user.mFacebookFriendList.clear();
+                mUser.mFacebookFriendList.clear();
 
                 while (i < friendsCount) {
 
@@ -226,7 +228,7 @@ public class LoginFragment extends Fragment {
                     String friendFacebookPictureURL = friendPictureData.getString("url");
 
                     Friend newFriend = new Friend(friendName, friendID, friendFacebookPictureURL);
-                    user.mFacebookFriendList.add(newFriend);
+                    mUser.mFacebookFriendList.add(newFriend);
 
                     i += 1;
                 }
@@ -281,19 +283,23 @@ public class LoginFragment extends Fragment {
 
     }
 
-    private boolean isLoggedIn() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
-    }
+//    private boolean isLoggedIn() {
+//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//        return accessToken != null;
+//    }
 
     @Override
     public void onResume() {
         super.onResume();
         ((LoginActivity)getActivity()).hideStatusBar();
 
-        if (isLoggedIn() && !mIsLoggingOut && isConnected()) {
+        mUser = User.getInstance();
+
+        if (!mIsLoggingOut && isConnected() && !mUser.getUserKey().equals("")) {
             Intent i = DilemmaActivity.newIntent(getContext());
             startActivity(i);
+        } else if (!mIsLoggingOut && isConnected() && mUser.getUserKey().equals("")) {
+            getFacebookParameters();
         }
     }
 

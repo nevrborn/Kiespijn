@@ -116,6 +116,15 @@ public class DilemmaFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mDilemmaList == null) {
+            getData();
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -123,7 +132,9 @@ public class DilemmaFragment extends Fragment {
 
         mUserFbId = User.getInstance().getUserKey();
 
-        getData();
+        if (mDilemmaList == null) {
+            getData();
+        }
 
 
         // set up the references

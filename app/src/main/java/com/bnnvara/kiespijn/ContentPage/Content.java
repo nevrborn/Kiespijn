@@ -18,6 +18,9 @@ public class Content implements Serializable {
     @SerializedName("isAPhoto")
     private Boolean mIsAPhoto;
 
+    @SerializedName("isAnArticle")
+    private Boolean mIsAnArticle;
+
     @SerializedName("user_fb_name")
     private String mUserFbName;
 
@@ -39,9 +42,10 @@ public class Content implements Serializable {
     public Content() {
     }
 
-    public Content(String text, Boolean isAPhoto, String userFbName, String userFbID, String userFbAge, String userFbGender, String userFbPhoto, String hometown) {
+    public Content(String text, Boolean isAPhoto, Boolean isAnArticle, String userFbName, String userFbID, String userFbAge, String userFbGender, String userFbPhoto, String hometown) {
         mText = text;
         mIsAPhoto = isAPhoto;
+        mIsAnArticle = isAnArticle;
         mUserFbName = userFbName;
         mUserFbID = userFbID;
         mUserFbAge = userFbAge;
@@ -128,5 +132,13 @@ public class Content implements Serializable {
 
     public void setUserFbHometown(String userFbHometown) {
         mUserFbHometown = userFbHometown;
+    }
+
+    public Boolean getAnArticle() {
+        return mIsAnArticle;
+    }
+
+    public void setAnArticle(Boolean anArticle) {
+        mIsAnArticle = anArticle;
     }
 }

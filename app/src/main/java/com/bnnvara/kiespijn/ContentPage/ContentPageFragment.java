@@ -125,6 +125,9 @@ public class ContentPageFragment extends Fragment {
         public void bindContentItem(Content content) {
             mContent = content;
 
+            mImage.setVisibility(View.GONE);
+            mLink.setVisibility(View.GONE);
+
             Glide.with(getActivity())
                     .load(mContent.getUserFbPhoto())
                     .placeholder(R.mipmap.ic_launcher)
@@ -142,21 +145,15 @@ public class ContentPageFragment extends Fragment {
             if (mContent.getAPhoto()) {
 
                 mImage.setVisibility(View.VISIBLE);
-                mLink.setVisibility(View.GONE);
 
                 Glide.with(getActivity())
                         .load(mContent.getPhotoLink())
                         .placeholder(R.mipmap.ic_launcher)
                         .into(mImage);
-            } else {
-
-                mImage.setVisibility(View.GONE);
+            } else if (mContent.getAnArticle()) {
                 mLink.setVisibility(View.VISIBLE);
-
                 mLink.setText(mContent.getArticleUrl());
-
             }
-
 
         }
 

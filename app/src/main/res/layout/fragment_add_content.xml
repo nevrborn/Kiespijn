@@ -55,7 +55,7 @@
         <ImageView
             android:id="@+id/imageview_thumbnail"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:layout_height="match_parent"
             app:srcCompat="@mipmap/ic_launcher"
             />
@@ -64,7 +64,7 @@
             android:id="@+id/add_content_link_view"
             android:layout_width="0dp"
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:textColor="@color/colorGreen"
             android:layout_height="match_parent"/>
 

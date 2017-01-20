@@ -252,31 +252,13 @@ public class ResultFragment extends Fragment {
     }
 
     private void animateSwipeJump() {
-
-        ObjectAnimator animShakeLeft = ObjectAnimator.ofFloat(mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - 20);
-        ObjectAnimator animShakeRight = ObjectAnimator.ofFloat(mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() + 40);
-        animShakeLeft.setInterpolator(new DecelerateInterpolator());
-        animShakeRight.setInterpolator(new DecelerateInterpolator());
-
-        AnimatorSet animSet = new AnimatorSet();
-        animSet.play(animShakeLeft).before(animShakeRight);
-        animSet.setDuration(1000);
-        animSet.start();
-
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setStartDelay(1000);
-        animatorSet.play(animShakeLeft);
-        animatorSet.setDuration(500);
-        animatorSet.start();
-
-
         ObjectAnimator animLeft = ObjectAnimator.ofFloat(mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - 250);
         animLeft.setInterpolator(new DecelerateInterpolator());
 
         AnimatorSet animSetWinner = new AnimatorSet();
         animSetWinner.play(animLeft);
         animSetWinner.setDuration(3000);
-        animSetWinner.setStartDelay(1500);
+        animSetWinner.setStartDelay(1000);
         animSetWinner.start();
     }
 }

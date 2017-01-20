@@ -87,11 +87,11 @@
                 <TextView
                     android:id="@+id/text_view_results_total"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="24dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="3dp"
+                    android:gravity="center_vertical"
                     android:text="55"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     />
 
@@ -193,7 +193,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="180dp">
+            android:layout_height="0dp"
+            android:layout_weight="1.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -678,13 +679,6 @@
 
         </ScrollView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.0">
-
-        </View>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -764,8 +758,8 @@
         android:layout_width="32dp"
         android:layout_height="24dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-4dp"
-        android:background="@drawable/ic_action_badge_red"
+        android:layout_marginBottom="-2dp"
+        android:background="@drawable/crown_silver"
         />
 
 </RelativeLayout>

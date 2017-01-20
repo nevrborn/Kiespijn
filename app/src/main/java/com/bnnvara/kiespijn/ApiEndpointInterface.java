@@ -6,7 +6,7 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-// http://www.mocky.io/v2/58779aa40f00009b070d489f
+// http://www.mocky.io/v2/587df54f0f0000821a5df734
 
 public interface ApiEndpointInterface {
 

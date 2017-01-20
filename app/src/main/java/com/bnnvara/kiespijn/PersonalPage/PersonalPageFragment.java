@@ -159,11 +159,13 @@ public class PersonalPageFragment extends Fragment {
 
 
     private void createDilemmaLists() {
+        long now = 1484639254;
+
         for (Dilemma dilemma: mDilemmaList){
 
             // determine timeLeft of the dilemma
-            boolean isRunning = dilemma.getDeadline() > (System.currentTimeMillis() / 1000L);
-            int timeLeft = (int) ((dilemma.getDeadline() - (System.currentTimeMillis() / 1000L) ) / 1000);
+            boolean isRunning = dilemma.getDeadline() > (now);
+            int timeLeft = (int) ((dilemma.getDeadline() - (now) ) / 1000);
             dilemma.setTimeLeft(timeLeft);
 
             // determine if current user answered for the dilemma (and is not the creator)

@@ -258,7 +258,7 @@ public class ResultFragment extends Fragment {
         AnimatorSet animSetWinner = new AnimatorSet();
         animSetWinner.play(animLeft);
         animSetWinner.setDuration(3000);
-        animSetWinner.setStartDelay(1000);
+        animSetWinner.setStartDelay(500);
         animSetWinner.start();
     }
 }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,10 +49,7 @@ public class PersonalPageFragment extends Fragment {
     private static final String LOGGING_OUT = "logging_out";
 
     // view variables
-    private Button mMineButton;
-    private Button mOhtersButton;
-    private Button mRunningButton;
-    private Button mClosedButton;
+    private SwitchCompat mFilterSwitch;
 
     // regular variables
     private DilemmaAdapter mDilemmaAdapter;
@@ -89,53 +87,26 @@ public class PersonalPageFragment extends Fragment {
 
         // set references
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_personal_page);
-        mMineButton = (Button) view.findViewById(R.id.button_pers_page_mine);
-        mOhtersButton = (Button) view.findViewById(R.id.button_pers_page_others);
-        mRunningButton = (Button) view.findViewById(R.id.button_pers_page_running);
-        mClosedButton = (Button) view.findViewById(R.id.button_pers_page_closed);
+        mFilterSwitch = (SwitchCompat) view.findViewById(R.id.switch_compat_own_others);
 
         // set the RecyclerView
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mDilemmaAdapter);
 
         // set listeners
-        mMineButton.setOnClickListener(new View.OnClickListener() {
+        mFilterSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mShowMyDilemmas = true;
-                updateUi();
-                mMineButton.setAlpha(1.0f);
-                mOhtersButton.setAlpha(0.65f);
-            }
-        });
-        mOhtersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mShowMyDilemmas = false;
-                updateUi();
-                mMineButton.setAlpha(0.65f);
-                mOhtersButton.setAlpha(1.0f);
-            }
-        });
-        mRunningButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mShowRunning = true;
-                updateUi();
-                mRunningButton.setAlpha(1.0f);
-                mClosedButton.setAlpha(0.65f);
-            }
-        });
-        mClosedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mShowRunning = false;
-                updateUi();
-                mRunningButton.setAlpha(0.65f);
-                mClosedButton.setAlpha(1.0f);
-            }
-        });
+                if (mFilterSwitch.isChecked()) {
+                    mShowMyDilemmas = false; // if checked, means right option so show others' dilemma's
+                    updateUi();
 
+                } else {
+                    mShowMyDilemmas = true;
+                    updateUi();
+                }
+            }
+        });
 
         return view;
     }
@@ -171,17 +142,16 @@ public class PersonalPageFragment extends Fragment {
     }
 
     private void updateUi() {
-
-        if (mShowMyDilemmas && mShowRunning) {
-            mDilemmaAdapter = new DilemmaAdapter(mMyRunningDilemmaList);
-        } else if (mShowMyDilemmas && !mShowRunning) {
-            mDilemmaAdapter = new DilemmaAdapter(mMyClosedDilemmaList);
-        } else if (!mShowMyDilemmas && mShowRunning){
-            mDilemmaAdapter = new DilemmaAdapter(mOthersRunningDilemmaList);
-        } else if (!mShowMyDilemmas && !mShowRunning){
-            mDilemmaAdapter = new DilemmaAdapter(mOthersClosedDilemmaList);
+        if (mShowMyDilemmas) {
+            ArrayList<Dilemma> myDilemmaList = new ArrayList<>();
+            myDilemmaList.addAll(mMyRunningDilemmaList);
+            myDilemmaList.addAll(mMyClosedDilemmaList);
+            mDilemmaAdapter = new DilemmaAdapter(myDilemmaList);
         } else {
-            mDilemmaAdapter = new DilemmaAdapter((mDilemmaList));
+            ArrayList<Dilemma> othersDilemmaList = new ArrayList<>();
+            othersDilemmaList.addAll(mOthersRunningDilemmaList);
+            othersDilemmaList.addAll(mOthersClosedDilemmaList);
+            mDilemmaAdapter = new DilemmaAdapter(othersDilemmaList);
         }
 
         mRecyclerView.setAdapter(mDilemmaAdapter);

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,7 @@ public class TargetGroupFragment extends Fragment {
         Button nextButton = (Button) view.findViewById(R.id.button_next_target_group);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_target_group);
         final ImageView gifView = (ImageView) view.findViewById(R.id.targetgroup_gif);
+        final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar_targetgroup);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -109,6 +111,7 @@ public class TargetGroupFragment extends Fragment {
         mRandomGif = mDilemma.getRandomGifURL();
         callSomeoneButton.setText(mListOfCallers.get(mDilemma.getRandomCallerIndex()));
 
+        progressBar.setVisibility(View.GONE);
         gifView.setVisibility(View.GONE);
         Glide.with(getActivity())
                 .load(mRandomGif)
@@ -162,6 +165,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
 
                 gifView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 isHasChosen = false;
 
                 Glide.with(getActivity())
@@ -214,6 +218,7 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 gifView.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

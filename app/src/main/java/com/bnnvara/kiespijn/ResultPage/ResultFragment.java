@@ -1,5 +1,7 @@
 package com.bnnvara.kiespijn.ResultPage;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -24,6 +28,7 @@ import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
+import com.daimajia.swipe.SwipeLayout;
 
 public class ResultFragment extends Fragment {
 
@@ -35,6 +40,7 @@ public class ResultFragment extends Fragment {
     // Views
     private ImageView mUserPhotoImageView;
     private ImageView mClockImageView;
+    private ImageView mWinnerImageView;
     private TextView mUserNameTextView;
     private TextView mUserDescriptionTextView;
     private TextView mDilemmaTextView;
@@ -85,6 +91,7 @@ public class ResultFragment extends Fragment {
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo_personal_page);
         mClockImageView = (ImageView) view.findViewById(R.id.image_view_clock);
+        mWinnerImageView = (ImageView) view.findViewById(R.id.result_page_winner_icon);
         mUserNameTextView = (TextView) view.findViewById(R.id.text_view_username_personal_page);
         mUserDescriptionTextView = (TextView) view.findViewById(R.id.text_view_user_info_personal_page);
         mDilemmaTextView = (TextView) view.findViewById(R.id.text_view_dilemma_personal_page);
@@ -206,6 +213,9 @@ public class ResultFragment extends Fragment {
         // text of the two options
         mAnswerATextView.setText(mDilemma.getTitlePhotoA());
         mAnswerBTextView.setText(mDilemma.getTitlePhotoB());
+
+        // animation
+        animateSwipeJump();
     }
 
 
@@ -239,5 +249,16 @@ public class ResultFragment extends Fragment {
             default:
                 return true;
         }
+    }
+
+    private void animateSwipeJump() {
+        ObjectAnimator animLeft = ObjectAnimator.ofFloat(mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - 250);
+        animLeft.setInterpolator(new DecelerateInterpolator());
+
+        AnimatorSet animSetWinner = new AnimatorSet();
+        animSetWinner.play(animLeft);
+        animSetWinner.setDuration(3000);
+        animSetWinner.setStartDelay(500);
+        animSetWinner.start();
     }
 }

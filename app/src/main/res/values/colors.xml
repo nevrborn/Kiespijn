@@ -10,5 +10,8 @@
     <color name="colorYellow">#FDD66F</color>
     <color name="colorGrey">#FAF7FE</color>
     <color name="colorTransparentWhite">#B3FFFFFF</color>
+    <color name="colorGreyLeft">#F2F2F2</color>
+    <color name="colorGreyRight">#E7E7E7</color>
+
 
 </resources>

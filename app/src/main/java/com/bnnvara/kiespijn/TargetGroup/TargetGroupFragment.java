@@ -36,6 +36,7 @@ public class TargetGroupFragment extends Fragment {
     private Button callSomeoneButton;
     private Boolean isHasChosen = false;
     private int mCallerIndex;
+    private String mRandomGif;
 
     private static List<Integer> mListOfCallers = new ArrayList<>();
     private static List<String> mListOfGifs = new ArrayList<>();
@@ -52,6 +53,7 @@ public class TargetGroupFragment extends Fragment {
         setHasOptionsMenu(true);
 
         updateLists();
+
     }
 
     @Nullable
@@ -68,8 +70,6 @@ public class TargetGroupFragment extends Fragment {
         Button previousButton = (Button) view.findViewById(R.id.button_previous_target_group);
         final ImageView gifView = (ImageView) view.findViewById(R.id.targetgroup_gif);
 
-        gifView.setVisibility(View.GONE);
-
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
         Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
@@ -78,7 +78,10 @@ public class TargetGroupFragment extends Fragment {
         everyoneButton.setTypeface(source_sans_extra_light);
         callSomeoneButton.setTypeface(source_sans_extra_light);
 
-        setRandomCaller();
+        if (mDilemma.getRandomCallerIndex() == 0 && mDilemma.getRandomGifURL().equals("")) {
+            mDilemma.setRandomCallerIndex(getRandomCallerInt());
+            mDilemma.setRandomGifURL(getRandomGifURL());
+        }
 
 
         if (mDilemma != null && !mDilemma.getFirstTimeToTargetGroup()) {
@@ -102,6 +105,15 @@ public class TargetGroupFragment extends Fragment {
             }
 
         }
+
+        mRandomGif = mDilemma.getRandomGifURL();
+        callSomeoneButton.setText(mListOfCallers.get(mDilemma.getRandomCallerIndex()));
+
+        gifView.setVisibility(View.GONE);
+        Glide.with(getActivity())
+                .load(mRandomGif)
+                .asGif()
+                .into(gifView);
 
         // set the listeners
         friendsButton.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +165,7 @@ public class TargetGroupFragment extends Fragment {
                 isHasChosen = false;
 
                 Glide.with(getActivity())
-                        .load(getRandomGifURL())
+                        .load(mRandomGif)
                         .asGif()
                         .into(gifView);
 
@@ -202,7 +214,6 @@ public class TargetGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 gifView.setVisibility(View.GONE);
-                setRandomCaller();
             }
         });
 
@@ -228,9 +239,9 @@ public class TargetGroupFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setRandomCaller() {
+    private int getRandomCallerInt() {
         mCallerIndex = 1 + (int) (Math.random() * ((13 - 1)));
-        callSomeoneButton.setText(mListOfCallers.get(mCallerIndex));
+        return mCallerIndex;
     }
 
     private String getRandomGifURL() {

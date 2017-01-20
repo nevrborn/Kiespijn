@@ -74,6 +74,8 @@ public class Dilemma implements Serializable {
 
     private Boolean isFirstTimeToTargetGroup = true;
     private Boolean isFirstTimeToFromWho = true;
+    private int mRandomCallerIndex = 0;
+    private String mRandomGifURL = "";
 
 
 
@@ -345,5 +347,21 @@ public class Dilemma implements Serializable {
 
     public void setTargetIDList(List<String> targetIDList) {
         mTargetIDList = targetIDList;
+    }
+
+    public int getRandomCallerIndex() {
+        return mRandomCallerIndex;
+    }
+
+    public void setRandomCallerIndex(int randomCallerIndex) {
+        mRandomCallerIndex = randomCallerIndex;
+    }
+
+    public String getRandomGifURL() {
+        return mRandomGifURL;
+    }
+
+    public void setRandomGifURL(String randomGifURL) {
+        mRandomGifURL = randomGifURL;
     }
 }

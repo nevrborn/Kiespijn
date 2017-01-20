@@ -2,34 +2,24 @@ package com.bnnvara.kiespijn.CreateDilemmaPage;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.BuildConfig;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -38,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
-import com.bnnvara.kiespijn.GoogleImageSearch.GalleryItem;
 import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
@@ -324,20 +313,15 @@ public class CreateDilemmaFragment extends Fragment {
             String googleUri = data.getStringExtra(GOOGLE_IMAGE_URL);
 
             if (isImageA) {
+                mDilemma.setPhotoA(googleUri);
                 displayPicture(googleUri, mImageViewA);
             } else {
+                mDilemma.setPhotoB(googleUri);
                 displayPicture(googleUri, mImageViewB);
             }
 
         }
 
-    }
-
-    private Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
     }
 
     private void galleryIntent() {

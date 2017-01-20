@@ -35,7 +35,7 @@
         <activity
             android:name=".PersonalPage.PersonalPageActivity"
             android:screenOrientation="portrait"
-            android:label="Jouw Kiespagina">
+            android:label="Jouw HALPP">
         </activity>
         <activity
             android:name=".ArticleSearchPage.ArticleSearchActivity"
@@ -65,7 +65,7 @@
         <activity
             android:name=".GoogleImageSearch.GoogleSearchActivity"
             android:screenOrientation="portrait"
-            android:label="Google Search">
+            android:label="Google Zoeken">
         </activity>
         <activity
             android:name=".AddContentPage.AddContentActivity"
@@ -76,7 +76,7 @@
         <activity
             android:name=".ContentPage.ContentPageActivity"
             android:screenOrientation="portrait"
-            android:label="Kiesresultaat"
+            android:label="Toelichtingen"
             android:parentActivityName=".ResultPage.ResultActivity">
         </activity>
         <activity

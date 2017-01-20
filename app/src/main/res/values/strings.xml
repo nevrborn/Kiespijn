@@ -23,7 +23,7 @@
     <string name="dilemma_user_description">Vrouw | 31 jaar</string>
     <string name="dilemma_filter">Alleen vrienden</string>
     <string name="dilemma_empty">Whoops, je bent door alle dilemma\'s heen!</string>
-    <string name="dilemma_x_uur">x uur</string>
+    <string name="dilemma_x_uur">xx uur</string>
     <string name="choose_dilemma">KIES\n%1$s</string>
     <string name="add_content_swipe">Licht jouw\nantwoord toe +</string>
     <string name="create_dilemma_yourself">Do you want to create your own dilemma?</string>

@@ -133,6 +133,11 @@ public class ContentPageFragment extends Fragment {
                     .placeholder(R.mipmap.ic_launcher)
                     .into(mUserPhoto);
 
+            // Set hometown to unknown if this is hided information on Facebook
+            if (mContent.getUserFbHometown() == null) {
+                mContent.setUserFbHometown("Onbekend");
+            }
+
             mUserName.setText(mContent.getUserFbName());
             mUserInfo.setText(mContent.getUserFbAge() + ", " + mContent.getUserFbGender() + ", " + mContent.getUserFbHometown());
             mText.setText(mContent.getText());

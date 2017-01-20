@@ -135,7 +135,7 @@ public class DilemmaFragment extends Fragment {
         if (!hasDownloadedData) {
             getData();
         }
-
+        addTempDilemmas();
 
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo);
@@ -147,28 +147,26 @@ public class DilemmaFragment extends Fragment {
         final SwitchCompat filterSwitch = (SwitchCompat) view.findViewById(R.id.dilemma_filter_switch);
         mSkipDilemma = (Button) view.findViewById(R.id.button_skip_dilemma);
         mFriendIcon = (ImageView) view.findViewById(R.id.imageview_friends);
-
-        filterSwitch.setChecked(false);
-
         mFirstDilemmaImage = (ImageView) view.findViewById(R.id.image_view_first_option_decicision_page);
         mSecondDilemmaImage = (ImageView) view.findViewById(R.id.image_view_second_option_decicision_page);
         mFirstDilemmaImageText = (TextView) view.findViewById(R.id.text_view_first_image_title);
         mSecondDilemmaImageText = (TextView) view.findViewById(R.id.text_view_second_image_title);
-
         mChooseDilemmaText1 = (TextView) view.findViewById(R.id.textview_next_dilemma_first);
         mChooseDilemmaText2 = (TextView) view.findViewById(R.id.textview_next_dilemma_second);
         final TextView addContent1 = (TextView) view.findViewById(R.id.textview_add_content_swipe_first);
         final TextView addContent2 = (TextView) view.findViewById(R.id.textview_add_content_swipe_second);
 
+        filterSwitch.setChecked(false);
+
+        // Set up the references for the swiping functionality
         swipeLayout1 = (SwipeLayout) view.findViewById(R.id.swipeview_first);
         swipeLayout2 = (SwipeLayout) view.findViewById(R.id.swipeview_second);
 
+        // setting up the swiping features
         swipeLayout1.setShowMode(SwipeLayout.ShowMode.PullOut);
         swipeLayout2.setShowMode(SwipeLayout.ShowMode.PullOut);
-
         swipeLayout1.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout1.findViewById(R.id.swipe_bottom_wrapper_first));
         swipeLayout2.addDrag(SwipeLayout.DragEdge.Bottom, swipeLayout2.findViewById(R.id.swipe_bottom_wrapper_second));
-
         swipeLayout1.setRightSwipeEnabled(false);
         swipeLayout1.setLeftSwipeEnabled(false);
         swipeLayout2.setRightSwipeEnabled(false);
@@ -182,7 +180,6 @@ public class DilemmaFragment extends Fragment {
         addContent1.setTypeface(source_sans_extra_light);
         addContent2.setTypeface(source_sans_extra_light);
         mDilemmaTextView.setTypeface(source_sans_bold);
-
 
         swipeLayout1.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
@@ -376,15 +373,17 @@ public class DilemmaFragment extends Fragment {
 
     private void updateUi() {
 
+        // ask user to create a dilemma after looking at four dilemma's
         if (mCurrentIndex == 4 && !User.getInstance().getHasCreatedDilemma()) {
             askToCreateDilemma();
         }
 
+        // update current Dilemma t show
         mDilemma = mDilemmaList.get(mCurrentIndex);
 
+        // reset swipable features
         swipeLayout1.setAlpha(1.0f);
         swipeLayout2.setAlpha(1.0f);
-
         swipeLayout1.setClickable(true);
         swipeLayout2.setClickable(true);
         swipeLayout1.setBottomSwipeEnabled(true);
@@ -450,10 +449,10 @@ public class DilemmaFragment extends Fragment {
             mSecondDilemmaImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_sand_timer));
         }
 
+        // Set hometown to unknown if this is hided information on Facebook
         if (mDilemma.getCreator_hometown() == null) {
             mDilemma.setCreator_hometown("Onbekend");
         }
-
 
         // set creator and mDilemma text
         if (!mDilemma.getIsAnonymous()) {
@@ -717,7 +716,6 @@ public class DilemmaFragment extends Fragment {
             mDilemmaList = mDilemmaApiResponse.getDilemmaList();
             Log.v("mDilemmaList", String.valueOf(response.body().getDilemmaList().size()));
             createDummyDate();
-            addTempDilemmas();
             updateUi();
             hasDownloadedData = true;
         }

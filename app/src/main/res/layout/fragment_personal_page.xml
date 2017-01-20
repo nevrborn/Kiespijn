@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_personal_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,71 +14,107 @@
     tools:context="com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity">
 
     <LinearLayout
-        android:id="@+id/linear_layout_top_filter_buttons"
+        android:id="@+id/linear_layout_personal_page_toggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:divider="@color/cardview_dark_background"
-        >
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_pers_page_mine"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:background="@drawable/buttons_filter"
-            android:text="@string/button_my_dilemmas"
-            android:textColor="@android:color/white"
-            />
+            android:gravity="right"
+            android:layout_marginRight="5dp"
+            android:text="Mijn eigen dilemma's"
+            android:textSize="12sp"/>
 
-        <Button
-            android:id="@+id/button_pers_page_others"
-            android:layout_width="match_parent"
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_compat_own_others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textColorLink="@color/colorGreen"
+            app:theme="@style/MyPersonalPageSwitch"/>
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:background="@drawable/buttons_filter"
-            android:alpha=".65"
-            android:text="@string/button_from_others"
-            android:textColor="@android:color/white"
-            />
+            android:layout_marginLeft="5dp"
+            android:text="Waar ik op heb gestemd"
+            android:textSize="12sp"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_layout_lower_filter_buttons"
-        android:layout_below="@id/linear_layout_top_filter_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:divider="@color/cardview_dark_background"
-        >
+    <!--<LinearLayout-->
+        <!--android:id="@+id/linear_layout_top_filter_buttons"-->
+        <!--android:layout_below="@id/linear_layout_personal_page_toggle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:divider="@color/cardview_dark_background"-->
+        <!--&gt;-->
 
-        <Button
-            android:id="@+id/button_pers_page_running"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@drawable/buttons_filter"
-            android:alpha=".65"
-            android:text="@string/button_running"
-            android:textColor="@android:color/white"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/button_pers_page_mine"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="0.5"-->
+            <!--android:background="@drawable/buttons_filter"-->
+            <!--android:text="@string/button_my_dilemmas"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--/>-->
 
-        <Button
-            android:id="@+id/button_pers_page_closed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@drawable/buttons_filter"
-            android:text="@string/button_expired"
-            android:textColor="@android:color/white"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/button_pers_page_others"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="0.5"-->
+            <!--android:background="@drawable/buttons_filter"-->
+            <!--android:alpha=".65"-->
+            <!--android:text="@string/button_from_others"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/linear_layout_lower_filter_buttons"-->
+        <!--android:layout_below="@id/linear_layout_top_filter_buttons"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:divider="@color/cardview_dark_background"-->
+        <!--&gt;-->
+
+        <!--<Button-->
+            <!--android:id="@+id/button_pers_page_running"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="0.5"-->
+            <!--android:background="@drawable/buttons_filter"-->
+            <!--android:alpha=".65"-->
+            <!--android:text="@string/button_running"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/button_pers_page_closed"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="0.5"-->
+            <!--android:background="@drawable/buttons_filter"-->
+            <!--android:text="@string/button_expired"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--/>-->
+
+    <!--</LinearLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_personal_page"
-        android:layout_below="@id/linear_layout_lower_filter_buttons"
+        android:layout_below="@id/linear_layout_personal_page_toggle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"

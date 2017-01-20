@@ -12,7 +12,7 @@ public class User {
     // Singleton
     private static User sCurrentUser;
 
-    private String mUserKey;
+    private String mUserKey = "";
     private String mName;
     private String mEmail;
     private String mSex;
@@ -128,4 +128,5 @@ public class User {
     public void setHasCreatedDilemma(Boolean hasCreatedDilemma) {
         this.hasCreatedDilemma = hasCreatedDilemma;
     }
+
 }

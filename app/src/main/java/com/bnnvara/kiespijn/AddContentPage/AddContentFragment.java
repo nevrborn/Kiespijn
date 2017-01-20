@@ -55,6 +55,7 @@ public class AddContentFragment extends Fragment {
     private static Dilemma mDilemma;
     private static String mAnswerOption;
     private boolean mIsAPhoto;
+    private boolean mIsAnArticle;
 
     private String mLink;
     private String mImageLink;
@@ -148,8 +149,7 @@ public class AddContentFragment extends Fragment {
                 Intent i = ArticleSearchActivity.newIntent(getActivity());
                 startActivityForResult(i, REQUEST_ARTICLE_URL);
 
-                //addLink();
-                mIsAPhoto = false;
+                mIsAnArticle = true;
             }
         });
 
@@ -159,7 +159,7 @@ public class AddContentFragment extends Fragment {
                 User user = User.getInstance();
                 String text = editTextField.getText().toString();
 
-                Content content = new Content(text, mIsAPhoto, user.getName(), user.getUserKey(), user.getAge(), user.getSex(), user.getProfilePictureURL(), user.getHometown());
+                Content content = new Content(text, mIsAPhoto, mIsAnArticle, user.getName(), user.getUserKey(), user.getAge(), user.getSex(), user.getProfilePictureURL(), user.getHometown());
 
                 if (mIsAPhoto) {
                     content.setPhotoLink(mImageLink);
@@ -267,6 +267,8 @@ public class AddContentFragment extends Fragment {
             mImageThumbnail.setImageBitmap(imageBitmap);
             String imageUri = getImageUri(getContext(), imageBitmap).toString();
             mImageLink = imageUri;
+            mImageThumbnail.setVisibility(View.VISIBLE);
+            mAddedContentLayout.setVisibility(View.VISIBLE);
 
         }
 
@@ -287,12 +289,12 @@ public class AddContentFragment extends Fragment {
             Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
 
             mImageThumbnail.setImageBitmap(bitmap);
+            mImageThumbnail.setVisibility(View.VISIBLE);
 
         }
 
         if (requestCode == REQUEST_ARTICLE_URL && resultCode == Activity.RESULT_OK) {
             mLinkView.setText(data.getStringExtra(ARTICLE_URL));
-            mImageThumbnail.setVisibility(View.GONE);
             mLinkView.setVisibility(View.VISIBLE);
             mAddedContentLayout.setVisibility(View.VISIBLE);
         }
@@ -304,6 +306,9 @@ public class AddContentFragment extends Fragment {
                     .load(googleUri)
                     .placeholder(R.mipmap.ic_launcher)
                     .into(mImageThumbnail);
+
+            mImageThumbnail.setVisibility(View.VISIBLE);
+            mAddedContentLayout.setVisibility(View.VISIBLE);
 
         }
     }

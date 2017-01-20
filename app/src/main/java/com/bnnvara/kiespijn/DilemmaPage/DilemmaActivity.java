@@ -21,4 +21,8 @@ public class DilemmaActivity extends SingleFragmentActivity {
         return DilemmaFragment.newInstance();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -99,7 +99,7 @@ public class DilemmaFragment extends Fragment {
 
     private float mImageAlpha = 1.0f;
     private int tempOffset;
-    private Boolean hasChosen = false;
+    private Boolean hasDownloadedData = false;
 
     public static Fragment newInstance() {
         return new DilemmaFragment();
@@ -120,7 +120,7 @@ public class DilemmaFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (mDilemmaList == null) {
+        if (!hasDownloadedData) {
             getData();
         }
     }
@@ -132,7 +132,7 @@ public class DilemmaFragment extends Fragment {
 
         mUserFbId = User.getInstance().getUserKey();
 
-        if (mDilemmaList == null) {
+        if (!hasDownloadedData) {
             getData();
         }
 
@@ -509,8 +509,8 @@ public class DilemmaFragment extends Fragment {
         replies1.setOptionBAnswers(optionB);
         dilemma_1.setReplies(replies1);
         Contents contents1 = new Contents();
-        Content contentA = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
-        Content contentB = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentA = new Content("Hello, this is a test", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentB = new Content("Hello, this is also a test, but for Content B", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
         contents1.addContentToOptionA(contentA);
         contents1.addContentToOptionB(contentB);
         dilemma_1.setContents(contents1);
@@ -544,8 +544,8 @@ public class DilemmaFragment extends Fragment {
         replies2.setOptionBAnswers(optionB2);
         dilemma_2.setReplies(replies2);
         Contents contents2 = new Contents();
-        Content contentA2 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
-        Content contentB2 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentA2 = new Content("Hello, this is a test", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentB2 = new Content("Hello, this is also a test, but for Content B", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
         contents2.addContentToOptionA(contentA2);
         contents2.addContentToOptionB(contentB2);
         dilemma_2.setContents(contents2);
@@ -558,7 +558,6 @@ public class DilemmaFragment extends Fragment {
         dilemma_3.setCreator_name("Eliza Cambre");
         dilemma_3.setCreator_age("25");
         dilemma_3.setCreator_sex("Vrouw");
-        dilemma_3.setCreator_hometown("Amsterdam");
         dilemma_3.setCreator_picture_url("https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
         dilemma_3.setPhotoA("https://nyoobserver.files.wordpress.com/2013/12/vermeer-670-girl-with-a-pearl-earring_2000.jpg");
         dilemma_3.setPhotoB("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg/266px-Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg");
@@ -579,8 +578,8 @@ public class DilemmaFragment extends Fragment {
         replies3.setOptionBAnswers(optionB3);
         dilemma_3.setReplies(replies3);
         Contents contents3 = new Contents();
-        Content contentA3 = new Content("Hello, this is a test", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
-        Content contentB3 = new Content("Hello, this is also a test, but for Content B", true, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentA3 = new Content("Hello, this is a test", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
+        Content contentB3 = new Content("Hello, this is also a test, but for Content B", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
         contents3.addContentToOptionA(contentA3);
         contents3.addContentToOptionB(contentB3);
         dilemma_3.setContents(contents3);
@@ -720,6 +719,7 @@ public class DilemmaFragment extends Fragment {
             createDummyDate();
             addTempDilemmas();
             updateUi();
+            hasDownloadedData = true;
         }
 
     }

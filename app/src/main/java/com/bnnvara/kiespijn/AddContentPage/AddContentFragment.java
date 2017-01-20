@@ -10,9 +10,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -29,8 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchActivity;
-import com.bnnvara.kiespijn.CapiModel.ArticleRoot;
 import com.bnnvara.kiespijn.ContentPage.Content;
+import com.bnnvara.kiespijn.CreateDilemmaPage.PermissionUtils;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
@@ -38,7 +42,11 @@ import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
 
 import java.io.ByteArrayOutputStream;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -52,20 +60,24 @@ public class AddContentFragment extends Fragment {
     private static final String GOOGLE_IMAGE_URL = "google_image_url";
     private static final String ARTICLE_URL = "article_url";
 
+    private static final int REQUEST_PERMISSIONS = 1000;
+    public static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     private static Dilemma mDilemma;
     private static String mAnswerOption;
     private boolean mIsAPhoto;
     private boolean mIsAnArticle;
+    private String mCurrentPhotoPath;
 
-    private String mLink;
     private String mImageLink;
-    private String mContentText;
+    private String mArticleLink;
     private LinearLayout mAddedContentLayout;
 
     private TextView mLinkView;
     private ImageView mImageThumbnail;
-
-    private List<ArticleRoot> mArticleRootList;
 
 
     public static Fragment newInstance(Dilemma dilemma, String answerOption) {
@@ -79,6 +91,8 @@ public class AddContentFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         setRetainInstance(true);
+
+        PermissionUtils.requestIfNeeded(getActivity(), PERMISSIONS, REQUEST_PERMISSIONS);
     }
 
     @Nullable
@@ -148,7 +162,6 @@ public class AddContentFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = ArticleSearchActivity.newIntent(getActivity());
                 startActivityForResult(i, REQUEST_ARTICLE_URL);
-
                 mIsAnArticle = true;
             }
         });
@@ -164,7 +177,7 @@ public class AddContentFragment extends Fragment {
                 if (mIsAPhoto) {
                     content.setPhotoLink(mImageLink);
                 } else {
-                    content.setArticleUrl(mLink);
+                    content.setArticleUrl(mArticleLink);
                 }
 
                 if (mAnswerOption.equals("optionA")) {
@@ -233,22 +246,24 @@ public class AddContentFragment extends Fragment {
         builder.show();
     }
 
-    private boolean hasCameraSupport() {
-        boolean hasSupport = false;
-        if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
-            hasSupport = true;
-        }
-        return hasSupport;
-    }
-
     private void cameraIntent() {
-        if (hasCameraSupport()) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    Uri photoURI = Uri.fromFile(photoFile);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         }
-
     }
 
     private void galleryIntent() {
@@ -261,40 +276,44 @@ public class AddContentFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // Show the thumbnail on ImageView
+            Uri imageUri = Uri.parse(mCurrentPhotoPath);
+            mImageLink = imageUri.getPath();
 
-            mImageThumbnail.setImageBitmap(imageBitmap);
-            String imageUri = getImageUri(getContext(), imageBitmap).toString();
-            mImageLink = imageUri;
+            Glide.with(getActivity())
+                    .load(mImageLink)
+                    .into(mImageThumbnail);
+
             mImageThumbnail.setVisibility(View.VISIBLE);
             mAddedContentLayout.setVisibility(View.VISIBLE);
 
+            // ScanFile so it will appear in the device gallery
+            MediaScannerConnection.scanFile(getContext(),
+                    new String[]{mImageLink}, null,
+                    new MediaScannerConnection.OnScanCompletedListener() {
+                        public void onScanCompleted(String path, Uri uri) {
+                        }
+                    });
         }
 
         if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK
                 && null != data) {
 
             Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            mImageLink = selectedImage.toString();
 
-            Cursor cursor = getContext().getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
+            Glide.with(getActivity())
+                    .load(mImageLink)
+                    .into(mImageThumbnail);
 
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-
-            mImageThumbnail.setImageBitmap(bitmap);
             mImageThumbnail.setVisibility(View.VISIBLE);
+            mAddedContentLayout.setVisibility(View.VISIBLE);
 
         }
 
         if (requestCode == REQUEST_ARTICLE_URL && resultCode == Activity.RESULT_OK) {
             mLinkView.setText(data.getStringExtra(ARTICLE_URL));
+            mArticleLink = data.getStringExtra(ARTICLE_URL);
             mLinkView.setVisibility(View.VISIBLE);
             mAddedContentLayout.setVisibility(View.VISIBLE);
         }
@@ -304,7 +323,6 @@ public class AddContentFragment extends Fragment {
 
             Glide.with(getActivity())
                     .load(googleUri)
-                    .placeholder(R.mipmap.ic_launcher)
                     .into(mImageThumbnail);
 
             mImageThumbnail.setVisibility(View.VISIBLE);
@@ -313,11 +331,49 @@ public class AddContentFragment extends Fragment {
         }
     }
 
-    private Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM) + File.separator);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_PERMISSIONS) {
+            // Confirm required permissions have been granted
+            boolean hasPermissions = true;
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    // Cannot proceed without permissions
+                    hasPermissions = false;
+                    openUpSettings();
+                }
+            }
+
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void openUpSettings() {
+        final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setData(Uri.parse("package:" + getContext().getPackageName()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(intent);
     }
 
 }

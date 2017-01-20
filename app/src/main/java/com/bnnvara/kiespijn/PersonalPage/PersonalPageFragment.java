@@ -247,7 +247,7 @@ public class PersonalPageFragment extends Fragment {
             if (dilemma.getTimeLeft() < 0){
                 holder.mTimeLeftTextView.setText("---");
             } else if (dilemma.getTimeLeft() == 1){
-                holder.mTimeLeftTextView.setText(R.string.time_left_1_hour);
+                holder.mTimeLeftTextView.setText(" 1 uur ");
             } else {
                 holder.mTimeLeftTextView.setText(dilemma.getTimeLeft() + " uren");
             }

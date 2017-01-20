@@ -126,7 +126,6 @@ public class LoginFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         // TODO: Do we need this? Can we delete it?
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
-        // getFacebookParameters();
     }
 
     public void signOut() {
@@ -284,10 +283,10 @@ public class LoginFragment extends Fragment {
 
     }
 
-    private boolean isLoggedIn() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
-    }
+//    private boolean isLoggedIn() {
+//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//        return accessToken != null;
+//    }
 
     @Override
     public void onResume() {

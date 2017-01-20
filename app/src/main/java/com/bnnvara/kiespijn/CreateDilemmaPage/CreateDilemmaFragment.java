@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.CreateDilemmaPage;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,12 +10,18 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.BuildConfig;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
@@ -38,11 +45,11 @@ import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 import com.bumptech.glide.Glide;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -58,11 +65,18 @@ public class CreateDilemmaFragment extends Fragment {
     private static final String GOOGLE_IMAGE_URL = "google_image_url";
     private static final int GOOGLE_IMAGE = 3;
 
+    private static final int REQUEST_PERMISSIONS = 1000;
+    public static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     private EditText mOptionAText;
     private EditText mOptionBText;
     private ImageView mImageViewA;
     private ImageView mImageViewB;
     private Boolean isImageA = true;
+    private String mCurrentPhotoPath;
 
     // dilemma variables
     private static Dilemma mDilemma;
@@ -78,6 +92,12 @@ public class CreateDilemmaFragment extends Fragment {
         return new CreateDilemmaFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        PermissionUtils.requestIfNeeded(getActivity(), PERMISSIONS, REQUEST_PERMISSIONS);
+    }
 
     @Nullable
     @Override
@@ -240,19 +260,22 @@ public class CreateDilemmaFragment extends Fragment {
         builder.show();
     }
 
-    private boolean hasCameraSupport() {
-        boolean hasSupport = false;
-        if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
-            hasSupport = true;
-        }
-        return hasSupport;
-    }
-
     private void cameraIntent() {
-        if (hasCameraSupport()) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    Uri photoURI = Uri.fromFile(photoFile);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         }
 
@@ -260,22 +283,26 @@ public class CreateDilemmaFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Bitmap imageA;
-        Bitmap imageB;
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // Show the thumbnail on ImageView
+            Uri imageUri = Uri.parse(mCurrentPhotoPath);
+            String path = imageUri.getPath();
 
             if (isImageA) {
-                imageA = imageBitmap;
-                String imageAUri = getImageUri(getContext(), imageA).toString();
-                mDilemma.setPhotoA(imageAUri);
-                displayPicture(imageAUri, mImageViewA);
+                mDilemma.setPhotoA(path);
+                displayPicture(path, mImageViewA);
             } else {
-                imageB = imageBitmap;
-                String imageBUri = getImageUri(getContext(), imageB).toString();
-                mDilemma.setPhotoB(imageBUri);
+                mDilemma.setPhotoB(path);
+                displayPicture(path, mImageViewB);
             }
+
+            // ScanFile so it will appear in the device gallery
+            MediaScannerConnection.scanFile(getContext(),
+                    new String[]{path}, null,
+                    new MediaScannerConnection.OnScanCompletedListener() {
+                        public void onScanCompleted(String path, Uri uri) {
+                        }
+                    });
         }
 
         if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK
@@ -359,6 +386,51 @@ public class CreateDilemmaFragment extends Fragment {
                 .centerCrop()
                 .placeholder(R.drawable.ic_action_sand_timer)
                 .into(imageView);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_PERMISSIONS) {
+            // Confirm required permissions have been granted
+            boolean hasPermissions = true;
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    // Cannot proceed without permissions
+                    hasPermissions = false;
+                    openUpSettings();
+                }
+            }
+
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void openUpSettings() {
+        final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setData(Uri.parse("package:" + getContext().getPackageName()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(intent);
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM) + File.separator);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
     }
 
 

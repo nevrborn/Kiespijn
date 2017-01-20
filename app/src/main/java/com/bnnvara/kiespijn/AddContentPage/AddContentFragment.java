@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.AddContentPage;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;

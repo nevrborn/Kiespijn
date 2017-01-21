@@ -123,6 +123,8 @@ public class DilemmaFragment extends Fragment {
         if (!hasDownloadedData) {
             getData();
         }
+
+        addTempDilemmas();
     }
 
     @Nullable
@@ -135,7 +137,6 @@ public class DilemmaFragment extends Fragment {
         if (!hasDownloadedData) {
             getData();
         }
-        addTempDilemmas();
 
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo);
@@ -613,6 +614,7 @@ public class DilemmaFragment extends Fragment {
                 Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
+                User.getInstance().setHasCreatedDilemma(true);
                 return true;
             default:
                 return true;

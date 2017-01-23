@@ -422,7 +422,6 @@ public class DilemmaFragment extends Fragment {
             Glide.with(getActivity())
                     .load(mDilemma.getPhotoA())
                     .centerCrop()
-                    .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mFirstDilemmaImage);
             mFirstDilemmaImageText.setText(mDilemma.getTitlePhotoA());
             mChooseDilemmaText1.setText(getString(R.string.choose_dilemma, mDilemma.getTitlePhotoA().toUpperCase()));
@@ -434,7 +433,6 @@ public class DilemmaFragment extends Fragment {
             Glide.with(getActivity())
                     .load(mDilemma.getPhotoB())
                     .centerCrop()
-                    .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mSecondDilemmaImage);
             mSecondDilemmaImageText.setText(mDilemma.getTitlePhotoB());
             mChooseDilemmaText2.setText(getString(R.string.choose_dilemma, mDilemma.getTitlePhotoB().toUpperCase()));

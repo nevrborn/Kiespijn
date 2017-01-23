@@ -155,92 +155,98 @@ public class LoginFragment extends Fragment {
 
         mUser = User.getInstance();
 
-        try {
-            String facebookID = object.getString("id");
-            Log.i(TAG, "Facebook ID is: " + facebookID);
-            String facebookName = object.getString("name");
-            Log.i(TAG, "Facebook NAME is: " + facebookName);
-            String facebookGender = object.getString("gender");
-            Log.i(TAG, "Facebook GENDER is: " + facebookGender);
+        if (object != null) {
 
-            mUser.setUserKey(facebookID);
-            mUser.setName(facebookName);
-            mUser.setSex(facebookGender);
+            try {
+                String facebookID = object.getString("id");
+                Log.i(TAG, "Facebook ID is: " + facebookID);
+                String facebookName = object.getString("name");
+                Log.i(TAG, "Facebook NAME is: " + facebookName);
+                String facebookGender = object.getString("gender");
+                Log.i(TAG, "Facebook GENDER is: " + facebookGender);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                mUser.setUserKey(facebookID);
+                mUser.setName(facebookName);
+                mUser.setSex(facebookGender);
 
-        String facebookHometown = null;
-        try {
-            facebookHometown = object.getString("hometown");
-            String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));
-            mUser.setHometown(hometown);
-        } catch (JSONException e) {
-            mUser.setHometown("Onbekend");
-            e.printStackTrace();
-        }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            String facebookHometown = null;
+            try {
+                facebookHometown = object.getString("hometown");
+                String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));
+                mUser.setHometown(hometown);
+            } catch (JSONException e) {
+                mUser.setHometown("Onbekend");
+                e.printStackTrace();
+            }
 
 
-        // GET BIRTHDAY IF POSSIBLE
-        try {
-            String facebookBirthday = object.getString("birthday");
-            Log.i(TAG, "Facebook BIRTHDAY is: " + facebookBirthday);
-            String age = calculateAge(facebookBirthday);
-            mUser.setAge(age);
-        } catch (JSONException e) {
-            mUser.setAge("Onbekend");
-            e.printStackTrace();
-
-        }
-
-        // GET PHOTO URL IF POSSIBLE
-        try {
-            JSONObject pictureObject = object.getJSONObject("picture");
-            JSONObject pictureData = pictureObject.getJSONObject("data");
-            String facebookPictureURL = pictureData.getString("url");
-            Log.i(TAG, "Facebook PICTURE URL is: " + facebookPictureURL);
-            mUser.setProfilePictureURL(facebookPictureURL);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            JSONObject facebookFriends = object.getJSONObject("friends");
-            JSONArray friendsObject = facebookFriends.getJSONArray("data");
-            Log.i(TAG, "Facebook Friends Object is: " + friendsObject);
-
-            int friendsCount = friendsObject.length();
-
-            int i = 0;
-
-            if (friendsCount != 0) {
-
-                mUser.mFacebookFriendList.clear();
-
-                while (i < friendsCount) {
-
-                    JSONObject friend = friendsObject.getJSONObject(i);
-                    String friendID = friend.getString("id");
-                    String friendName = friend.getString("name");
-
-                    JSONObject friendPictureObject = friend.getJSONObject("picture");
-                    JSONObject friendPictureData = friendPictureObject.getJSONObject("data");
-                    String friendFacebookPictureURL = friendPictureData.getString("url");
-
-                    Friend newFriend = new Friend(friendName, friendID, friendFacebookPictureURL);
-                    mUser.mFacebookFriendList.add(newFriend);
-
-                    i += 1;
-                }
+            // GET BIRTHDAY IF POSSIBLE
+            try {
+                String facebookBirthday = object.getString("birthday");
+                Log.i(TAG, "Facebook BIRTHDAY is: " + facebookBirthday);
+                String age = calculateAge(facebookBirthday);
+                mUser.setAge(age);
+            } catch (JSONException e) {
+                mUser.setAge("Onbekend");
+                e.printStackTrace();
 
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        Intent i = DilemmaActivity.newIntent(getContext());
-        startActivity(i);
+            // GET PHOTO URL IF POSSIBLE
+            try {
+                JSONObject pictureObject = object.getJSONObject("picture");
+                JSONObject pictureData = pictureObject.getJSONObject("data");
+                String facebookPictureURL = pictureData.getString("url");
+                Log.i(TAG, "Facebook PICTURE URL is: " + facebookPictureURL);
+                mUser.setProfilePictureURL(facebookPictureURL);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                JSONObject facebookFriends = object.getJSONObject("friends");
+                JSONArray friendsObject = facebookFriends.getJSONArray("data");
+                Log.i(TAG, "Facebook Friends Object is: " + friendsObject);
+
+                int friendsCount = friendsObject.length();
+
+                int i = 0;
+
+                if (friendsCount != 0) {
+
+                    mUser.mFacebookFriendList.clear();
+
+                    while (i < friendsCount) {
+
+                        JSONObject friend = friendsObject.getJSONObject(i);
+                        String friendID = friend.getString("id");
+                        String friendName = friend.getString("name");
+
+                        JSONObject friendPictureObject = friend.getJSONObject("picture");
+                        JSONObject friendPictureData = friendPictureObject.getJSONObject("data");
+                        String friendFacebookPictureURL = friendPictureData.getString("url");
+
+                        Friend newFriend = new Friend(friendName, friendID, friendFacebookPictureURL);
+                        mUser.mFacebookFriendList.add(newFriend);
+
+                        i += 1;
+                    }
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Intent i = DilemmaActivity.newIntent(getContext());
+            startActivity(i);
+
+        } else {
+            getFacebookParameters();
+        }
 
     }
 

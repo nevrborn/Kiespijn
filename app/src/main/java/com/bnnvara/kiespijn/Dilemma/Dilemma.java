@@ -333,6 +333,11 @@ public class Dilemma implements Serializable {
     }
 
     public String getCreator_hometown() {
+
+        if (mCreator_hometown == null || mCreator_hometown.equals("")) {
+            mCreator_hometown = "Onbekend";
+        }
+        
         return mCreator_hometown;
     }
 

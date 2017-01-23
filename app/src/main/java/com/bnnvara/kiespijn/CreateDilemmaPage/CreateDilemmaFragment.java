@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
@@ -27,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bnnvara.kiespijn.BuildConfig;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.GoogleImageSearch.GoogleSearchActivity;
 import com.bnnvara.kiespijn.R;
@@ -137,6 +139,7 @@ public class CreateDilemmaFragment extends Fragment {
                     Intent i = TargetGroupActivity.newIntent(getActivity());
                     i.putExtra(DILEMMA_OBJECT, mDilemma);
                     startActivity(i);
+                    getActivity().finish();
                 } else {
                     Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
                 }
@@ -259,7 +262,7 @@ public class CreateDilemmaFragment extends Fragment {
                 photoFile = createImageFile();
                 // Continue only if the File was successfully created
                 if (photoFile != null) {
-                    Uri photoURI = Uri.fromFile(photoFile);
+                    Uri photoURI = FileProvider.getUriForFile(getContext(), BuildConfig.APPLICATION_ID + ".provider", photoFile);
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
@@ -267,7 +270,6 @@ public class CreateDilemmaFragment extends Fragment {
                 throw new RuntimeException(ex);
             }
         }
-
     }
 
     @Override
@@ -405,7 +407,7 @@ public class CreateDilemmaFragment extends Fragment {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM) + File.separator);
+                Environment.DIRECTORY_DCIM), "Camera");
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */

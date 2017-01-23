@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.bnnvara.kiespijn.ContentPage.ContentPageActivity;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -51,14 +52,28 @@ public class ResultFragment extends Fragment {
     private TextView mTimeLeftTextView;
     private TextView mAnswerATextView;
     private TextView mAnswerBTextView;
-    private com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar mProgressBarTotalLeft;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarTotalRight;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenLeft;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenRight;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarWomenLeft;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarWomenRight;
     private Button mAddedContentButtonA;
     private Button mAddedContentButtonB;
+    private RoundCornerProgressBar TotalLeftProgressBar;
+    private RoundCornerProgressBar TotalRightProgressBar;
+    private RoundCornerProgressBar MenLeftProgressBar;
+    private RoundCornerProgressBar MenRightProgressBar;
+    private RoundCornerProgressBar womenLeftProgressBar;
+    private RoundCornerProgressBar womanRightProgressBar;
+    private RoundCornerProgressBar unknownSexLeftProgressBar;
+    private RoundCornerProgressBar unknownSexRightProgressBar;
+    private RoundCornerProgressBar cityLeftProgressBar;
+    private RoundCornerProgressBar cityRightProgressBar;
+    private TextView totalNrOfResultsTextView;
+    private TextView menNrOfResultsTextView;
+    private TextView womenNrOfResultsTextView;
+    private TextView unknownSexNrOfResultsTextView;
+    private TextView cityNrOfResultsTextView;
+    private TextView ageGroup1NrOfResultsTextView;
+    private TextView ageGroup2NrOfResultsTextView;
+    private TextView ageGroup3NrOfResultsTextView;
+    private TextView ageGroup4NrOfResultsTextView;
+    private TextView ageGroupUnknownNrOfResultsTextView;
 
     // Regular variables
     private Dilemma mDilemma;
@@ -83,6 +98,9 @@ public class ResultFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
+
+        // animation
+        animateSwipeJump();
     }
 
     @Nullable
@@ -217,9 +235,6 @@ public class ResultFragment extends Fragment {
         // text of the two options
         mAnswerATextView.setText(mDilemma.getTitlePhotoA());
         mAnswerBTextView.setText(mDilemma.getTitlePhotoB());
-
-        // animation
-        animateSwipeJump();
     }
 
 
@@ -261,18 +276,25 @@ public class ResultFragment extends Fragment {
         display.getSize(size);
         int screenWidth = size.x;
 
-        int offset = screenWidth / 2;
+        int offset = screenWidth / 4;
 
+        // make the object go left or right
         ObjectAnimator animLeft = ObjectAnimator.ofFloat(
                 mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - offset);
         animLeft.setInterpolator(new DecelerateInterpolator());
+
+        // Make the object 100% transparent
+        ObjectAnimator animAlpha = ObjectAnimator.ofFloat(mWinnerImageView,"alpha",0.0f);
+        animAlpha.setDuration(3000);
+
+        // make the object rotate
         RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotateAnimation.setDuration(3000);
+        rotateAnimation.setDuration(1500);
         mWinnerImageView.startAnimation(rotateAnimation);
 
         AnimatorSet animSetWinner = new AnimatorSet();
-        animSetWinner.play(animLeft);
-        animSetWinner.setStartDelay(3000);
+        animSetWinner.play(animLeft).before(animAlpha);
+        animSetWinner.setStartDelay(1500);
         animSetWinner.setDuration(3000);
         animSetWinner.start();
     }

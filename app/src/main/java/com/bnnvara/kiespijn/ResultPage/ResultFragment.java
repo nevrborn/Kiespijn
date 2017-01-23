@@ -12,16 +12,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -33,7 +30,6 @@ import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
-import com.daimajia.swipe.SwipeLayout;
 
 public class ResultFragment extends Fragment {
 
@@ -54,6 +50,7 @@ public class ResultFragment extends Fragment {
     private TextView mAnswerBTextView;
     private Button mAddedContentButtonA;
     private Button mAddedContentButtonB;
+
     private RoundCornerProgressBar TotalLeftProgressBar;
     private RoundCornerProgressBar TotalRightProgressBar;
     private RoundCornerProgressBar MenLeftProgressBar;
@@ -64,16 +61,34 @@ public class ResultFragment extends Fragment {
     private RoundCornerProgressBar unknownSexRightProgressBar;
     private RoundCornerProgressBar cityLeftProgressBar;
     private RoundCornerProgressBar cityRightProgressBar;
+
     private TextView totalNrOfResultsTextView;
     private TextView menNrOfResultsTextView;
     private TextView womenNrOfResultsTextView;
     private TextView unknownSexNrOfResultsTextView;
     private TextView cityNrOfResultsTextView;
-    private TextView ageGroup1NrOfResultsTextView;
-    private TextView ageGroup2NrOfResultsTextView;
-    private TextView ageGroup3NrOfResultsTextView;
-    private TextView ageGroup4NrOfResultsTextView;
-    private TextView ageGroupUnknownNrOfResultsTextView;
+
+    private TextView ageGroup1NrOfResultsLeftTextView;
+    private TextView ageGroup2NrOfResultsLeftTextView;
+    private TextView ageGroup3NrOfResultsLeftTextView;
+    private TextView ageGroup4NrOfResultsLeftTextView;
+    private TextView ageGroupUnknownNrOfResultsLeftTextView;
+    private TextView ageGroup1ScoreLeftTextView;
+    private TextView ageGroup2ScoreLeftTextView;
+    private TextView ageGroup3ScoreLeftTextView;
+    private TextView ageGroup4ScoreLeftTextView;
+    private TextView ageGroupUnknownScoreLeftTextView;
+
+    private TextView ageGroup1NrOfResultsRightTextView;
+    private TextView ageGroup2NrOfResultsRightTextView;
+    private TextView ageGroup3NrOfResultsRightTextView;
+    private TextView ageGroup4NrOfResultsRightTextView;
+    private TextView ageGroupUnknownNrOfResultsRightTextView;
+    private TextView ageGroup1ScoreRightTextView;
+    private TextView ageGroup2ScoreRightTextView;
+    private TextView ageGroup3ScoreRightTextView;
+    private TextView ageGroup4ScoreRightTextView;
+    private TextView ageGroupUnknownScoreRightTextView;
 
     // Regular variables
     private Dilemma mDilemma;
@@ -98,9 +113,6 @@ public class ResultFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
-
-        // animation
-        animateSwipeJump();
     }
 
     @Nullable
@@ -122,17 +134,41 @@ public class ResultFragment extends Fragment {
         mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
         mAddedContentButtonA = (Button) view.findViewById(R.id.button_added_content_A);
         mAddedContentButtonB = (Button) view.findViewById(R.id.button_added_content_B);
-//        mProgressBarTotalLeft = (com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
-//        mProgressBarTotalRight = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
-//        mProgressBarMenLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
-//        mProgressBarMenRight = (SeekBar) view.findViewById(R.id.seekBar_men_right);
-//        mProgressBarWomenLeft = (SeekBar) view.findViewById(R.id.seekBar_women_left);
-//        mProgressBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
-
-
-//        mProgressBarTotalLeft.setProgress(20);
-//        mProgressBarTotalLeft.setProgressText("2055%");
-
+        TotalLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
+        TotalRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
+        MenLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
+        MenRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_right);
+        womenLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_women_left);
+        womanRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_women_right);
+        unknownSexLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_left);
+        unknownSexRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_right);
+        cityLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_city_left);
+        cityRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_city_right);
+        totalNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_total);
+        menNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_men);
+        womenNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_women);
+        unknownSexNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_uknown_sex);
+        cityNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_city);
+        ageGroup1NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_1_nr_left_text_view);
+        ageGroup2NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_2_nr_left_text_view);
+        ageGroup3NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_3_nr_left_text_view);
+        ageGroup4NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_4_nr_left_text_view);
+        ageGroupUnknownNrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_unkown_nr_left_text_view);
+        ageGroup1ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_1_score_left_text_view);
+        ageGroup2ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_2_score_left_text_view);
+        ageGroup3ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_3_score_left_text_view);
+        ageGroup4ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_4_score_left_text_view);
+        ageGroupUnknownScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_unknown_score_left_text_view);
+        ageGroup1NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_1_nr_right_text_view);
+        ageGroup2NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_2_nr_right_text_view);
+        ageGroup3NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_3_nr_right_text_view);
+        ageGroup4NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_4_nr_right_text_view);
+        ageGroupUnknownNrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_unknown_nr_right_text_view);
+        ageGroup1ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_1_score_right_text_view);
+        ageGroup2ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_2_score_right_text_view);
+        ageGroup3ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_3_score_right_text_view);
+        ageGroup4ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_4_score_right_text_view);
+        ageGroupUnknownScoreRightTextView = (TextView) view.findViewById(R.id.age_group_unknown_score_right_text_view);
 
         // set up the listeners
         mAddedContentButtonA.setOnClickListener(new View.OnClickListener() {
@@ -149,44 +185,10 @@ public class ResultFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//        mProgressBarTotalLeft.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarTotalRight.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarMenLeft.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarMenRight.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarWomenLeft.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarWomenRight.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
 
         updateUi();
+        animateWinnerCrown();
+
         return view;
     }
 
@@ -270,7 +272,7 @@ public class ResultFragment extends Fragment {
         }
     }
 
-    private void animateSwipeJump() {
+    private void animateWinnerCrown() {
         Point size = new Point();
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         display.getSize(size);

@@ -875,6 +875,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/contentNrLeftTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/view_result_page_empty_fill"
@@ -886,6 +887,7 @@
                 />
 
             <TextView
+                android:id="@+id/contentNrRightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.Dilemma;
 
+import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.ContentPage.Contents;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;
@@ -462,4 +463,13 @@ public class Dilemma implements Serializable {
         double score = (double) this.getVotesFromMen() / this.getTotalVotes();
         return (int) Math.round(score);
     }
+
+    public int getContentCountA() {
+        return mContents.getOptionAContent().size();
+    }
+
+    public int getContentCountB() {
+        return mContents.getOptionBContent().size();
+    }
+
 }

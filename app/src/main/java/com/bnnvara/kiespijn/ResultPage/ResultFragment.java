@@ -249,7 +249,7 @@ public class ResultFragment extends Fragment {
                 contentACountTextView.setText("0");
                 mAddedContentButtonA.setClickable(false);
             } else {
-                contentACountTextView.setText(mDilemma.getContentCountA());
+                contentACountTextView.setText(Integer.toString(mDilemma.getContentCountA()));
                 mAddedContentButtonA.setClickable(true);
             }
 
@@ -257,7 +257,7 @@ public class ResultFragment extends Fragment {
                 contentBCountTextView.setText("0");
                 mAddedContentButtonB.setClickable(false);
             } else {
-                contentBCountTextView.setText(mDilemma.getContentCountB());
+                contentBCountTextView.setText(Integer.toString(mDilemma.getContentCountB()));
                 mAddedContentButtonB.setClickable(true);
             }
         }

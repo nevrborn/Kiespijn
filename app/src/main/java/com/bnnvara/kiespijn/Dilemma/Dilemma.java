@@ -1,5 +1,6 @@
 package com.bnnvara.kiespijn.Dilemma;
 
+import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.ContentPage.Contents;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;
@@ -332,6 +333,11 @@ public class Dilemma implements Serializable {
     }
 
     public String getCreator_hometown() {
+
+        if (mCreator_hometown == null || mCreator_hometown.equals("")) {
+            mCreator_hometown = "Onbekend";
+        }
+
         return mCreator_hometown;
     }
 
@@ -517,6 +523,12 @@ public class Dilemma implements Serializable {
         return (int) Math.round(score);
     }
 
+    public int getContentCountA() {
+        return mContents.getOptionAContent().size();
+    }
 
+    public int getContentCountB() {
+        return mContents.getOptionBContent().size();
+    }
 
 }

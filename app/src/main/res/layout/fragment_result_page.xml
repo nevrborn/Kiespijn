@@ -905,10 +905,10 @@
     <ImageView
         android:id="@+id/result_page_winner_icon"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="75dp"
         android:layout_centerInParent="true"
         android:layout_marginBottom="-2dp"
-        android:background="@drawable/crown_silver"
+        android:background="@drawable/crown_yellow"
         />
 
 </RelativeLayout>

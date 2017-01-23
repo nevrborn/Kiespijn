@@ -91,6 +91,9 @@ public class ResultFragment extends Fragment {
     private TextView ageGroup4ScoreRightTextView;
     private TextView ageGroupUnknownScoreRightTextView;
 
+    private TextView contentACountTextView;
+    private TextView contentBCountTextView;
+
     // Regular variables
     private Dilemma mDilemma;
 
@@ -170,6 +173,8 @@ public class ResultFragment extends Fragment {
         ageGroup3ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_3_score_right_text_view);
         ageGroup4ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_4_score_right_text_view);
         ageGroupUnknownScoreRightTextView = (TextView) view.findViewById(R.id.age_group_unknown_score_right_text_view);
+        contentACountTextView = (TextView) view.findViewById(R.id.contentNrLeftTextView);
+        contentBCountTextView = (TextView) view.findViewById(R.id.contentNrRightTextView);
 
         // set up the listeners
         mAddedContentButtonA.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +243,25 @@ public class ResultFragment extends Fragment {
         // text of the two options
         mAnswerATextView.setText(mDilemma.getTitlePhotoA());
         mAnswerBTextView.setText(mDilemma.getTitlePhotoB());
+
+        // set the content bagde numbers according to content size
+        if (mDilemma.getContents() != null) {
+            if (mDilemma.getContentCountA() == 0) {
+                contentACountTextView.setText("0");
+                mAddedContentButtonA.setClickable(false);
+            } else {
+                contentACountTextView.setText(Integer.toString(mDilemma.getContentCountA()));
+                mAddedContentButtonA.setClickable(true);
+            }
+
+            if (mDilemma.getContentCountB() == 0) {
+                contentBCountTextView.setText("0");
+                mAddedContentButtonB.setClickable(false);
+            } else {
+                contentBCountTextView.setText(Integer.toString(mDilemma.getContentCountB()));
+                mAddedContentButtonB.setClickable(true);
+            }
+        }
 
         calculateAllStatistics();
     }

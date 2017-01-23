@@ -192,9 +192,11 @@ public class TargetGroupFragment extends Fragment {
                         Intent i = DilemmaFromWhoActivity.newIntent(getActivity());
                         i.putExtra(DILEMMA_OBJECT, mDilemma);
                         startActivity(i);
+                        getActivity().finish();
                     } else {
                         Intent i = FriendListActivity.newIntent(getActivity(), mDilemma);
                         startActivity(i);
+                        getActivity().finish();
                     }
 
                 } else {

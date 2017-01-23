@@ -19,6 +19,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchActivity;
+import com.bnnvara.kiespijn.BuildConfig;
 import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.CreateDilemmaPage.PermissionUtils;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -256,7 +258,7 @@ public class AddContentFragment extends Fragment {
                 photoFile = createImageFile();
                 // Continue only if the File was successfully created
                 if (photoFile != null) {
-                    Uri photoURI = Uri.fromFile(photoFile);
+                    Uri photoURI = FileProvider.getUriForFile(getContext(), BuildConfig.APPLICATION_ID + ".provider", photoFile);
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
@@ -336,7 +338,7 @@ public class AddContentFragment extends Fragment {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM) + File.separator);
+                Environment.DIRECTORY_DCIM), "Camera");
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */

@@ -3,9 +3,11 @@ package com.bnnvara.kiespijn.ResultPage;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,8 +15,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -191,9 +195,9 @@ public class ResultFragment extends Fragment {
         mDilemmaTextView.setText(mDilemma.getTitle());
 
         // time left
-        if (mDilemma.getTimeLeft() < 0){
+        if (mDilemma.getTimeLeft() < 0) {
             mTimeLeftTextView.setText("---");
-        } else if (mDilemma.getTimeLeft() == 1){
+        } else if (mDilemma.getTimeLeft() == 1) {
             mTimeLeftTextView.setText(R.string.time_left_1_hour);
         } else {
             mTimeLeftTextView.setText(mDilemma.getTimeLeft() + " uren");
@@ -252,13 +256,24 @@ public class ResultFragment extends Fragment {
     }
 
     private void animateSwipeJump() {
-        ObjectAnimator animLeft = ObjectAnimator.ofFloat(mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - 250);
+        Point size = new Point();
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+        int screenWidth = size.x;
+
+        int offset = screenWidth / 2;
+
+        ObjectAnimator animLeft = ObjectAnimator.ofFloat(
+                mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - offset);
         animLeft.setInterpolator(new DecelerateInterpolator());
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(3000);
+        mWinnerImageView.startAnimation(rotateAnimation);
 
         AnimatorSet animSetWinner = new AnimatorSet();
         animSetWinner.play(animLeft);
+        animSetWinner.setStartDelay(3000);
         animSetWinner.setDuration(3000);
-        animSetWinner.setStartDelay(500);
         animSetWinner.start();
     }
 }

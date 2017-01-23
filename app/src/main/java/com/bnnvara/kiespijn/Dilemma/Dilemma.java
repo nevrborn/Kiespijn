@@ -459,7 +459,12 @@ public class Dilemma implements Serializable {
     }
 
     public int getScoreMenA() {
-        double score = (double) this.getVotesFromMen() / this.getTotalVotes();
+        double score = (double) this.getVotesFromMenA() / this.getVotesFromMen();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreMenB() {
+        double score = (double) this.getVotesFromMenB() / this.getVotesFromMen();
         return (int) Math.round(score);
     }
 }

@@ -20,6 +20,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.bnnvara.kiespijn.ContentPage.ContentPageActivity;
@@ -237,6 +238,8 @@ public class ResultFragment extends Fragment {
         // text of the two options
         mAnswerATextView.setText(mDilemma.getTitlePhotoA());
         mAnswerBTextView.setText(mDilemma.getTitlePhotoB());
+
+        calculateAllStatistics();
     }
 
 
@@ -270,6 +273,14 @@ public class ResultFragment extends Fragment {
             default:
                 return true;
         }
+    }
+
+    private void calculateAllStatistics() {
+        mDilemma.getScoreA();
+        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreA()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreB()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreMenA()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreMenB()), Toast.LENGTH_SHORT).show();
     }
 
     private void animateWinnerCrown() {

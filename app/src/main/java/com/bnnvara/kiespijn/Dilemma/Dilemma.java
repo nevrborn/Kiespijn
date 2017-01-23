@@ -423,48 +423,100 @@ public class Dilemma implements Serializable {
                 + this.getVotesFromUnknownSex();
     }
 
+    public int getVotesFromAgeGroup1A(){
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup1();
+    }
+
+    public int getVotesFromAgeGroup1B(){
+        return this.getReplies().getAnswerB().getAnswerFromAgeGroup1();
+    }
+
     public int getVotesFromAgeGroup1() {
-        return this.getReplies().getAnswerA().getAnswerFromAgeGroup1()
-                + this.getReplies().getAnswerB().getAnswerFromAgeGroup1();
+        return this.getVotesFromAgeGroup1A()
+                + this.getVotesFromAgeGroup1B();
+    }
+
+    public int getVotesFromAgeGroup2A(){
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup2();
+    }
+
+    public int getVotesFromAgeGroup2B(){
+        return this.getReplies().getAnswerB().getAnswerFromAgeGroup2();
     }
 
     public int getVotesFromAgeGroup2() {
-        return this.getReplies().getAnswerA().getAnswerFromAgeGroup2()
-                + this.getReplies().getAnswerB().getAnswerFromAgeGroup2();
+        return this.getVotesFromAgeGroup2A()
+                + this.getVotesFromAgeGroup2B();
+    }
+
+    public int getVotesFromAgeGroup3A(){
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup3();
+    }
+
+    public int getVotesFromAgeGroup3B(){
+        return this.getReplies().getAnswerB().getAnswerFromAgeGroup3();
     }
 
     public int getVotesFromAgeGroup3() {
-        return this.getReplies().getAnswerA().getAnswerFromAgeGroup3()
-                + this.getReplies().getAnswerB().getAnswerFromAgeGroup3();
+        return this.getVotesFromAgeGroup3A()
+                + this.getVotesFromAgeGroup3B();
+    }
+
+    public int getVotesFromAgeGroup4A(){
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup4();
+    }
+
+    public int getVotesFromAgeGroup4B(){
+        return this.getReplies().getAnswerB().getAnswerFromAgeGroup4();
     }
 
     public int getVotesFromAgeGroup4() {
-        return this.getReplies().getAnswerA().getAnswerFromAgeGroup4()
-                + this.getReplies().getAnswerB().getAnswerFromAgeGroup4();
+        return this.getVotesFromAgeGroup4A()
+                + this.getVotesFromAgeGroup4B();
+    }
+
+    public int getVotesFromAgeGroupUnknownA(){
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroupUnknown();
+    }
+
+    public int getVotesFromAgeGroupUnknownB(){
+        return this.getReplies().getAnswerB().getAnswerFromAgeGroupUnknown();
     }
 
     public int getVotesFromAgeGroupUnknown() {
-        return this.getReplies().getAnswerA().getAnswerFromAgeGroupUnknown()
-                + this.getReplies().getAnswerB().getAnswerFromAgeGroupUnknown();
+        return this.getVotesFromAgeGroupUnknownA()
+                + this.getVotesFromAgeGroupUnknownB();
     }
 
+
+
     public int getScoreA() {
-        double score = (double) this.getTotalVotesA() / this.getTotalVotes();
+        double score = (double) (this.getTotalVotesA() * 100) / this.getTotalVotes();
         return (int) Math.round(score);
     }
 
     public int getScoreB() {
-        double score = (double) this.getTotalVotesB() / this.getTotalVotes();
+        double score = (double) (this.getTotalVotesB() * 100) / this.getTotalVotes();
         return (int) Math.round(score);
     }
 
     public int getScoreMenA() {
-        double score = (double) this.getVotesFromMenA() / this.getVotesFromMen();
+        double score = (double) (this.getVotesFromMenA() * 100) / this.getVotesFromMen();
         return (int) Math.round(score);
     }
 
     public int getScoreMenB() {
-        double score = (double) this.getVotesFromMenB() / this.getVotesFromMen();
+        double score = (double) (this.getVotesFromMenB() * 100) / this.getVotesFromMen();
         return (int) Math.round(score);
     }
+
+
+
+    public int getScoreAgeGroup1A() {
+        double score = (double) (this.getVotesFromAgeGroup1A() * 100) / this.getVotesFromAgeGroup1();
+        return (int) Math.round(score);
+    }
+
+
+
 }

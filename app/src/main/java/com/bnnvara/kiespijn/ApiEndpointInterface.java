@@ -6,11 +6,11 @@ import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-// http://www.mocky.io/v2/587df54f0f0000821a5df734
+// http://www.mocky.io/v2/58860f0d1000004e0025dfba
 
 public interface ApiEndpointInterface {
 
-    @GET("v2/58821c70280000d502cbd3fb")
+    @GET("v2/58860f0d1000004e0025dfba")
     Call<DilemmaApiResponse> getDilemmaList();
 
     @GET("v2/58779aa40f00009b070d489f")

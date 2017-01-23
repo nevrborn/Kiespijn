@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -284,8 +283,8 @@ public class Dilemma implements Serializable {
 
     public boolean isAnsweredByCurrentUser() {
         String userFbId = User.getInstance().getUserKey();
-        List<String> answerList = this.getReplies().getOptionAAnswers().getAnswerFacebookIDs();
-        answerList.addAll(this.getReplies().getOptionBAnswers().getAnswerFacebookIDs());
+        List<String> answerList = this.getReplies().getAnswerA().getAnswerFacebookIDs();
+        answerList.addAll(this.getReplies().getAnswerB().getAnswerFacebookIDs());
 
         for (String answerID : answerList) {
             if (answerID.contains(userFbId)) {
@@ -363,5 +362,9 @@ public class Dilemma implements Serializable {
 
     public void setRandomGifURL(String randomGifURL) {
         mRandomGifURL = randomGifURL;
+    }
+
+    public int getTotalVotes(){
+        return this.getReplies().getAnswerA().getAnswerFromMen();
     }
 }

@@ -29,7 +29,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="2dp"
             android:gravity="fill_horizontal"
             >
 
@@ -67,6 +67,17 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/text_view_overall_results"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="center_horizontal"
+            android:text="Alle stemmen"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +102,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center_vertical"
                     android:text="55"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     />
 
@@ -146,13 +157,13 @@
                 >
 
                 <RelativeLayout
-                    android:id="@+id/relative_layout_unknown_right"
+                    android:id="@+id/relative_layout_total_right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
 
                     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        android:id="@+id/progressBar_unknown_right"
+                        android:id="@+id/progressBar_total_right"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
                         android:orientation="horizontal"
@@ -164,7 +175,7 @@
                         app:rcReverse="false"/>
 
                     <TextView
-                        android:id="@+id/text_view_result_unknown_right"
+                        android:id="@+id/text_view_result_total_right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -247,8 +258,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_below="@+id/text_view_results_women"
+                            android:layout_marginBottom="24dp"
                             android:gravity="center_vertical"
                             android:text="Onbekend (1)"
+                            android:textSize="14dp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/text_view_results_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_below="@+id/text_view_results_uknown_sex"
+                            android:gravity="center_vertical"
+                            android:text="Amsterdam (4)"
                             android:textSize="14dp"
                             android:textStyle="bold"/>
 
@@ -257,6 +279,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_toLeftOf="@id/relative_layout_sex_middle"
                         >
 
@@ -334,7 +357,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/relative_layout_women_left"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginBottom="24dp"
                             >
 
                             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -364,6 +387,41 @@
 
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/relative_layout_city_left"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/relative_layout_unknown_left"
+                            >
+
+                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                                android:id="@+id/progressBar_city_left"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:orientation="horizontal"
+                                app:rcBackgroundColor="@color/colorGreyLeft"
+                                app:rcBackgroundPadding="0dp"
+                                app:rcProgress="50"
+                                app:rcProgressColor="@color/colorRed"
+                                app:rcRadius="6dp"
+                                app:rcReverse="true"/>
+
+                            <TextView
+                                android:id="@+id/text_view_result_city_left"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="4dp"
+                                android:text="50%"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                />
+
+                        </RelativeLayout>
+
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -373,14 +431,14 @@
                         >
 
                         <RelativeLayout
-                            android:id="@+id/relative_layout_total_right"
+                            android:id="@+id/relative_layout_men_right"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="12dp"
                             >
 
                             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                                android:id="@+id/progressBar_total_right"
+                                android:id="@+id/progressBar_men_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
@@ -392,7 +450,7 @@
                                 app:rcReverse="false"/>
 
                             <TextView
-                                android:id="@+id/text_view_result_total_right"
+                                android:id="@+id/text_view_result_men_right"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -407,15 +465,15 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:id="@+id/relative_layout_men_right"
+                            android:id="@+id/relative_layout_women_right"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/relative_layout_total_right"
+                            android:layout_below="@id/relative_layout_men_right"
                             android:layout_marginBottom="12dp"
                             >
 
                             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                                android:id="@+id/progressBar_men_right"
+                                android:id="@+id/progressBar_women_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
@@ -427,7 +485,7 @@
                                 app:rcReverse="false"/>
 
                             <TextView
-                                android:id="@+id/text_view_result_men_right"
+                                android:id="@+id/text_view_result_women_right"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -442,15 +500,15 @@
                         </RelativeLayout>
 
                         <RelativeLayout
-                            android:id="@+id/relative_layout_women_right"
+                            android:id="@+id/relative_layout_unknown_right"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/relative_layout_men_right"
-                            android:layout_marginBottom="16dp"
+                            android:layout_below="@id/relative_layout_women_right"
+                            android:layout_marginBottom="24dp"
                             >
 
                             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                                android:id="@+id/progressBar_women_right"
+                                android:id="@+id/progressBar_unknown_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
@@ -462,7 +520,7 @@
                                 app:rcReverse="false"/>
 
                             <TextView
-                                android:id="@+id/text_view_result_women_right"
+                                android:id="@+id/text_view_result_unknown_right"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
@@ -476,14 +534,56 @@
 
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/relative_layout_city_right"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/relative_layout_unknown_right"
+                            >
+
+                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                                android:id="@+id/progressBar_city_right"
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:orientation="horizontal"
+                                app:rcBackgroundColor="@color/colorGreyRight"
+                                app:rcBackgroundPadding="0dp"
+                                app:rcProgress="50"
+                                app:rcProgressColor="@color/colorGreen"
+                                app:rcRadius="6dp"
+                                app:rcReverse="false"/>
+
+                            <TextView
+                                android:id="@+id/text_view_result_city_right"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="4dp"
+                                android:text="50%"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                />
+
+                        </RelativeLayout>
+
                     </RelativeLayout>
 
                 </RelativeLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/colorGrey"
+                    />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
@@ -521,10 +621,12 @@
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_1_nr_left_text_view"
                                 android:text="2"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_1_score_left_text_view"
                                 android:text="0%"
                                 />
                         </TableRow>
@@ -536,10 +638,12 @@
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_2_nr_left_text_view"
                                 android:text="31"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_2_score_left_text_view"
                                 android:text="71%"
                                 />
                         </TableRow>
@@ -551,10 +655,12 @@
                                 />
 
                             <TextView
-                                android:text="8"
+                                android:id="@+id/age_group_3_nr_left_text_view"
+                                android:text="7"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_3_score_left_text_view"
                                 android:text="88%"
                                 />
                         </TableRow>
@@ -566,11 +672,30 @@
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_4_nr_left_text_view"
                                 android:text="3"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_4_score_left_text_view"
                                 android:text="67%"
+                                />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:text=" ??"
+                                />
+
+                            <TextView
+                                android:id="@+id/age_group_unkown_nr_left_text_view"
+                                android:text="1"
+                                />
+
+                            <TextView
+                                android:id="@+id/age_group_unknown_score_left_text_view"
+                                android:text="100%"
                                 />
                         </TableRow>
 
@@ -616,10 +741,12 @@
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_1_nr_right_text_view"
                                 android:text="2"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_1_score_right_text_view"
                                 android:text="100%"
                                 />
                         </TableRow>
@@ -631,10 +758,12 @@
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_2_nr_right_text_view"
                                 android:text="31"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_2_score_right_text_view"
                                 android:text="29%"
                                 />
                         </TableRow>
@@ -646,10 +775,12 @@
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_3_nr_right_text_view"
                                 android:text="8"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_3_score_right_text_view"
                                 android:text="12%"
                                 />
                         </TableRow>
@@ -661,11 +792,30 @@
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_4_nr_right_text_view"
                                 android:text="3"
                                 />
 
                             <TextView
+                                android:id="@+id/age_group_4_score_right_text_view"
                                 android:text="33%"
+                                />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                android:text=" ??"
+                                />
+
+                            <TextView
+                                android:id="@+id/age_group_unknown_nr_right_text_view"
+                                android:text="1"
+                                />
+
+                            <TextView
+                                android:id="@+id/age_group_unknown_score_right_text_view"
+                                android:text="0%"
                                 />
                         </TableRow>
 
@@ -725,6 +875,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/contentNrLeftTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/view_result_page_empty_fill"
@@ -736,6 +887,7 @@
                 />
 
             <TextView
+                android:id="@+id/contentNrRightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -752,10 +904,9 @@
 
     <ImageView
         android:id="@+id/result_page_winner_icon"
-        android:layout_above="@id/lieaar_layout_result"
-        android:layout_width="32dp"
-        android:layout_height="24dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="-2dp"
         android:background="@drawable/crown_silver"
         />

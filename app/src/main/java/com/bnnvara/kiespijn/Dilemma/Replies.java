@@ -3,30 +3,29 @@ package com.bnnvara.kiespijn.Dilemma;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Replies implements Serializable{
 
     @SerializedName("optionA")
-    private Answer mOptionAAnswers;
-
+    private Answer mAnswerA;
 
     @SerializedName("optionB")
-    private Answer mOptionBAnswers;
+    private Answer mAnswerB;
 
-    public Answer getOptionAAnswers() {
-        return mOptionAAnswers;
+
+    public Answer getAnswerA() {
+        return mAnswerA;
     }
 
-    public void setOptionAAnswers(Answer optionAAnswers) {
-        mOptionAAnswers = optionAAnswers;
+    public void setAnswerA(Answer answerA) {
+        mAnswerA = answerA;
     }
 
-    public Answer getOptionBAnswers() {
-        return mOptionBAnswers;
+    public Answer getAnswerB() {
+        return mAnswerB;
     }
 
-    public void setOptionBAnswers(Answer optionBAnswers) {
-        mOptionBAnswers = optionBAnswers;
+    public void setAnswerB(Answer answerB) {
+        mAnswerB = answerB;
     }
 }

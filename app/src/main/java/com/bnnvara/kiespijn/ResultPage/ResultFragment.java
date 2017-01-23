@@ -3,23 +3,25 @@ package com.bnnvara.kiespijn.ResultPage;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
+import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.bnnvara.kiespijn.ContentPage.ContentPageActivity;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -28,7 +30,6 @@ import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
-import com.daimajia.swipe.SwipeLayout;
 
 public class ResultFragment extends Fragment {
 
@@ -47,14 +48,47 @@ public class ResultFragment extends Fragment {
     private TextView mTimeLeftTextView;
     private TextView mAnswerATextView;
     private TextView mAnswerBTextView;
-    private com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar mProgressBarTotalLeft;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarTotalRight;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenLeft;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarMenRight;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarWomenLeft;
-    private com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar mProgressBarWomenRight;
     private Button mAddedContentButtonA;
     private Button mAddedContentButtonB;
+
+    private RoundCornerProgressBar TotalLeftProgressBar;
+    private RoundCornerProgressBar TotalRightProgressBar;
+    private RoundCornerProgressBar MenLeftProgressBar;
+    private RoundCornerProgressBar MenRightProgressBar;
+    private RoundCornerProgressBar womenLeftProgressBar;
+    private RoundCornerProgressBar womanRightProgressBar;
+    private RoundCornerProgressBar unknownSexLeftProgressBar;
+    private RoundCornerProgressBar unknownSexRightProgressBar;
+    private RoundCornerProgressBar cityLeftProgressBar;
+    private RoundCornerProgressBar cityRightProgressBar;
+
+    private TextView totalNrOfResultsTextView;
+    private TextView menNrOfResultsTextView;
+    private TextView womenNrOfResultsTextView;
+    private TextView unknownSexNrOfResultsTextView;
+    private TextView cityNrOfResultsTextView;
+
+    private TextView ageGroup1NrOfResultsLeftTextView;
+    private TextView ageGroup2NrOfResultsLeftTextView;
+    private TextView ageGroup3NrOfResultsLeftTextView;
+    private TextView ageGroup4NrOfResultsLeftTextView;
+    private TextView ageGroupUnknownNrOfResultsLeftTextView;
+    private TextView ageGroup1ScoreLeftTextView;
+    private TextView ageGroup2ScoreLeftTextView;
+    private TextView ageGroup3ScoreLeftTextView;
+    private TextView ageGroup4ScoreLeftTextView;
+    private TextView ageGroupUnknownScoreLeftTextView;
+
+    private TextView ageGroup1NrOfResultsRightTextView;
+    private TextView ageGroup2NrOfResultsRightTextView;
+    private TextView ageGroup3NrOfResultsRightTextView;
+    private TextView ageGroup4NrOfResultsRightTextView;
+    private TextView ageGroupUnknownNrOfResultsRightTextView;
+    private TextView ageGroup1ScoreRightTextView;
+    private TextView ageGroup2ScoreRightTextView;
+    private TextView ageGroup3ScoreRightTextView;
+    private TextView ageGroup4ScoreRightTextView;
+    private TextView ageGroupUnknownScoreRightTextView;
 
     // Regular variables
     private Dilemma mDilemma;
@@ -100,17 +134,41 @@ public class ResultFragment extends Fragment {
         mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
         mAddedContentButtonA = (Button) view.findViewById(R.id.button_added_content_A);
         mAddedContentButtonB = (Button) view.findViewById(R.id.button_added_content_B);
-//        mProgressBarTotalLeft = (com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
-//        mProgressBarTotalRight = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
-//        mProgressBarMenLeft = (com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
-//        mProgressBarMenRight = (SeekBar) view.findViewById(R.id.seekBar_men_right);
-//        mProgressBarWomenLeft = (SeekBar) view.findViewById(R.id.seekBar_women_left);
-//        mProgressBarWomenRight = (SeekBar) view.findViewById(R.id.seekBar_women_right);
-
-
-//        mProgressBarTotalLeft.setProgress(20);
-//        mProgressBarTotalLeft.setProgressText("2055%");
-
+        TotalLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
+        TotalRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
+        MenLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
+        MenRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_right);
+        womenLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_women_left);
+        womanRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_women_right);
+        unknownSexLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_left);
+        unknownSexRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_right);
+        cityLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_city_left);
+        cityRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_city_right);
+        totalNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_total);
+        menNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_men);
+        womenNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_women);
+        unknownSexNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_uknown_sex);
+        cityNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_city);
+        ageGroup1NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_1_nr_left_text_view);
+        ageGroup2NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_2_nr_left_text_view);
+        ageGroup3NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_3_nr_left_text_view);
+        ageGroup4NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_4_nr_left_text_view);
+        ageGroupUnknownNrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_unkown_nr_left_text_view);
+        ageGroup1ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_1_score_left_text_view);
+        ageGroup2ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_2_score_left_text_view);
+        ageGroup3ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_3_score_left_text_view);
+        ageGroup4ScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_4_score_left_text_view);
+        ageGroupUnknownScoreLeftTextView = (TextView) view.findViewById(R.id.age_group_unknown_score_left_text_view);
+        ageGroup1NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_1_nr_right_text_view);
+        ageGroup2NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_2_nr_right_text_view);
+        ageGroup3NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_3_nr_right_text_view);
+        ageGroup4NrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_4_nr_right_text_view);
+        ageGroupUnknownNrOfResultsRightTextView = (TextView) view.findViewById(R.id.age_group_unknown_nr_right_text_view);
+        ageGroup1ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_1_score_right_text_view);
+        ageGroup2ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_2_score_right_text_view);
+        ageGroup3ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_3_score_right_text_view);
+        ageGroup4ScoreRightTextView = (TextView) view.findViewById(R.id.age_group_4_score_right_text_view);
+        ageGroupUnknownScoreRightTextView = (TextView) view.findViewById(R.id.age_group_unknown_score_right_text_view);
 
         // set up the listeners
         mAddedContentButtonA.setOnClickListener(new View.OnClickListener() {
@@ -127,44 +185,10 @@ public class ResultFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//        mProgressBarTotalLeft.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarTotalRight.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarMenLeft.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarMenRight.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarWomenLeft.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
-//        mProgressBarWomenRight.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                return true;
-//            }
-//        });
 
         updateUi();
+        animateWinnerCrown();
+
         return view;
     }
 
@@ -191,9 +215,9 @@ public class ResultFragment extends Fragment {
         mDilemmaTextView.setText(mDilemma.getTitle());
 
         // time left
-        if (mDilemma.getTimeLeft() < 0){
+        if (mDilemma.getTimeLeft() < 0) {
             mTimeLeftTextView.setText("---");
-        } else if (mDilemma.getTimeLeft() == 1){
+        } else if (mDilemma.getTimeLeft() == 1) {
             mTimeLeftTextView.setText(R.string.time_left_1_hour);
         } else {
             mTimeLeftTextView.setText(mDilemma.getTimeLeft() + " uren");
@@ -213,9 +237,6 @@ public class ResultFragment extends Fragment {
         // text of the two options
         mAnswerATextView.setText(mDilemma.getTitlePhotoA());
         mAnswerBTextView.setText(mDilemma.getTitlePhotoB());
-
-        // animation
-        animateSwipeJump();
     }
 
 
@@ -251,14 +272,32 @@ public class ResultFragment extends Fragment {
         }
     }
 
-    private void animateSwipeJump() {
-        ObjectAnimator animLeft = ObjectAnimator.ofFloat(mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - 250);
+    private void animateWinnerCrown() {
+        Point size = new Point();
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+        int screenWidth = size.x;
+
+        int offset = screenWidth / 4;
+
+        // make the object go left or right
+        ObjectAnimator animLeft = ObjectAnimator.ofFloat(
+                mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - offset);
         animLeft.setInterpolator(new DecelerateInterpolator());
 
+        // Make the object 100% transparent
+        ObjectAnimator animAlpha = ObjectAnimator.ofFloat(mWinnerImageView,"alpha",0.0f);
+        animAlpha.setDuration(3000);
+
+        // make the object rotate
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(1500);
+        mWinnerImageView.startAnimation(rotateAnimation);
+
         AnimatorSet animSetWinner = new AnimatorSet();
-        animSetWinner.play(animLeft);
+        animSetWinner.play(animLeft).before(animAlpha);
+        animSetWinner.setStartDelay(1500);
         animSetWinner.setDuration(3000);
-        animSetWinner.setStartDelay(500);
         animSetWinner.start();
     }
 }

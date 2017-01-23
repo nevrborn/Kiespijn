@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -76,7 +75,6 @@ public class Dilemma implements Serializable {
     private Boolean isFirstTimeToFromWho = true;
     private int mRandomCallerIndex = 0;
     private String mRandomGifURL = "";
-
 
 
     private int mTimeLeft;
@@ -284,8 +282,8 @@ public class Dilemma implements Serializable {
 
     public boolean isAnsweredByCurrentUser() {
         String userFbId = User.getInstance().getUserKey();
-        List<String> answerList = this.getReplies().getOptionAAnswers().getAnswerFacebookIDs();
-        answerList.addAll(this.getReplies().getOptionBAnswers().getAnswerFacebookIDs());
+        List<String> answerList = this.getReplies().getAnswerA().getAnswerFacebookIDs();
+        answerList.addAll(this.getReplies().getAnswerB().getAnswerFacebookIDs());
 
         for (String answerID : answerList) {
             if (answerID.contains(userFbId)) {
@@ -363,5 +361,105 @@ public class Dilemma implements Serializable {
 
     public void setRandomGifURL(String randomGifURL) {
         mRandomGifURL = randomGifURL;
+    }
+
+
+
+    /*
+    * All methods to dertmine the the statistics for the Result Page
+    *
+    * */
+    public int getVotesFromMenA() {
+        return this.getReplies().getAnswerA().getAnswerFromMen();
+    }
+
+    public int getVotesFromMenB() {
+        return this.getReplies().getAnswerB().getAnswerFromMen();
+    }
+
+    public int getVotesFromMen() {
+        return this.getVotesFromMenA() + this.getVotesFromMenB();
+    }
+
+    public int getVotesFromWomenA() {
+        return this.getReplies().getAnswerA().getAnswerFromWomen();
+    }
+
+    public int getVotesFromWomenB() {
+        return this.getReplies().getAnswerB().getAnswerFromWomen();
+    }
+
+    public int getVotesFromWomen() {
+        return this.getVotesFromWomenA() + this.getVotesFromWomenB();
+    }
+
+    public int getVotesFromUnknownSexA() {
+        return this.getReplies().getAnswerA().getAnswerFromUnknownSex();
+    }
+
+    public int getVotesFromUnknownSexB() {
+        return this.getReplies().getAnswerB().getAnswerFromUnknownSex();
+    }
+
+    public int getVotesFromUnknownSex() {
+        return this.getVotesFromUnknownSexA() + this.getVotesFromUnknownSexB();
+    }
+
+    public int getTotalVotesA() {
+        return this.getVotesFromMenA()
+                + this.getVotesFromWomenA()
+                + this.getVotesFromUnknownSexA();
+    }
+
+    public int getTotalVotesB() {
+        return this.getVotesFromMenB()
+                + this.getVotesFromWomenB()
+                + this.getVotesFromUnknownSexB();
+    }
+
+    public int getTotalVotes() {
+        return this.getVotesFromMen()
+                + this.getVotesFromWomen()
+                + this.getVotesFromUnknownSex();
+    }
+
+    public int getVotesFromAgeGroup1() {
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup1()
+                + this.getReplies().getAnswerB().getAnswerFromAgeGroup1();
+    }
+
+    public int getVotesFromAgeGroup2() {
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup2()
+                + this.getReplies().getAnswerB().getAnswerFromAgeGroup2();
+    }
+
+    public int getVotesFromAgeGroup3() {
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup3()
+                + this.getReplies().getAnswerB().getAnswerFromAgeGroup3();
+    }
+
+    public int getVotesFromAgeGroup4() {
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroup4()
+                + this.getReplies().getAnswerB().getAnswerFromAgeGroup4();
+    }
+
+    public int getVotesFromAgeGroupUnknown() {
+        return this.getReplies().getAnswerA().getAnswerFromAgeGroupUnknown()
+                + this.getReplies().getAnswerB().getAnswerFromAgeGroupUnknown();
+    }
+
+    public int getScoreA() {
+        double score = (double) this.getTotalVotesA() / this.getTotalVotes();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreB() {
+        double score = (double) this.getTotalVotesB() / this.getTotalVotes();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreMenA() {
+        double score = (double) this.getVotesFromMen() / this.getTotalVotes();
+        return (int) Math.round(score);
     }
 }

@@ -2,8 +2,6 @@ package com.bnnvara.kiespijn.DilemmaPage;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -19,9 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.view.animation.BounceInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,12 +40,8 @@ import com.bumptech.glide.Glide;
 import com.daimajia.swipe.SwipeLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.Primitives;
-import com.mindorks.placeholderview.SwipeDecor;
-import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -123,6 +115,8 @@ public class DilemmaFragment extends Fragment {
         if (!hasDownloadedData) {
             getData();
         }
+
+        addTempDilemmas();
     }
 
     @Nullable
@@ -135,7 +129,6 @@ public class DilemmaFragment extends Fragment {
         if (!hasDownloadedData) {
             getData();
         }
-        addTempDilemmas();
 
         // set up the references
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo);
@@ -502,8 +495,8 @@ public class DilemmaFragment extends Fragment {
         mFacebookIDs.add("10157925351030158");
         Answer optionA = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs);
         Answer optionB = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs);
-        replies1.setOptionAAnswers(optionA);
-        replies1.setOptionBAnswers(optionB);
+        replies1.setAnswerA(optionA);
+        replies1.setAnswerB(optionB);
         dilemma_1.setReplies(replies1);
         Contents contents1 = new Contents();
         Content contentA = new Content("Hello, this is a test", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
@@ -537,8 +530,8 @@ public class DilemmaFragment extends Fragment {
         mFacebookIDs2.add("10210277093237768");
         Answer optionA2 = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs2);
         Answer optionB2 = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs2);
-        replies2.setOptionAAnswers(optionA2);
-        replies2.setOptionBAnswers(optionB2);
+        replies2.setAnswerA(optionA2);
+        replies2.setAnswerB(optionB2);
         dilemma_2.setReplies(replies2);
         Contents contents2 = new Contents();
         Content contentA2 = new Content("Hello, this is a test", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
@@ -571,8 +564,8 @@ public class DilemmaFragment extends Fragment {
         mFacebookIDs3.add("10210277093237768");
         Answer optionA3 = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs3);
         Answer optionB3 = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs3);
-        replies3.setOptionAAnswers(optionA3);
-        replies3.setOptionBAnswers(optionB3);
+        replies3.setAnswerA(optionA3);
+        replies3.setAnswerB(optionB3);
         dilemma_3.setReplies(replies3);
         Contents contents3 = new Contents();
         Content contentA3 = new Content("Hello, this is a test", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");
@@ -611,6 +604,7 @@ public class DilemmaFragment extends Fragment {
                 Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
+                User.getInstance().setHasCreatedDilemma(true);
                 return true;
             default:
                 return true;

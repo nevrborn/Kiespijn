@@ -1,6 +1,5 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.ContentPage.Contents;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;
@@ -572,6 +571,51 @@ public class Dilemma implements Serializable {
 
     public int getScoreAgeGroup1A() {
         double score = (double) (this.getVotesFromAgeGroup1A() * 100) / this.getVotesFromAgeGroup1();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroup1B() {
+        double score = (double) (this.getVotesFromAgeGroup1B() * 100) / this.getVotesFromAgeGroup1();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroup2A() {
+        double score = (double) (this.getVotesFromAgeGroup2A() * 100) / this.getVotesFromAgeGroup2();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroup2B() {
+        double score = (double) (this.getVotesFromAgeGroup2B() * 100) / this.getVotesFromAgeGroup2();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroup3A() {
+        double score = (double) (this.getVotesFromAgeGroup3A() * 100) / this.getVotesFromAgeGroup3();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroup3B() {
+        double score = (double) (this.getVotesFromAgeGroup3B() * 100) / this.getVotesFromAgeGroup3();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroup4A() {
+        double score = (double) (this.getVotesFromAgeGroup4A() * 100) / this.getVotesFromAgeGroup4();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroup4B() {
+        double score = (double) (this.getVotesFromAgeGroup4B() * 100) / this.getVotesFromAgeGroup4();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroupUnknownA() {
+        double score = (double) (this.getVotesFromAgeGroupUnknownA() * 100) / this.getVotesFromAgeGroupUnknown();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreAgeGroupUnknownB() {
+        double score = (double) (this.getVotesFromAgeGroupUnknownB() * 100) / this.getVotesFromAgeGroupUnknown();
         return (int) Math.round(score);
     }
 

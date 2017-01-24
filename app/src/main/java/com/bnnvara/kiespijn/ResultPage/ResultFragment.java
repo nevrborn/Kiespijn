@@ -97,7 +97,6 @@ public class ResultFragment extends Fragment {
     // Regular variables
     private Dilemma mDilemma;
 
-
     public static Fragment newInstance(Dilemma dilemma) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(DILEMMA_OBJECT, dilemma);
@@ -264,6 +263,7 @@ public class ResultFragment extends Fragment {
         }
 
         calculateAllStatistics();
+        calculateAgeGroups();
     }
 
 
@@ -368,5 +368,33 @@ public class ResultFragment extends Fragment {
         animSetWinner.setStartDelay(1500);
         animSetWinner.setDuration(3000);
         animSetWinner.start();
+    }
+
+    // method to fill in age group statiostics - TO BE ADDED TO calcaluateAllStatistics later
+    private void calculateAgeGroups() {
+
+        // VOTES
+        ageGroup1NrOfResultsLeftTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup1A()));
+        ageGroup1NrOfResultsRightTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup1B()));
+        ageGroup2NrOfResultsLeftTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup2A()));
+        ageGroup2NrOfResultsRightTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup2B()));
+        ageGroup3NrOfResultsLeftTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup3A()));
+        ageGroup3NrOfResultsRightTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup3B()));
+        ageGroup4NrOfResultsLeftTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup4A()));
+        ageGroup4NrOfResultsRightTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroup4B()));
+        ageGroupUnknownNrOfResultsLeftTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroupUnknownA()));
+        ageGroupUnknownNrOfResultsRightTextView.setText(Integer.toString(mDilemma.getVotesFromAgeGroupUnknownB()));
+
+        // SCORE
+        ageGroup1ScoreLeftTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup1A()));
+        ageGroup1ScoreRightTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup1B()));
+        ageGroup2ScoreLeftTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup2A()));
+        ageGroup2ScoreRightTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup2B()));
+        ageGroup3ScoreLeftTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup3A()));
+        ageGroup3ScoreRightTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup3B()));
+        ageGroup4ScoreLeftTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup4A()));
+        ageGroup4ScoreRightTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup4B()));
+        ageGroupUnknownScoreLeftTextView.setText(Integer.toString(mDilemma.getScoreAgeGroupUnknownA()));
+        ageGroupUnknownScoreRightTextView.setText(Integer.toString(mDilemma.getScoreAgeGroupUnknownB()));
     }
 }

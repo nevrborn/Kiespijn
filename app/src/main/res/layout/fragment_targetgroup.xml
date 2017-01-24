@@ -113,8 +113,6 @@
         android:id="@+id/targetgroup_gif"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:alpha="0.5"
         />
 
     <ProgressBar
@@ -123,5 +121,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true"/>
+
 
 </RelativeLayout>

@@ -111,7 +111,6 @@ public class TargetGroupFragment extends Fragment {
         mRandomGif = mDilemma.getRandomGifURL();
         callSomeoneButton.setText(mListOfCallers.get(mDilemma.getRandomCallerIndex()));
 
-        progressBar.setVisibility(View.GONE);
         gifView.setVisibility(View.GONE);
         Glide.with(getActivity())
                 .load(mRandomGif)

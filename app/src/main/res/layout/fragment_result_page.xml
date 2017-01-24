@@ -120,30 +120,33 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                         android:id="@+id/progressBar_total_left"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
                         android:orientation="horizontal"
                         app:rcBackgroundColor="@color/colorGreyLeft"
                         app:rcBackgroundPadding="0dp"
-                        app:rcProgress="63"
                         app:rcProgressColor="@color/colorRed"
                         app:rcRadius="6dp"
-                        app:rcReverse="true"/>
-
-                    <TextView
-                        android:id="@+id/text_view_result_total_left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="4dp"
-                        android:text="63%"
-                        android:textColor="@android:color/white"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
+                        app:rcReverse="true"
+                        app:rcTextProgressColor="@android:color/white"
+                        app:rcTextProgressSize="16dp"
+                        app:rcTextProgressMargin="4dp"
                         />
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/text_view_result_total_left"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginRight="4dp"-->
+                        <!--android:text="63%"-->
+                        <!--android:textColor="@android:color/white"-->
+                        <!--android:textSize="16dp"-->
+                        <!--android:textStyle="bold"-->
+                        <!--/>-->
 
                 </RelativeLayout>
 
@@ -162,30 +165,33 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                         android:id="@+id/progressBar_total_right"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
                         android:orientation="horizontal"
                         app:rcBackgroundColor="@color/colorGreyRight"
                         app:rcBackgroundPadding="0dp"
-                        app:rcProgress="37"
                         app:rcProgressColor="@color/colorGreen"
                         app:rcRadius="6dp"
-                        app:rcReverse="false"/>
-
-                    <TextView
-                        android:id="@+id/text_view_result_total_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="4dp"
-                        android:text="37%"
-                        android:textColor="@android:color/white"
-                        android:textSize="16dp"
-                        android:textStyle="bold"
+                        app:rcReverse="false"
+                        app:rcTextProgressColor="@android:color/white"
+                        app:rcTextProgressSize="16dp"
+                        app:rcTextProgressMargin="4dp"
                         />
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/text_view_result_total_right"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentLeft="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_marginLeft="4dp"-->
+                        <!--android:text="37%"-->
+                        <!--android:textColor="@android:color/white"-->
+                        <!--android:textSize="16dp"-->
+                        <!--android:textStyle="bold"-->
+                        <!--/>-->
 
                 </RelativeLayout>
 
@@ -290,30 +296,33 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_men_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyLeft"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="75"
                                 app:rcProgressColor="@color/colorRed"
                                 app:rcRadius="6dp"
-                                app:rcReverse="true"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_men_left"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="4dp"
-                                android:text="75%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="true"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_men_left"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginRight="4dp"-->
+                                <!--android:text="75%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 
@@ -325,30 +334,33 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_women_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyLeft"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="55"
                                 app:rcProgressColor="@color/colorRed"
                                 app:rcRadius="6dp"
-                                app:rcReverse="true"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_women_left"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="4dp"
-                                android:text="55%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="true"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_women_left"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginRight="4dp"-->
+                                <!--android:text="55%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 
@@ -360,30 +372,33 @@
                             android:layout_marginBottom="24dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_unknown_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyLeft"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="0"
                                 app:rcProgressColor="@color/colorRed"
                                 app:rcRadius="6dp"
-                                app:rcReverse="true"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_unknown_left"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="4dp"
-                                android:text="0%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="true"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_unknown_left"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginRight="4dp"-->
+                                <!--android:text="0%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 
@@ -394,30 +409,33 @@
                             android:layout_below="@id/relative_layout_unknown_left"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_city_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyLeft"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="50"
                                 app:rcProgressColor="@color/colorRed"
                                 app:rcRadius="6dp"
-                                app:rcReverse="true"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_city_left"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="4dp"
-                                android:text="50%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="true"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_city_left"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginRight="4dp"-->
+                                <!--android:text="50%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 
@@ -437,30 +455,33 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_men_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyRight"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="37"
                                 app:rcProgressColor="@color/colorGreen"
                                 app:rcRadius="6dp"
-                                app:rcReverse="false"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_men_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="4dp"
-                                android:text="37%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="false"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_men_right"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentLeft="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginLeft="4dp"-->
+                                <!--android:text="37%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 
@@ -472,30 +493,33 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_women_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyRight"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="25"
                                 app:rcProgressColor="@color/colorGreen"
                                 app:rcRadius="6dp"
-                                app:rcReverse="false"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_women_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="4dp"
-                                android:text="25%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="false"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_women_right"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentLeft="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginLeft="4dp"-->
+                                <!--android:text="25%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 
@@ -507,30 +531,33 @@
                             android:layout_marginBottom="24dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_unknown_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyRight"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="100"
                                 app:rcProgressColor="@color/colorGreen"
                                 app:rcRadius="6dp"
-                                app:rcReverse="false"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_unknown_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="4dp"
-                                android:text="100%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="false"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_unknown_right"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentLeft="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginLeft="4dp"-->
+                                <!--android:text="100%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 
@@ -541,30 +568,33 @@
                             android:layout_below="@id/relative_layout_unknown_right"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_city_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
                                 android:orientation="horizontal"
                                 app:rcBackgroundColor="@color/colorGreyRight"
                                 app:rcBackgroundPadding="0dp"
-                                app:rcProgress="50"
                                 app:rcProgressColor="@color/colorGreen"
                                 app:rcRadius="6dp"
-                                app:rcReverse="false"/>
-
-                            <TextView
-                                android:id="@+id/text_view_result_city_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="4dp"
-                                android:text="50%"
-                                android:textColor="@android:color/white"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
+                                app:rcReverse="false"
+                                app:rcTextProgressColor="@android:color/white"
+                                app:rcTextProgressSize="14dp"
+                                app:rcTextProgressMargin="4dp"
                                 />
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/text_view_result_city_right"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentLeft="true"-->
+                                <!--android:layout_centerVertical="true"-->
+                                <!--android:layout_marginLeft="4dp"-->
+                                <!--android:text="50%"-->
+                                <!--android:textColor="@android:color/white"-->
+                                <!--android:textSize="14dp"-->
+                                <!--android:textStyle="bold"-->
+                                <!--/>-->
 
                         </RelativeLayout>
 

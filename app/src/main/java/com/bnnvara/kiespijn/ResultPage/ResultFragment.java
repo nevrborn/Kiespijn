@@ -20,9 +20,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar;
 import com.bnnvara.kiespijn.ContentPage.ContentPageActivity;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
@@ -30,6 +29,7 @@ import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
+import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
 
 public class ResultFragment extends Fragment {
@@ -52,22 +52,22 @@ public class ResultFragment extends Fragment {
     private Button mAddedContentButtonA;
     private Button mAddedContentButtonB;
 
-    private RoundCornerProgressBar TotalLeftProgressBar;
-    private RoundCornerProgressBar TotalRightProgressBar;
-    private RoundCornerProgressBar MenLeftProgressBar;
-    private RoundCornerProgressBar MenRightProgressBar;
-    private RoundCornerProgressBar womenLeftProgressBar;
-    private RoundCornerProgressBar womanRightProgressBar;
-    private RoundCornerProgressBar unknownSexLeftProgressBar;
-    private RoundCornerProgressBar unknownSexRightProgressBar;
-    private RoundCornerProgressBar cityLeftProgressBar;
-    private RoundCornerProgressBar cityRightProgressBar;
+    private TextRoundCornerProgressBar mTotalLeftProgressBar;
+    private TextRoundCornerProgressBar mTotalRightProgressBar;
+    private TextRoundCornerProgressBar mMenLeftProgressBar;
+    private TextRoundCornerProgressBar mMenRightProgressBar;
+    private TextRoundCornerProgressBar mWomenLeftProgressBar;
+    private TextRoundCornerProgressBar mWomanRightProgressBar;
+    private TextRoundCornerProgressBar mUnknownSexLeftProgressBar;
+    private TextRoundCornerProgressBar mUnknownSexRightProgressBar;
+    private TextRoundCornerProgressBar mCityLeftProgressBar;
+    private TextRoundCornerProgressBar mCityRightProgressBar;
 
-    private TextView totalNrOfResultsTextView;
-    private TextView menNrOfResultsTextView;
-    private TextView womenNrOfResultsTextView;
-    private TextView unknownSexNrOfResultsTextView;
-    private TextView cityNrOfResultsTextView;
+    private TextView mTotalNrOfResultsTextView;
+    private TextView mMenNrOfResultsTextView;
+    private TextView mWomenNrOfResultsTextView;
+    private TextView mUnknownSexNrOfResultsTextView;
+    private TextView mCityNrOfResultsTextView;
 
     private TextView ageGroup1NrOfResultsLeftTextView;
     private TextView ageGroup2NrOfResultsLeftTextView;
@@ -138,21 +138,21 @@ public class ResultFragment extends Fragment {
         mAnswerBTextView = (TextView) view.findViewById(R.id.text_view_result_answer_B);
         mAddedContentButtonA = (Button) view.findViewById(R.id.button_added_content_A);
         mAddedContentButtonB = (Button) view.findViewById(R.id.button_added_content_B);
-        TotalLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
-        TotalRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
-        MenLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
-        MenRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_men_right);
-        womenLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_women_left);
-        womanRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_women_right);
-        unknownSexLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_left);
-        unknownSexRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_right);
-        cityLeftProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_city_left);
-        cityRightProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressBar_city_right);
-        totalNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_total);
-        menNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_men);
-        womenNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_women);
-        unknownSexNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_uknown_sex);
-        cityNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_city);
+        mTotalLeftProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_total_left);
+        mTotalRightProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_total_right);
+        mMenLeftProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_men_left);
+        mMenRightProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_men_right);
+        mWomenLeftProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_women_left);
+        mWomanRightProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_women_right);
+        mUnknownSexLeftProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_left);
+        mUnknownSexRightProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_unknown_right);
+        mCityLeftProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_city_left);
+        mCityRightProgressBar = (TextRoundCornerProgressBar) view.findViewById(R.id.progressBar_city_right);
+        mTotalNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_total);
+        mMenNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_men);
+        mWomenNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_women);
+        mUnknownSexNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_uknown_sex);
+        mCityNrOfResultsTextView = (TextView) view.findViewById(R.id.text_view_results_city);
         ageGroup1NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_1_nr_left_text_view);
         ageGroup2NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_2_nr_left_text_view);
         ageGroup3NrOfResultsLeftTextView = (TextView) view.findViewById(R.id.age_group_3_nr_left_text_view);
@@ -300,11 +300,40 @@ public class ResultFragment extends Fragment {
     }
 
     private void calculateAllStatistics() {
-        mDilemma.getScoreA();
-        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreA()), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreB()), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreMenA()), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getActivity(), String.valueOf(mDilemma.getScoreMenB()), Toast.LENGTH_SHORT).show();
+        // Total
+        mTotalNrOfResultsTextView.setText(String.valueOf(mDilemma.getTotalVotes()));
+        mTotalLeftProgressBar.setProgress(mDilemma.getScoreA());
+        mTotalLeftProgressBar.setProgressText(String.valueOf(mDilemma.getScoreA()) + "%");
+        mTotalRightProgressBar.setProgress(mDilemma.getScoreB());
+        mTotalRightProgressBar.setProgressText(String.valueOf(mDilemma.getScoreB()) + "%");
+
+        // Men
+        mMenNrOfResultsTextView.setText("Mannen (" + mDilemma.getVotesFromMen() + ")");
+        mMenLeftProgressBar.setProgress(mDilemma.getScoreMenA());
+        mMenLeftProgressBar.setProgressText(String.valueOf(mDilemma.getScoreMenA()) + "%");
+        mMenRightProgressBar.setProgress(mDilemma.getScoreMenB());
+        mMenRightProgressBar.setProgressText(String.valueOf(mDilemma.getScoreMenB()) + "%");
+
+        // Women
+        mWomenNrOfResultsTextView.setText("Vrouwen (" + mDilemma.getVotesFromWomen() + ")");
+        mWomenLeftProgressBar.setProgress(mDilemma.getScoreWomenA());
+        mWomenLeftProgressBar.setProgressText(String.valueOf(mDilemma.getScoreWomenA()) + "%");
+        mWomanRightProgressBar.setProgress(mDilemma.getScoreWomenB());
+        mWomanRightProgressBar.setProgressText(String.valueOf(mDilemma.getScoreWomenB()) + "%");
+
+        // Sex unknown
+        mUnknownSexNrOfResultsTextView.setText("Onbekend (" + mDilemma.getVotesFromUnknownSex() + ")");
+        mUnknownSexLeftProgressBar.setProgress(mDilemma.getScoreUnknownSexA());
+        mUnknownSexLeftProgressBar.setProgressText(String.valueOf(mDilemma.getScoreUnknownSexA()) + "%");
+        mUnknownSexRightProgressBar.setProgress(mDilemma.getScoreUnknownSexB());
+        mUnknownSexRightProgressBar.setProgressText(String.valueOf(mDilemma.getScoreUnknownSexB()) + "%");
+
+        // Same City
+        mCityNrOfResultsTextView.setText("Jouw stad (" + mDilemma.getVotesFromSameCity() + ")");
+        mCityLeftProgressBar.setProgress(mDilemma.getVotesFromSameCityA());
+        mCityLeftProgressBar.setProgressText(String.valueOf(mDilemma.getVotesFromSameCityA()) + "%");
+        mCityRightProgressBar.setProgress(mDilemma.getVotesFromSameCityB());
+        mCityRightProgressBar.setProgressText(String.valueOf(mDilemma.getVotesFromSameCityB()) + "%");
     }
 
     private void animateWinnerCrown() {
@@ -313,11 +342,15 @@ public class ResultFragment extends Fragment {
         display.getSize(size);
         int screenWidth = size.x;
 
+        // Determine which side is the winner and gets the crown
         int offset = screenWidth / 4;
+        if (mDilemma.getScoreA() >= 50) {
+            offset *= -1;
+        }
 
         // make the object go left or right
         ObjectAnimator animLeft = ObjectAnimator.ofFloat(
-                mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() - offset);
+                mWinnerImageView, "translationX", mWinnerImageView.getLeft(), mWinnerImageView.getLeft() + offset);
         animLeft.setInterpolator(new DecelerateInterpolator());
 
         // Make the object 100% transparent
@@ -327,6 +360,7 @@ public class ResultFragment extends Fragment {
         // make the object rotate
         RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setDuration(1500);
+        rotateAnimation.setStartOffset(250);
         mWinnerImageView.startAnimation(rotateAnimation);
 
         AnimatorSet animSetWinner = new AnimatorSet();

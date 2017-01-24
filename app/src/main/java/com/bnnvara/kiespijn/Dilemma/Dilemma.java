@@ -375,6 +375,8 @@ public class Dilemma implements Serializable {
     * All methods to dertmine the the statistics for the Result Page
     *
     * */
+
+    // Men, womand en unknown
     public int getVotesFromMenA() {
         return this.getReplies().getAnswerA().getAnswerFromMen();
     }
@@ -411,6 +413,8 @@ public class Dilemma implements Serializable {
         return this.getVotesFromUnknownSexA() + this.getVotesFromUnknownSexB();
     }
 
+
+    // TOTAL
     public int getTotalVotesA() {
         return this.getVotesFromMenA()
                 + this.getVotesFromWomenA()
@@ -429,6 +433,23 @@ public class Dilemma implements Serializable {
                 + this.getVotesFromUnknownSex();
     }
 
+
+    // CITY
+    public int getVotesFromSameCityA(){
+        return this.getReplies().getAnswerA().getAnswerFromSameLocation();
+    }
+
+    public int getVotesFromSameCityB(){
+        return this.getReplies().getAnswerB().getAnswerFromSameLocation();
+    }
+
+    public int getVotesFromSameCity() {
+        return this.getVotesFromSameCityA()
+                + this.getVotesFromSameCityB();
+    }
+
+
+    // Age
     public int getVotesFromAgeGroup1A(){
         return this.getReplies().getAnswerA().getAnswerFromAgeGroup1();
     }
@@ -515,6 +536,37 @@ public class Dilemma implements Serializable {
         double score = (double) (this.getVotesFromMenB() * 100) / this.getVotesFromMen();
         return (int) Math.round(score);
     }
+
+    public int getScoreWomenA() {
+        double score = (double) (this.getVotesFromWomenA() * 100) / this.getVotesFromWomen();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreWomenB() {
+        double score = (double) (this.getVotesFromWomenB() * 100) / this.getVotesFromWomen();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreUnknownSexA() {
+        double score = (double) (this.getVotesFromUnknownSexA() * 100) / this.getVotesFromUnknownSex();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreUnknownSexB() {
+        double score = (double) (this.getVotesFromUnknownSexB() * 100) / this.getVotesFromUnknownSex();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreSameCityA() {
+        double score = (double) (this.getVotesFromSameCityA() * 100) / this.getVotesFromSameCity();
+        return (int) Math.round(score);
+    }
+
+    public int getScoreSameCityB() {
+        double score = (double) (this.getVotesFromSameCityB() * 100) / this.getVotesFromSameCity();
+        return (int) Math.round(score);
+    }
+
 
 
 

@@ -1,6 +1,5 @@
 package com.bnnvara.kiespijn.Dilemma;
 
-import com.bnnvara.kiespijn.ContentPage.Content;
 import com.bnnvara.kiespijn.ContentPage.Contents;
 import com.bnnvara.kiespijn.User;
 import com.google.gson.annotations.SerializedName;

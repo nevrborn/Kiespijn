@@ -493,10 +493,10 @@ public class DilemmaFragment extends Fragment {
         mFacebookIDs.add("1272797916114496");
         mFacebookIDs.add("103858760112750");
         mFacebookIDs.add("10157925351030158");
-//        Answer optionA = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs);
-//        Answer optionB = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs);
-//        replies1.setAnswerA(optionA);
-//        replies1.setAnswerB(optionB);
+        //Answer optionA = new Answer("4", "5", "2", "5", "2", "2", "6", mFacebookIDs);
+        //Answer optionB = new Answer("6", "10", "5", "10", "1", "5", "6", mFacebookIDs);
+        //replies1.setAnswerA(optionA);
+        //replies1.setAnswerB(optionB);
         dilemma_1.setReplies(replies1);
         Contents contents1 = new Contents();
         Content contentA = new Content("Hello, this is a test", true, false, "Paul van Cappelle", "1272797916114496", "30", "Man", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B", "Amsterdam");

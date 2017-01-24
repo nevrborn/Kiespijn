@@ -7,7 +7,6 @@
     >
 
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/progress_google_search"
         android:layout_width="match_parent"
         android:layout_height="100dp"/>

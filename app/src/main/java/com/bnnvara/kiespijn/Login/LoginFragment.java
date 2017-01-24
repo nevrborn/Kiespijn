@@ -88,12 +88,14 @@ public class LoginFragment extends Fragment {
 
         // Setting up the different view elements
         TextView title = (TextView) view.findViewById(R.id.textview_login_title);
+        TextView subtitle = (TextView) view.findViewById(R.id.textview_login_subtitle);
         TextView text = (TextView) view.findViewById(R.id.textview_login_text);
         LoginButton loginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
-        title.setTypeface(source_sans_extra_light);
+        Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        subtitle.setTypeface(source_sans_extra_light);
         text.setTypeface(source_sans_extra_light);
 
         // Facebook Login Button Setup

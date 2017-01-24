@@ -37,11 +37,23 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/colorRed"
-            android:gravity="center_vertical"
+            android:gravity="bottom"
             android:text="@string/login_title"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="55sp"/>
+
+        <TextView
+            android:id="@+id/textview_login_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorRed"
+            android:gravity="center_horizontal"
+            android:text="@string/login_subtitle"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"/>
 
 
         <TextView

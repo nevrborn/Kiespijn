@@ -108,13 +108,6 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:visibility="gone"
-        android:id="@+id/targetgroup_gif"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
     <ProgressBar
         android:id="@+id/progress_bar_targetgroup"
         android:visibility="gone"
@@ -122,5 +115,11 @@
         android:layout_height="50dp"
         android:layout_centerInParent="true"/>
 
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/targetgroup_gif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </RelativeLayout>

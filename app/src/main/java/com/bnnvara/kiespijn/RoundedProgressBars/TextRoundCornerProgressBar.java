@@ -145,10 +145,11 @@ public class TextRoundCornerProgressBar extends BaseRoundCornerProgressBar imple
 //        });
         clearTextProgressAlign();
         // TODO Temporary
-        int textProgressWidth = tvProgress.getMeasuredWidth() + (getTextProgressMargin() * 2);
-        float ratio = getMax() / getProgress();
-        int progressWidth = (int) ((getLayoutWidth() - (getPadding() * 2)) / ratio);
-        if (textProgressWidth + textProgressMargin < progressWidth) {
+//        int textProgressWidth = tvProgress.getMeasuredWidth() + (getTextProgressMargin() * 2);
+//        float ratio = getMax() / getProgress();
+//        int progressWidth = (int) ((getLayoutWidth() - (getPadding() * 2)) / ratio);
+//        if (textProgressWidth + textProgressMargin < progressWidth) {
+        if (getProgress() > 25f) {
             alignTextProgressInsideProgress();
         } else {
             alignTextProgressOutsideProgress();
@@ -204,6 +205,7 @@ public class TextRoundCornerProgressBar extends BaseRoundCornerProgressBar imple
                 params.addRule(RelativeLayout.ALIGN_END, R.id.layout_progress);
         }
         tvProgress.setLayoutParams(params);
+        setTextProgressColor(Color.WHITE);
     }
 
     private void alignTextProgressOutsideProgress() {
@@ -218,6 +220,7 @@ public class TextRoundCornerProgressBar extends BaseRoundCornerProgressBar imple
                 params.addRule(RelativeLayout.END_OF, R.id.layout_progress);
         }
         tvProgress.setLayoutParams(params);
+        setTextProgressColor(Color.BLACK);
     }
 
     public String getProgressText() {

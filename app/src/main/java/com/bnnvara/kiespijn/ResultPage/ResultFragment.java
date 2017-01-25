@@ -389,7 +389,7 @@ public class ResultFragment extends Fragment {
 
         // Make the object 100% transparent
         ObjectAnimator animAlpha = ObjectAnimator.ofFloat(mWinnerImageView,"alpha",0.0f);
-        animAlpha.setDuration(3000);
+        animAlpha.setDuration(2500);
 
         // make the object rotate
         RotateAnimation rotateAnimation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -400,7 +400,7 @@ public class ResultFragment extends Fragment {
         AnimatorSet animSetWinner = new AnimatorSet();
         animSetWinner.play(animLeft).before(animAlpha);
         animSetWinner.setStartDelay(1500);
-        animSetWinner.setDuration(3000);
+        animSetWinner.setDuration(1500);
         animSetWinner.start();
     }
 

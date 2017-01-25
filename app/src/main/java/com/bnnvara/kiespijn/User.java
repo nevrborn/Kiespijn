@@ -2,6 +2,7 @@ package com.bnnvara.kiespijn;
 
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.FriendList.Friend;
+import com.bnnvara.kiespijn.GroupPage.Group;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,8 @@ public class User {
     private String mHometown;
     private DilemmaApiResponse mUserCreatedDilemmas;
     private DilemmaApiResponse mUserAnsweredDilemmas;
-    public List<Friend> mFacebookFriendList = new ArrayList<>();
+    private List<Friend> mFacebookFriendList = new ArrayList<>();
+    private List<Group> mGroupsList = new ArrayList<>();
     private Boolean hasCreatedDilemma = false;
 
 
@@ -34,6 +36,7 @@ public class User {
             User user = new User();
             User.setInstance(user);
         }
+
         return sCurrentUser;
     }
 
@@ -113,6 +116,10 @@ public class User {
         mFacebookFriendList = facebookFriendList;
     }
 
+    public void addFriendToFacebookFriendList(Friend friend) {
+        mFacebookFriendList.add(friend);
+    }
+
     public String getHometown() {
         return mHometown;
     }
@@ -129,4 +136,23 @@ public class User {
         this.hasCreatedDilemma = hasCreatedDilemma;
     }
 
+    public List<Group> getGroupsList() {
+
+        if (mGroupsList == null || (mGroupsList != null && mGroupsList.size() == 0)) {
+            addGroupToGroupsList(new Group("BNN peeps", null));
+            addGroupToGroupsList(new Group("Familie", null));
+            addGroupToGroupsList(new Group("UNI buddies", null));
+            addGroupToGroupsList(new Group("Amsterdam crew", null));
+        }
+
+        return mGroupsList;
+    }
+
+    public void setGroupsList(List<Group> groupsList) {
+        mGroupsList = groupsList;
+    }
+
+    public void addGroupToGroupsList(Group group) {
+        mGroupsList.add(group);
+    }
 }

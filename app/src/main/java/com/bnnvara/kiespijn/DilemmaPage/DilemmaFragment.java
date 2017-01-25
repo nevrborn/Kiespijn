@@ -203,6 +203,7 @@ public class DilemmaFragment extends Fragment {
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
                 setDilemmaAlpha(topOffset, 1);
+                swipeLayout2.setBottomSwipeEnabled(false);
             }
 
             @Override
@@ -254,6 +255,7 @@ public class DilemmaFragment extends Fragment {
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
                 setDilemmaAlpha(topOffset, 2);
+                swipeLayout1.setBottomSwipeEnabled(false);
             }
 
             @Override

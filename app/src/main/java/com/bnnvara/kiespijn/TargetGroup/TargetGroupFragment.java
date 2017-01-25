@@ -164,7 +164,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
 
                 gifView.setVisibility(View.VISIBLE);
-                //progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 isHasChosen = false;
 
                 Glide.with(getActivity())
@@ -251,7 +251,7 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private String getRandomGifURL() {
-        int randomIndex = 1 + (int) (Math.random() * ((35 - 1)));
+        int randomIndex = 1 + (int) (Math.random() * ((5 - 1)));
         return mListOfGifs.get(randomIndex);
     }
 

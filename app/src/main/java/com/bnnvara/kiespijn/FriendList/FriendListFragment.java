@@ -154,7 +154,7 @@ public class FriendListFragment extends Fragment {
             public void onClick(View view) {
 
                 if (mTargetIDList.size() == 0) {
-                    Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.check_at_least_one_friend, Toast.LENGTH_SHORT).show();
                 } else {
                     mDilemma.setTargetIDList(mTargetIDList);
                     Intent i = DilemmaFromWhoActivity.newIntent(getActivity());

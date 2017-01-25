@@ -65,6 +65,7 @@
     </LinearLayout>
 
     <SearchView
+        android:visibility="gone"
         android:id="@+id/searchview_friends"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -78,6 +79,7 @@
         android:layout_marginRight="25dp">
 
         <TextView
+            android:id="@+id/textview_friendlist_everyone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/everybody"

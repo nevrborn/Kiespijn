@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                    <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                         android:id="@+id/progressBar_total_left"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content"
                     >
 
-                    <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                    <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                         android:id="@+id/progressBar_total_right"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
@@ -296,7 +296,7 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_men_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
@@ -334,7 +334,7 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_women_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
@@ -372,7 +372,7 @@
                             android:layout_marginBottom="24dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_unknown_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
@@ -409,7 +409,7 @@
                             android:layout_below="@id/relative_layout_unknown_left"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_city_left"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
@@ -455,7 +455,7 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_men_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
@@ -493,7 +493,7 @@
                             android:layout_marginBottom="12dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_women_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
@@ -531,7 +531,7 @@
                             android:layout_marginBottom="24dp"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_unknown_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"
@@ -568,7 +568,7 @@
                             android:layout_below="@id/relative_layout_unknown_right"
                             >
 
-                            <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                            <com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar
                                 android:id="@+id/progressBar_city_right"
                                 android:layout_width="match_parent"
                                 android:layout_height="20dp"

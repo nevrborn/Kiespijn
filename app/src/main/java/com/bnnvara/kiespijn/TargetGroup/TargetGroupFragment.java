@@ -164,7 +164,7 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorGreen));
 
                 gifView.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.VISIBLE);
+                //progressBar.setVisibility(View.VISIBLE);
                 isHasChosen = false;
 
                 Glide.with(getActivity())

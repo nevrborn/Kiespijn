@@ -35,8 +35,7 @@
         <activity
             android:name=".PersonalPage.PersonalPageActivity"
             android:screenOrientation="portrait"
-            android:label="Jouw HALPP"
-            android:parentActivityName=".DilemmaPage.DilemmaActivity">
+            android:label="Jouw HALPP">
         </activity>
         <activity
             android:name=".ArticleSearchPage.ArticleSearchActivity"

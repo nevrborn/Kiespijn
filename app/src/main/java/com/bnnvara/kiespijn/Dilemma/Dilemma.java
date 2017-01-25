@@ -320,8 +320,8 @@ public class Dilemma implements Serializable {
 
         int i = 0;
 
-        while (i < user.mFacebookFriendList.size()) {
-            if (user.mFacebookFriendList.get(i).getFacebookID().equals(mCreator_fb_id)) {
+        while (i < user.getFacebookFriendList().size()) {
+            if (user.getFacebookFriendList().get(i).getFacebookID().equals(mCreator_fb_id)) {
                 return true;
             }
 

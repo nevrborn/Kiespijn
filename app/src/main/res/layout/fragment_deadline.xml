@@ -22,13 +22,22 @@
             android:background="@drawable/ic_action_previous_arrow"
             />
 
-        <Button
-            android:id="@+id/button_next_deadline"
-            android:layout_width="30dp"
+        <TextView
+            android:id="@+id/textview_post_dilemma"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/ic_action_next_arrow"
-            />
+            android:text="POST"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/colorRed"/>
+
+        <!--<Button-->
+        <!--android:id="@+id/button_next_deadline"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:background="@drawable/ic_action_next_arrow"-->
+        <!--/>-->
 
     </LinearLayout>
 

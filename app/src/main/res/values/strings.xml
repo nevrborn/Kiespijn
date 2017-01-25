@@ -11,6 +11,7 @@
     <string name="login_title">HALPP!</string>
     <string name="login_subtitle">Wat moet ik kiezen?</string>
     <string name="login_text">Inloggen</string>
+    <string name="logout_text">Uitloggen</string>
     <string name="login_email_text">email</string>
     <string name="login_password_text">wachtwoord</string>
     <string name="facebook_app_id">1276846372390346</string>
@@ -65,7 +66,7 @@
 
     // DEADLINE WHO SCREEN
     <string name="deadline_title"> UUR TOT DE UITSLAG</string>
-    <string name="deadline_set">POST JE DILEMMA</string>
+    <string name="deadline_set">KLAAR!</string>
     <string name="deadline_hours_1">2 uur</string>
     <string name="deadline_hours_2">12 uur</string>
     <string name="deadline_hours_3">24 uur</string>

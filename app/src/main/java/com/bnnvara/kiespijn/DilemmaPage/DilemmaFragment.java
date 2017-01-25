@@ -2,10 +2,12 @@ package com.bnnvara.kiespijn.DilemmaPage;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -225,7 +227,6 @@ public class DilemmaFragment extends Fragment {
         });
 
 
-
         swipeLayout2.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
@@ -412,7 +413,6 @@ public class DilemmaFragment extends Fragment {
             Glide.with(getActivity())
                     .load(mDilemma.getCreator_picture_url())
                     .centerCrop()
-                    .placeholder(R.drawable.ic_action_sand_timer)
                     .into(mUserPhotoImageView);
         } else if (mDilemma.getIsAnonymous() || mDilemma.getCreator_picture_url() == null) {
             mUserPhotoImageView.setImageResource(R.drawable.ic_action_user_photo);

@@ -57,7 +57,8 @@ public class DeadlineFragment extends Fragment {
         final Button hourButton2 = (Button) view.findViewById(R.id.button_deadline_hours_2);
         final Button hourButton3 = (Button) view.findViewById(R.id.button_deadline_hours_3);
         Button previousButton = (Button) view.findViewById(R.id.button_previous_deadline);
-        Button postDilemmaButton = (Button) view.findViewById(R.id.button_next_deadline);
+        //Button postDilemmaButton = (Button) view.findViewById(R.id.button_next_deadline);
+        TextView postDilemmaButton = (TextView) view.findViewById(R.id.textview_post_dilemma);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -66,7 +67,7 @@ public class DeadlineFragment extends Fragment {
         hourButton1.setTypeface(source_sans_extra_light);
         hourButton2.setTypeface(source_sans_extra_light);
         hourButton3.setTypeface(source_sans_extra_light);
-        postDilemmaButton.setTypeface(source_sans_extra_light);
+        postDilemmaButton.setTypeface(source_sans_bold);
 
 
         if (mDilemma.getDeadline() != 0) {
@@ -188,6 +189,7 @@ public class DeadlineFragment extends Fragment {
     private void setDateCreatedAndDeadLine(int deadline) {
         mDilemma.setCreatedAt();
         mDilemma.setDeadline(deadline);
+
     }
 
     private void setUserDetails() {
@@ -230,8 +232,8 @@ public class DeadlineFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
-                        intent.putExtra(Intent.EXTRA_SUBJECT, "Kiespijn");
-                        intent.putExtra(Intent.EXTRA_TEXT, "Take this dilemma for me: " + mDilemma.getUuid());
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "HALPP!");
+                        intent.putExtra(Intent.EXTRA_TEXT, "HALPP! Wat moet ik kiezen? " + mDilemma.getTitlePhotoA() + " of " + mDilemma.getTitlePhotoB());
                         startActivityForResult(intent, 0);
                     }
                 })

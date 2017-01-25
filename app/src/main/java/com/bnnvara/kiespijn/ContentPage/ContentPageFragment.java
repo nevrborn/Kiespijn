@@ -130,7 +130,6 @@ public class ContentPageFragment extends Fragment {
 
             Glide.with(getActivity())
                     .load(mContent.getUserFbPhoto())
-                    .placeholder(R.mipmap.ic_launcher)
                     .into(mUserPhoto);
 
             // Set hometown to unknown if this is hided information on Facebook
@@ -148,7 +147,6 @@ public class ContentPageFragment extends Fragment {
 
                 Glide.with(getActivity())
                         .load(mContent.getPhotoLink())
-                        .placeholder(R.mipmap.ic_launcher)
                         .into(mImage);
             } else if (mContent.getAnArticle()) {
                 mLink.setVisibility(View.VISIBLE);

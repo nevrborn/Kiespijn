@@ -71,16 +71,6 @@
     <!--android:layout_height="50dp"-->
     <!--android:padding="8dp"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Groep Naam"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"
-        android:id="@+id/textview_group_name"/>
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

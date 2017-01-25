@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
 import com.bnnvara.kiespijn.FriendList.Friend;
+import com.bnnvara.kiespijn.GroupPage.Group;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.facebook.AccessToken;
@@ -56,6 +57,7 @@ public class LoginFragment extends Fragment {
     private static Boolean mHasJustLoggedOut = false;
     private User mUser;
     LoginButton mLoginButton;
+    Boolean mAddedDummyData = false;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -226,6 +228,8 @@ public class LoginFragment extends Fragment {
                         Friend newFriend = new Friend(friendName, friendID, friendFacebookPictureURL);
                         mUser.addFriendToFacebookFriendList(newFriend);
 
+                        addExtraFriendsAndGroups();
+
                         i += 1;
                     }
 
@@ -340,5 +344,41 @@ public class LoginFragment extends Fragment {
         AlertDialog alert = builder.create();
         alert.setCanceledOnTouchOutside(false);
         alert.show();
+    }
+
+    public void addExtraFriendsAndGroups() {
+        if (!mAddedDummyData) {
+            Friend paul = new Friend("Paul van Cappellen", "1272797916114496", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+            Friend eliza = new Friend("Eliza Cambre", "10210277093237768", "https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
+            Friend jesse = new Friend("Jesse Verdellen", "dummydata", "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAg4AAAAJGI4OTY4NDM2LTkyYWUtNDdiMy1iYjIxLTNiYmVlNzcwZDJjNw.jpg");
+            Friend lydie = new Friend("Lydie Polak", "dummydata", "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/053/35a/1aa82e4.jpg");
+            Friend zowi = new Friend("Zowi Vermeire", "dummydata", "https://0.academia-photos.com/8522896/3447685/4052853/s200_zowi.vermeire.jpg");
+            Friend donald = new Friend("Donald Trump", "dummydata", "http://az616578.vo.msecnd.net/files/2016/06/13/6360139435793044861461393096_Donald-Trump-prune-face.jpg");
+
+            mUser.addFriendToFacebookFriendList(jesse);
+            mUser.addFriendToFacebookFriendList(zowi);
+            mUser.addFriendToFacebookFriendList(lydie);
+            mUser.addFriendToFacebookFriendList(donald);
+
+            List<Friend> friendlist1 = new ArrayList<>();
+            List<Friend> friendlist2 = new ArrayList<>();
+            List<Friend> friendlist3 = new ArrayList<>();
+
+            friendlist1.add(paul);
+            friendlist1.add(eliza);
+
+            friendlist2.add(jesse);
+            friendlist2.add(paul);
+            friendlist2.add(lydie);
+            friendlist2.add(zowi);
+
+            friendlist3.add(donald);
+
+            User.getInstance().addGroupToGroupsList(new Group("AppAcademy", friendlist1));
+            User.getInstance().addGroupToGroupsList(new Group("BNN Crew", friendlist2));
+            User.getInstance().addGroupToGroupsList(new Group("Random", friendlist3));
+
+            mAddedDummyData = true;
+        }
     }
 }

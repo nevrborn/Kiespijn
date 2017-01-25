@@ -583,27 +583,6 @@ public class DilemmaFragment extends Fragment {
         mDilemmaList.add(dilemma_1);
         mDilemmaList.add(dilemma_2);
         mDilemmaList.add(dilemma_3);
-
-        Friend paul = new Friend("Paul van Cappellen", "1272797916114496", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
-        Friend eliza = new Friend("Eliza Cambre", "10210277093237768", "https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
-        Friend jesse = new Friend("Jesse Verdellen", "dummydata", "dummydata");
-        Friend lydie = new Friend("Lydie Polak", "dummydata", "dummydata");
-        Friend zowi = new Friend("Zowi Vermeire", "dummydata", "dummydata");
-        Friend martijn = new Friend("Martijn Woute", "dummydata", "dummydata");
-
-        List<Friend> friendlist1 = new ArrayList<>();
-        List<Friend> friendlist2 = new ArrayList<>();
-
-        friendlist1.add(paul);
-        friendlist1.add(eliza);
-        friendlist1.add(martijn);
-        friendlist2.add(jesse);
-        friendlist2.add(paul);
-        friendlist2.add(lydie);
-        friendlist2.add(zowi);
-
-        User.getInstance().addGroupToGroupsList(new Group("AppAcademy", friendlist1));
-        User.getInstance().addGroupToGroupsList(new Group("BNN Crew", friendlist2));
     }
 
 

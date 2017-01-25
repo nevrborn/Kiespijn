@@ -56,7 +56,6 @@ public class GroupPageFragment extends Fragment {
         mGroupsList = user.getGroupsList();
 
         final EditText addGroupNameEditText = (EditText) view.findViewById(R.id.edittext_make_group_name);
-        final TextView groupName = (TextView) view.findViewById(R.id.textview_group_name);
         final TextView saveButton = (TextView) view.findViewById(R.id.text_view_save_group);
         final TextView deleteButton = (TextView) view.findViewById(R.id.text_view_delete_groups);
         final Button groupsButton = (Button) view.findViewById(R.id.group_page_groups);
@@ -84,7 +83,6 @@ public class GroupPageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 addGroupNameEditText.setVisibility(View.GONE);
-                groupName.setVisibility(View.VISIBLE);
                 saveButton.setVisibility(View.GONE);
                 deleteButton.setVisibility(View.VISIBLE);
                 groupsButton.setAlpha(1);
@@ -99,7 +97,6 @@ public class GroupPageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 addGroupNameEditText.setVisibility(View.VISIBLE);
-                groupName.setVisibility(View.GONE);
                 saveButton.setVisibility(View.VISIBLE);
                 deleteButton.setVisibility(View.GONE);
                 makeGroupButton.setAlpha(1);

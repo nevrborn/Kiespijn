@@ -34,6 +34,9 @@ import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Replies;
+import com.bnnvara.kiespijn.FriendList.Friend;
+import com.bnnvara.kiespijn.GroupPage.Group;
+import com.bnnvara.kiespijn.GroupPage.GroupPageActivity;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
@@ -86,6 +89,7 @@ public class DilemmaFragment extends Fragment {
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
+    private List<Group> mGroupsList = new ArrayList<>();
     private Dilemma mDilemma;
     private int mCurrentIndex;
     private String mUserFbId;
@@ -579,6 +583,27 @@ public class DilemmaFragment extends Fragment {
         mDilemmaList.add(dilemma_1);
         mDilemmaList.add(dilemma_2);
         mDilemmaList.add(dilemma_3);
+
+        Friend paul = new Friend("Paul van Cappellen", "1272797916114496", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
+        Friend eliza = new Friend("Eliza Cambre", "10210277093237768", "https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
+        Friend jesse = new Friend("Jesse Verdellen", "dummydata", "dummydata");
+        Friend lydie = new Friend("Lydie Polak", "dummydata", "dummydata");
+        Friend zowi = new Friend("Zowi Vermeire", "dummydata", "dummydata");
+        Friend martijn = new Friend("Martijn Woute", "dummydata", "dummydata");
+
+        List<Friend> friendlist1 = new ArrayList<>();
+        List<Friend> friendlist2 = new ArrayList<>();
+
+        friendlist1.add(paul);
+        friendlist1.add(eliza);
+        friendlist1.add(martijn);
+        friendlist2.add(jesse);
+        friendlist2.add(paul);
+        friendlist2.add(lydie);
+        friendlist2.add(zowi);
+
+        User.getInstance().addGroupToGroupsList(new Group("AppAcademy", friendlist1));
+        User.getInstance().addGroupToGroupsList(new Group("BNN Crew", friendlist2));
     }
 
 
@@ -607,6 +632,10 @@ public class DilemmaFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 User.getInstance().setHasCreatedDilemma(true);
+                return true;
+            case R.id.menu_item_manage_groups:
+                Intent intent = GroupPageActivity.newIntent(getActivity());
+                startActivity(intent);
                 return true;
             default:
                 return true;

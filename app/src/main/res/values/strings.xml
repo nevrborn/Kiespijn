@@ -70,9 +70,9 @@
     <string name="deadline_hours_1">2 uur</string>
     <string name="deadline_hours_2">12 uur</string>
     <string name="deadline_hours_3">24 uur</string>
-    <string name="share_on_social_media">Share on Social Media</string>
-    <string name="share_on_social_media_text">Do you want to share the dilemma on social media?</string>
-    <string name="go_to_main">Go to main</string>
+    <string name="share_on_social_media">Deel op social media</string>
+    <string name="share_on_social_media_text">Wil je jouw dilemma delen op Social Media?</string>
+    <string name="go_to_main">Ga naar dilemmas</string>
     <string name="share">Delen</string>
 
     // CREATE DILEMMA SCREEN
@@ -85,9 +85,9 @@
     <string name="check_at_least_one_targetgroup">Vink ten minste éen doelgroep!</string>
     <string name="check_at_least_one_sender">Vink ten minste éen afsender!</string>
     <string name="check_at_least_one_deadline">Vink ten minste éen deadline!</string>
-    <string name="use_image">Gebruik photo</string>
-    <string name="enter_dilemma_context">Enter Dilemma Context</string>
-    <string name="save_context">SAVE CONTEXT</string>
+    <string name="use_image">Gebruik foto</string>
+    <string name="enter_dilemma_context">Leg hier uit waarom jij op deze optie stemt</string>
+    <string name="save_context">OPSLAAN</string>
     <string name="add_content">Licht jouw antwoord toe +</string>
     <string name="add_photo">Voeg foto toe</string>
     <string name="take_photo">Maak Foto</string>
@@ -99,13 +99,13 @@
     <string name="google_cx_key">005303562240230618745:fehybwiv3j0</string>
     <string name="google_search_api_key">AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4</string>
     <string name="google_baseURL">https://www.googleapis.com</string>
-    <string name="google_no_photos">Geen photos for deze zoek, probeer opnieuw</string>
+    <string name="google_no_photos">Geen fotos for deze zoek, probeer opnieuw</string>
 
     // ADD CONTENT SCREEN
     <string name="add_content_hint">Waar denk je aan?</string>
     <string name="add_content_media">Voeg media toe</string>
     <string name="result_page_content_buttons">Toelichtingen</string>
-    <string name="add_content_foto_video">FOTO / VIDEO</string>
+    <string name="add_content_foto_video">FOTO</string>
     <string name="add_content_google">Google Verrassing</string>
     <string name="add_content_add">VOEG TOE</string>
     <string name="add_content_article">article / blog / fragment</string>
@@ -114,6 +114,16 @@
 
     // RESULT SCREEN
     <string name="result_content">TOELICHTING</string>
+
+    // GROUP PAGE
+    <string name="group_page_title">Groepen Beheeren</string>
+    <string name="group_page_save_group">Bevaar Groep</string>
+    <string name="group_page_your_groups">JOUW GROEPEN</string>
+    <string name="group_page_new_groups">MAAK GROEP</string>
+    <string name="group_page_new_group_name">Voer naam in</string>
+    <string name="fill_inn_group_name">Voer groep naam in</string>
+    <string name="tap_to_see_group_members">Klik om groepsleden te zien</string>
+    <string name="delete_groups">Groepen verwijderen</string>
 
     // DUMMY/HINT VARIABLES
     <string name="name">NAAM</string>

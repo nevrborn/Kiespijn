@@ -10,7 +10,6 @@
 
     <item
         android:id="@+id/menu_google_search_use"
-        android:icon="@drawable/ic_action_create_dilemma"
         android:title="@string/use_image"
         app:showAsAction="always|withText"
         />

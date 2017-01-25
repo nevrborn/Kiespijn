@@ -19,6 +19,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar;
@@ -40,6 +41,7 @@ public class ResultFragment extends Fragment {
     private static final String LOGGING_OUT = "logging_out";
 
     // Views
+    private RelativeLayout mProgressBarsRelativeLayout;
     private ImageView mUserPhotoImageView;
     private ImageView mClockImageView;
     private ImageView mWinnerImageView;
@@ -126,6 +128,7 @@ public class ResultFragment extends Fragment {
         mDilemma = (Dilemma) getArguments().getSerializable(DILEMMA_OBJECT);
 
         // set up the references
+        mProgressBarsRelativeLayout = (RelativeLayout) view.findViewById(R.id.relative_layout_progress_bars);
         mUserPhotoImageView = (ImageView) view.findViewById(R.id.image_view_user_photo_personal_page);
         mClockImageView = (ImageView) view.findViewById(R.id.image_view_clock);
         mWinnerImageView = (ImageView) view.findViewById(R.id.result_page_winner_icon);
@@ -341,6 +344,7 @@ public class ResultFragment extends Fragment {
             mCityNrOfResultsTextView.setVisibility(View.GONE);
             mCityLeftProgressBar.setVisibility(View.GONE);
             mCityRightProgressBar.setVisibility(View.GONE);
+            mProgressBarsRelativeLayout.invalidate();
         }
 
 

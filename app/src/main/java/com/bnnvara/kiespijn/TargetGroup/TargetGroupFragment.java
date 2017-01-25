@@ -198,7 +198,7 @@ public class TargetGroupFragment extends Fragment {
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), R.string.not_all_fields_filled, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.check_at_least_one_targetgroup, Toast.LENGTH_SHORT).show();
                 }
 
             }

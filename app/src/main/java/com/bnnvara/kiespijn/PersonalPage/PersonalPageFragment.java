@@ -247,12 +247,9 @@ public class PersonalPageFragment extends Fragment {
             if (dilemma.getTimeLeft() < 0){
                 holder.mTimeLeftTextView.setText("Verlopen");
                 holder.mClockImageView.setVisibility(View.GONE);
-            } else if (dilemma.getTimeLeft() == 1){
-                holder.mClockImageView.setVisibility(View.VISIBLE);
-                holder.mTimeLeftTextView.setText(" 1 uur ");
             } else {
                 holder.mClockImageView.setVisibility(View.VISIBLE);
-                holder.mTimeLeftTextView.setText(dilemma.getTimeLeft() + " uren");
+                holder.mTimeLeftTextView.setText(dilemma.getTimeLeft() + " uur");
             }
         }
 

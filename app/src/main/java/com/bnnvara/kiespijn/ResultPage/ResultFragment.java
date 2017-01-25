@@ -221,11 +221,10 @@ public class ResultFragment extends Fragment {
 
         // time left
         if (mDilemma.getTimeLeft() < 0) {
-            mTimeLeftTextView.setText("---");
-        } else if (mDilemma.getTimeLeft() == 1) {
-            mTimeLeftTextView.setText(R.string.time_left_1_hour);
+            mTimeLeftTextView.setText("Verlopen");
+            mClockImageView.setVisibility(View.GONE);
         } else {
-            mTimeLeftTextView.setText(mDilemma.getTimeLeft() + " uren");
+            mTimeLeftTextView.setText(mDilemma.getTimeLeft() + " uur");
         }
 
         // set user profile picture

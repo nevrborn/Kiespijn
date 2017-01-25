@@ -76,7 +76,8 @@
     <string name="title_hint_1">Dilemma 1</string>
     <string name="title_hint_2">Dilemma 2</string>
     <string name="image_title">image title</string>
-    <string name="not_all_fields_filled">Niet alle velden zijn gevuld</string>
+    <string name="not_all_fields_filled">Vul eerst alle velden voor je verder gaat!</string>
+    <string name="check_at_least_one_friend">Vink ten minste éen van je vrienden aan!</string>
     <string name="use_image">Gebruik photo</string>
     <string name="add_content">Licht jouw antwoord toe +</string>
     <string name="add_photo">Voeg foto toe</string>

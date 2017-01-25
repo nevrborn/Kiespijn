@@ -293,10 +293,10 @@ public class TargetGroupFragment extends Fragment {
 //        mListOfGifs.add("https://i.imgur.com/DBtFXw2.gif");
 //        mListOfGifs.add("https://i.imgur.com/NTtD2QI.gif");
 //        mListOfGifs.add("https://i.imgur.com/3wcLG9u.gif");
-        mListOfGifs.add("https://i.imgur.com/iZA2t5H.gif");
-        mListOfGifs.add("https://i.imgur.com/cGIBrMa.gif");
-        mListOfGifs.add("http://i.imgur.com/XR1DhfB.gif");
-        mListOfGifs.add("https://media.giphy.com/media/eYgVBZKw2LG6Y/giphy.gif");
+//        mListOfGifs.add("https://i.imgur.com/iZA2t5H.gif");
+//        mListOfGifs.add("https://i.imgur.com/cGIBrMa.gif");
+//        mListOfGifs.add("http://i.imgur.com/XR1DhfB.gif");
+//        mListOfGifs.add("https://media.giphy.com/media/eYgVBZKw2LG6Y/giphy.gif");
         mListOfGifs.add("https://media.giphy.com/media/LZElUsjl1Bu6c/giphy.gif");
 //        mListOfGifs.add("https://media.giphy.com/media/QKKV7KFrG9XMY/giphy.gif");
 //        mListOfGifs.add("https://media.giphy.com/media/JltOMwYmi0VrO/giphy.gif");

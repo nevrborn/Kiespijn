@@ -9,6 +9,11 @@ public class Group {
     private String mGroupName;
     private List<Friend> mGroupMembers;
 
+    public Group(String groupName, List<Friend> groupMembers) {
+        mGroupName = groupName;
+        mGroupMembers = groupMembers;
+    }
+
     public String getGroupName() {
         return mGroupName;
     }

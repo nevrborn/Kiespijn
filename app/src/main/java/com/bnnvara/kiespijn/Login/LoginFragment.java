@@ -220,7 +220,7 @@ public class LoginFragment extends Fragment {
 
                 if (friendsCount != 0) {
 
-                    mUser.mFacebookFriendList.clear();
+                    mUser.getFacebookFriendList().clear();
 
                     while (i < friendsCount) {
 
@@ -233,7 +233,7 @@ public class LoginFragment extends Fragment {
                         String friendFacebookPictureURL = friendPictureData.getString("url");
 
                         Friend newFriend = new Friend(friendName, friendID, friendFacebookPictureURL);
-                        mUser.mFacebookFriendList.add(newFriend);
+                        mUser.addFriendToFacebookFriendList(newFriend);
 
                         i += 1;
                     }

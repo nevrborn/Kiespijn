@@ -156,17 +156,18 @@ public class User {
 
             Friend paul = new Friend("Paul van Cappellen", "1272797916114496", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
             Friend eliza = new Friend("Eliza Cambre", "10210277093237768", "https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
+            Friend dummy = new Friend("Dummy", "dummydata", "dummydata");
 
             List<Friend> friendlist1 = new ArrayList<>();
             List<Friend> friendlist2 = new ArrayList<>();
 
             friendlist1.add(paul);
             friendlist1.add(eliza);
-            friendlist2.add(paul);
+            friendlist2.add(dummy);
 
             addGroupToGroupsList(new Group("BNN peeps", friendlist1));
-            addGroupToGroupsList(new Group("Familie", null));
-            addGroupToGroupsList(new Group("UNI buddies", null));
+            addGroupToGroupsList(new Group("Familie", friendlist2));
+            addGroupToGroupsList(new Group("UNI buddies", friendlist2));
             addGroupToGroupsList(new Group("Utrecht crew", friendlist2));
         }
     }

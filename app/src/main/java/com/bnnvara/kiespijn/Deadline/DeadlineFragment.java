@@ -219,19 +219,19 @@ public class DeadlineFragment extends Fragment {
 
     private void shareDilemma() {
         AlertDialog shareDialog = new AlertDialog.Builder(getContext())
-                .setTitle("Share on social media")
-                .setMessage("Do you want to share the dilemma on social media?")
-                .setPositiveButton("Share", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.share_on_social_media))
+                .setMessage(getString(R.string.share_on_social_media_text))
+                .setPositiveButton(getString(R.string.share), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
-                        intent.putExtra(Intent.EXTRA_SUBJECT, "HALPP!");
+                        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
                         intent.putExtra(Intent.EXTRA_TEXT, "HALPP! Wat moet ik kiezen? " + mDilemma.getTitlePhotoA() + " of " + mDilemma.getTitlePhotoB());
                         startActivityForResult(intent, 0);
                     }
                 })
-                .setNegativeButton("Go to main", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.go_to_main), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         goToMain();

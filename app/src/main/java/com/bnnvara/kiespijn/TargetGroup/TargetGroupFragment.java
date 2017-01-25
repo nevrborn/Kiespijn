@@ -53,7 +53,6 @@ public class TargetGroupFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         updateLists();
-
     }
 
     @Nullable
@@ -104,7 +103,6 @@ public class TargetGroupFragment extends Fragment {
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
             }
-
         }
 
         mRandomGif = mDilemma.getRandomGifURL();
@@ -130,7 +128,6 @@ public class TargetGroupFragment extends Fragment {
                 mDilemma.setIsToAll("false");
                 mDilemma.setFirstTimeToTargetGroup(false);
                 isHasChosen = true;
-
             }
         });
 
@@ -177,7 +174,6 @@ public class TargetGroupFragment extends Fragment {
                 everyoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
                 callSomeoneButton.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 callSomeoneButton.setTextColor(getResources().getColor(R.color.colorYellow));
-
             }
         });
 
@@ -200,7 +196,6 @@ public class TargetGroupFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), R.string.check_at_least_one_targetgroup, Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
@@ -250,8 +245,8 @@ public class TargetGroupFragment extends Fragment {
     }
 
     private String getRandomGifURL() {
-        int randomIndex = 1 + (int) (Math.random() * ((5 - 1)));
-        return mListOfGifs.get(randomIndex);
+        //int randomIndex = 1 + (int) (Math.random() * ((1 - 1)));
+        return mListOfGifs.get(0);
     }
 
     public void updateLists() {
@@ -282,7 +277,7 @@ public class TargetGroupFragment extends Fragment {
 //        mListOfGifs.add("https://i.imgur.com/0glopxW.gif");
 //        mListOfGifs.add("https://i.imgur.com/rR8mwEL.gif");
 //        mListOfGifs.add("https://i.imgur.com/Dgo1nxQ.gif");
-//        mListOfGifs.add("https://i.imgur.com/QjbIiBA.gif");
+        mListOfGifs.add("https://i.imgur.com/QjbIiBA.gif");
 //        mListOfGifs.add("https://i.imgur.com/baCcvq8.gif");
 //        mListOfGifs.add("https://i.imgur.com/eEhpf79.gif");
 //        mListOfGifs.add("https://i.imgur.com/yeSjKv2.gif");
@@ -297,7 +292,7 @@ public class TargetGroupFragment extends Fragment {
 //        mListOfGifs.add("https://i.imgur.com/cGIBrMa.gif");
 //        mListOfGifs.add("http://i.imgur.com/XR1DhfB.gif");
 //        mListOfGifs.add("https://media.giphy.com/media/eYgVBZKw2LG6Y/giphy.gif");
-        mListOfGifs.add("https://media.giphy.com/media/LZElUsjl1Bu6c/giphy.gif");
+        //      mListOfGifs.add("https://media.giphy.com/media/LZElUsjl1Bu6c/giphy.gif");
 //        mListOfGifs.add("https://media.giphy.com/media/QKKV7KFrG9XMY/giphy.gif");
 //        mListOfGifs.add("https://media.giphy.com/media/JltOMwYmi0VrO/giphy.gif");
 //        mListOfGifs.add("https://media.giphy.com/media/r1HGFou3mUwMw/giphy.gif");

@@ -45,11 +45,11 @@
     <string name="targetgroup_profile">Profile</string>
     <string name="button_next">VOLGENDE STAP!</string>
     <string name="create_dilemma">Nieuw dilemma</string>
-    <string name="targetgroup_call_someone">JE MOEDERRR BELLEN</string>
+    <string name="targetgroup_call_someone">JE MOEDER BELLEN</string>
     <string name="targetgroup_call_someone_2">DARTH VADER BELLEN</string>
     <string name="targetgroup_call_someone_3">DE FABELTJESKRANT BELLEN</string>
     <string name="targetgroup_call_someone_4">ALFRED JODOCUS KWAK BELLEN</string>
-    <string name="targetgroup_call_someone_5">JESUS BELLEN</string>
+    <string name="targetgroup_call_someone_5">BNN BELLEN</string>
     <string name="targetgroup_call_someone_6">SHANIQUA BELLEN</string>
     <string name="targetgroup_call_someone_7">HELP DESK BELLEN</string>
     <string name="targetgroup_call_someone_8">BASSIE EN ADRIAAN BELLEN</string>
@@ -70,6 +70,10 @@
     <string name="deadline_hours_1">2 uur</string>
     <string name="deadline_hours_2">12 uur</string>
     <string name="deadline_hours_3">24 uur</string>
+    <string name="share_on_social_media">Share on Social Media</string>
+    <string name="share_on_social_media_text">Do you want to share the dilemma on social media?</string>
+    <string name="go_to_main">Go to main</string>
+    <string name="share">Delen</string>
 
     // CREATE DILEMMA SCREEN
     <string name="title_hint">Moet ik…</string>
@@ -82,6 +86,8 @@
     <string name="check_at_least_one_sender">Vink ten minste éen afsender!</string>
     <string name="check_at_least_one_deadline">Vink ten minste éen deadline!</string>
     <string name="use_image">Gebruik photo</string>
+    <string name="enter_dilemma_context">Enter Dilemma Context</string>
+    <string name="save_context">SAVE CONTEXT</string>
     <string name="add_content">Licht jouw antwoord toe +</string>
     <string name="add_photo">Voeg foto toe</string>
     <string name="take_photo">Maak Foto</string>

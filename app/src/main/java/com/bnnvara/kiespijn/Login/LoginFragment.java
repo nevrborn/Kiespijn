@@ -53,8 +53,9 @@ public class LoginFragment extends Fragment {
     // Facebook Parameters
     private CallbackManager mCallbackManager;
     private static Boolean mIsLoggingOut = false;
-    private Boolean hasInternetConnection = false;
+    private static Boolean mHasJustLoggedOut = false;
     private User mUser;
+    LoginButton mLoginButton;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -73,12 +74,6 @@ public class LoginFragment extends Fragment {
         mCallbackManager = CallbackManager.Factory.create();
         AppEventsLogger.activateApp(getActivity().getApplication());
 
-//        if (User.getInstance().getUserKey().equals("")) {
-//            if (isLoggedIn() && !mIsLoggingOut && isConnected()) {
-//                getFacebookParameters();
-//            }
-//        }
-
     }
 
     @Nullable
@@ -90,7 +85,7 @@ public class LoginFragment extends Fragment {
         TextView title = (TextView) view.findViewById(R.id.textview_login_title);
         TextView subtitle = (TextView) view.findViewById(R.id.textview_login_subtitle);
         TextView text = (TextView) view.findViewById(R.id.textview_login_text);
-        LoginButton loginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
+        mLoginButton = (LoginButton) view.findViewById(R.id.facebook_login_button);
 
         // FONT setup
         Typeface source_sans_extra_light = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-ExtraLight.ttf");
@@ -99,10 +94,10 @@ public class LoginFragment extends Fragment {
         text.setTypeface(source_sans_extra_light);
 
         // Facebook Login Button Setup
-        loginButton.setReadPermissions("email", "public_profile", "user_friends");
-        loginButton.setFragment(this);
+        mLoginButton.setReadPermissions("email", "public_profile", "user_friends");
+        mLoginButton.setFragment(this);
 
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        mLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
@@ -129,10 +124,6 @@ public class LoginFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         // TODO: Do we need this? Can we delete it?
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void signOut() {
-        LoginManager.getInstance().logOut();
     }
 
     private void getFacebookParameters() {
@@ -243,6 +234,8 @@ public class LoginFragment extends Fragment {
                 e.printStackTrace();
             }
 
+            mIsLoggingOut = false;
+            mHasJustLoggedOut = false;
             Intent i = DilemmaActivity.newIntent(getContext());
             startActivity(i);
 
@@ -292,11 +285,6 @@ public class LoginFragment extends Fragment {
 
     }
 
-//    private boolean isLoggedIn() {
-//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-//        return accessToken != null;
-//    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -304,11 +292,15 @@ public class LoginFragment extends Fragment {
 
         mUser = User.getInstance();
 
-        if (!mIsLoggingOut && isConnected() && !mUser.getUserKey().equals("")) {
+        if (!mIsLoggingOut && isConnected() && !mUser.getUserKey().equals("") && !mHasJustLoggedOut) {
             Intent i = DilemmaActivity.newIntent(getContext());
             startActivity(i);
-        } else if (!mIsLoggingOut && isConnected() && mUser.getUserKey().equals("")) {
+        } else if (!mIsLoggingOut && isConnected() && mUser.getUserKey().equals("") && !mHasJustLoggedOut) {
             getFacebookParameters();
+        } else if (mIsLoggingOut && !mHasJustLoggedOut) {
+            mLoginButton.performClick();
+            mIsLoggingOut = false;
+            mHasJustLoggedOut = true;
         }
     }
 

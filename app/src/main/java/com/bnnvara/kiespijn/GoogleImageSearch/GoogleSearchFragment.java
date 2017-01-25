@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Login.LoginFragment;
@@ -54,6 +55,7 @@ public class GoogleSearchFragment extends Fragment {
     private int mImageIndex = 1;
     private long mTotalImageSize;
     private MenuItem mNewSearch;
+
 
     public static GoogleSearchFragment newInstance(String searchString) {
         mSearchString = searchString;
@@ -224,11 +226,14 @@ public class GoogleSearchFragment extends Fragment {
         private ImageView mItemImageView;
         private CheckBox mRadioButton;
         private GalleryItem mGalleryItem;
+        private ProgressBar mProgressBar;
+
 
         public PhotoHolder(View itemView) {
             super(itemView);
             mRadioButton = (CheckBox) itemView.findViewById(R.id.radioButton);
             mItemImageView = (ImageView) itemView.findViewById(R.id.iv_photo_gallery_fragment);
+            mProgressBar = (ProgressBar) itemView.findViewById(R.id.progress_google_search);
             itemView.setOnClickListener(this);
         }
 
@@ -242,13 +247,15 @@ public class GoogleSearchFragment extends Fragment {
 
             Glide.with(getActivity())
                     .load(url)
-                    .placeholder(R.mipmap.ic_launcher)
                     .into(mItemImageView);
+
         }
 
         @Override
         public void onClick(View view) {
             int i = 0;
+
+            mProgressBar.setVisibility(View.GONE);
 
             while (i < mRadioButtonList.size()) {
                 mRadioButtonList.get(i).setChecked(false);

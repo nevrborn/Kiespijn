@@ -443,8 +443,7 @@ public class Dilemma implements Serializable {
     }
 
     public int getVotesFromSameCity() {
-        return this.getVotesFromSameCityA()
-                + this.getVotesFromSameCityB();
+        return this.getVotesFromSameCityA() + this.getVotesFromSameCityB();
     }
 
 
@@ -565,10 +564,7 @@ public class Dilemma implements Serializable {
         double score = (double) (this.getVotesFromSameCityB() * 100) / this.getVotesFromSameCity();
         return (int) Math.round(score);
     }
-
-
-
-
+    
     public int getScoreAgeGroup1A() {
         double score = (double) (this.getVotesFromAgeGroup1A() * 100) / this.getVotesFromAgeGroup1();
         return (int) Math.round(score);

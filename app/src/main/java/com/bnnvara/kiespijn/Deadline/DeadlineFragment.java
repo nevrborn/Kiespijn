@@ -43,7 +43,6 @@ public class DeadlineFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
 
     }
 
@@ -180,11 +179,6 @@ public class DeadlineFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_no_create_button, menu);
-    }
 
     private void setDateCreatedAndDeadLine(int deadline) {
         mDilemma.setCreatedAt();

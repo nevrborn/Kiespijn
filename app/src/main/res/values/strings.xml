@@ -105,10 +105,10 @@
     <string name="add_content_hint">Waar denk je aan?</string>
     <string name="add_content_media">Voeg media toe</string>
     <string name="result_page_content_buttons">Toelichtingen</string>
-    <string name="add_content_foto_video">FOTO</string>
+    <string name="add_content_foto_video">Foto</string>
     <string name="add_content_google">Google Verrassing</string>
     <string name="add_content_add">VOEG TOE</string>
-    <string name="add_content_article">article / blog / fragment</string>
+    <string name="add_content_article">artikel / blog / fragment</string>
     <string name="add_content_purpose_title">Waarom raad jij deze keuze aan?</string>
     <string name="add_content_purpose_text">Deel hier waarom jij een bepaalde keuze maakt en voeg een eigen foto of video toe.\n\nOf nog makkelijker: Selecteer meteen via Google een foto!\n\nWil je een tof artikel, blog of fragment vinden, die jouw keuze nog meer onderbouwt? Dat kan hier!</string>
 

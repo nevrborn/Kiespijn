@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
 import com.bnnvara.kiespijn.GroupPage.Group;
+import com.bnnvara.kiespijn.GroupPage.GroupPageActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 import com.bnnvara.kiespijn.User;
@@ -41,6 +43,8 @@ public class FriendListFragment extends Fragment {
     private RecyclerView mPhotoRecylerView;
     private List<String> mTargetIDList = new ArrayList<>();
     private Boolean mCheckTargetList = false;
+    private Boolean mComingFromFriendList = false;
+    private Button mGroupButton;
 
     private Boolean showGroups = false;
 
@@ -56,12 +60,27 @@ public class FriendListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_friend_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_make_group:
+                Intent intent = GroupPageActivity.newIntent(getActivity());
+                startActivity(intent);
+                mComingFromFriendList = true;
+                return true;
+            default:
+                return true;
+        }
+
     }
 
     @Nullable
@@ -72,15 +91,17 @@ public class FriendListFragment extends Fragment {
         Button nextButton = (Button) view.findViewById(R.id.button_next_friend_list);
         Button prevButton = (Button) view.findViewById(R.id.button_previous_friend_list);
         final Button friendsButton = (Button) view.findViewById(R.id.friend_list_all);
-        final Button groupButton = (Button) view.findViewById(R.id.friend_list_groups);
+        mGroupButton = (Button) view.findViewById(R.id.friend_list_groups);
         mSearchView = (SearchView) view.findViewById(R.id.searchview_friends);
         mCheckBoxAllFriends = (CheckBox) view.findViewById(R.id.checkbox_all_friends);
         final TextView everyoneTextView = (TextView) view.findViewById(R.id.textview_friendlist_everyone);
 
         // FONT setup
         Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
-        groupButton.setTypeface(source_sans_bold);
+        mGroupButton.setTypeface(source_sans_bold);
         friendsButton.setTypeface(source_sans_bold);
+
+        mSearchView.setVisibility(View.GONE);
 
         if (mDilemma.getTargetIDList() != null) {
             mCheckTargetList = true;
@@ -115,7 +136,7 @@ public class FriendListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 friendsButton.setAlpha(1);
-                groupButton.setAlpha(0.65f);
+                mGroupButton.setAlpha(0.65f);
                 friendAdapter.setupAdapter();
                 mCheckBoxAllFriends.setVisibility(View.VISIBLE);
                 everyoneTextView.setVisibility(View.VISIBLE);
@@ -123,11 +144,11 @@ public class FriendListFragment extends Fragment {
             }
         });
 
-        groupButton.setOnClickListener(new View.OnClickListener() {
+        mGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 friendsButton.setAlpha(0.65f);
-                groupButton.setAlpha(1);
+                mGroupButton.setAlpha(1);
                 groupAdapter.setupAdapter();
                 mCheckBoxAllFriends.setVisibility(View.GONE);
                 everyoneTextView.setVisibility(View.GONE);
@@ -173,8 +194,6 @@ public class FriendListFragment extends Fragment {
                 getActivity().finish();
             }
         });
-
-
 
         return view;
     }
@@ -317,17 +336,22 @@ public class FriendListFragment extends Fragment {
 
         TextView groupName;
         CheckBox checkBox;
+        TextView groupFriendsName;
+        Group mGroup;
+        Boolean mSeeWholeGroup = true;
 
         public GroupHolder(View itemView) {
             super(itemView);
             groupName = (TextView) itemView.findViewById(R.id.textview_group_name);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkbox_group);
+            groupFriendsName = (TextView) itemView.findViewById(R.id.textview_groups_names);
 
             itemView.setOnClickListener(this);
         }
 
         public void bindGroupItem(final Group group) {
 
+            mGroup = group;
             groupName.setText(group.getGroupName());
 
             checkBox.setOnClickListener(new View.OnClickListener() {
@@ -342,12 +366,10 @@ public class FriendListFragment extends Fragment {
                             if (!checkTargetList(facebookID)) {
                                 mTargetIDList.add(group.getGroupMembers().get(i).getFacebookID());
                             }
-
                             i += 1;
                         }
 
                     } else {
-
                         int i = 0;
 
                         while (i < group.getGroupMembers().size()) {
@@ -356,11 +378,8 @@ public class FriendListFragment extends Fragment {
                                 int index = mTargetIDList.indexOf(facebookID);
                                 mTargetIDList.remove(index);
                             }
-
                             i += 1;
                         }
-
-                        mCheckBoxAllFriends.setChecked(false);
                     }
                 }
             });
@@ -381,14 +400,31 @@ public class FriendListFragment extends Fragment {
                     i += 1;
                 }
             }
-
         }
 
         @Override
         public void onClick(View view) {
-
+            if (mSeeWholeGroup) {
+                seeMembersOfGroup(mGroup);
+                mSeeWholeGroup = false;
+            } else if (!mSeeWholeGroup) {
+                groupFriendsName.setText(R.string.tap_to_see_group_members);
+                mSeeWholeGroup = true;
+            }
         }
 
+        private void seeMembersOfGroup(Group group) {
+            int i = 0;
+
+            while (i < group.getGroupMembers().size()) {
+                if (i == 0) {
+                    groupFriendsName.setText(group.getGroupMembers().get(i).getName());
+                } else {
+                    groupFriendsName.setText(groupFriendsName.getText() + ", " + group.getGroupMembers().get(i).getName());
+                }
+                i += 1;
+            }
+        }
     }
 
     private class GroupListAdapter extends RecyclerView.Adapter<GroupHolder> {
@@ -425,4 +461,14 @@ public class FriendListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mComingFromFriendList == true) {
+            mGroupButton.performClick();
+            mGroupsList = User.getInstance().getGroupsList();
+        }
+
+    }
 }

@@ -34,6 +34,9 @@ import com.bnnvara.kiespijn.Dilemma.Answer;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
 import com.bnnvara.kiespijn.Dilemma.Replies;
+import com.bnnvara.kiespijn.FriendList.Friend;
+import com.bnnvara.kiespijn.GroupPage.Group;
+import com.bnnvara.kiespijn.GroupPage.GroupPageActivity;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
@@ -86,10 +89,12 @@ public class DilemmaFragment extends Fragment {
 
     private static List<Dilemma> mDilemmaList;
     private static List<Dilemma> mTempDilemmaList = new ArrayList<>();
+    private List<Group> mGroupsList = new ArrayList<>();
     private Dilemma mDilemma;
     private int mCurrentIndex;
     private String mUserFbId;
     private Boolean mFilterFriends = false;
+    private Boolean mIsLastDilemma = false;
 
     private float mImageAlpha = 1.0f;
     private int tempOffset;
@@ -323,7 +328,11 @@ public class DilemmaFragment extends Fragment {
                     }
                 } else {
                     mFilterFriends = false;
-                    resetCurrentIndex();
+
+                    if (mIsLastDilemma) {
+                        resetCurrentIndex();
+                        mIsLastDilemma = false;
+                    }
                 }
             }
         });
@@ -365,6 +374,8 @@ public class DilemmaFragment extends Fragment {
 
     private void showNoDilemmas() {
         mNoDilemmasTextView.setVisibility(View.VISIBLE);
+        mIsLastDilemma = true;
+
     }
 
     private void updateUi() {
@@ -607,6 +618,10 @@ public class DilemmaFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 User.getInstance().setHasCreatedDilemma(true);
+                return true;
+            case R.id.menu_item_manage_groups:
+                Intent intent = GroupPageActivity.newIntent(getActivity());
+                startActivity(intent);
                 return true;
             default:
                 return true;

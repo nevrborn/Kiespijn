@@ -4,8 +4,7 @@
 
     <item
         android:id="@+id/menu_make_group"
-        android:icon="@drawable/places_ic_search"
-        android:title="@string/groups"
+        android:title="@string/group_page_title"
         app:showAsAction="always|withText"/>
 
 </menu>

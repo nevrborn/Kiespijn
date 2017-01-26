@@ -6,8 +6,8 @@
     android:background="@color/colorGrey"
     >
 
-    <LinearLayout
-        android:layout_width="100dp"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -18,7 +18,7 @@
             android:id="@+id/button_previous_deadline"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="16dp"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/ic_action_previous_arrow"
             />
 
@@ -26,7 +26,9 @@
             android:id="@+id/textview_post_dilemma"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="POST"
+            android:text="@string/deadline_set"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
             android:textSize="20sp"
             android:gravity="center"
             android:textColor="@color/colorRed"/>
@@ -39,7 +41,7 @@
         <!--android:background="@drawable/ic_action_next_arrow"-->
         <!--/>-->
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

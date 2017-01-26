@@ -1,7 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/colorGrey"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:id="@+id/imageview_fromwho_user"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:background="@mipmap/ic_profile"
+        android:backgroundTint="@color/colorYellow"
+        android:layout_marginTop="18dp"
+        android:contentDescription="@string/image_content"/>
+
+    <TextView
+        android:id="@+id/textview_fromwho_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/group_page_title"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        android:textColor="@color/colorGreen"
+        android:background="@color/colorYellow"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:weightSum="1"
+        android:padding="5dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/group_page_groups"
+            android:text="@string/group_page_your_groups"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/buttons_filter"
+            android:textColor="@android:color/white"
+            />
+
+        <Button
+            android:id="@+id/group_page_new_group"
+            android:text="@string/group_page_new_groups"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/buttons_filter"
+            android:textColor="@android:color/white"
+            android:layout_weight="0.5"
+            android:alpha=".65"/>
+
+    </LinearLayout>
+
+    <!--<SearchView-->
+    <!--android:visibility="gone"-->
+    <!--android:id="@+id/searchview_friends"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:padding="8dp"/>-->
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/fill_in_group_name"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/colorRed"
+        android:inputType="textCapSentences"
+        android:id="@+id/edittext_make_group_name"/>
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/group_list_recycler_view"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        >
+
+        <TextView
+            android:id="@+id/text_view_save_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="20sp"
+            android:text="@string/group_page_save_group"
+            />
+
+        <TextView
+            android:id="@+id/text_view_delete_groups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:text="@string/delete_groups"
+            />
+
+    </LinearLayout>
+
 
 </LinearLayout>

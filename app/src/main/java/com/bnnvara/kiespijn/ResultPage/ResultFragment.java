@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bnnvara.kiespijn.GroupPage.GroupPageActivity;
 import com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar;
 import com.bnnvara.kiespijn.ContentPage.ContentPageActivity;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
@@ -292,6 +293,10 @@ public class ResultFragment extends Fragment {
                 Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
+                return true;
+            case R.id.menu_item_manage_groups:
+                Intent intent = GroupPageActivity.newIntent(getActivity());
+                startActivity(intent);
                 return true;
             case android.R.id.home:
                 getActivity().onBackPressed();

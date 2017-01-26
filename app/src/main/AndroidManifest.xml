@@ -60,7 +60,7 @@
         <activity
             android:name=".Deadline.DeadlineActivity"
             android:screenOrientation="portrait"
-            android:label="Deadline">
+            android:label="Looptijd">
         </activity>
         <activity
             android:name=".GoogleImageSearch.GoogleSearchActivity"

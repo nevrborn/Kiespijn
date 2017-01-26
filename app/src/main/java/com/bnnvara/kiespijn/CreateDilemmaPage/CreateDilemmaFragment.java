@@ -342,21 +342,21 @@ public class CreateDilemmaFragment extends Fragment {
         final EditText enterContext = new EditText(getContext());
         enterContext.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
-        contextAlert.setTitle("Enter Dilemma Context");
+        contextAlert.setTitle(getString(R.string.enter_dilemma_context));
         contextAlert.setView(enterContext);
 
         if (mDilemma.getBackgroundInfo() != null) {
             enterContext.setText(mDilemma.getBackgroundInfo());
         }
 
-        contextAlert.setPositiveButton("SAVE CONTEXT", new DialogInterface.OnClickListener() {
+        contextAlert.setPositiveButton(getString(R.string.save_context), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 mDilemma.setBackgroundInfo(enterContext.getText().toString());
             }
         });
 
-        contextAlert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        contextAlert.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 

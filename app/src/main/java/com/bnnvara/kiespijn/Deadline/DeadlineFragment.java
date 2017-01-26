@@ -30,6 +30,7 @@ public class DeadlineFragment extends Fragment {
 
     private static final String TAG = "DeadlineFragment";
     private static final String DILEMMA_OBJECT = "dilemma_object";
+    private static final int SHARE_DILEMMA = 0;
 
     private static Dilemma mDilemma;
     private int mDeadline;
@@ -228,7 +229,7 @@ public class DeadlineFragment extends Fragment {
                         intent.setType("text/plain");
                         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
                         intent.putExtra(Intent.EXTRA_TEXT, "HALPP! Wat moet ik kiezen? " + mDilemma.getTitlePhotoA() + " of " + mDilemma.getTitlePhotoB());
-                        startActivityForResult(intent, 0);
+                        startActivityForResult(intent, SHARE_DILEMMA);
                     }
                 })
                 .setNegativeButton(getString(R.string.go_to_main), new DialogInterface.OnClickListener() {
@@ -245,5 +246,15 @@ public class DeadlineFragment extends Fragment {
         Intent i = DilemmaActivity.newIntent(getActivity());
         startActivity(i);
         getActivity().finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SHARE_DILEMMA && resultCode == ResultActivity.RESULT_CANCELED) {
+            shareDilemma();
+        }
+
     }
 }

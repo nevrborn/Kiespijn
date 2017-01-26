@@ -375,7 +375,7 @@ public class DilemmaFragment extends Fragment {
     private void showNoDilemmas() {
         mNoDilemmasTextView.setVisibility(View.VISIBLE);
         mIsLastDilemma = true;
-
+        askToCreateDilemma();
     }
 
     private void updateUi() {
@@ -618,10 +618,6 @@ public class DilemmaFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 User.getInstance().setHasCreatedDilemma(true);
-                return true;
-            case R.id.menu_item_manage_groups:
-                Intent intent = GroupPageActivity.newIntent(getActivity());
-                startActivity(intent);
                 return true;
             default:
                 return true;

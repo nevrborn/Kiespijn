@@ -35,7 +35,6 @@ import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.TargetGroup.TargetGroupActivity;
 import com.bumptech.glide.Glide;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -257,7 +256,7 @@ public class CreateDilemmaFragment extends Fragment {
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             // Create the File where the photo should go
-            File photoFile = null;
+            File photoFile;
             try {
                 photoFile = createImageFile();
                 // Continue only if the File was successfully created
@@ -382,7 +381,6 @@ public class CreateDilemmaFragment extends Fragment {
             for (int grantResult : grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     // Cannot proceed without permissions
-                    hasPermissions = false;
                     openUpSettings();
                 }
             }

@@ -6,6 +6,8 @@
     <string name="everybody">Iedereen</string>
     <string name="groups">GROEPEN</string>
     <string name="skip">Niet nu</string>
+    <string name="read_more">Lees meer</string>
+    <string name="read_less">Lees minder</string>
 
     // LOGIN SCREEN
     <string name="login_title">HALPP!</string>
@@ -115,6 +117,7 @@
 
     // RESULT SCREEN
     <string name="result_content">TOELICHTING</string>
+    <string name="expired_dilemma">Verlopen</string>
 
     // GROUP PAGE
     <string name="group_page_title">Groepen Beheren</string>

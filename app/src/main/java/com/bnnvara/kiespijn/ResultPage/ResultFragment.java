@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bnnvara.kiespijn.GroupPage.GroupPageActivity;
 import com.bnnvara.kiespijn.RoundedProgressBars.TextRoundCornerProgressBar;
 import com.bnnvara.kiespijn.ContentPage.ContentPageActivity;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
@@ -31,7 +30,6 @@ import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.PersonalPage.PersonalPageActivity;
 import com.bnnvara.kiespijn.R;
-import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
 
 public class ResultFragment extends Fragment {

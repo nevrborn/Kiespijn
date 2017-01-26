@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.bnnvara.kiespijn.ArticleSearchPage.ArticleSearchFragment;
 import com.bnnvara.kiespijn.SingleFragmentActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

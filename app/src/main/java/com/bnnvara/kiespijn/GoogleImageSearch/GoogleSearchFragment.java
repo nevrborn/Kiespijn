@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.bnnvara.kiespijn.Login.LoginFragment;
 import com.bnnvara.kiespijn.R;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -308,10 +307,6 @@ public class GoogleSearchFragment extends Fragment {
         ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        if (networkInfo != null && networkInfo.isConnected())
-            return true;
-        else
-
-            return false;
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

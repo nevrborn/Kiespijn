@@ -205,12 +205,12 @@ public class ArticleSearchFragment extends Fragment {
                 public void onClick(View view) {
                     if (!mState){
                         mState = !mState;
-                        mMoreLess.setText("Lees minder");
+                        mMoreLess.setText(getString(R.string.read_less));
                         mIntroduction.setVisibility(View.GONE);
                         mMainText.setVisibility(View.VISIBLE);
                     } else {
                         mState = !mState;
-                        mMoreLess.setText("Lees meer");
+                        mMoreLess.setText(getString(R.string.read_more));
                         mIntroduction.setVisibility(View.VISIBLE);
                         mMainText.setVisibility(View.GONE);
                     }

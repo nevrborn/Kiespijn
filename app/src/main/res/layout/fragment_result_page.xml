@@ -45,7 +45,7 @@
                 android:text="Opie A AAA AAAA"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 />
 
@@ -61,7 +61,7 @@
                 android:text="Optie B BBB BBBB"
                 android:textAlignment="gravity"
                 android:textColor="@android:color/white"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 />
 
@@ -74,7 +74,7 @@
             android:layout_marginBottom="2dp"
             android:gravity="center_horizontal"
             android:text="Alle stemmen"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             />
 
@@ -102,7 +102,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center_vertical"
                     android:text="55"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     />
 
@@ -243,7 +243,7 @@
                             android:layout_marginBottom="12dp"
                             android:gravity="center_vertical"
                             android:text="Mannen (18)"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             />
 
@@ -256,7 +256,7 @@
                             android:layout_marginBottom="12dp"
                             android:gravity="center_vertical"
                             android:text="Vrouwen (26)"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             />
 
@@ -267,7 +267,7 @@
                             android:layout_below="@+id/text_view_results_women"
                             android:gravity="center_vertical"
                             android:text="Onbekend (1)"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -277,7 +277,7 @@
                             android:layout_below="@+id/text_view_results_uknown_sex"
                             android:gravity="center_vertical"
                             android:text="Amsterdam (4)"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
                             android:textStyle="bold"/>
 
                     </RelativeLayout>
@@ -911,7 +911,7 @@
                 android:gravity="center"
                 android:text="8"
                 android:textColor="@android:color/white"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 />
 
             <TextView
@@ -923,7 +923,7 @@
                 android:gravity="center"
                 android:text="12"
                 android:textColor="@android:color/white"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 />
 
         </RelativeLayout>

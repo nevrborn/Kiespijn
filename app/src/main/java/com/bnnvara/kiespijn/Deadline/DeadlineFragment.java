@@ -9,9 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,8 +17,6 @@ import android.widget.Toast;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.DilemmaFromWho.DilemmaFromWhoActivity;
-import com.bnnvara.kiespijn.DilemmaPage.DilemmaActivity;
-import com.bnnvara.kiespijn.DilemmaPage.DilemmaFragment;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.ResultPage.ResultActivity;
 import com.bnnvara.kiespijn.User;
@@ -103,8 +98,6 @@ public class DeadlineFragment extends Fragment {
 
             Log.i(TAG, "CreatedAt: " + mDilemma.getDateAndTime(mDilemma.getCreatedAt()));
             Log.i(TAG, "Deadline: " + mDilemma.getDateAndTime(mDilemma.getDeadline()));
-
-        } else {
 
         }
 

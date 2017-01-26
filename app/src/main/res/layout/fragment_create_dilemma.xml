@@ -55,7 +55,8 @@
                 android:layout_marginBottom="4dp"
                 android:layout_gravity="center_vertical"
                 android:background="@color/colorYellow"
-                android:foreground="@mipmap/ic_info"/>
+                android:foreground="@mipmap/ic_info"
+                android:contentDescription="@string/image_content"/>
 
             <ImageView
                 android:layout_width="5dp"

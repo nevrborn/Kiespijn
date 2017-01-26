@@ -219,10 +219,7 @@ public class FriendListFragment extends Fragment {
 
     private Boolean checkTargetList(String ID) {
 
-        if (mTargetIDList.contains(ID)) {
-            return true;
-        }
-        return false;
+        return mTargetIDList.contains(ID);
     }
 
     public class FriendHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -472,7 +469,7 @@ public class FriendListFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if (mComingFromFriendList == true) {
+        if (mComingFromFriendList) {
             mGroupButton.performClick();
             mGroupsList = User.getInstance().getGroupsList();
         }

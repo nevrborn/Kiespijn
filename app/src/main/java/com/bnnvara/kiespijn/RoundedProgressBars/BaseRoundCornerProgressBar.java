@@ -28,8 +28,6 @@ package com.bnnvara.kiespijn.RoundedProgressBars;
         import android.os.Parcelable;
         import android.util.AttributeSet;
         import android.util.DisplayMetrics;
-        import android.util.Log;
-        import android.util.TypedValue;
         import android.view.Gravity;
         import android.view.LayoutInflater;
         import android.view.ViewGroup;

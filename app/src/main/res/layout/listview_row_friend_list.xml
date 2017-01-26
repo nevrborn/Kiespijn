@@ -10,7 +10,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@mipmap/ic_launcher"
-        android:id="@+id/imageview_profile_picture"/>
+        android:id="@+id/imageview_profile_picture"
+        android:contentDescription="@string/image_content"/>
 
     <TextView
         android:id="@+id/textview_friend_name"

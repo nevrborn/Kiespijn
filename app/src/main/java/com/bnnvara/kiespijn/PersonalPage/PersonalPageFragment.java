@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +21,6 @@ import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
-import com.bnnvara.kiespijn.GroupPage.GroupPageActivity;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.ResultPage.ResultActivity;
@@ -246,7 +244,7 @@ public class PersonalPageFragment extends Fragment {
             }
 
             if (dilemma.getTimeLeft() < 0){
-                holder.mTimeLeftTextView.setText("Verlopen");
+                holder.mTimeLeftTextView.setText(getString(R.string.expired_dilemma));
                 holder.mClockImageView.setVisibility(View.GONE);
             } else {
                 holder.mClockImageView.setVisibility(View.VISIBLE);

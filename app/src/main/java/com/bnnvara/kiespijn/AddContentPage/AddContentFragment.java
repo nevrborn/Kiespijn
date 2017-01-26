@@ -2,13 +2,9 @@ package com.bnnvara.kiespijn.AddContentPage;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -43,7 +39,6 @@ import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.User;
 import com.bumptech.glide.Glide;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -253,7 +248,7 @@ public class AddContentFragment extends Fragment {
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             // Create the File where the photo should go
-            File photoFile = null;
+            File photoFile;
             try {
                 photoFile = createImageFile();
                 // Continue only if the File was successfully created
@@ -358,7 +353,6 @@ public class AddContentFragment extends Fragment {
             for (int grantResult : grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     // Cannot proceed without permissions
-                    hasPermissions = false;
                     openUpSettings();
                 }
             }

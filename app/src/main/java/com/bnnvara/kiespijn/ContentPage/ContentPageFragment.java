@@ -19,9 +19,7 @@ import android.widget.TextView;
 
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.R;
-import com.bnnvara.kiespijn.ResultPage.ResultActivity;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.vision.text.Text;
 
 import java.util.List;
 

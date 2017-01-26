@@ -13,7 +13,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -31,8 +30,6 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginBehavior;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -168,7 +165,7 @@ public class LoginFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            String facebookHometown = null;
+            String facebookHometown;
             try {
                 facebookHometown = object.getString("hometown");
                 String hometown = facebookHometown.substring(0, facebookHometown.indexOf(','));

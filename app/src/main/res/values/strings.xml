@@ -74,6 +74,7 @@
     <string name="share_on_social_media_text">Wil je jouw dilemma delen op Social Media?</string>
     <string name="go_to_main">Ga naar dilemmas</string>
     <string name="share">Delen</string>
+    <string name="dilemma_is_posted">Je dilemma is nu te zien voor anderen!</string>
 
     // CREATE DILEMMA SCREEN
     <string name="title_hint">Moet ik…</string>

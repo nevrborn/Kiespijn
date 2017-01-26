@@ -302,10 +302,16 @@ public class DilemmaFragment extends Fragment {
         mBackgroundInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Achtergrond informatie");
                 builder.setIcon(R.mipmap.ic_info);
                 builder.setMessage(mDilemma.getBackgroundInfo());
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
                 builder.show();
             }
         });

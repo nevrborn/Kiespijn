@@ -243,9 +243,9 @@ public class DeadlineFragment extends Fragment {
 
     private void goToMain() {
         mDilemma = null;
-        Intent i = DilemmaActivity.newIntent(getActivity());
-        startActivity(i);
         getActivity().finish();
+        Toast.makeText(getActivity(), R.string.dilemma_is_posted, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

@@ -340,10 +340,16 @@ public class ResultFragment extends Fragment {
             mCityNrOfResultsTextView.setVisibility(View.VISIBLE);
             mCityLeftProgressBar.setVisibility(View.VISIBLE);
             mCityRightProgressBar.setVisibility(View.VISIBLE);
+            setMarginBottom(mUnknownSexLeftProgressBar, 24);
+            setMarginBottom(mUnknownSexNrOfResultsTextView, 24);
+            setMarginBottom(mUnknownSexRightProgressBar, 24);
         } else {
             mCityNrOfResultsTextView.setVisibility(View.GONE);
             mCityLeftProgressBar.setVisibility(View.GONE);
             mCityRightProgressBar.setVisibility(View.GONE);
+            setMarginBottom(mUnknownSexLeftProgressBar, 0);
+            setMarginBottom(mUnknownSexNrOfResultsTextView, 0);
+            setMarginBottom(mUnknownSexRightProgressBar, 0);
             mProgressBarsRelativeLayout.invalidate();
         }
 
@@ -371,6 +377,13 @@ public class ResultFragment extends Fragment {
         ageGroup4ScoreRightTextView.setText(Integer.toString(mDilemma.getScoreAgeGroup4B()));
         ageGroupUnknownScoreLeftTextView.setText(Integer.toString(mDilemma.getScoreAgeGroupUnknownA()));
         ageGroupUnknownScoreRightTextView.setText(Integer.toString(mDilemma.getScoreAgeGroupUnknownB()));
+    }
+
+    public static void setMarginBottom(View v, int bottom) {
+        ViewGroup.MarginLayoutParams params =
+                (ViewGroup.MarginLayoutParams)v.getLayoutParams();
+        params.setMargins(params.leftMargin, params.topMargin,
+                params.rightMargin, bottom);
     }
 
     private void animateWinnerCrown() {

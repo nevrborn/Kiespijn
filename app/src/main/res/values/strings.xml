@@ -116,8 +116,8 @@
     <string name="result_content">TOELICHTING</string>
 
     // GROUP PAGE
-    <string name="group_page_title">Groepen Beheeren</string>
-    <string name="group_page_save_group">Bevaar Groep</string>
+    <string name="group_page_title">Groepen Beheren</string>
+    <string name="group_page_save_group">Bewaar Groep</string>
     <string name="group_page_your_groups">JOUW GROEPEN</string>
     <string name="group_page_new_groups">MAAK GROEP</string>
     <string name="group_page_new_group_name">Voer naam in</string>

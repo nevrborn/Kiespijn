@@ -58,6 +58,7 @@ public class GroupPageFragment extends Fragment {
         final EditText addGroupNameEditText = (EditText) view.findViewById(R.id.edittext_make_group_name);
         final TextView saveButton = (TextView) view.findViewById(R.id.text_view_save_group);
         final TextView deleteButton = (TextView) view.findViewById(R.id.text_view_delete_groups);
+        final TextView title = (TextView) view.findViewById(R.id.textview_group_title);
         final Button groupsButton = (Button) view.findViewById(R.id.group_page_groups);
         final Button makeGroupButton = (Button) view.findViewById(R.id.group_page_new_group);
 
@@ -66,6 +67,7 @@ public class GroupPageFragment extends Fragment {
 
         // FONT setup
         Typeface source_sans_bold = Typeface.createFromAsset(getContext().getAssets(), "fonts/SourceSansPro-Bold.ttf");
+        title.setTypeface(source_sans_bold);
         groupsButton.setTypeface(source_sans_bold);
         makeGroupButton.setTypeface(source_sans_bold);
         saveButton.setTypeface(source_sans_bold);
@@ -115,6 +117,7 @@ public class GroupPageFragment extends Fragment {
                         Group newGroup = new Group(groupName, mNewGroupList);
                         user.addGroupToGroupsList(newGroup);
                         mGroupsList = user.getGroupsList();
+                        groupsButton.performClick();
                     } else {
                         Toast.makeText(getActivity(), R.string.check_at_least_one_friend, Toast.LENGTH_SHORT).show();
                     }
@@ -122,7 +125,8 @@ public class GroupPageFragment extends Fragment {
                     Toast.makeText(getActivity(), R.string.fill_in_group_name, Toast.LENGTH_SHORT).show();
                 }
 
-                groupsButton.performClick();
+                addGroupNameEditText.setText("");
+                addGroupNameEditText.setHint(R.string.fill_in_group_name);
 
             }
         });

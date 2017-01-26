@@ -80,11 +80,11 @@
     <string name="title_hint_1">Dilemma 1</string>
     <string name="title_hint_2">Dilemma 2</string>
     <string name="image_title">image title</string>
-    <string name="not_all_fields_filled">Vul eerst alle velden voor je verder gaat!</string>
+    <string name="not_all_fields_filled">Vul eerst alle velden in voor je verder gaat!</string>
     <string name="check_at_least_one_friend">Vink ten minste éen van je vrienden aan!</string>
-    <string name="check_at_least_one_targetgroup">Vink ten minste éen doelgroep!</string>
-    <string name="check_at_least_one_sender">Vink ten minste éen afsender!</string>
-    <string name="check_at_least_one_deadline">Vink ten minste éen deadline!</string>
+    <string name="check_at_least_one_targetgroup">Kies eerst je doelgroep!</string>
+    <string name="check_at_least_one_sender">Kies eerst of je anoniem wilt blijven of niet!</string>
+    <string name="check_at_least_one_deadline">Je moet de looptijd nog kiezen!</string>
     <string name="use_image">Gebruik foto</string>
     <string name="enter_dilemma_context">Leg hier uit waarom jij op deze optie stemt</string>
     <string name="save_context">OPSLAAN</string>
@@ -99,7 +99,7 @@
     <string name="google_cx_key">005303562240230618745:fehybwiv3j0</string>
     <string name="google_search_api_key">AIzaSyDNtEcEBu5G3341BkSjJqoOeUqID9MLNp4</string>
     <string name="google_baseURL">https://www.googleapis.com</string>
-    <string name="google_no_photos">Geen fotos for deze zoek, probeer opnieuw</string>
+    <string name="google_no_photos">We hebben geen foto's gevonden voor je zoekopdracht, probeer het opnieuw</string>
 
     // ADD CONTENT SCREEN
     <string name="add_content_hint">Waar denk je aan?</string>
@@ -120,7 +120,7 @@
     <string name="group_page_save_group">Bewaar Groep</string>
     <string name="group_page_your_groups">JOUW GROEPEN</string>
     <string name="group_page_new_groups">MAAK GROEP</string>
-    <string name="fill_in_group_name">Voer groep naam in</string>
+    <string name="fill_in_group_name">Voer groepsnaam in</string>
     <string name="tap_to_see_group_members">Klik om groepsleden te zien</string>
     <string name="delete_groups">Groepen verwijderen</string>
 

@@ -375,7 +375,7 @@ public class DilemmaFragment extends Fragment {
     private void showNoDilemmas() {
         mNoDilemmasTextView.setVisibility(View.VISIBLE);
         mIsLastDilemma = true;
-
+        askToCreateDilemma();
     }
 
     private void updateUi() {

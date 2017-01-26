@@ -149,7 +149,7 @@ public class TextRoundCornerProgressBar extends BaseRoundCornerProgressBar imple
 //        float ratio = getMax() / getProgress();
 //        int progressWidth = (int) ((getLayoutWidth() - (getPadding() * 2)) / ratio);
 //        if (textProgressWidth + textProgressMargin < progressWidth) {
-        if (getProgress() > 25f) {
+        if (getProgress() > 35f) {
             alignTextProgressInsideProgress();
         } else {
             alignTextProgressOutsideProgress();

@@ -619,10 +619,6 @@ public class DilemmaFragment extends Fragment {
                 startActivity(intent3);
                 User.getInstance().setHasCreatedDilemma(true);
                 return true;
-            case R.id.menu_item_manage_groups:
-                Intent intent = GroupPageActivity.newIntent(getActivity());
-                startActivity(intent);
-                return true;
             default:
                 return true;
         }

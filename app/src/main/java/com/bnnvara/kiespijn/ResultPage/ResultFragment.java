@@ -294,10 +294,6 @@ public class ResultFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
-            case R.id.menu_item_manage_groups:
-                Intent intent = GroupPageActivity.newIntent(getActivity());
-                startActivity(intent);
-                return true;
             case android.R.id.home:
                 getActivity().onBackPressed();
             default:

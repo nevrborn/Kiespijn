@@ -137,10 +137,6 @@ public class PersonalPageFragment extends Fragment {
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
                 return true;
-            case R.id.menu_item_manage_groups:
-                Intent intent = GroupPageActivity.newIntent(getActivity());
-                startActivity(intent);
-                return true;
             default:
                 return true;
         }

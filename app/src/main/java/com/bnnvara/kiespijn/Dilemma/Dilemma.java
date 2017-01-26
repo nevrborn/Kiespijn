@@ -298,17 +298,17 @@ public class Dilemma implements Serializable {
         String ageToShow;
         int age = Integer.parseInt(mCreator_age);
         if (age <= 16) {
-            ageToShow = "0 - 16 jaar";
+            ageToShow = "0 - 16";
         } else if (age > 16 && age <= 20) {
-            ageToShow = "17 - 20 jaar";
+            ageToShow = "17 - 20";
         } else if (age > 20 && age <= 25) {
-            ageToShow = "21 - 25 jaar";
+            ageToShow = "21 - 25";
         } else if (age > 25 && age <= 30) {
-            ageToShow = "26 - 30 jaar";
+            ageToShow = "26 - 30";
         } else if (age > 30 && age <= 35) {
-            ageToShow = "31 - 35 jaar";
+            ageToShow = "31 - 35";
         } else if (age > 35 && age <= 40) {
-            ageToShow = "36 - 40 jaar";
+            ageToShow = "36 - 40";
         } else {
             ageToShow = "Leeftijd onbekend";
         }

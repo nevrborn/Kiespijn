@@ -44,6 +44,7 @@ public class FriendListFragment extends Fragment {
     private List<String> mTargetIDList = new ArrayList<>();
     private Boolean mCheckTargetList = false;
     private Boolean mComingFromFriendList = false;
+    private Boolean mHasAddedAllCheckBoxes = false;
     private Button mGroupButton;
 
     private Boolean showGroups = false;
@@ -138,8 +139,8 @@ public class FriendListFragment extends Fragment {
                 friendsButton.setAlpha(1);
                 mGroupButton.setAlpha(0.65f);
                 friendAdapter.setupAdapter();
-                mCheckBoxAllFriends.setVisibility(View.VISIBLE);
-                everyoneTextView.setVisibility(View.VISIBLE);
+//                mCheckBoxAllFriends.setVisibility(View.VISIBLE);
+//                everyoneTextView.setVisibility(View.VISIBLE);
                 mCheckTargetList = true;
             }
         });
@@ -150,8 +151,8 @@ public class FriendListFragment extends Fragment {
                 friendsButton.setAlpha(0.65f);
                 mGroupButton.setAlpha(1);
                 groupAdapter.setupAdapter();
-                mCheckBoxAllFriends.setVisibility(View.GONE);
-                everyoneTextView.setVisibility(View.GONE);
+//                mCheckBoxAllFriends.setVisibility(View.GONE);
+//                everyoneTextView.setVisibility(View.GONE);
                 mCheckTargetList = true;
 
             }
@@ -241,7 +242,13 @@ public class FriendListFragment extends Fragment {
 
         public void bindFriendItem(final Friend friend) {
 
-            mCheckBoxList.add(checkBox);
+            if (!mHasAddedAllCheckBoxes) {
+                mCheckBoxList.add(checkBox);
+
+                if (mCheckBoxList.size() == mFriendList.size()) {
+                    mHasAddedAllCheckBoxes = true;
+                }
+            }
 
             Glide.with(getActivity())
                     .load(friend.getProfilePicURL())

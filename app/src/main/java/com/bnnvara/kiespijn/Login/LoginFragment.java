@@ -350,10 +350,10 @@ public class LoginFragment extends Fragment {
         if (!mAddedDummyData) {
             Friend paul = new Friend("Paul van Cappellen", "1272797916114496", "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/14054015_1154486661278956_2640202812254557417_n.jpg?oh=6b2f0af784e478e8debf70221af2a05c&oe=591F024B");
             Friend eliza = new Friend("Eliza Cambre", "10210277093237768", "https://scontent.xx.fbcdn.net/v/t1.0-1/c90.41.576.576/s320x320/15337588_10209957675732530_6982606016405059815_n.jpg?oh=af0857e17e686184f7a2355abc5e6b5e&oe=591EC9B3");
-            Friend jesse = new Friend("Jesse Verdellen", "dummydata", "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAg4AAAAJGI4OTY4NDM2LTkyYWUtNDdiMy1iYjIxLTNiYmVlNzcwZDJjNw.jpg");
-            Friend lydie = new Friend("Lydie Polak", "dummydata", "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/053/35a/1aa82e4.jpg");
-            Friend zowi = new Friend("Zowi Vermeire", "dummydata", "https://0.academia-photos.com/8522896/3447685/4052853/s200_zowi.vermeire.jpg");
-            Friend donald = new Friend("Donald Trump", "dummydata", "http://az616578.vo.msecnd.net/files/2016/06/13/6360139435793044861461393096_Donald-Trump-prune-face.jpg");
+            Friend jesse = new Friend("Jesse Verdellen", "dummydata1", "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAg4AAAAJGI4OTY4NDM2LTkyYWUtNDdiMy1iYjIxLTNiYmVlNzcwZDJjNw.jpg");
+            Friend lydie = new Friend("Lydie Polak", "dummydata2", "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/1/005/053/35a/1aa82e4.jpg");
+            Friend zowi = new Friend("Zowi Vermeire", "dummydata3", "https://0.academia-photos.com/8522896/3447685/4052853/s200_zowi.vermeire.jpg");
+            Friend donald = new Friend("Donald Trump", "dummydata4", "http://az616578.vo.msecnd.net/files/2016/06/13/6360139435793044861461393096_Donald-Trump-prune-face.jpg");
 
             mUser.addFriendToFacebookFriendList(jesse);
             mUser.addFriendToFacebookFriendList(zowi);

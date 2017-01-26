@@ -79,6 +79,7 @@
         android:layout_marginRight="25dp">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/textview_friendlist_everyone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -88,6 +89,7 @@
             android:gravity="end"/>
 
         <CheckBox
+            android:visibility="gone"
             android:id="@+id/checkbox_all_friends"
             android:layout_width="50dp"
             android:layout_height="50dp"/>

@@ -119,7 +119,7 @@ public class GroupPageFragment extends Fragment {
                         Toast.makeText(getActivity(), R.string.check_at_least_one_friend, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), R.string.fill_inn_group_name, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.fill_in_group_name, Toast.LENGTH_SHORT).show();
                 }
 
                 groupsButton.performClick();

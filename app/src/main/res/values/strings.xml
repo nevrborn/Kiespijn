@@ -120,8 +120,7 @@
     <string name="group_page_save_group">Bewaar Groep</string>
     <string name="group_page_your_groups">JOUW GROEPEN</string>
     <string name="group_page_new_groups">MAAK GROEP</string>
-    <string name="group_page_new_group_name">Voer naam in</string>
-    <string name="fill_inn_group_name">Voer groep naam in</string>
+    <string name="fill_in_group_name">Voer groep naam in</string>
     <string name="tap_to_see_group_members">Klik om groepsleden te zien</string>
     <string name="delete_groups">Groepen verwijderen</string>
 

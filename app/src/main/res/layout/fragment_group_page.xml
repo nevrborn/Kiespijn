@@ -74,9 +74,10 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/group_page_new_group_name"
+        android:hint="@string/fill_in_group_name"
         android:layout_gravity="center"
         android:textAlignment="center"
+        android:textColor="@color/colorRed"
         android:inputType="textCapSentences"
         android:id="@+id/edittext_make_group_name"/>
 

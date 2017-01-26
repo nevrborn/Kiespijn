@@ -22,6 +22,7 @@ import com.bnnvara.kiespijn.ApiEndpointInterface;
 import com.bnnvara.kiespijn.CreateDilemmaPage.CreateDilemmaActivity;
 import com.bnnvara.kiespijn.Dilemma.Dilemma;
 import com.bnnvara.kiespijn.Dilemma.DilemmaApiResponse;
+import com.bnnvara.kiespijn.GroupPage.GroupPageActivity;
 import com.bnnvara.kiespijn.Login.LoginActivity;
 import com.bnnvara.kiespijn.R;
 import com.bnnvara.kiespijn.ResultPage.ResultActivity;
@@ -135,6 +136,10 @@ public class PersonalPageFragment extends Fragment {
                 Intent intent3 = CreateDilemmaActivity.newIntent(getActivity());
                 intent3.putExtra(DILEMMA_OBJECT, dilemma);
                 startActivity(intent3);
+                return true;
+            case R.id.menu_item_manage_groups:
+                Intent intent = GroupPageActivity.newIntent(getActivity());
+                startActivity(intent);
                 return true;
             default:
                 return true;

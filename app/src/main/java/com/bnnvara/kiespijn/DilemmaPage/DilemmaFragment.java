@@ -94,6 +94,7 @@ public class DilemmaFragment extends Fragment {
     private int mCurrentIndex;
     private String mUserFbId;
     private Boolean mFilterFriends = false;
+    private Boolean mIsLastDilemma = false;
 
     private float mImageAlpha = 1.0f;
     private int tempOffset;
@@ -327,7 +328,11 @@ public class DilemmaFragment extends Fragment {
                     }
                 } else {
                     mFilterFriends = false;
-                    resetCurrentIndex();
+
+                    if (mIsLastDilemma) {
+                        resetCurrentIndex();
+                        mIsLastDilemma = false;
+                    }
                 }
             }
         });
@@ -369,6 +374,8 @@ public class DilemmaFragment extends Fragment {
 
     private void showNoDilemmas() {
         mNoDilemmasTextView.setVisibility(View.VISIBLE);
+        mIsLastDilemma = true;
+
     }
 
     private void updateUi() {

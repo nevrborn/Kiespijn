@@ -20,7 +20,7 @@
     <string name="fb_login_protocol_scheme">fb1276846372390346</string>
 
     // DILEMMA PAGE
-    <string name="de_kies">DE KIES</string>
+    <string name="de_kies">VRAAG</string>
     <string name="dilemma_main_text">Mijn familie wil mijn vader cremeren maar ik wil</string>
     <string name="dilemma_main_text_short_version">Oh wat een dilemma. Wat moet ik kiezen?</string>
     <string name="dilemma_username">ANONIEM</string>

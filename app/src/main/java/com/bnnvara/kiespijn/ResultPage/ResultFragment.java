@@ -333,24 +333,19 @@ public class ResultFragment extends Fragment {
         // Same City
         if (!mDilemma.getCreator_hometown().equals("Onbekend")) {
             mCityNrOfResultsTextView.setText(mDilemma.getCreator_hometown() + " (" + mDilemma.getVotesFromSameCity() + ")");
-            mCityLeftProgressBar.setProgress(mDilemma.getVotesFromSameCityA());
-            mCityLeftProgressBar.setProgressText(String.valueOf(mDilemma.getVotesFromSameCityA()) + "%");
-            mCityRightProgressBar.setProgress(mDilemma.getVotesFromSameCityB());
-            mCityRightProgressBar.setProgressText(String.valueOf(mDilemma.getVotesFromSameCityB()) + "%");
+            mCityLeftProgressBar.setProgress(mDilemma.getScoreUnknownSexA());
+            mCityLeftProgressBar.setProgressText(String.valueOf(mDilemma.getScoreUnknownSexA()) + "%");
+            mCityRightProgressBar.setProgress(mDilemma.getScoreUnknownSexB());
+            mCityRightProgressBar.setProgressText(String.valueOf(mDilemma.getScoreUnknownSexB()) + "%");
 
             mCityNrOfResultsTextView.setVisibility(View.VISIBLE);
             mCityLeftProgressBar.setVisibility(View.VISIBLE);
             mCityRightProgressBar.setVisibility(View.VISIBLE);
-            setMarginBottom(mUnknownSexLeftProgressBar, 24);
-            setMarginBottom(mUnknownSexNrOfResultsTextView, 24);
-            setMarginBottom(mUnknownSexRightProgressBar, 24);
+
         } else {
             mCityNrOfResultsTextView.setVisibility(View.GONE);
             mCityLeftProgressBar.setVisibility(View.GONE);
             mCityRightProgressBar.setVisibility(View.GONE);
-            setMarginBottom(mUnknownSexLeftProgressBar, 0);
-            setMarginBottom(mUnknownSexNrOfResultsTextView, 0);
-            setMarginBottom(mUnknownSexRightProgressBar, 0);
             mProgressBarsRelativeLayout.invalidate();
         }
 

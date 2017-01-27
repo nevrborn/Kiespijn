@@ -374,9 +374,11 @@ public class LoginFragment extends Fragment {
 
             friendlist3.add(donald);
 
-            User.getInstance().addGroupToGroupsList(new Group("AppAcademy", friendlist1));
-            User.getInstance().addGroupToGroupsList(new Group("BNN Crew", friendlist2));
-            User.getInstance().addGroupToGroupsList(new Group("Random", friendlist3));
+            if (User.getInstance().getGroupsList().size() == 0) {
+                User.getInstance().addGroupToGroupsList(new Group("AppAcademy", friendlist1));
+                User.getInstance().addGroupToGroupsList(new Group("BNN Crew", friendlist2));
+                User.getInstance().addGroupToGroupsList(new Group("Random", friendlist3));
+            }
 
             mAddedDummyData = true;
         }
